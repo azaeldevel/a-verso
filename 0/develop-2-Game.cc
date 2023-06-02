@@ -1,6 +1,10 @@
+#include <SDL_image.h>
 
 #include "develop-2-Game.hh"
 
+Game::Game(const std::filesystem::path& p) : path(p)
+{
+}
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, int flags)
 {
@@ -38,12 +42,29 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     }
     //std::cout << "init success\n";
     running = true; // everything inited successfully, start the main loop
+
+    IMG_Init(IMG_INIT_PNG);
+    m_pTexture = IMG_LoadTexture(render, (path/"platform/char9.png").string().c_str());
+
+    m_sourceRectangle.w = 100;
+    m_sourceRectangle.h = 100;
+    m_sourceRectangle.x = 0;
+    m_sourceRectangle.y = 0;
+    m_destinationRectangle.x = m_sourceRectangle.x;
+    m_destinationRectangle.y = m_sourceRectangle.y;
+    m_destinationRectangle.w = m_sourceRectangle.w;
+    m_destinationRectangle.h = m_sourceRectangle.h;
+    SDL_QueryTexture(m_pTexture, NULL, NULL,&m_sourceRectangle.w, &m_sourceRectangle.h);
+
     return true;
 }
 
 void Game::rendering()
 {
     SDL_RenderClear(render);
+
+    SDL_RenderCopy(render, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
+
     SDL_RenderPresent(render);
 }
 

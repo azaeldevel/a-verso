@@ -389,3 +389,16 @@
 	"begin_code.h"
 	"close_code.h"
 
+1685691005 source:/home/azael/develop/octetos/a-verso/0/develop-2-main.cc
+	"develop-2-Game.hh"
+
+1685691332 /home/azael/develop/octetos/a-verso/0/develop-2-Game.hh
+	<filesystem>
+	"Verso.hh"
+
+1685688552 /home/azael/develop/octetos/a-verso/0/Verso.hh
+	<SDL.h>
+
+1685688561 source:/home/azael/develop/octetos/a-verso/0/Verso.cc
+	"Verso.hh"
+
