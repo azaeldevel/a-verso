@@ -46,14 +46,14 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     IMG_Init(IMG_INIT_PNG);
     m_pTexture = IMG_LoadTexture(render, (path/"platform/char9.png").string().c_str());
 
-    m_sourceRectangle.w = 100;
-    m_sourceRectangle.h = 100;
+    m_sourceRectangle.w = 20;
+    m_sourceRectangle.h = 20;
     m_sourceRectangle.x = 0;
-    m_sourceRectangle.y = 0;
-    m_destinationRectangle.x = m_sourceRectangle.x;
-    m_destinationRectangle.y = m_sourceRectangle.y;
-    m_destinationRectangle.w = m_sourceRectangle.w;
-    m_destinationRectangle.h = m_sourceRectangle.h;
+    m_sourceRectangle.y = 70;
+    m_destinationRectangle.x = 0;
+    m_destinationRectangle.y = 0;
+    m_destinationRectangle.w = 100;
+    m_destinationRectangle.h = 100;
     SDL_QueryTexture(m_pTexture, NULL, NULL,&m_sourceRectangle.w, &m_sourceRectangle.h);
 
     return true;

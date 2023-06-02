@@ -8,20 +8,20 @@
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/a-verso" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
-				<Option type="1" />
+				<Option object_output="bin/obj/Debug/" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
 					<Add option="`pkg-config sdl2 --cflags`" />
 				</Compiler>
 				<Linker>
-					<Add option="`pkg-config sdl2 --libs`" />
+					<Add option="`pkg-config sdl2 --libs` `pkg-config SDL2_image --libs`" />
 				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/a-verso" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
+				<Option object_output="bin/obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -35,7 +35,11 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="0/develop-1.cc" />
+		<Unit filename="0/Verso.cc" />
+		<Unit filename="0/Verso.hh" />
+		<Unit filename="0/develop-2-Game.cc" />
+		<Unit filename="0/develop-2-Game.hh" />
+		<Unit filename="0/develop-2-main.cc" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
