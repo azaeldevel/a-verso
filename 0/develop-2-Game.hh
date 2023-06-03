@@ -14,11 +14,13 @@ public:
     virtual void handleEvents();
 
 private:
-    SDL_Window* window;
-    SDL_Renderer* render;
+    //SDL_Window* window;
+    //SDL_Renderer* render;
 
     /*SDL_Texture* m_pTexture; // the new SDL_Texture variable
     SDL_Rect m_sourceRectangle; // the first rectangle
     SDL_Rect m_destinationRectangle; // another rectangle
     const std::filesystem::path path;*/
+
+    SDL_Rect rect1;
 };

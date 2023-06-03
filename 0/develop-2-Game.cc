@@ -56,6 +56,11 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     m_destinationRectangle.h = 100;
     SDL_QueryTexture(m_pTexture, NULL, NULL,&m_sourceRectangle.w, &m_sourceRectangle.h);*/
 
+    rect1.w = 100;
+    rect1.h = 100;
+    rect1.x = 100;
+    rect1.y = 100;
+
     return true;
 }
 
@@ -64,6 +69,9 @@ void Game::rendering()
     SDL_RenderClear(render);
 
     //SDL_RenderCopy(render, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
+    //SDL_SetRenderDrawColor(render, 0,0,0,0);
+    SDL_RenderDrawLine(render,rect1.x,rect1.y,rect1.x + rect1.w,rect1.y + rect1.h);
+
 
     SDL_RenderPresent(render);
 }

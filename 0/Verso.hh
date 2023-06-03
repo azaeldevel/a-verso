@@ -15,6 +15,9 @@ namespace oct::verso
     protected:
         bool running;
 
+        SDL_Window* window;
+        SDL_Renderer* render;
+
     public:
         virtual ~Verso();
 
