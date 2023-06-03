@@ -7,7 +7,7 @@
 class Game : public oct::verso::Verso
 {
 public:
-    Game(const std::filesystem::path&);
+    //Game(const std::filesystem::path&);
     virtual bool init(const char* title, int xpos, int ypos, int width, int height, int flags);
     virtual void rendering();
     virtual void clean();
