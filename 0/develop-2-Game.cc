@@ -2,9 +2,9 @@
 
 #include "develop-2-Game.hh"
 
-Game::Game(const std::filesystem::path& p) : path(p)
+/*Game::Game(const std::filesystem::path& p) : path(p)
 {
-}
+}*/
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, int flags)
 {
@@ -43,7 +43,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     //std::cout << "init success\n";
     running = true; // everything inited successfully, start the main loop
 
-    IMG_Init(IMG_INIT_PNG);
+    /*IMG_Init(IMG_INIT_PNG);
     m_pTexture = IMG_LoadTexture(render, (path/"platform/char9.png").string().c_str());
 
     m_sourceRectangle.w = 20;
@@ -54,7 +54,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     m_destinationRectangle.y = 0;
     m_destinationRectangle.w = 100;
     m_destinationRectangle.h = 100;
-    SDL_QueryTexture(m_pTexture, NULL, NULL,&m_sourceRectangle.w, &m_sourceRectangle.h);
+    SDL_QueryTexture(m_pTexture, NULL, NULL,&m_sourceRectangle.w, &m_sourceRectangle.h);*/
 
     return true;
 }
@@ -63,7 +63,7 @@ void Game::rendering()
 {
     SDL_RenderClear(render);
 
-    SDL_RenderCopy(render, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
+    //SDL_RenderCopy(render, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
 
     SDL_RenderPresent(render);
 }
