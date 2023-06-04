@@ -24,7 +24,7 @@ namespace oct::verso::v0
         {
             point[0] = 0;
             point[1] = 0;
-            point[2] = 0;
+            if( D == 3) point[2] = 0;
         }
         Point(C p[D])
         {
@@ -120,11 +120,11 @@ namespace oct::verso::v0
         }
         Point operator * (V r) const
         {
-            Point pnew;
+            Point pnew = *this;
 
-            point[0] *= r;
-            point[1] *= r;
-            if(D == 3) point[2] *= r;
+            pnew[0] *= r;
+            pnew[1] *= r;
+            if(D == 3) pnew[2] *= r;
 
             return pnew;
         }
@@ -169,6 +169,34 @@ namespace oct::verso::v0
             }
 
             return sqrt(d);
+        }
+        V length()const
+        {
+            V d = 0;
+
+            d +=  pow(point[0],2);
+            d +=  pow(point[1],2);
+            if(D == 3)
+            {
+                d +=  pow(point[2],2);
+            }
+
+            return sqrt(d);
+        }
+        Point ortho() const
+        {
+            if(3 == D) throw core_here::exception("La pendiente para 3 dimensiones esta en desarrollo.");
+
+            Point v;
+            v[0] = point[1] * -1;
+            v[1] = point[0];
+            //if(D == 3);
+
+            return v;
+        }
+        V comp(const Point& b)
+        {
+            return ((*this) * b) / b.length();
         }
 
 
@@ -246,29 +274,28 @@ namespace oct::verso::v0
         C point[D];
     };
 
+
+
     template<class C, unsigned char D>
     class Shape
     {
     };
 
+
     template<class C, unsigned char D,class V>
-    class Vector : public Shape<C,D>
+    class Line : public Shape<C,D>
     {
 
     public:
-        Vector() = default;
-        Vector(C p[2 * D])
+        Line() = default;
+        Line(C p[2 * D])
         {
             ps[0][0] = p[0];
             ps[0][1] = p[1];
             ps[1][0] = p[2];
             ps[1][1] = p[3];
         }
-        Vector(std::initializer_list<C> l)
-        {
-            throw core_here::exception("En desarrollo");
-        }
-        Vector(const Point<C,D,V>& p0,const Point<C,D,V>& p1)
+        Line(const Point<C,D,V>& p0,const Point<C,D,V>& p1)
         {
             ps[0] = p0;
             ps[1] = p1;
@@ -284,7 +311,7 @@ namespace oct::verso::v0
             }
             else if(ps[0] == ps[1])
             {
-                V s = ps[0].slope(ps[1]);
+                /*V s = ps[0].slope(ps[1]);
                 //std::cout << "Slope : " << s << "\n";
                 if(s != 0.0)
                 {
@@ -292,11 +319,11 @@ namespace oct::verso::v0
                 }
                 V delta = ps[0].distance(ps[1]);
                 delta = delta - leng;
-                ps[1].proyect(delta);
+                ps[1].proyect(delta);*/
             }
             else
             {
-                ps[1].proyect(leng);
+                //ps[1].proyect(leng);
             }
 
         }
@@ -349,42 +376,10 @@ namespace oct::verso::v0
         }
 
 #endif // OCTETOS_AVERSO_TTD
-    private:
+    protected:
         Point<C,D,V> ps[2];
     };
 
-    template<class C, unsigned char D,class V>
-    class Line : public Vector<C,D,V>
-    {
-
-    public:
-        Line() : b{0,1},n{1,0}
-        {
-
-        }
-        Line(C p[2 * D]) : Vector<C,D,V>(p)
-        {
-
-        }
-        Line(const Point<C,D,V>& p0,const Point<C,D,V>& p1) : Vector<C,D,V>(p0,p1)
-        {
-        }
-
-
-#ifdef OCTETOS_AVERSO_TTD
-
-        void print(std::ostream& out)const
-        {
-            out << "Line ";
-                ps[0].print(out);
-                ps[1].print(out);
-        }
-
-#endif // OCTETOS_AVERSO_TTD
-
-    private:
-        Vector<C,D,V> b,n;
-    };
 
     template<class C, unsigned char D>
     class Rectangle : public Shape<C,D>
