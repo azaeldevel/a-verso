@@ -1,12 +1,13 @@
 
-#include<SDL.h>
-#include <SDL_image.h>
+
 #include <filesystem>
 
 #include "Verso.hh"
 #include "shapes.hh"
 
-class Game : public oct::verso::v0::Verso
+namespace verso_here = oct::verso::v0;
+
+class Game : public verso_here::Verso
 {
 public:
     //Game(const std::filesystem::path&);
@@ -14,16 +15,14 @@ public:
     virtual void rendering();
     virtual void clean();
     virtual void handleEvents();
+    virtual void update();
 
 private:
     SDL_Window* window;
     SDL_Renderer* render;
 
-    /*SDL_Texture* m_pTexture; // the new SDL_Texture variable
-    SDL_Rect m_sourceRectangle; // the first rectangle
-    SDL_Rect m_destinationRectangle; // another rectangle
-    const std::filesystem::path path;*/
-
-    SDL_Rect rect1;
-    oct::verso::v0::Line<int,2,float> line1;
+    verso_here::Line<int,2,float> line1;
+    verso_here::Point<int,2,float> p0;
+    verso_here::Point<int,2,float> pU;
+    verso_here::Point<int,2,float> O;
 };

@@ -44,7 +44,32 @@ void v0_developing()
     CU_ASSERT(scalar1 - 1.0 < infimium);
 
 
+    oct::verso::v0::Point<int,2,float> p4(10,10);
+    oct::verso::v0::Point<int,2,float> p5;
+    p5.move(p4);
+    CU_ASSERT(p5.x() == 10);
+    CU_ASSERT(p5.y() == 10);
+    //p5.print(std::cout);
+
+    float dist1 = p0.distance(p5);
+    //std::cout << "distancia p0 -> p5 es " << dist1 << "\n";
+    CU_ASSERT(dist1 - 14.142135624 < infimium);
+
     oct::verso::v0::Line<int,2,float> line1;
+    line1.set(p0,p5);
+    //std::cout << std::endl;
+    //line1.print(std::cout);
+    line1.move(p4);
+    //std::cout << std::endl;
+    //line1.print(std::cout);
+
+
+    oct::verso::v0::Line<int,2,float> line2;
+    std::cout << std::endl;
+    line2.print(std::cout);
+    line2.resize(100);
+    std::cout << std::endl;
+    line2.print(std::cout);
 }
 
 
