@@ -1,4 +1,4 @@
-#include <SDL_image.h>
+
 
 #include "develop-2-Game.hh"
 
@@ -18,10 +18,10 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         {
             //std::cout << "window creation success\n";
             render = SDL_CreateRenderer(window, -1, 0);
-            if(render != 0) // renderer init success
+            if(render) // renderer init success
             {
                 //std::cout << "renderer creation success\n";
-                SDL_SetRenderDrawColor(render, 255,255,255,255);
+                //SDL_SetRenderDrawColor(render, 255,255,255,255);
             }
             else
             {
@@ -69,9 +69,11 @@ void Game::rendering()
     SDL_RenderClear(render);
 
     //SDL_RenderCopy(render, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
-    //SDL_SetRenderDrawColor(render, 0,0,0,0);
-    SDL_RenderDrawLine(render,rect1.x,rect1.y,rect1.x + rect1.w,rect1.y + rect1.h);
 
+    SDL_SetRenderDrawColor(render, 255,255,255,255);
+    SDL_RenderDrawLine(render,rect1.x,rect1.y,rect1.x + rect1.w,rect1.y + rect1.h);
+    //line1.draw(render);
+    SDL_SetRenderDrawColor(render, 0,0,0,255);
 
     SDL_RenderPresent(render);
 }

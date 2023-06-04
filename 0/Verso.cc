@@ -1,7 +1,7 @@
 
 #include "Verso.hh"
 
-namespace oct::verso
+namespace oct::verso::v0
 {
 
     Verso::~Verso()
@@ -22,19 +22,6 @@ namespace oct::verso
     }
     void Verso::handleEvents()
     {
-        SDL_Event event;
-
-        if(SDL_PollEvent(&event))
-        {
-            switch (event.type)
-            {
-            case SDL_QUIT:
-                running = false;
-                break;
-            default:
-                break;
-            }
-        }
     }
     void Verso::clean()
     {

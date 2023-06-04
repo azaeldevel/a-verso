@@ -3,20 +3,16 @@
 #define OCTETOS_AVERSO_VERSO_HH
 
 
-#include<SDL.h>
+//#include<SDL.h>
 
-namespace oct::verso
+namespace oct::verso::v0
 {
-
     class Verso
     {
     private:
 
     protected:
         bool running;
-
-        SDL_Window* window;
-        SDL_Renderer* render;
 
     public:
         virtual ~Verso();
@@ -29,6 +25,7 @@ namespace oct::verso
 
         bool is_running();
     };
+
 }
 
 #endif // OCTETOS_AVERSO_AVERSO_HH
