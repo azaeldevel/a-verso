@@ -10,7 +10,6 @@
 #include <GLFW/glfw3.h>
 GLFWwindow* window;
 
-
 int main( void )
 {
 	// Initialise GLFW
@@ -71,5 +70,3 @@ int main( void )
 
 	return 0;
 }
-
-
