@@ -48,6 +48,12 @@ int main(int argc, char *argv[])
 		return CU_get_error();
 	}
 
+	if ((NULL == CU_add_test(pSuite_v0, "Funciones y operadores C++..", v0_cpp_features)))
+	{
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+
 
 #endif
 

@@ -3,6 +3,8 @@
 #define OCTETOS_AVERSO_SHAPES_HH
 
 #include <core/3/Exception.hh>
+#include <glm/glm.hpp>
+
 #ifdef OCTETOS_AVERSO_TTD
     #include <iostream>
 #endif // OCTETOS_AVERSO_DEBUG
@@ -45,6 +47,15 @@ namespace oct::verso::v0
             point[0] = x;
             point[1] = y;
             point[2] = z;
+        }
+        Point(C x, C y,C z, C w)
+        {
+            if(4 == D) throw core_here::exception("Deve especifiecarse 3 dimensiones para usar contructor de 3 demensiones");
+
+            point[0] = x;
+            point[1] = y;
+            point[2] = z;
+            point[3] = w;
         }
         Point(const Point& p)
         {
@@ -200,12 +211,12 @@ namespace oct::verso::v0
         }
 
 
-        void set(C x, C y)
+        inline void set(C x, C y)
         {
             point[0] = x;
             point[1] = y;
         }
-        void set(C x, C y,C z)
+        inline void set(C x, C y,C z)
         {
             if(3 > D) throw core_here::exception("Deve especifiecarse 3 dimensiones para usar contructor de 3 demensiones");
 
@@ -213,51 +224,51 @@ namespace oct::verso::v0
             point[1] = y;
             point[2] = z;
         }
-        C x() const
+        inline C x() const
         {
             return point[0];
         }
-        C y() const
+        inline C y() const
         {
             return point[1];
         }
-        C z() const
+        inline C z() const
         {
             if(3 > D) throw core_here::exception("Deve especifiecarse 3 dimensiones para usar contructor de 3 demensiones");
 
             return point[2];
         }
-        C& x()
+        inline C& x()
         {
             return point[0];
         }
-        C& y()
+        inline C& y()
         {
             return point[1];
         }
-        C& z()
+        inline C& z()
         {
             if(3 == D) throw core_here::exception("Deve especifiecarse 3 dimensiones para usar contructor de 3 demensiones");
             return point[2];
         }
 
-        C& operator [] (unsigned char i)
+        inline C& operator [] (unsigned char i)
         {
             if(i == D) throw core_here::exception("Deve especifiecarse 3 dimensiones para usar contructor de 3 demensiones");
 
             return point[i];
         }
-        const C& operator [] (unsigned char i) const
+        inline const C& operator [] (unsigned char i) const
         {
             if(i == D) throw core_here::exception("Deve especifiecarse 3 dimensiones para usar contructor de 3 demensiones");
 
             return point[i];
         }
-        operator C*()
+        inline operator C*()
         {
             return point;
         }
-        operator const C*() const
+        inline operator const C*() const
         {
             return point;
         }

@@ -110,6 +110,56 @@ void v0_opnegl_compatible()
     CU_ASSERT(p3D_1_array[2] == 2);
 }
 
+void v0_cpp_features()
+{
+    verso_here::Point<int,2,float> p2D_0;
+    CU_ASSERT(p2D_0[0] == 0);
+    CU_ASSERT(p2D_0[1] == 0);
+
+    verso_here::Point<int,3,float> p3D_0;
+    CU_ASSERT(p3D_0[0] == 0);
+    CU_ASSERT(p3D_0[1] == 0);
+    CU_ASSERT(p3D_0[2] == 0);
+
+    verso_here::Point<int,4,float> p4D_0;
+    CU_ASSERT(p4D_0[0] == 0);
+    CU_ASSERT(p4D_0[1] == 0);
+    CU_ASSERT(p4D_0[2] == 0);
+    CU_ASSERT(p4D_0[3] == 0);
+
+
+    verso_here::Point<int,2,float> p2D_1 {0,1};
+    CU_ASSERT(p2D_1[0] == 0);
+    CU_ASSERT(p2D_1[1] == 1);
+
+    verso_here::Point<int,3,float> p3D_1 {0,1,2};
+    CU_ASSERT(p3D_1[0] == 0);
+    CU_ASSERT(p3D_1[1] == 1);
+    CU_ASSERT(p3D_1[2] == 2);
+
+    verso_here::Point<int,4,float> p4D_1 {0,1,2,3};
+    CU_ASSERT(p4D_1[0] == 0);
+    CU_ASSERT(p4D_1[1] == 1);
+    CU_ASSERT(p4D_1[2] == 2);
+    CU_ASSERT(p4D_1[3] == 3);
+
+
+
+    verso_here::Point<int,2,float> p2D_2(0,1);
+    CU_ASSERT(p2D_2[0] == 0);
+    CU_ASSERT(p2D_2[1] == 1);
+
+    verso_here::Point<int,3,float> p3D_2(0,1,2,3);
+    CU_ASSERT(p3D_2[0] == 0);
+    CU_ASSERT(p3D_2[1] == 1);
+    CU_ASSERT(p3D_2[2] == 2);
+
+    verso_here::Point<int,4,float> p4D_2(0,1,2,3);
+    CU_ASSERT(p4D_2[0] == 0);
+    CU_ASSERT(p4D_2[1] == 1);
+    CU_ASSERT(p4D_2[2] == 2);
+    CU_ASSERT(p4D_2[3] == 3);
+}
 
 
 

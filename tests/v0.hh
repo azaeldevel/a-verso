@@ -14,5 +14,6 @@ int v0_clean(void);
 void v0_developing();
 void v0_math();
 void v0_opnegl_compatible();
+void v0_cpp_features();
 
 #endif

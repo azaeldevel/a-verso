@@ -2,7 +2,8 @@
 #include <filesystem>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include <Verso.hh>
 
@@ -23,6 +24,8 @@ private:
     GLuint vertexbuffer;
     static const GLfloat g_vertex_buffer_data[];
 	GLuint programID;
+	GLuint MatrixID;
+	glm::mat4 projection,view,model,mvp;
 
 private:
     GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path);
