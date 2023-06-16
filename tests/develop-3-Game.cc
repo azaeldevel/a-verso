@@ -100,9 +100,9 @@ void Game::update()
 
 void Game::rendering()
 {
-		// Swap buffers
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+    // Swap buffers
+    glfwSwapBuffers(window);
+    glfwPollEvents();
 }
 
 void Game::clean()

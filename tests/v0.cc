@@ -99,6 +99,15 @@ void v0_opnegl_compatible()
 
     verso_here::Point<int,3,float> p3D {0,0,0};
     CU_ASSERT(sizeof(p3D) == sizeof(int) * 3);//compilble with opengl array
+
+    verso_here::Point<int,3,float> p3D_1 {0,1,2};
+    CU_ASSERT(p3D_1[0] == 0);
+    CU_ASSERT(p3D_1[1] == 1);
+    CU_ASSERT(p3D_1[2] == 2);
+    int* p3D_1_array = p3D_1;
+    CU_ASSERT(p3D_1_array[0] == 0);
+    CU_ASSERT(p3D_1_array[1] == 1);
+    CU_ASSERT(p3D_1_array[2] == 2);
 }
 
 
