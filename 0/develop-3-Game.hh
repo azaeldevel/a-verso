@@ -19,4 +19,10 @@ public:
 
 private:
     GLFWwindow* window;
+    GLuint vertexbuffer;
+    static const GLfloat g_vertex_buffer_data[];
+	GLuint programID;
+
+private:
+    GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path);
 };
