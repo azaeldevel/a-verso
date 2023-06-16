@@ -13,9 +13,10 @@ class Game : public verso_here::Verso
 public:
     //Game(const std::filesystem::path&);
     virtual bool initialize(const char* title, int width, int height);
+    virtual void handleEvents();
+    virtual void update();
     virtual void rendering();
     virtual void clean();
-    virtual void handleEvents();
 
 private:
     GLFWwindow* window;

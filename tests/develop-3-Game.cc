@@ -64,7 +64,15 @@ bool Game::initialize(const char* title, int width, int height)
     return true;
 }
 
-void Game::rendering()
+void Game::handleEvents()
+{
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
+    {
+        running = false;
+    }
+}
+
+void Game::update()
 {
         // Clear the screen
 		glClear( GL_COLOR_BUFFER_BIT );
@@ -88,12 +96,15 @@ void Game::rendering()
 		glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
 
 		glDisableVertexAttribArray(0);
+}
+
+void Game::rendering()
+{
 
 		// Swap buffers
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 }
-
 
 void Game::clean()
 {
@@ -101,13 +112,11 @@ void Game::clean()
 	glfwTerminate();
 }
 
-void Game::handleEvents()
-{
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
-    {
-        running = false;
-    }
-}
+
+
+
+
+
 
 GLuint Game::LoadShaders(const char * vertex_file_path,const char * fragment_file_path)
 {

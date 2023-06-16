@@ -13,20 +13,22 @@ namespace oct::verso::v0
     {
         running = true;
     }
-    void Verso::rendering()
+    void Verso::handleEvents()
     {
-
     }
     void Verso::update()
     {
     }
-    void Verso::handleEvents()
+    void Verso::rendering()
     {
+
     }
     void Verso::clean()
     {
 
     }
+
+
 
     bool Verso::is_running()
     {

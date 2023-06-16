@@ -18,9 +18,9 @@ namespace oct::verso::v0
         virtual ~Verso();
 
         virtual void initialize();
-        virtual void rendering();
-        virtual void update();
         virtual void handleEvents();
+        virtual void update();
+        virtual void rendering();
         virtual void clean();
 
         bool is_running();
