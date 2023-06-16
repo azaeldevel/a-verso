@@ -72,7 +72,7 @@ namespace oct::verso::v0
 
             return *this;
         }
-        bool operator == (const Point& p)
+        bool operator == (const Point& p) const
         {
             if( point[0] != p.point[0]) return false;
             if( point[1] != p.point[1]) return false;
@@ -252,6 +252,14 @@ namespace oct::verso::v0
             if(i == D) throw core_here::exception("Deve especifiecarse 3 dimensiones para usar contructor de 3 demensiones");
 
             return point[i];
+        }
+        operator C*()
+        {
+            return point;
+        }
+        operator const C*() const
+        {
+            return point;
         }
 
 

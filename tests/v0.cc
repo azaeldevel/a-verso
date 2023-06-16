@@ -24,6 +24,10 @@ int v0_clean(void)
 void v0_developing()
 {
 
+}
+
+void v0_math()
+{
     verso_here::Point<int,2,float> p0;
     /*std::cout << std::endl;
     point1.print(std::cout);
@@ -37,7 +41,6 @@ void v0_developing()
     verso_here::Point<int,2,float> p3(1,1);
 
     CU_ASSERT(p2 == p3);
-
 
     float slope1 = p0.slope(p2);
     CU_ASSERT(slope1 - 1.0 < infimium);
@@ -87,8 +90,15 @@ void v0_developing()
     float compt2 = p6.comp(p8);
     //std::cout << "\nComponente de p6 sobre p8 es " << compt2 << "\n";
     CU_ASSERT(abs(compt2  + 4.02492) < infimium);
+}
 
-    //oct::verso::v0::Vector<int,2,float> vect2;
+void v0_opnegl_compatible()
+{
+    verso_here::Point<int,2,float> p2D {0,0};
+    CU_ASSERT(sizeof(p2D) == sizeof(int) * 2);//compilble with opengl array
+
+    verso_here::Point<int,3,float> p3D {0,0,0};
+    CU_ASSERT(sizeof(p3D) == sizeof(int) * 3);//compilble with opengl array
 }
 
 
