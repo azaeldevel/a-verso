@@ -9,7 +9,7 @@ namespace oct::verso::v0
     }
 
 
-    void Verso::init()
+    void Verso::initialize()
     {
         running = true;
     }

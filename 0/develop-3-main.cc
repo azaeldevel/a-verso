@@ -4,7 +4,7 @@
 int main(int argc, char* argv[])
 {
     Game g_game;
-    g_game.init("Tutorial 01",1024, 768);
+    g_game.initialize("Tutorial 01",1024, 768);
     while(g_game.is_running())
     {
         g_game.handleEvents();

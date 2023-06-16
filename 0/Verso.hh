@@ -17,7 +17,7 @@ namespace oct::verso::v0
     public:
         virtual ~Verso();
 
-        virtual void init();
+        virtual void initialize();
         virtual void rendering();
         virtual void update();
         virtual void handleEvents();
