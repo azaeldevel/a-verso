@@ -1,5 +1,12 @@
 #include <fstream>
-#include <vector>
+#include <chrono>
+#include <thread>
+
+#if defined(_WIN32) || defined(_WIN64)
+    #include <Windows.h>
+#else
+    #include <unistd.h>
+#endif
 
 #include "develop-3-Game.hh"
 
@@ -68,17 +75,22 @@ bool Game::initialize(const char* title, int width, int height)
 	// Or, for an ortho camera :
 	//glm::mat4 Projection = glm::ortho(-10.0f,10.0f,-10.0f,10.0f,0.0f,100.0f); // In world coordinates
 
+	camera = glm::vec3(4,6,6);//posision de la camara
+	length_camera = camera.length();
+    target_camera = glm::vec3(0,0,0);
+
 	// Camera matrix
-	view       = glm::lookAt(
-								glm::vec3(4,3,3), // Camera is at (4,3,3), in World Space
+	/*view       = glm::lookAt(
+								camera, // Camera is at (4,3,3), in World Space
 								glm::vec3(0,0,0), // and looks at the origin
 								glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
-						   );
+						   );*/
 	// Model matrix : an identity matrix (model will be at the origin)
 	model      = glm::mat4(1.0f);
 	// Our ModelViewProjection : multiplication of our 3 matrices
-	mvp        = projection * view * model;
+	//mvp        = projection * view * model;
 
+	U1.set(0,1,1);
 	running = true;
     return true;
 }
@@ -93,6 +105,13 @@ void Game::handleEvents()
 
 void Game::update()
 {
+    view       = glm::lookAt(
+								reinterpret_cast<glm::vec3&>(camera), // Camera is at (4,3,3), in World Space
+								reinterpret_cast<glm::vec3&>(target_camera), // and looks at the origin
+								glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
+						   );
+    mvp        = projection * view * model;
+
         // Clear the screen
 		glClear( GL_COLOR_BUFFER_BIT );
 
@@ -120,9 +139,13 @@ void Game::update()
 
 		glDisableVertexAttribArray(0);
 
-		// Swap buffers
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+
+    if(camera[0] > 0) --camera[0];
+    else
+    {
+        //auto normal = camera.normal();
+        //auto newcamp = verso_here::Point<int,3,float>::create(camera,normal,1);
+    }
 }
 
 void Game::rendering()
@@ -130,6 +153,8 @@ void Game::rendering()
     // Swap buffers
     glfwSwapBuffers(window);
     glfwPollEvents();
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }
 
 void Game::clean()

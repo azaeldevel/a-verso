@@ -3,7 +3,9 @@
 #define OCTETOS_AVERSO_SHAPES_HH
 
 #include <core/3/Exception.hh>
-#include <glm/glm.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+#include <vector>
 
 #ifdef OCTETOS_AVERSO_TTD
     #include <iostream>
@@ -22,12 +24,7 @@ namespace oct::verso::v0
     class Point
     {
     public:
-        Point()
-        {
-            point[0] = 0;
-            point[1] = 0;
-            if( D == 3) point[2] = 0;
-        }
+        Point();
         Point(C p[D])
         {
             for(unsigned char i = 0; i < D; i++)
@@ -35,35 +32,16 @@ namespace oct::verso::v0
                 point[i] = p[i];
             }
         }
-        Point(C x, C y)
-        {
-            point[0] = x;
-            point[1] = y;
-        }
-        Point(C x, C y,C z)
-        {
-            if(3 == D) throw core_here::exception("Deve especifiecarse 3 dimensiones para usar contructor de 3 demensiones");
-
-            point[0] = x;
-            point[1] = y;
-            point[2] = z;
-        }
-        Point(C x, C y,C z, C w)
-        {
-            if(4 == D) throw core_here::exception("Deve especifiecarse 3 dimensiones para usar contructor de 3 demensiones");
-
-            point[0] = x;
-            point[1] = y;
-            point[2] = z;
-            point[3] = w;
-        }
+        Point(C x, C y);
+        Point(C x, C y,C z);
+        Point(C x, C y,C z, C w);
         Point(const Point& p)
         {
             point[0] = p.point[0];
             point[1] = p.point[1];
             if(D == 3) point[2] = p.point[2];
         }
-        Point(std::initializer_list<C> l)
+        Point(std::initializer_list<C>& l)
         {
             if(l.size() > D) throw core_here::exception("La cantidad de datos indicados excede la capacidad del objetos");
             unsigned char i = 0;
@@ -71,6 +49,15 @@ namespace oct::verso::v0
             {
                 point[i] = c;
                 i++;
+            }
+        }
+        Point(const glm::vec<D,C,glm::packed_highp>& v)
+        {
+            //if(v.size() != D) throw core_here::exception("La cantidad de datos indicados es diferente de la especificada para el Objeto Point");
+
+            for(size_t i = 0; i < D; i++)
+            {
+                point[i] = v[i];
             }
         }
 
@@ -99,7 +86,17 @@ namespace oct::verso::v0
 
             return true;
         }
-        V operator * (const Point& p) const
+        V operator * (const Point<int,D,V>& p) const
+        {
+            V scalar = 0;
+
+            scalar += point[0] * p.point[0];
+            scalar += point[1] * p.point[1];
+            if(D == 3) scalar += point[2] * p.point[2];
+
+            return scalar;
+        }
+        V operator * (const Point<float,D,V>& p) const
         {
             V scalar = 0;
 
@@ -194,21 +191,61 @@ namespace oct::verso::v0
 
             return sqrt(d);
         }
-        Point ortho() const
+        bool is_plane_xy() const
         {
-            if(3 == D) throw core_here::exception("La pendiente para 3 dimensiones esta en desarrollo.");
-
-            Point v;
-            v[0] = point[1] * -1;
-            v[1] = point[0];
-            //if(D == 3);
-
-            return v;
+            if(D == 2)
+            {
+                return false;
+            }
+            else if(D == 3)
+            {
+                if(x() != 0 and y() != 0 and z() == 0)//plano x,y
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
+        Point normal() const;
         V comp(const Point& b)
         {
             return ((*this) * b) / b.length();
         }
+        void unit ()
+        {
+            V l = length();
+                point[0] /= l;
+                point[1] /= l;
+                if(D == 3) point[2] /= l;
+        }
+
+        /*static Point create(const Point& a, const Point<int,D,V>& b, const Point& u, V angle)
+        {
+            V p = a * b;
+            p *= angle;
+            return u * p;
+        }
+        static Point create(const Point& a, const Point<float,D,V>& b, const Point& u, V angle)
+        {
+            V p = a * b;
+            p *= angle;
+            return u * p;
+        }
+        static Point create(const Point<int,D,V>& a, const Point& b, const Point& u, V angle)
+        {
+            V p = a * b;
+            p *= angle;
+            return u * p;
+        }
+        static Point create(const Point<float,D,V>& a, const Point& b, const Point& u, V angle)
+        {
+            V p = a * b;
+            p *= angle;
+            return u * p;
+        }*/
 
 
         inline void set(C x, C y)
@@ -274,6 +311,7 @@ namespace oct::verso::v0
         }
 
 
+
 #ifdef OCTETOS_AVERSO_TTD
 
         void print(std::ostream& out)const
@@ -287,6 +325,17 @@ namespace oct::verso::v0
                 }
             out << ")";
         }
+        void printLn(std::ostream& out)const
+        {
+            out << "(";
+                out << point[0] << ",";
+                out << point[1];
+                if(D == 3)
+                {
+                    out << "," << point[2];
+                }
+            out << ")\n";
+        }
 
 #endif // OCTETOS_AVERSO_TTD
     private:
@@ -295,14 +344,14 @@ namespace oct::verso::v0
 
 
 
-    template<class C, unsigned char D>
+    template<class C, unsigned char D,class V>
     class Shape
     {
     };
 
 
     template<class C, unsigned char D,class V>
-    class Line : public Shape<C,D>
+    class Line : public Shape<C,D,V>
     {
 
     public:
@@ -400,18 +449,20 @@ namespace oct::verso::v0
     };
 
 
-    template<class C, unsigned char D>
-    class Rectangle : public Shape<C,D>
+    template<class C, unsigned char D,class V>
+    class Rectangle : public Shape<C,D,V>
     {
 
     };
 
-    template<class C, unsigned char D>
-    class Circle : public Shape<C,D>
+    template<class C, unsigned char D,class V> void circle(const Point<C,D,V>& center,V radio,const Point<float,D,V>& delta,std::vector<Point<C,D,V>>&);
+    //template<class C, unsigned char D,class V> void circle(const Point<C,D,V>& center,const Point<C,D,V>& last,const Point<C,D,V>& delta);
+    //template<class C, unsigned char D,class V> void circle(const Point& center,const Point<C,D,V>& plane,V delta);
+    template<class C, unsigned char D,class V>
+    class Circle : public Shape<C,D,V>
     {
 
     };
-
 
     namespace dd
     {

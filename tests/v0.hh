@@ -15,5 +15,6 @@ void v0_developing();
 void v0_math();
 void v0_opnegl_compatible();
 void v0_cpp_features();
+void v0_glm_compatible();
 
 #endif

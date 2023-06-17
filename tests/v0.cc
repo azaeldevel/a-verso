@@ -24,6 +24,7 @@ int v0_clean(void)
 void v0_developing()
 {
 
+
 }
 
 void v0_math()
@@ -32,6 +33,7 @@ void v0_math()
     /*std::cout << std::endl;
     point1.print(std::cout);
     std::cout << std::endl;*/
+    verso_here::Point<int,3,float> O;
 
     verso_here::Point<int,2,float> p2({1,1});
     /*std::cout << std::endl;
@@ -79,7 +81,7 @@ void v0_math()
 
     verso_here::Point<int,2,float> p6 {2,5};
     verso_here::Point<int,2,float> p7 {-1,2};
-    verso_here::Point<int,2,float> p8 = p7.ortho();
+    verso_here::Point<int,2,float> p8 = p7.normal();
     //std::cout << std::endl;
     //p8.print(std::cout);
 
@@ -90,6 +92,16 @@ void v0_math()
     float compt2 = p6.comp(p8);
     //std::cout << "\nComponente de p6 sobre p8 es " << compt2 << "\n";
     CU_ASSERT(abs(compt2  + 4.02492) < infimium);
+
+    std::vector<verso_here::Point<int,3,float>> circle_1;
+    verso_here::Point<float,3,float> cricle_delta(8,9,0);
+    cricle_delta.unit();
+    cricle_delta.printLn(std::cout);
+    verso_here::circle(O,10.0f,cricle_delta,circle_1);
+    for(const verso_here::Point<int,3,float>& p : circle_1)
+    {
+        p.printLn(std::cout);
+    }
 }
 
 void v0_opnegl_compatible()
@@ -149,7 +161,7 @@ void v0_cpp_features()
     CU_ASSERT(p2D_2[0] == 0);
     CU_ASSERT(p2D_2[1] == 1);
 
-    verso_here::Point<int,3,float> p3D_2(0,1,2,3);
+    verso_here::Point<int,3,float> p3D_2(0,1,2);
     CU_ASSERT(p3D_2[0] == 0);
     CU_ASSERT(p3D_2[1] == 1);
     CU_ASSERT(p3D_2[2] == 2);
@@ -161,6 +173,26 @@ void v0_cpp_features()
     CU_ASSERT(p4D_2[3] == 3);
 }
 
+
+void v0_glm_compatible()
+{
+    glm::vec3 vect1(0,1,2);
+    verso_here::Point<int,3,float> p0(vect1);
+    CU_ASSERT(p0[0] == 0);
+    CU_ASSERT(p0[1] == 1);
+    CU_ASSERT(p0[2] == 2);
+    CU_ASSERT(sizeof(p0) == sizeof(int) * 3);
+
+
+    glm::vec4 vect2(0,1,2,3);
+    verso_here::Point<int,4,float> p1(vect2);
+    CU_ASSERT(p1[0] == 0);
+    CU_ASSERT(p1[1] == 1);
+    CU_ASSERT(p1[2] == 2);
+    CU_ASSERT(p1[3] == 3);
+    CU_ASSERT(sizeof(p1) == sizeof(int) * 4);
+
+}
 
 
 

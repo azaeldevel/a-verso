@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <shapes.hh>
 #include <Verso.hh>
 
 namespace verso_here = oct::verso::v0;
@@ -26,6 +27,10 @@ private:
 	GLuint programID;
 	GLuint MatrixID;
 	glm::mat4 projection,view,model,mvp;
+	verso_here::Point<int,3,float> O;
+	verso_here::Point<int,3,float> U1;
+	verso_here::Point<float,3,float> camera,target_camera;
+	float length_camera;
 
 private:
     GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path);
