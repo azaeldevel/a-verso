@@ -51,15 +51,7 @@ namespace oct::verso::v0
                 i++;
             }
         }
-        Point(const glm::vec<D,C,glm::packed_highp>& v)
-        {
-            //if(v.size() != D) throw core_here::exception("La cantidad de datos indicados es diferente de la especificada para el Objeto Point");
-
-            for(size_t i = 0; i < D; i++)
-            {
-                point[i] = v[i];
-            }
-        }
+        Point(const glm::vec<D,C,glm::packed_highp>& v);
 
 
         Point& operator = (const Point& p)
@@ -70,6 +62,8 @@ namespace oct::verso::v0
 
             return *this;
         }
+        Point& operator = (const glm::vec<D,C,glm::packed_highp>& v);
+
         bool operator == (const Point& p) const
         {
             if( point[0] != p.point[0]) return false;
@@ -217,43 +211,19 @@ namespace oct::verso::v0
         void unit ()
         {
             V l = length();
-                point[0] /= l;
-                point[1] /= l;
-                if(D == 3) point[2] /= l;
+            point[0] /= l;
+            point[1] /= l;
+            if(D == 3) point[2] /= l;
         }
 
-        /*static Point create(const Point& a, const Point<int,D,V>& b, const Point& u, V angle)
-        {
-            V p = a * b;
-            p *= angle;
-            return u * p;
-        }
-        static Point create(const Point& a, const Point<float,D,V>& b, const Point& u, V angle)
-        {
-            V p = a * b;
-            p *= angle;
-            return u * p;
-        }
-        static Point create(const Point<int,D,V>& a, const Point& b, const Point& u, V angle)
-        {
-            V p = a * b;
-            p *= angle;
-            return u * p;
-        }
-        static Point create(const Point<float,D,V>& a, const Point& b, const Point& u, V angle)
-        {
-            V p = a * b;
-            p *= angle;
-            return u * p;
-        }*/
 
 
-        inline void set(C x, C y)
+        void set(C x, C y)
         {
             point[0] = x;
             point[1] = y;
         }
-        inline void set(C x, C y,C z)
+        void set(C x, C y,C z)
         {
             if(3 > D) throw core_here::exception("Deve especifiecarse 3 dimensiones para usar contructor de 3 demensiones");
 
@@ -261,51 +231,43 @@ namespace oct::verso::v0
             point[1] = y;
             point[2] = z;
         }
-        inline C x() const
+        C x() const
         {
             return point[0];
         }
-        inline C y() const
+        C y() const
         {
             return point[1];
         }
-        inline C z() const
-        {
-            if(3 > D) throw core_here::exception("Deve especifiecarse 3 dimensiones para usar contructor de 3 demensiones");
+        C z() const;
 
-            return point[2];
-        }
-        inline C& x()
+        C& x()
         {
             return point[0];
         }
-        inline C& y()
+        C& y()
         {
             return point[1];
         }
-        inline C& z()
-        {
-            if(3 == D) throw core_here::exception("Deve especifiecarse 3 dimensiones para usar contructor de 3 demensiones");
-            return point[2];
-        }
+        C& z();
 
-        inline C& operator [] (unsigned char i)
+        C& operator [] (unsigned char i)
         {
             if(i == D) throw core_here::exception("Deve especifiecarse 3 dimensiones para usar contructor de 3 demensiones");
 
             return point[i];
         }
-        inline const C& operator [] (unsigned char i) const
+        const C& operator [] (unsigned char i) const
         {
             if(i == D) throw core_here::exception("Deve especifiecarse 3 dimensiones para usar contructor de 3 demensiones");
 
             return point[i];
         }
-        inline operator C*()
+        operator C*()
         {
             return point;
         }
-        inline operator const C*() const
+        operator const C*() const
         {
             return point;
         }
@@ -455,7 +417,62 @@ namespace oct::verso::v0
 
     };
 
-    template<class C, unsigned char D,class V> void circle(const Point<C,D,V>& center,V radio,const Point<float,D,V>& delta,std::vector<Point<C,D,V>>&);
+    template<class C, unsigned char D,class V> void circle(const Point<C,D,V>& center,V radio,const Point<float,D,V>& delta,std::vector<Point<float,D,V>>& rest)
+    {
+#ifdef OCTETOS_AVERSO_TTD
+        V lu = delta.length();
+        if(abs(V(1) - lu) > 0.001) throw core_here::exception("El vector delta debe se un vector unitario");
+#endif // OCTETOS_AVERSO_TTD
+
+        if(delta.is_plane_xy())//plano x,y
+        {
+            V dp = delta.length();
+            //primer cuadrante
+            //std::cout << "primer cuadrante\n";
+            rest.push_back(Point<float,D,V>(radio,0));
+            while(rest.back().x() > 0)
+            {
+                rest.push_back(rest.back());
+                rest.back().x() -= dp;
+                rest.back().y() += dp;
+                //rest.back().printLn(std::cout);
+            }
+
+            //segundo cuadrante
+            //std::cout << "segundo cuadrante\n";
+            while(rest.back().y() > 0)
+            {
+                rest.push_back(rest.back());
+                rest.back().x() -= dp;
+                rest.back().y() -= dp;
+                //rest.back().printLn(std::cout);
+            }
+
+            //tercer cuadrante
+            //std::cout << "tercer cuadrante\n";
+            while(rest.back().x() < 0)
+            {
+                rest.push_back(rest.back());
+                rest.back().x() += dp;
+                rest.back().y() -= dp;
+                //rest.back().printLn(std::cout);
+            }
+
+            //cuarto cuadrante
+            //std::cout << "cuarto cuadrante\n";
+            while(rest.back().y() < 0)
+            {
+                rest.push_back(rest.back());
+                rest.back().x() += dp;
+                rest.back().y() += dp;
+                //rest.back().printLn(std::cout);
+            }
+        }
+        else
+        {
+            core_here::exception("Plano de dibujo desconocido");
+        }
+    }
     //template<class C, unsigned char D,class V> void circle(const Point<C,D,V>& center,const Point<C,D,V>& last,const Point<C,D,V>& delta);
     //template<class C, unsigned char D,class V> void circle(const Point& center,const Point<C,D,V>& plane,V delta);
     template<class C, unsigned char D,class V>

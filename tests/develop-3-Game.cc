@@ -75,9 +75,13 @@ bool Game::initialize(const char* title, int width, int height)
 	// Or, for an ortho camera :
 	//glm::mat4 Projection = glm::ortho(-10.0f,10.0f,-10.0f,10.0f,0.0f,100.0f); // In world coordinates
 
-	camera = glm::vec3(4,6,6);//posision de la camara
-	length_camera = camera.length();
-    target_camera = glm::vec3(0,0,0);
+	camera = glm::vec3(4,3,3);//posision de la camara
+	step = 0;
+	/*camera_path_delta = glm::vec3(9,7,0);
+	camera_path_delta.unit();
+    verso_here::circle(O,camera.length(),camera_path_delta,camera_path);
+    camera_index = 0;
+    camera_actual = &camera;*/
 
 	// Camera matrix
 	/*view       = glm::lookAt(
@@ -90,7 +94,9 @@ bool Game::initialize(const char* title, int width, int height)
 	// Our ModelViewProjection : multiplication of our 3 matrices
 	//mvp        = projection * view * model;
 
-	U1.set(0,1,1);
+	fps_ms = std::chrono::milliseconds(int(1.0/60.0)/1000);
+	step_trans = 0;
+
 	running = true;
     return true;
 }
@@ -105,9 +111,10 @@ void Game::handleEvents()
 
 void Game::update()
 {
+    //camera.printLn(std::cout);
     view       = glm::lookAt(
 								reinterpret_cast<glm::vec3&>(camera), // Camera is at (4,3,3), in World Space
-								reinterpret_cast<glm::vec3&>(target_camera), // and looks at the origin
+								reinterpret_cast<glm::vec3&>(O), // and looks at the origin
 								glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
 						   );
     mvp        = projection * view * model;
@@ -140,12 +147,34 @@ void Game::update()
 		glDisableVertexAttribArray(0);
 
 
-    if(camera[0] > 0) --camera[0];
-    else
-    {
-        //auto normal = camera.normal();
-        //auto newcamp = verso_here::Point<int,3,float>::create(camera,normal,1);
-    }
+		if(step == 0)
+        {
+            if(camera.x() > 0) camera.x()--;
+            else step = 1;
+        }
+		else if(step == 1)
+        {
+            verso_here::Point<float,3,float> u(0.0,0.0,0.5);
+            camera.move(u);
+            step_trans++;
+            if(step_trans > 50)
+            {
+                step = 2;
+                step_trans = 0;
+            }
+        }
+		else if(step == 2)
+        {
+            verso_here::Point<float,3,float> u(0.5,0.5,0.0);
+            camera.move(u);
+            step_trans++;
+            if(step_trans > 300) step = 3;
+        }
+        else
+        {
+
+        }
+
 }
 
 void Game::rendering()
@@ -154,7 +183,7 @@ void Game::rendering()
     glfwSwapBuffers(window);
     glfwPollEvents();
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(fps_ms));
 }
 
 void Game::clean()

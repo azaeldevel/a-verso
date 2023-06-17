@@ -93,15 +93,32 @@ void v0_math()
     //std::cout << "\nComponente de p6 sobre p8 es " << compt2 << "\n";
     CU_ASSERT(abs(compt2  + 4.02492) < infimium);
 
-    std::vector<verso_here::Point<int,3,float>> circle_1;
+    std::vector<verso_here::Point<float,3,float>> circle_1;
     verso_here::Point<float,3,float> cricle_delta(8,9,0);
     cricle_delta.unit();
-    cricle_delta.printLn(std::cout);
+    CU_ASSERT(cricle_delta.length() - 1.0 < infimium);
+    //cricle_delta.printLn(std::cout);
     verso_here::circle(O,10.0f,cricle_delta,circle_1);
-    for(const verso_here::Point<int,3,float>& p : circle_1)
+    CU_ASSERT(circle_1.size() == 41);
+    //std::cout << "size : " << circle_1.size() << "\n";
+    /*for(const verso_here::Point<int,3,float>& p : circle_1)
     {
         p.printLn(std::cout);
-    }
+    }*/
+
+
+    std::vector<verso_here::Point<float,3,float>> camera_path;
+    verso_here::Point<float,3,float> camera_path_delta;
+    camera_path_delta = glm::vec3(8,9,0);
+    camera_path_delta.unit();
+    CU_ASSERT(camera_path_delta.length() - 1.0 < infimium);
+    //std::cout << "Length : " << camera_path_delta.length()  << "\n";
+    verso_here::circle(O,10.0f,camera_path_delta,camera_path);
+    /*std::cout << "size : " << camera_path.size() << "\n";
+    for(const verso_here::Point<float,3,float>& p : camera_path)
+    {
+        p.printLn(std::cout);
+    }*/
 }
 
 void v0_opnegl_compatible()

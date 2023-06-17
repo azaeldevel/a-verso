@@ -88,6 +88,15 @@ template<> Point<int,3,float>::Point(int x, int y)
     point[1] = y;
     point[2] = 0;
 }
+template<> Point<float,3,float>::Point(float x, float y)
+{
+/*#ifdef OCTETOS_AVERSO_TTD
+    std::cout << "template<> Point<int,2,float>::Point(int x, int y)\n";
+#endif*/
+    point[0] = x;
+    point[1] = y;
+    point[2] = 0;
+}
 template<> Point<int,3,float>::Point(int x, int y, int z)
 {
 /*#ifdef OCTETOS_AVERSO_TTD
@@ -194,6 +203,71 @@ template<> Point<int,4,float>::Point(std::initializer_list<int>& l)
     }
 }
 
+template<> Point<int,3,float>::Point(const glm::vec<3,int,glm::packed_highp>& v)
+{
+    for(size_t i = 0; i < 3; i++)
+    {
+        point[i] = v[i];
+    }
+}
+template<> Point<int,4,float>::Point(const glm::vec<4,int,glm::packed_highp>& v)
+{
+    point[0] = v[0];
+    point[1] = v[1];
+    point[2] = v[2];
+    point[3] = v[3];
+}
+template<> Point<float,3,float>::Point(const glm::vec<3,float,glm::packed_highp>& v)
+{
+    for(size_t i = 0; i < 3; i++)
+    {
+        point[i] = v[i];
+    }
+}
+
+
+
+
+
+template<> Point<int,3,float>& Point<int,3,float>::operator =(const glm::vec<3,int,glm::packed_highp>& v)
+{
+/*#ifdef OCTETOS_AVERSO_TTD
+    std::cout << "template<> Point<int,4,float>::Point(std::initializer_list<int> l)\n";
+#endif*/
+    point[0] = v[0];
+    point[1] = v[1];
+    point[2] = v[2];
+
+    return *this;
+}
+template<> Point<int,4,float>& Point<int,4,float>::operator =(const glm::vec<4,int,glm::packed_highp>& v)
+{
+/*#ifdef OCTETOS_AVERSO_TTD
+    std::cout << "template<> Point<int,4,float>::Point(std::initializer_list<int> l)\n";
+#endif*/
+    point[0] = v[0];
+    point[1] = v[1];
+    point[2] = v[2];
+    point[3] = v[3];
+
+    return *this;
+}
+template<> Point<float,3,float>& Point<float,3,float>::operator =(const glm::vec<3,float,glm::packed_highp>& v)
+{
+/*#ifdef OCTETOS_AVERSO_TTD
+    std::cout << "template<> Point<float,3,float>& Point<float,3,float>::operator =(const glm::vec<3,float,glm::packed_highp>& v)\n";
+#endif*/
+    for(size_t i = 0; i < 3; i++)
+    {
+        point[i] = v[i];
+    }
+
+    return *this;
+}
+
+
+
+
 
 template<> Point<int,2,float> Point<int,2,float>::normal() const
 {
@@ -235,6 +309,30 @@ template<> Point<float,3,float> Point<float,3,float>::normal() const
     return v;
 }
 
+
+
+
+template<> int Point<int,2,float>::z() const
+{
+    return 0;
+}
+template<> int Point<int,3,float>::z() const
+{
+    return point[2];
+}
+template<> float Point<float,3,float>::z() const
+{
+    return point[2];
+}
+
+template<> int& Point<int,3,float>::z()
+{
+    return point[2];
+}
+template<> float& Point<float,3,float>::z()
+{
+    return point[2];
+}
 
 
 template<> int&  Point<int,2,float>::operator [] (unsigned char i)
@@ -286,7 +384,7 @@ template<> bool Point<int,3,float>::is_plane_xy() const
     }
 }
 
-
+/*
 template<> void circle(const Point<int,3,float>& center,float radio,const Point<float,3,float>& delta,std::vector<Point<int,3,float>>& rest)
 {
 
@@ -297,21 +395,54 @@ template<> void circle(const Point<int,3,float>& center,float radio,const Point<
 
     if(delta.is_plane_xy())//plano x,y
     {
-        std::cout << "plano xy detectado\n";
         float dp = delta.length();
         //primer cuadrante
+        std::cout << "primer cuadrante\n";
         rest.push_back(Point<int,3,float>(radio,0));
-        while(rest.back().x() > 0 and rest.back().y() < radio)
+        while(rest.back().x() > 0)
         {
             rest.push_back(rest.back());
             rest.back().x() -= dp;
             rest.back().y() += dp;
+            rest.back().printLn(std::cout);
+        }
+
+        //segundo cuadrante
+        std::cout << "segundo cuadrante\n";
+        while(rest.back().y() > 0)
+        {
+            rest.push_back(rest.back());
+            rest.back().x() -= dp;
+            rest.back().y() -= dp;
+            rest.back().printLn(std::cout);
+        }
+
+        //tercer cuadrante
+        std::cout << "tercer cuadrante\n";
+        while(rest.back().x() < 0)
+        {
+            rest.push_back(rest.back());
+            rest.back().x() += dp;
+            rest.back().y() -= dp;
+            rest.back().printLn(std::cout);
+        }
+
+        //cuarto cuadrante
+        std::cout << "cuarto cuadrante\n";
+        while(rest.back().y() < 0)
+        {
+            rest.push_back(rest.back());
+            rest.back().x() += dp;
+            rest.back().y() += dp;
+            rest.back().printLn(std::cout);
         }
     }
     else
     {
         core_here::exception("Plano de dibujo desconocido");
     }
-}
+}*/
+
+
 
 }

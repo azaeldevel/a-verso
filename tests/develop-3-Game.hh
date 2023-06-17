@@ -28,9 +28,13 @@ private:
 	GLuint MatrixID;
 	glm::mat4 projection,view,model,mvp;
 	verso_here::Point<int,3,float> O;
-	verso_here::Point<int,3,float> U1;
-	verso_here::Point<float,3,float> camera,target_camera;
-	float length_camera;
+	verso_here::Point<float,3,float> camera;
+	/*std::vector<verso_here::Point<float,3,float>> camera_path;
+	verso_here::Point<float,3,float> camera_path_delta;
+	size_t camera_index;*/
+	int step,step_trans;
+	//float fps;
+	std::chrono::milliseconds fps_ms;
 
 private:
     GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path);
