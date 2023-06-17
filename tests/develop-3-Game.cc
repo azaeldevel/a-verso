@@ -77,11 +77,6 @@ bool Game::initialize(const char* title, int width, int height)
 
 	camera = glm::vec3(4,3,3);//posision de la camara
 	step = 0;
-	/*camera_path_delta = glm::vec3(9,7,0);
-	camera_path_delta.unit();
-    verso_here::circle(O,camera.length(),camera_path_delta,camera_path);
-    camera_index = 0;
-    camera_actual = &camera;*/
 
 	// Camera matrix
 	/*view       = glm::lookAt(
@@ -111,7 +106,6 @@ void Game::handleEvents()
 
 void Game::update()
 {
-    camera.printLn(std::cout);
     view       = glm::lookAt(
 								camera, // Camera is at (4,3,3), in World Space
 								glm::vec3(0,0,0), // and looks at the origin
@@ -149,36 +143,47 @@ void Game::update()
 
 		if(step == 0)
         {
-            if(camera[0] > 0) camera[0]--;
-            else step = 1;
+            if(camera.x > 0) camera.x -= 0.1;
+            else
+            {
+                step = 1;
+            }
+            std::cout << "Alineacion z ";
+            camera.printLn(std::cout);
         }
 		else if(step == 1)
         {
-            camera[2] += 0.5;
+            camera.z += 0.5;
             step_trans++;
             if(step_trans > 50)
             {
                 step = 2;
                 step_trans = 0;
             }
+            std::cout << "Alejamineto z ";
+            camera.printLn(std::cout);
         }
 		else if(step == 2)
         {//1er cuadrante
-            camera[1] += 0.5;
-            camera[2] -= 0.5;
-            if(camera[2] < 0) step = 3;
+            if(camera.z < 0) step = 3;
+            camera.y += 0.5;
+            camera.z -= 0.5;
+            std::cout << "1er cuadrante ";
+            camera.printLn(std::cout);
         }
 		else if(step == 3)
         {//2do cuadrante
-            camera[1] -= 0.5;
-            camera[2] += 0.5;
-            if(camera[1] > 0) step = 4;
+            std::cout << "2do cuadrante ";
+            camera.printLn(std::cout);
+            if(camera.y < 0) step = 4;
+            camera.y -= 0.5;
+            camera.z -= 0.5;
         }
 		else if(step == 4)
         {//3er cuadrante
-            /*camera[1] -= 0.5;
-            camera[2] += 0.5;
-            if(camera[2] < 0) step = 5;*/
+            /*if(camera[1] < 0) step = 5;
+            camera[1] += 0.5;
+            camera[2] -= 0.5;*/
         }
         else
         {
