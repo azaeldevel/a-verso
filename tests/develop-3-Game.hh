@@ -27,7 +27,7 @@ private:
 	GLuint programID;
 	GLuint MatrixID;
 	glm::mat4 projection,view,model,mvp;
-	verso_here::Point<int,3,float> O;
+	//glm::vec3 O;
 	verso_here::Point<float,3,float> camera;
 	/*std::vector<verso_here::Point<float,3,float>> camera_path;
 	verso_here::Point<float,3,float> camera_path_delta;

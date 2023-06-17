@@ -111,10 +111,10 @@ void Game::handleEvents()
 
 void Game::update()
 {
-    //camera.printLn(std::cout);
+    camera.printLn(std::cout);
     view       = glm::lookAt(
-								reinterpret_cast<glm::vec3&>(camera), // Camera is at (4,3,3), in World Space
-								reinterpret_cast<glm::vec3&>(O), // and looks at the origin
+								camera, // Camera is at (4,3,3), in World Space
+								glm::vec3(0,0,0), // and looks at the origin
 								glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
 						   );
     mvp        = projection * view * model;
@@ -149,13 +149,12 @@ void Game::update()
 
 		if(step == 0)
         {
-            if(camera.x() > 0) camera.x()--;
+            if(camera[0] > 0) camera[0]--;
             else step = 1;
         }
 		else if(step == 1)
         {
-            verso_here::Point<float,3,float> u(0.0,0.0,0.5);
-            camera.move(u);
+            camera[2] += 0.5;
             step_trans++;
             if(step_trans > 50)
             {
@@ -164,11 +163,22 @@ void Game::update()
             }
         }
 		else if(step == 2)
-        {
-            verso_here::Point<float,3,float> u(0.5,0.5,0.0);
-            camera.move(u);
-            step_trans++;
-            if(step_trans > 300) step = 3;
+        {//1er cuadrante
+            camera[1] += 0.5;
+            camera[2] -= 0.5;
+            if(camera[2] < 0) step = 3;
+        }
+		else if(step == 3)
+        {//2do cuadrante
+            camera[1] -= 0.5;
+            camera[2] += 0.5;
+            if(camera[1] > 0) step = 4;
+        }
+		else if(step == 4)
+        {//3er cuadrante
+            /*camera[1] -= 0.5;
+            camera[2] += 0.5;
+            if(camera[2] < 0) step = 5;*/
         }
         else
         {
