@@ -3,9 +3,7 @@
 #define OCTETOS_AVERSO_SHAPES_HH
 
 #include <core/3/Exception.hh>
-#include <glm/vec2.hpp>
-#include <glm/vec3.hpp>
-#include <glm/vec4.hpp>
+#include <glm/glm.hpp>
 #include <vector>
 
 #ifdef OCTETOS_AVERSO_TTD
@@ -27,6 +25,7 @@ namespace oct::verso::v0
     public:
         typedef glm::vec<D,C,glm::packed_highp> vector;
 
+        //>>>Contructores
         Point()
         {
         }
@@ -43,36 +42,43 @@ namespace oct::verso::v0
         Point(const Point& p) : vector(p)
         {
         }
-        Point(std::initializer_list<C>& l);
         Point(const glm::vec<D,C,glm::packed_highp>& v) : vector(v)
         {
         }
+        Point(std::initializer_list<C>& l);
+
+        //>>>Operadores
+        Point& operator = (const Point& p);
+        Point& operator = (const glm::vec<D,C,glm::packed_highp>& p);
+
+        //>>>getters and setters
+
+
+
+        //>>>
+        /*
+        *\brief Componente de this en la direction de b
+        */
+        V length() const;
+        V comp(const Point& b)
+        {
+            V v = glm::dot((const vector&)*this,b);
+            v /= b.length();
+
+            return v;
+        }
+        V distance(const Point& b)
+        {
+            return glm::distance((const vector&)*this,b);
+        }
+        Point normalize() const
+        {
+            return glm::normalize((const vector&)*this);
+        }
 
 #ifdef OCTETOS_AVERSO_TTD
-
-        void print(std::ostream& out)const
-        {
-            out << "(";
-                out << vector::x << ",";
-                out << vector::y;
-                if(D == 3)
-                {
-                    out << "," << vector::z;
-                }
-            out << ")";
-        }
-        void printLn(std::ostream& out)const
-        {
-            out << "(";
-                out << vector::x << ",";
-                out << vector::y;
-                if(D == 3)
-                {
-                    out << "," << vector::z;
-                }
-            out << ")\n";
-        }
-
+        void print(std::ostream& out)const;
+        void printLn(std::ostream& out)const;
 #endif // OCTETOS_AVERSO_TTD
 
     };

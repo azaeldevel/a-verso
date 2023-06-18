@@ -44,11 +44,23 @@ void v0_math()
 
     CU_ASSERT(p2 == p3);
 
-    verso_here::Point<int,2,float> p6 {2,5};
-    verso_here::Point<int,2,float> p7 {-1,2};
-    //std::cout << std::endl;
-    //p8.print(std::cout);
+    verso_here::Point<float,2,float> p6 {2,5};
+    verso_here::Point<float,2,float> p7 {-1,2};
+    float comp_1 = p6.comp(p7);
+    //std::cout << "Componente de (2,5) en la direccion de (-1,2) es " << comp_1 << std::endl;
+    CU_ASSERT((8/sqrt(5)) - comp_1 < infimium);
 
+    verso_here::Point<float,3,float> p9 {-1,2,3};
+    verso_here::Point<float,3,float> p8(p9.normalize());
+    /*std::cout << "El vector normal de (-1,2,3) es ";
+    p8.printLn(std::cout);*/
+    CU_ASSERT(p8.length() - 1.0 < infimium);
+
+    verso_here::Point<float,3,float> p10(2, 3, 1);
+    verso_here::Point<float,3,float> p11(3, 1, -9);
+    verso_here::Point<float,3,float> p12 = glm::cross(p10,p11);
+    /*std::cout << "Producto crusado es ";
+    p12.printLn(std::cout);*/
 }
 
 void v0_opnegl_compatible()

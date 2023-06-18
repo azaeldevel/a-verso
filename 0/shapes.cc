@@ -93,4 +93,119 @@ template<> Point<int,4,float>::Point(std::initializer_list<int>& l)
 }
 
 
+
+template<> Point<int,2,float>& Point<int,2,float>::operator = (const Point<int,2,float>& p)
+{
+    vector::x = p[0];
+    vector::y = p[1];
+
+    return *this;
+}
+template<> Point<int,3,float>& Point<int,3,float>::operator = (const Point<int,3,float>& p)
+{
+    vector::x = p[0];
+    vector::y = p[1];
+    vector::z = p[1];
+
+    return *this;
+}
+
+template<> Point<int,2,float>& Point<int,2,float>::operator = (const glm::vec<2,int,glm::packed_highp>& p)
+{
+    vector::x = p[0];
+    vector::y = p[1];
+
+    return *this;
+}
+template<> Point<int,3,float>& Point<int,3,float>::operator = (const glm::vec<3,int,glm::packed_highp>& p)
+{
+    vector::x = p[0];
+    vector::y = p[1];
+    vector::z = p[1];
+
+    return *this;
+}
+
+
+
+
+
+template<> float Point<int,2,float>::length() const
+{
+    float d = 0;
+
+    d +=  pow(vector::x,2);
+    d +=  pow(vector::y,2);
+
+    return sqrt(d);
+}
+template<> float Point<float,2,float>::length() const
+{
+    float d = 0;
+
+    d +=  pow(vector::x,2);
+    d +=  pow(vector::y,2);
+
+    return sqrt(d);
+}
+
+template<> float Point<int,3,float>::length() const
+{
+    float d = 0;
+
+    d +=  pow(vector::x,2);
+    d +=  pow(vector::y,2);
+    d +=  pow(vector::z,2);
+
+    return sqrt(d);
+}
+template<> float Point<float,3,float>::length() const
+{
+    float d = 0;
+
+    d +=  pow(vector::x,2);
+    d +=  pow(vector::y,2);
+    d +=  pow(vector::z,2);
+
+    return sqrt(d);
+}
+
+
+
+
+#ifdef OCTETOS_AVERSO_TTD
+    template<> void Point<int,3,float>::print(std::ostream& out)const
+    {
+        out << "(";
+            out << vector::x << ",";
+            out << vector::y;
+            out << "," << vector::z;
+        out << ")";
+    }
+    template<> void Point<float,3,float>::print(std::ostream& out)const
+    {
+        out << "(";
+            out << vector::x << ",";
+            out << vector::y;
+            out << "," << vector::z;
+        out << ")";
+    }
+
+    template<> void Point<int,3,float>::printLn(std::ostream& out)const
+    {
+        out << "(";
+            out << vector::x << ",";
+            out << vector::y;
+            out << "," << vector::z;
+        out << ")\n";
+    }
+    template<> void Point<float,3,float>::printLn(std::ostream& out)const
+    {
+        out << "(";
+            out << vector::x << ",";
+            out << vector::y;
+            out << "," << vector::z;
+        out << ")\n";
+    }
+#endif // OCTETOS_AVERSO_TTD
 }
