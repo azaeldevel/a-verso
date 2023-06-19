@@ -144,12 +144,9 @@ void Game::update()
 		if(step == 0)
         {
             if(camera.x > 0) camera.x -= 0.1;
-            else
-            {
-                step = 1;
-            }
-            std::cout << "Alineacion z ";
-            camera.printLn(std::cout);
+            else step = 1;
+            //std::cout << "Alineacion z ";
+            //camera.printLn(std::cout);
         }
 		else if(step == 1)
         {
@@ -160,30 +157,20 @@ void Game::update()
                 step = 2;
                 step_trans = 0;
             }
-            std::cout << "Alejamineto z ";
-            camera.printLn(std::cout);
+            //std::cout << "Alejamineto z ";
+            //camera.printLn(std::cout);
         }
 		else if(step == 2)
         {//1er cuadrante
-            if(camera.z < 0) step = 3;
-            camera.y += 0.5;
-            camera.z -= 0.5;
-            std::cout << "1er cuadrante ";
-            camera.printLn(std::cout);
+
         }
 		else if(step == 3)
         {//2do cuadrante
-            std::cout << "2do cuadrante ";
-            camera.printLn(std::cout);
-            if(camera.y < 0) step = 4;
-            camera.y -= 0.5;
-            camera.z -= 0.5;
+
         }
 		else if(step == 4)
         {//3er cuadrante
-            /*if(camera[1] < 0) step = 5;
-            camera[1] += 0.5;
-            camera[2] -= 0.5;*/
+
         }
         else
         {

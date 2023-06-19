@@ -73,9 +73,6 @@
 		<Unit filename="0/develop-2-Game.cc">
 			<Option target="Release" />
 		</Unit>
-		<Unit filename="0/develop-2-Game.hh">
-			<Option target="Release" />
-		</Unit>
 		<Unit filename="0/develop-2-main.cc">
 			<Option target="Release" />
 		</Unit>

@@ -125,6 +125,14 @@ template<> Point<int,3,float>& Point<int,3,float>::operator = (const glm::vec<3,
 
     return *this;
 }
+template<> Point<float,3,float>& Point<float,3,float>::operator = (const glm::vec<3,float,glm::packed_highp>& p)
+{
+    vector::x = p[0];
+    vector::y = p[1];
+    vector::z = p[1];
+
+    return *this;
+}
 
 
 
