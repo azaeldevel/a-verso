@@ -70,15 +70,6 @@
 		</Linker>
 		<Unit filename="0/Verso.cc" />
 		<Unit filename="0/Verso.hh" />
-		<Unit filename="0/develop-2-Game.cc">
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="0/develop-2-main.cc">
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="0/develop-3.cc">
-			<Option target="Debug" />
-		</Unit>
 		<Unit filename="0/shapes.cc" />
 		<Unit filename="0/shapes.hh" />
 		<Unit filename="tests/develop-3-Game.cc">

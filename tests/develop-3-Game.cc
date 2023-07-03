@@ -57,14 +57,18 @@ bool Game::initialize(const char* title, int width, int height)
 	// Dark blue background
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
-	GLuint VertexArrayID;
-	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
+	//GLuint VertexArrayID;
+	//std::cout << "vbID_tirangle : " << vbID_tirangle << "\n";
+	glGenVertexArrays(1, &VAO);
+	//std::cout << "vbID_tirangle : " << vbID_tirangle << "\n";
+	glBindVertexArray(VAO);
 
 	// Create and compile our GLSL program from the shaders
 	programID = LoadShaders( "tests/triangle/SimpleVertexShader.vertexshader", "tests/triangle/SimpleFragmentShader.fragmentshader" );
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
+	glGenBuffers(1, &vbID_triangle);
+	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
+	glBindBuffer(GL_ARRAY_BUFFER, vbID_triangle);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
 	// Get a handle for our "MVP" uniform
@@ -112,6 +116,18 @@ void Game::handleEvents()
     {
         action_shape = &Game::action_create_triangle;
     }
+    else if(glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
+    {
+        camera.x -= 0.01;
+    }
+    else if(glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
+    {
+        camera.y -= 0.01;
+    }
+    else if(glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
+    {
+        camera.z -= 0.01;
+    }
 }
 
 void Game::update()
@@ -136,7 +152,6 @@ void Game::update()
 		// 1rst attribute buffer : vertices
         if(action_shape) (this->*action_shape)();
 
-		glDisableVertexAttribArray(0);
 
         if(action_main) (this->*action_main)();
 
@@ -144,7 +159,8 @@ void Game::update()
 
 void Game::rendering()
 {
-    // Swap buffers
+    handleEvents();
+    update();
     glfwSwapBuffers(window);
     glfwPollEvents();
 
@@ -260,7 +276,7 @@ void Game::action_align()
 void Game::action_create_triangle()
 {
     glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    //glBindBuffer(GL_ARRAY_BUFFER, vbID_triangle);
     glVertexAttribPointer(
 			0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
 			3,                  // size
@@ -272,4 +288,11 @@ void Game::action_create_triangle()
 
     // Draw the triangle !
     glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
+
+    glDisableVertexAttribArray(0);
+}
+
+void Game::action_x()
+{
+    camera.x -= 0.01;
 }

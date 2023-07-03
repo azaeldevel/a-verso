@@ -22,7 +22,7 @@ public:
 
 private:
     GLFWwindow* window;
-    GLuint vertexbuffer;
+    //GLuint vertexbuffer;
     static const GLfloat g_vertex_buffer_data[];
 	GLuint programID;
 	GLuint MatrixID;
@@ -42,5 +42,10 @@ private:
     void (Game::*action_main)();
     void (Game::*action_shape)();
     void action_align();
+    void action_x();
     void action_create_triangle();
+
+private://OpenGl Objects
+    GLuint VAO;
+    GLuint vbID_triangle;
 };
