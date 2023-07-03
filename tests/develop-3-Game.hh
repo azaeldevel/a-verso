@@ -46,6 +46,6 @@ private:
     void action_create_triangle();
 
 private://OpenGl Objects
-    GLuint VAO;
-    GLuint vbID_triangle;
+    GLuint vao_main;
+    GLuint vbo_triangle;
 };

@@ -59,16 +59,16 @@ bool Game::initialize(const char* title, int width, int height)
 
 	//GLuint VertexArrayID;
 	//std::cout << "vbID_tirangle : " << vbID_tirangle << "\n";
-	glGenVertexArrays(1, &VAO);
+	glGenVertexArrays(1, &vao_main);
 	//std::cout << "vbID_tirangle : " << vbID_tirangle << "\n";
-	glBindVertexArray(VAO);
+	glBindVertexArray(vao_main);
 
 	// Create and compile our GLSL program from the shaders
 	programID = LoadShaders( "tests/triangle/SimpleVertexShader.vertexshader", "tests/triangle/SimpleFragmentShader.fragmentshader" );
 	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
-	glGenBuffers(1, &vbID_triangle);
+	glGenBuffers(1, &vbo_triangle);
 	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
-	glBindBuffer(GL_ARRAY_BUFFER, vbID_triangle);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
 	// Get a handle for our "MVP" uniform
