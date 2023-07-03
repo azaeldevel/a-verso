@@ -91,6 +91,8 @@ bool Game::initialize(const char* title, int width, int height)
 
 	fps_ms = std::chrono::milliseconds(int(1.0/60.0)/1000);
 	step_trans = 0;
+	action_main = NULL;
+	action_shape = NULL;
 
 	running = true;
     return true;
@@ -101,6 +103,14 @@ void Game::handleEvents()
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
     {
         running = false;
+    }
+    else if(glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS)
+    {
+        action_main = &Game::action_align;
+    }
+    else if(glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+    {
+        action_shape = &Game::action_create_triangle;
     }
 }
 
@@ -124,58 +134,11 @@ void Game::update()
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &mvp[0][0]);
 
 		// 1rst attribute buffer : vertices
-		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-		glVertexAttribPointer(
-			0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
-			3,                  // size
-			GL_FLOAT,           // type
-			GL_FALSE,           // normalized?
-			0,                  // stride
-			(void*)0            // array buffer offset
-		);
-
-		// Draw the triangle !
-		glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
+        if(action_shape) (this->*action_shape)();
 
 		glDisableVertexAttribArray(0);
 
-
-		if(step == 0)
-        {
-            if(camera.x > 0) camera.x -= 0.1;
-            else step = 1;
-            //std::cout << "Alineacion z ";
-            //camera.printLn(std::cout);
-        }
-		else if(step == 1)
-        {
-            camera.z += 0.5;
-            step_trans++;
-            if(step_trans > 50)
-            {
-                step = 2;
-                step_trans = 0;
-            }
-            //std::cout << "Alejamineto z ";
-            //camera.printLn(std::cout);
-        }
-		else if(step == 2)
-        {//1er cuadrante
-
-        }
-		else if(step == 3)
-        {//2do cuadrante
-
-        }
-		else if(step == 4)
-        {//3er cuadrante
-
-        }
-        else
-        {
-
-        }
+        if(action_main) (this->*action_main)();
 
 }
 
@@ -286,4 +249,27 @@ GLuint Game::LoadShaders(const char * vertex_file_path,const char * fragment_fil
 	glDeleteShader(FragmentShaderID);
 
 	return ProgramID;
+}
+
+
+void Game::action_align()
+{
+    if(camera.x > 0) camera.x -= 0.01;
+    else step = 1;
+}
+void Game::action_create_triangle()
+{
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    glVertexAttribPointer(
+			0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
+			3,                  // size
+			GL_FLOAT,           // type
+			GL_FALSE,           // normalized?
+			0,                  // stride
+			(void*)0            // array buffer offset
+    );
+
+    // Draw the triangle !
+    glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
 }

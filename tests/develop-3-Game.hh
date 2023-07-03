@@ -38,4 +38,9 @@ private:
 
 private:
     GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path);
+
+    void (Game::*action_main)();
+    void (Game::*action_shape)();
+    void action_align();
+    void action_create_triangle();
 };
