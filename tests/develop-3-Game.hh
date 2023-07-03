@@ -23,7 +23,10 @@ public:
 private:
     GLFWwindow* window;
     //GLuint vertexbuffer;
-    static const GLfloat g_vertex_buffer_data[];
+    static const GLfloat v_triangle[];
+    static const GLfloat v_rectangle[];
+    //static GLuint v_rectangle_indexs[];
+
 	GLuint programID;
 	GLuint MatrixID;
 	glm::mat4 projection,view,model,mvp;
@@ -44,8 +47,10 @@ private:
     void action_align();
     void action_x();
     void action_create_triangle();
+    void action_create_rectangle();
 
 private://OpenGl Objects
-    GLuint vao_main;
+    GLuint vao;
     GLuint vbo_triangle;
+    GLuint ebo_rectangle,vbo_rectangle;
 };

@@ -10,12 +10,31 @@
 
 #include "develop-3-Game.hh"
 
-const GLfloat Game::g_vertex_buffer_data[] = {
+const GLfloat Game::v_triangle[] = {
 		-1.0f, -1.0f, 0.0f,
 		 1.0f, -1.0f, 0.0f,
 		 0.0f,  1.0f, 0.0f,
 	};
-
+const GLfloat Game::v_rectangle[] = {
+        // first triangle
+        0.5f, 0.5f, 0.0f, // top right
+        0.5f, -0.5f, 0.0f, // bottom right
+        -0.5f, 0.5f, 0.0f, // top left
+        // second triangle
+        0.5f, -0.5f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f, // bottom left
+        -0.5f, 0.5f, 0.0f // top left
+    };
+/*const GLfloat Game::v_rectangle[] = {
+    0.5f, 0.5f, 0.0f, // top right
+    0.5f, -0.5f, 0.0f, // bottom right
+    -0.5f, -0.5f, 0.0f, // bottom left
+    -0.5f, 0.5f, 0.0f // top left
+    };
+GLuint Game::v_rectangle_indexs[] = { // note that we start from 0!
+    0, 1, 3, // first triangle
+    1, 2, 3 // second triangle
+    };*/
 bool Game::initialize(const char* title, int width, int height)
 {
     // Initialise GLFW
@@ -59,9 +78,9 @@ bool Game::initialize(const char* title, int width, int height)
 
 	//GLuint VertexArrayID;
 	//std::cout << "vbID_tirangle : " << vbID_tirangle << "\n";
-	glGenVertexArrays(1, &vao_main);
+	glGenVertexArrays(1, &vao);
 	//std::cout << "vbID_tirangle : " << vbID_tirangle << "\n";
-	glBindVertexArray(vao_main);
+	glBindVertexArray(vao);
 
 	// Create and compile our GLSL program from the shaders
 	programID = LoadShaders( "tests/triangle/SimpleVertexShader.vertexshader", "tests/triangle/SimpleFragmentShader.fragmentshader" );
@@ -69,7 +88,14 @@ bool Game::initialize(const char* title, int width, int height)
 	glGenBuffers(1, &vbo_triangle);
 	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(v_triangle), v_triangle, GL_STATIC_DRAW);
+
+	/*glGenBuffers(1, &ebo_rectangle);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_rectangle);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(v_rectangle_indexs), v_rectangle_indexs, GL_STATIC_DRAW);*/
+	glGenBuffers(1, &vbo_rectangle);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo_rectangle);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(v_rectangle), v_rectangle, GL_STATIC_DRAW);
 
 	// Get a handle for our "MVP" uniform
 	MatrixID = glGetUniformLocation(programID, "MVP");
@@ -128,6 +154,10 @@ void Game::handleEvents()
     {
         camera.z -= 0.01;
     }
+    else if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+    {
+        action_shape = &Game::action_create_rectangle;
+    }
 }
 
 void Game::update()
@@ -144,6 +174,7 @@ void Game::update()
 
 		// Use our shader
 		glUseProgram(programID);
+		//glBindVertexArray(vao);
 
 		// Send our transformation to the currently bound shader,
 		// in the "MVP" uniform
@@ -151,8 +182,6 @@ void Game::update()
 
 		// 1rst attribute buffer : vertices
         if(action_shape) (this->*action_shape)();
-
-
         if(action_main) (this->*action_main)();
 
 }
@@ -169,6 +198,9 @@ void Game::rendering()
 
 void Game::clean()
 {
+    glDeleteVertexArrays(1, &vao);
+    glDeleteBuffers(1, &vbo_triangle);
+    glDeleteBuffers(1, &ebo_rectangle);
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
 }
@@ -276,7 +308,7 @@ void Game::action_align()
 void Game::action_create_triangle()
 {
     glEnableVertexAttribArray(0);
-    //glBindBuffer(GL_ARRAY_BUFFER, vbID_triangle);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
     glVertexAttribPointer(
 			0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
 			3,                  // size
@@ -295,4 +327,23 @@ void Game::action_create_triangle()
 void Game::action_x()
 {
     camera.x -= 0.01;
+}
+
+void Game::action_create_rectangle()
+{
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_rectangle);
+    glVertexAttribPointer(
+			0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
+			3,                  // size
+			GL_FLOAT,           // type
+			GL_FALSE,           // normalized?
+			0,                  // stride
+			(void*)0            // array buffer offset
+    );
+
+    // Draw the triangle !
+    glDrawArrays(GL_TRIANGLES, 0, 6); // 3 indices starting at 0 -> 1 triangle
+
+    glDisableVertexAttribArray(0);
 }
