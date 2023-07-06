@@ -123,6 +123,8 @@ bool Game::initialize(const char* title, int width, int height)
 	step_trans = 0;
 	action_main = NULL;
 	action_shape = NULL;
+	//uniform shader
+	vertexColorLocation = glGetUniformLocation(programID, "ourColor");
 
 	running = true;
     return true;
@@ -168,6 +170,13 @@ void Game::update()
 								glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
 						   );
     mvp        = projection * view * model;
+
+        glUseProgram(programID);
+
+        timeValue = glfwGetTime();
+        greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+        //vertexColorLocation = glGetUniformLocation(programID, "ourColor");
+        glUniform3f(vertexColorLocation, 0.0f, greenValue, 0.0f);
 
         // Clear the screen
 		glClear( GL_COLOR_BUFFER_BIT );

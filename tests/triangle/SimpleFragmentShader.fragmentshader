@@ -2,11 +2,12 @@
 
 // Ouput data
 out vec3 color;
+uniform vec3 ourColor;
 
 void main()
 {
 
 	// Output color = red 
-	color = vec3(1,0,0);
+	color = ourColor;
 
 }

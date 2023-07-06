@@ -53,4 +53,6 @@ private://OpenGl Objects
     GLuint vao;
     GLuint vbo_triangle;
     GLuint ebo_rectangle,vbo_rectangle;
+    float timeValue,greenValue;
+    int vertexColorLocation;
 };
