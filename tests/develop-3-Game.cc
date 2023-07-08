@@ -105,9 +105,11 @@ bool Game::initialize(const char* title, int width, int height)
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle_2);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(v_triangle_2), v_triangle_2, GL_STATIC_DRAW);
 
-	/*glGenBuffers(1, &ebo_rectangle);
+	/*
+	glGenBuffers(1, &ebo_rectangle);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_rectangle);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(v_rectangle_indexs), v_rectangle_indexs, GL_STATIC_DRAW);*/
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(v_rectangle_indexs), v_rectangle_indexs, GL_STATIC_DRAW);
+	*/
 	glGenBuffers(1, &vbo_rectangle);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo_rectangle);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(v_rectangle), v_rectangle, GL_STATIC_DRAW);
