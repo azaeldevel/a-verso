@@ -20,24 +20,7 @@ public:
     virtual void rendering();
     virtual void clean();
 
-private:
-    GLFWwindow* window;
-    //GLuint vertexbuffer;
-    static const GLfloat v_triangle[];
-    static const GLfloat v_rectangle[];
-    //static GLuint v_rectangle_indexs[];
-
-	GLuint programID;
-	GLuint MatrixID;
-	glm::mat4 projection,view,model,mvp;
-	//glm::vec3 O;
-	verso_here::Point<float,3,float> camera;
-	/*std::vector<verso_here::Point<float,3,float>> camera_path;
-	verso_here::Point<float,3,float> camera_path_delta;
-	size_t camera_index;*/
-	int step,step_trans;
-	//float fps;
-	std::chrono::milliseconds fps_ms;
+public:
 
 private:
     GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path);
@@ -48,11 +31,30 @@ private:
     void action_x();
     void action_create_triangle();
     void action_create_rectangle();
+    void action_create_triangle_2();
 
 private://OpenGl Objects
     GLuint vao;
-    GLuint vbo_triangle;
+    GLuint vbo_triangle,vbo_triangle_2;
     GLuint ebo_rectangle,vbo_rectangle;
     float timeValue,greenValue;
     int vertexColorLocation;
+    GLFWwindow* window;
+    //GLuint vertexbuffer;
+    static const GLfloat v_triangle[];
+    static const GLfloat v_triangle_2[];
+    static const GLfloat v_rectangle[];
+    //static GLuint v_rectangle_indexs[];
+
+	GLuint shader_1,shader_2;
+	GLuint MatrixID;
+	glm::mat4 projection,view,model,mvp;
+	//glm::vec3 O;
+	verso_here::Point<float,3,float> camera;
+	/*std::vector<verso_here::Point<float,3,float>> camera_path;
+	verso_here::Point<float,3,float> camera_path_delta;
+	size_t camera_index;*/
+	int step,step_trans;
+	//float fps;
+	std::chrono::milliseconds fps_ms;
 };
