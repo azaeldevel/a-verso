@@ -97,9 +97,10 @@ bool Game::initialize(const char* title, int width, int height)
 
 	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
 	glGenBuffers(1, &vbo_triangle);
-	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(v_triangle), v_triangle, GL_STATIC_DRAW);
+
+	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
 	glGenBuffers(1, &vbo_triangle_2);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle_2);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(v_triangle_2), v_triangle_2, GL_STATIC_DRAW);
