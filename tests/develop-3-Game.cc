@@ -92,8 +92,9 @@ bool Game::initialize(const char* title, int width, int height)
 	glBindVertexArray(vao);
 
 	// Create and compile our GLSL program from the shaders
-	shader_1 = LoadShaders( "tests/triangle/SimpleVertexShader.vertexshader", "tests/triangle/SimpleFragmentShader.fragmentshader" );
-	shader_2 = LoadShaders( "tests/triangle/SimpleVertexShader-2.vertexshader", "tests/triangle/SimpleFragmentShader-2.fragmentshader" );
+	shader_1 = LoadShaders( "tests/triangle/SimpleVertexShader-1.vertexshader", "tests/triangle/SimpleFragmentShader-1.fragmentshader");
+	shader_2 = LoadShaders( "tests/triangle/SimpleVertexShader-2.vertexshader", "tests/triangle/SimpleFragmentShader-2.fragmentshader");
+
 	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
 	glGenBuffers(1, &vbo_triangle);
 	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
@@ -381,7 +382,7 @@ void Game::action_create_rectangle()
     );
 
     // Draw the triangle !
-    glDrawArrays(GL_TRIANGLES, 0, 6); // 3 indices starting at 0 -> 1 triangle
+    glDrawArrays(GL_TRIANGLES, 0, 6);
 
     glDisableVertexAttribArray(0);
 }
