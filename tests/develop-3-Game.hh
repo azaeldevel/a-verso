@@ -46,7 +46,7 @@ private://OpenGl Objects
     static const GLfloat v_rectangle[];
     //static GLuint v_rectangle_indexs[];
 
-	GLuint shader_1,shader_2;
+	GLuint shader_0,shader_1,shader_2;
 	GLuint MatrixID;
 	glm::mat4 projection,view,model,mvp;
 	//glm::vec3 O;
