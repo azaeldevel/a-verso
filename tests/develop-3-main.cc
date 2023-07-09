@@ -15,7 +15,6 @@ int main(int argc, char* argv[])
         }
     }
 
-
     Game g_game;
     g_game.initialize("Tutorial 02",1024, 768);
     while(g_game.is_running())

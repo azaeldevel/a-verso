@@ -7,6 +7,7 @@
 
 #include <shapes.hh>
 #include <Verso.hh>
+#include <Shader.hh>
 
 namespace verso_here = oct::verso::v0;
 
@@ -46,7 +47,8 @@ private://OpenGl Objects
     static const GLfloat v_rectangle[];
     //static GLuint v_rectangle_indexs[];
 
-	GLuint shader_0,shader_1,shader_2;
+	GLuint shader_0,shader_1;//shader_2
+	verso_here::Shader shader_2;
 	GLuint MatrixID;
 	glm::mat4 projection,view,model,mvp;
 	//glm::vec3 O;

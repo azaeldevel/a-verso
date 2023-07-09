@@ -94,8 +94,8 @@ bool Game::initialize(const char* title, int width, int height)
 	// Create and compile our GLSL program from the shaders
 	shader_0 = LoadShaders( "tests/triangle/SimpleVertexShader-0.vertexshader", "tests/triangle/SimpleFragmentShader-0.fragmentshader");
 	shader_1 = LoadShaders( "tests/triangle/SimpleVertexShader-1.vertexshader", "tests/triangle/SimpleFragmentShader-1.fragmentshader");
-	shader_2 = LoadShaders( "tests/triangle/SimpleVertexShader-2.vertexshader", "tests/triangle/SimpleFragmentShader-2.fragmentshader");
-
+	//shader_2 = LoadShaders( "tests/triangle/SimpleVertexShader-2.vertexshader", "tests/triangle/SimpleFragmentShader-2.fragmentshader");
+    shader_2.build( "tests/triangle/SimpleVertexShader-2.vertexshader", "tests/triangle/SimpleFragmentShader-2.fragmentshader");
 	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
 	glGenBuffers(1, &vbo_triangle);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
