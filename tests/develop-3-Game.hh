@@ -52,6 +52,7 @@ private://OpenGl Objects
     static const GLuint v_rectangle_indexs[];
     static const GLfloat v_triangle_texture[];
     static const GLfloat v_rectangle_textured[];
+    static const GLfloat v_cube[];
     //static GLuint v_rectangle_indexs[];
 
 	GLuint shader_0,shader_1;//shader_2

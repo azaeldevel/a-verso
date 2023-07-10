@@ -9,10 +9,6 @@
 #ifdef OCTETOS_AVERSO_TTD
     #include <iostream>
 #endif // OCTETOS_AVERSO_DEBUG
-#ifdef OCTETOS_AVERSO_SDL
-    #include <SDL.h>
-    #include <SDL_image.h>
-#endif // OCTETOS_AVERSO_SDL
 
 namespace oct::verso::v0
 {
