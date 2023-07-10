@@ -205,6 +205,10 @@ void Game::handleEvents()
     {
         camera_rotate = !camera_rotate;
     }
+    else if(glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
+    {
+        camera_radius += 0.05;
+    }
 }
 
 void Game::update()
