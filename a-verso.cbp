@@ -61,9 +61,6 @@
 			<Add option="-Wall -pedantic --std=c++20" />
 			<Add directory="/home/azael/develop/octetos" />
 		</Compiler>
-		<Linker>
-			<Add option="`pkg-config glfw3 --libs` `pkg-config glew --libs`" />
-		</Linker>
 		<Unit filename="0/Shader.cc" />
 		<Unit filename="0/Shader.hh" />
 		<Unit filename="0/Verso.cc" />
@@ -88,6 +85,11 @@
 		<Unit filename="tests/v0.hh">
 			<Option target="testing-dbg-v0" />
 		</Unit>
-		<Extensions />
+		<Extensions>
+			<lib_finder>
+				<lib name="glfw3" />
+				<lib name="glew" />
+			</lib_finder>
+		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
