@@ -72,5 +72,23 @@ void Shader::build(const std::filesystem::path& vertexPath, const std::filesyste
 		std::cout << "Error en contruccion de shader\n";
 	}
 }
+void Shader::use()
+{
+    glUseProgram(program);
+}
+
+
+void Shader::setBool(const std::string &name, bool value) const
+{
+    glUniform1i(glGetUniformLocation(program, name.c_str()), (int)value);
+}
+void Shader::setInt(const std::string &name, int value) const
+{
+    glUniform1i(glGetUniformLocation(program, name.c_str()), value);
+}
+void Shader::setFloat(const std::string &name, float value) const
+{
+    glUniform1f(glGetUniformLocation(program, name.c_str()), value);
+}
 
 }

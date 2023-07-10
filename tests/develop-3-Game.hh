@@ -32,12 +32,14 @@ private:
     void action_x();
     void action_create_triangle();
     void action_create_rectangle();
+    void action_create_rectangle_2();
     void action_create_triangle_2();
+    void action_create_rectangle_textured();
 
 private://OpenGl Objects
     GLuint vao;
     GLuint vbo_triangle,vbo_triangle_2;
-    GLuint ebo_rectangle,vbo_rectangle;
+    GLuint ebo_rectangle,vbo_rectangle,vbo_rectangle_textured,ebo_rectangle_textured;
     float timeValue,greenValue;
     int vertexColorLocation;
     GLFWwindow* window;
@@ -45,6 +47,10 @@ private://OpenGl Objects
     static const GLfloat v_triangle[];
     static const GLfloat v_triangle_2[];
     static const GLfloat v_rectangle[];
+    static const GLfloat v_rectangle_ebo_2[];
+    static const GLuint v_rectangle_indexs[];
+    static const GLfloat v_triangle_texture[];
+    static const GLfloat v_rectangle_textured[];
     //static GLuint v_rectangle_indexs[];
 
 	GLuint shader_0,shader_1;//shader_2

@@ -25,16 +25,16 @@ const GLfloat Game::v_rectangle[] = {
         -0.5f, -0.5f, 0.0f, // bottom left
         -0.5f, 0.5f, 0.0f // top left
     };
-/*const GLfloat Game::v_rectangle[] = {
-    0.5f, 0.5f, 0.0f, // top right
-    0.5f, -0.5f, 0.0f, // bottom right
-    -0.5f, -0.5f, 0.0f, // bottom left
-    -0.5f, 0.5f, 0.0f // top left
+const GLfloat Game::v_rectangle_ebo_2[] = {
+        0.5f, 0.5f, 0.0f, // top right
+        0.5f, -0.5f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f, // bottom left
+        -0.5f, 0.5f, 0.0f // top left
     };
-GLuint Game::v_rectangle_indexs[] = { // note that we start from 0!
+const GLuint Game::v_rectangle_indexs[] = { // note that we start from 0!
     0, 1, 3, // first triangle
     1, 2, 3 // second triangle
-    };*/
+    };
 
 const GLfloat Game::v_triangle_2[] = {
     // positions       // colors
@@ -42,6 +42,18 @@ const GLfloat Game::v_triangle_2[] = {
     -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom left
     0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f // top
 };
+const GLfloat Game::v_triangle_texture[] = {
+        0.0f, 0.0f, // lower-left corner
+        1.0f, 0.0f, // lower-right corner
+        0.5f, 1.0f // top-center corner
+    };
+const GLfloat Game::v_rectangle_textured[] = {
+        // positions          // colors           // texture coords
+         0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+         0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left
+    };
 
 bool Game::initialize(const char* title, int width, int height)
 {
@@ -100,20 +112,21 @@ bool Game::initialize(const char* title, int width, int height)
 	glGenBuffers(1, &vbo_triangle);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(v_triangle), v_triangle, GL_STATIC_DRAW);
-
 	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
 	glGenBuffers(1, &vbo_triangle_2);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle_2);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(v_triangle_2), v_triangle_2, GL_STATIC_DRAW);
+	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
+	glGenBuffers(1, &vbo_rectangle);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_rectangle);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(v_rectangle_ebo_2), v_rectangle_ebo_2, GL_STATIC_DRAW);
 
-	/*
 	glGenBuffers(1, &ebo_rectangle);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_rectangle);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(v_rectangle_indexs), v_rectangle_indexs, GL_STATIC_DRAW);
-	*/
-	glGenBuffers(1, &vbo_rectangle);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo_rectangle);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(v_rectangle), v_rectangle, GL_STATIC_DRAW);
+	glGenBuffers(1, &ebo_rectangle_textured);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_rectangle_textured);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(v_rectangle_indexs), v_rectangle_indexs, GL_STATIC_DRAW);
 
 
 	// Get a handle for our "MVP" uniform
@@ -391,6 +404,32 @@ void Game::action_create_rectangle()
     glDisableVertexAttribArray(0);
 }
 
+void Game::action_create_rectangle_2()
+{
+
+    timeValue = glfwGetTime();
+    greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+    //vertexColorLocation = glGetUniformLocation(programID, "ourColor");
+    glUniform3f(vertexColorLocation, 0.0f, greenValue, 0.0f);
+
+    glUseProgram(shader_1);
+
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_rectangle);
+    glVertexAttribPointer(
+			0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
+			3,                  // size
+			GL_FLOAT,           // type
+			GL_FALSE,           // normalized?
+			0,                  // stride
+			(void*)0            // array buffer offset
+    );
+
+    // Draw the triangle !
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    glDisableVertexAttribArray(0);
+}
 void Game::action_create_triangle_2()
 {
     glUseProgram(shader_2);
@@ -410,4 +449,20 @@ void Game::action_create_triangle_2()
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
+}
+
+
+void Game::action_create_rectangle_textured()
+{
+    // position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    // color attribute
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+    // texture coord attribute
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+    glEnableVertexAttribArray(2);
+
+
 }
