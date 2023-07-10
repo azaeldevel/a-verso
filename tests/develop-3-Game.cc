@@ -163,6 +163,10 @@ bool Game::initialize(const char* title, int width, int height)
 	glGenBuffers(1, &vbo_rectangle);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_rectangle);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(v_rectangle), v_rectangle, GL_STATIC_DRAW);
+	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
+	glGenBuffers(1, &vbo_cube);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_cube);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(v_cube), v_cube, GL_STATIC_DRAW);
 
 	glGenBuffers(1, &ebo_rectangle);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_rectangle);
@@ -251,6 +255,10 @@ void Game::handleEvents()
     else if(glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
     {
         camera_radius += 0.05;
+    }
+    else if(glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
+    {
+        action_shape = &Game::action_cube;
     }
 }
 
@@ -532,4 +540,31 @@ void Game::action_rotate_scene()
     camera_rigth = glm::normalize(glm::cross(glm::vec3(0,1,0), camera_direction));
     camera_up = glm::cross(camera_direction, camera_rigth);
     */
+}
+
+
+
+
+
+void Game::action_cube()
+{
+    timeValue = glfwGetTime();
+    greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+    //vertexColorLocation = glGetUniformLocation(programID, "ourColor");
+    glUniform3f(vertexColorLocation, 0.0f, greenValue, 0.0f);
+
+    glUseProgram(shader_1);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_cube);
+    // position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    // texture coord attribute
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+
+    // Draw the triangle !
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    glDisableVertexAttribArray(0);
 }

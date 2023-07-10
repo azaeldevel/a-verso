@@ -36,10 +36,11 @@ private:
     void action_create_triangle_2();
     void action_create_rectangle_textured();
     void action_rotate_scene();
+    void action_cube();
 
 private://OpenGl Objects
     GLuint vao;
-    GLuint vbo_triangle,vbo_triangle_2;
+    GLuint vbo_triangle,vbo_triangle_2,vbo_cube;
     GLuint ebo_rectangle,vbo_rectangle,vbo_rectangle_textured,ebo_rectangle_textured;
     float timeValue,greenValue;
     int vertexColorLocation;
