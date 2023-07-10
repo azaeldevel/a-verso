@@ -35,6 +35,7 @@ private:
     void action_create_rectangle_2();
     void action_create_triangle_2();
     void action_create_rectangle_textured();
+    void action_rotate_scene();
 
 private://OpenGl Objects
     GLuint vao;
@@ -57,6 +58,10 @@ private://OpenGl Objects
 	verso_here::Shader shader_2;
 	GLuint MatrixID;
 	glm::mat4 projection,view,model,mvp;
+	glm::vec3 camera_direction,camera_target,camera_up,camera_rigth;
+	float camera_radius;
+	bool camera_rotate;
+
 	//glm::vec3 O;
 	verso_here::Point<float,3,float> camera;
 	/*std::vector<verso_here::Point<float,3,float>> camera_path;

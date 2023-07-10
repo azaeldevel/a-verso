@@ -159,6 +159,14 @@ bool Game::initialize(const char* title, int width, int height)
 	//uniform shader
 	vertexColorLocation = glGetUniformLocation(shader_1, "ourColor");
 
+    camera_target =  glm::vec3(0,0,0);
+    camera_direction = glm::normalize(camera - camera_target);
+    camera_rigth = glm::normalize(glm::cross(glm::vec3(0,1,0), camera_direction));
+    camera_up = glm::cross(camera_direction, camera_rigth);
+    //camera_up = glm::vec3(0,1,0);
+    camera_rotate = false;
+    camera_radius = glm::distance(camera,camera_target);
+
 	running = true;
     return true;
 }
@@ -193,18 +201,20 @@ void Game::handleEvents()
     {
         action_shape = &Game::action_create_rectangle;
     }
-    else if(glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
+    else if(glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
     {
-        action_shape = &Game::action_create_triangle_2;
+        camera_rotate = !camera_rotate;
     }
 }
 
 void Game::update()
 {
+    if(camera_rotate) action_rotate_scene();
+
     view       = glm::lookAt(
 								camera, // Camera is at (4,3,3), in World Space
-								glm::vec3(0,0,0), // and looks at the origin
-								glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
+								camera_target, // and looks at the origin
+								camera_up  // Head is up (set to 0,-1,0 to look upside-down)
 						   );
     mvp        = projection * view * model;
 
@@ -379,7 +389,6 @@ void Game::action_x()
 
 void Game::action_create_rectangle()
 {
-
     timeValue = glfwGetTime();
     greenValue = (sin(timeValue) / 2.0f) + 0.5f;
     //vertexColorLocation = glGetUniformLocation(programID, "ourColor");
@@ -403,7 +412,6 @@ void Game::action_create_rectangle()
 
     glDisableVertexAttribArray(0);
 }
-
 void Game::action_create_rectangle_2()
 {
 
@@ -464,5 +472,17 @@ void Game::action_create_rectangle_textured()
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
+}
 
+void Game::action_rotate_scene()
+{
+    camera.y = sin(glfwGetTime()) * camera_radius;
+    camera.z = cos(glfwGetTime()) * camera_radius;
+
+    //if(camera.x > 0) camera.x -= 0.01;
+    /*
+    camera_direction = glm::normalize(camera - camera_target);
+    camera_rigth = glm::normalize(glm::cross(glm::vec3(0,1,0), camera_direction));
+    camera_up = glm::cross(camera_direction, camera_rigth);
+    */
 }
