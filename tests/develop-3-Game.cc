@@ -119,7 +119,7 @@ bool Game::initialize(const char* title, int width, int height)
 	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
 	glGenBuffers(1, &vbo_rectangle);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_rectangle);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(v_rectangle_ebo_2), v_rectangle_ebo_2, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(v_rectangle), v_rectangle, GL_STATIC_DRAW);
 
 	glGenBuffers(1, &ebo_rectangle);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_rectangle);
