@@ -61,6 +61,9 @@
 			<Add option="-Wall -pedantic --std=c++20" />
 			<Add directory="/home/azael/develop/octetos" />
 		</Compiler>
+		<Linker>
+			<Add option="`pkg-config glew --libs` `pkg-config glfw3 --libs`" />
+		</Linker>
 		<Unit filename="0/Shader.cc" />
 		<Unit filename="0/Shader.hh" />
 		<Unit filename="0/Verso.cc" />
