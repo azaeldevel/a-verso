@@ -1,7 +1,9 @@
 
 
 #include <filesystem>
-
+#include <SDL.h>
+//#include <SDL_image.h>
+#include <SDL_ttf.h>
 #include "Verso.hh"
 #include "shapes.hh"
 
@@ -21,8 +23,5 @@ private:
     SDL_Window* window;
     SDL_Renderer* render;
 
-    verso_here::Line<int,2,float> line1;
-    verso_here::Point<int,2,float> p0;
-    verso_here::Point<int,2,float> pU;
-    verso_here::Point<int,2,float> O;
+
 };

@@ -7,8 +7,6 @@ int main(int argc, char* argv[])
     g_game.init("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN);
     while(g_game.is_running())
     {
-        g_game.handleEvents();
-        g_game.update();
         g_game.rendering();
     }
 

@@ -3,8 +3,6 @@
 #define OCTETOS_AVERSO_VERSO_HH
 
 
-//#include<SDL.h>
-
 namespace oct::verso::v0
 {
     class Verso

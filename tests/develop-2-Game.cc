@@ -43,15 +43,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     //std::cout << "init success\n";
     running = true; // everything inited successfully, start the main loop
 
-    p0.set(0,0);
-    pU.set(1,1);
-    O.set(0,0);
 
-    verso_here::Point<int,2,float> p4 {50,50};
-    verso_here::Point<int,2,float> p5 {100,100};
-
-    line1.set(p0,p5);
-    line1.move(p4);
 
 
     return true;
@@ -59,22 +51,23 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
 void Game::rendering()
 {
+    handleEvents();
+    update();
+
+
+    //>>>>>>>>>>>>>>>>>
     SDL_RenderClear(render);
-
-    //SDL_RenderCopy(render, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
-
     SDL_SetRenderDrawColor(render, 255,255,255,255);
-    //SDL_RenderDrawLine(render,rect1.x,rect1.y,rect1.x + rect1.w,rect1.y + rect1.h);
-    line1.draw(render);
+
+
+
     SDL_SetRenderDrawColor(render, 0,0,0,255);
-
     SDL_RenderPresent(render);
-
-    SDL_Delay(100);
+    SDL_Delay(10);
 }
 void Game::update()
 {
-    line1.move(pU);
+
 }
 
 
