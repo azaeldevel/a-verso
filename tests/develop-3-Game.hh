@@ -4,10 +4,23 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <ft2build.h>
+#include FT_FREETYPE_H
+#include <map>
 
 #include <shapes.hh>
 #include <Verso.hh>
 #include <Shader.hh>
+
+struct Character
+{
+    unsigned int TextureID;  // ID handle of the glyph texture
+    glm::ivec2   Size;       // Size of glyph
+    glm::ivec2   Bearing;    // Offset from baseline to left/top of glyph
+    unsigned int Advance;    // Offset to advance to next glyph
+};
+static std::map<char, Character> Characters;
+
 
 namespace verso_here = oct::verso::v0;
 
@@ -20,6 +33,7 @@ public:
     virtual void update();
     virtual void rendering();
     virtual void clean();
+    void RenderText(verso_here::Shader &s, std::string text, float x, float y, float scale, glm::vec3 color);
 
 public:
 
@@ -41,7 +55,7 @@ private:
 private://OpenGl Objects
     GLuint vao;
     GLuint vbo_triangle,vbo_triangle_2,vbo_cube;
-    GLuint ebo_rectangle,vbo_rectangle,vbo_rectangle_textured,ebo_rectangle_textured;
+    GLuint ebo_rectangle,vbo_rectangle,vbo_rectangle_textured,ebo_rectangle_textured,vbo_text;
     float timeValue,greenValue;
     int vertexColorLocation;
     GLFWwindow* window;
@@ -57,7 +71,7 @@ private://OpenGl Objects
     //static GLuint v_rectangle_indexs[];
 
 	GLuint shader_0,shader_1;//shader_2
-	verso_here::Shader shader_2;
+	verso_here::Shader shader_2,shader_text;
 	GLuint MatrixID;
 	glm::mat4 projection,view,model,mvp;
 	glm::vec3 camera_direction,camera_target,camera_up,camera_rigth;
@@ -72,4 +86,7 @@ private://OpenGl Objects
 	int step,step_trans;
 	//float fps;
 	std::chrono::milliseconds fps_ms;
+
+	FT_Library ft;
+	FT_Face face;
 };
