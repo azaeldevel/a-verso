@@ -59,7 +59,7 @@ namespace oct::verso::v0
         void setInt(const std::string &name, int value) const;
         void setFloat(const std::string &name, float value) const;
 
-        void build(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
+        bool build(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
 
     private:
         // the program ID
@@ -67,7 +67,7 @@ namespace oct::verso::v0
 
     private:
         GLuint compile(const std::filesystem::path&,GLenum);
-        GLuint link(GLuint,GLuint);
+        bool link(GLuint,GLuint);
 
     };
 

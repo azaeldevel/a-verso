@@ -163,31 +163,48 @@ GLuint Shader::compile(const std::filesystem::path& path,GLenum type)
 	return shader_id;
 }
 
-void Shader::build(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath)
+bool Shader::build(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath)
+{
+    shader vertex(vertexPath,GL_VERTEX_SHADER),fragment(fragmentPath,GL_FRAGMENT_SHADER);
+
+	return link(vertex,fragment);
+}
+void Shader::use()
+{
+    glUseProgram(program);
+}
+bool Shader::link(GLuint vertex,GLuint fragment)
 {
     program = glCreateProgram();
-    shader vertex(vertexPath,GL_VERTEX_SHADER),fragment(fragmentPath,GL_FRAGMENT_SHADER);
-	//glAttachShader(program, compile(vertexPath,GL_VERTEX_SHADER));
+    //glAttachShader(program, compile(vertexPath,GL_VERTEX_SHADER));
 	glAttachShader(program, vertex);
 	//glAttachShader(program, compile(fragmentPath,GL_FRAGMENT_SHADER));
 	glAttachShader(program, fragment);
 	glLinkProgram(program);
 
-    GLint Result = GL_FALSE;
-	int InfoLogLength;
-	glGetProgramiv(program, GL_LINK_STATUS, &Result);
-	glGetProgramiv(program, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	if ( InfoLogLength > 0 )
+	// Note the different functions here: glGetProgram* instead of glGetShader*.
+    GLint isLinked = 0;
+    glGetProgramiv(program, GL_LINK_STATUS, (int *)&isLinked);
+    if (isLinked == GL_FALSE)
     {
-		/*std::vector<char> ProgramErrorMessage(InfoLogLength+1);
-		glGetProgramInfoLog(program, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-		printf("%s\n", &ProgramErrorMessage[0]);*/
-		std::cout << "Error en contruccion de shader\n";
-	}
-}
-void Shader::use()
-{
-    glUseProgram(program);
+        GLint maxLength = 0;
+        glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+
+        // The maxLength includes the NULL character
+        std::vector<GLchar> infoLog(maxLength);
+        glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
+
+        // We don't need the program anymore.
+        glDeleteProgram(program);
+        // Don't leak shaders either.
+
+        // Use the infoLog as you see fit.
+
+        // In this simple program, we'll just leave
+        return false;
+    }
+
+	return true;
 }
 
 

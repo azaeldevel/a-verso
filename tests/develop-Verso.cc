@@ -231,19 +231,19 @@ void Develop::handleEvents()
         {
             //std::cout << "Triangle\n";
             scenary = &Develop::scenary_triangle_1;
-        menu = Menu::activated_escenary;
+            menu = Menu::activated_escenary;
         }
         else if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
         {
             //std::cout << "Triangle\n";
             scenary = &Develop::scenary_triangle_2;
-        menu = Menu::activated_escenary;
+            menu = Menu::activated_escenary;
         }
         else if(glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
         {
             //std::cout << "Triangle\n";
             scenary = &Develop::scenary_cube_1;
-        menu = Menu::activated_escenary;
+            menu = Menu::activated_escenary;
         }
     }
     else if(menu == Menu::activated_escenary)
