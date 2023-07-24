@@ -101,7 +101,7 @@ const GLfloat Develop::v_cube_1_colors[] = {
     0.982f,  0.099f,  0.879f
 	};
 
-bool Develop::initialize(const char* title, int width, int height)
+bool Develop::initialize(const char* title, int w, int h)
 {
     // Initialise GLFW
 	if( !glfwInit() )
@@ -110,6 +110,9 @@ bool Develop::initialize(const char* title, int width, int height)
 		getchar();
 		return -1;
 	}
+	width = w;
+    height = h;
+    buffer = new int[ width * height * 3 ];
 
 	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -301,6 +304,7 @@ void Develop::rendering()
     handleEvents();
     update();
 
+    //save("image.tga",true);
     glfwSwapBuffers(window);
     glfwPollEvents();
 
@@ -365,5 +369,23 @@ void Develop::scenary_cube_1()
     );
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glDisableVertexAttribArray(0);
+}
+
+void Develop::save(const std::filesystem::path& path,bool seq)
+{
+    int width, height;
+     glfwGetFramebufferSize(window, &width, &height);
+     GLsizei nrChannels = 3;
+     GLsizei stride = nrChannels * width;
+     stride += (stride % 4) ? (4 - stride % 4) : 0;
+     GLsizei bufferSize = stride * height;
+     std::vector<char> buffer(bufferSize);
+     glPixelStorei(GL_PACK_ALIGNMENT, 4);
+     glReadBuffer(GL_FRONT);
+     glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, buffer.data());
+     //stbi_flip_vertically_on_write(true);
+     //stbi_write_png(path, width, height, nrChannels, buffer.data(), stride);
+
+
 }
 

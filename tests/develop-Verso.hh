@@ -28,12 +28,15 @@ public:
 public:
 
 private:
+    void save(const std::filesystem::path&,bool seq);
+private://OpenGl Objects
     static const GLfloat v_triangle_1[];
     static const GLfloat v_triangle_2[];
     static const GLfloat v_cube_1[];
     static const GLfloat v_cube_1_colors[];
 
-private://OpenGl Objects
+    int width,height;
+    int* buffer;
 
     GLFWwindow* window;
     GLuint vao;
