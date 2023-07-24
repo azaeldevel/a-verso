@@ -147,6 +147,7 @@ bool Develop::initialize(const char* title, int width, int height)
     shader_default.build("tests/shaders/mvp.vs", "tests/shaders/color-green.fs");
     shader_red.build("tests/shaders/mvp.vs", "tests/shaders/color-red.fs");
     shader_green.build("tests/shaders/mvp.vs", "tests/shaders/color-green.fs");
+    //shader_default = &shader_green;
     mvp_matrix = glGetUniformLocation(shader_default, "MVP");
 
 	//>>>>>
@@ -206,31 +207,16 @@ void Develop::handleEvents()
     {
         running = false;
     }
-    else if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+    else if(glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS)
     {
-        //std::cout << "Triangle\n";
-        scenary = &Develop::scenary_triangle_1;
-    }
-    else if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
-    {
-        //std::cout << "Triangle\n";
-        scenary = &Develop::scenary_triangle_2;
-    }
-    else if(glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
-    {
-        //std::cout << "Triangle\n";
-        scenary = &Develop::scenary_cube_1;
-    }
-    else
-
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
-    {
-        running = false;
+        menu = Menu::none;
+        scenary = NULL;
     }
     else if(menu == Menu::none)
     {
         if(glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
         {
+            //std::cout << "Make escenary\n";
             menu = Menu::make_escenary;
         }
         else
@@ -238,29 +224,27 @@ void Develop::handleEvents()
 
         }
     }
-    else if(glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS)
-    {
-        menu = Menu::none;
-        scenary = NULL;
-    }
     else if(menu == Menu::make_escenary)
     {
+        //std::cout << "Wating for escenary\n";
         if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
         {
             //std::cout << "Triangle\n";
             scenary = &Develop::scenary_triangle_1;
+        menu = Menu::activated_escenary;
         }
         else if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
         {
             //std::cout << "Triangle\n";
             scenary = &Develop::scenary_triangle_2;
+        menu = Menu::activated_escenary;
         }
         else if(glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
         {
             //std::cout << "Triangle\n";
             scenary = &Develop::scenary_cube_1;
-        }
         menu = Menu::activated_escenary;
+        }
     }
     else if(menu == Menu::activated_escenary)
     {

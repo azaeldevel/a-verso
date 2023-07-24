@@ -60,8 +60,8 @@ private://OpenGl Objects
         make_escenary,
         activated_escenary,
             camera_focused,
-            camera_translation,
-            camera_rotation,
+                camera_translation,
+                camera_rotation,
 
 	};
 	Menu menu;
