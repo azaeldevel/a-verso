@@ -153,6 +153,10 @@ bool Game::initialize(const char* title, int width, int height)
     shader_2.build( "tests/triangle/SimpleVertexShader-2.vertexshader", "tests/triangle/SimpleFragmentShader-2.fragmentshader");
     shader_text.build("tests/text.vertex", "tests/textfragment");
 
+	glEnable(GL_CULL_FACE);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	//std::cout << "vsID_triangle : " << vsID_triangle << "\n";
 	glGenBuffers(1, &vbo_triangle);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
@@ -286,10 +290,10 @@ bool Game::initialize(const char* title, int width, int height)
     glBindBuffer(GL_ARRAY_BUFFER, vbo_text);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
 
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
+    //glEnableVertexAttribArray(0);
+    //glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+    //glBindBuffer(GL_ARRAY_BUFFER, 0);
+    //glBindVertexArray(0);
 
 	running = true;
     return true;
@@ -659,7 +663,6 @@ void Game::RenderText(verso_here::Shader &s, std::string text, float x, float y,
     s.use();
     glUniform3f(glGetUniformLocation(s, "textColor"), color.x, color.y, color.z);
     glActiveTexture(GL_TEXTURE0);
-    glBindVertexArray(vao);
 
     // iterate through all characters
     std::string::const_iterator c;
@@ -685,7 +688,9 @@ void Game::RenderText(verso_here::Shader &s, std::string text, float x, float y,
         // render glyph texture over quad
         glBindTexture(GL_TEXTURE_2D, ch.TextureID);
         // update content of VBO memory
+        glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vbo_text);
+        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         // render quad
