@@ -66,10 +66,10 @@ bool Develop::initialize(const char* title, int width, int height)
 
 
     //>>
-    triangle_1.build("tests/shaders/fixed-view.vs", "tests/shaders/color-red.fs");
-    triangle_2.build("tests/shaders/fixed-view.vs", "tests/shaders/color-green.fs");
-    shader_3.build("tests/shaders/mvp.vs", "tests/shaders/color-red.fs");
-    mvp_matrix = glGetUniformLocation(shader_3, "MVP");
+    shader_default.build("tests/shaders/mvp.vs", "tests/shaders/color-green.fs");
+    shader_red.build("tests/shaders/mvp.vs", "tests/shaders/color-red.fs");
+    shader_green.build("tests/shaders/mvp.vs", "tests/shaders/color-green.fs");
+    mvp_matrix = glGetUniformLocation(shader_default, "MVP");
 
 	//>>>>>
 	glGenVertexArrays(1, &vao);
@@ -128,7 +128,7 @@ void Develop::handleEvents()
 void Develop::update()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    shader_3.use();
+    shader_default.use();
     glUniformMatrix4fv(mvp_matrix, 1, GL_FALSE, &mvp[0][0]);
 
     //>>
@@ -157,7 +157,7 @@ void Develop::clean()
 void Develop::scenary_triangle_1()
 {
     //std::cout << "Dariwing triangle\n";
-    //triangle_1.use();
+    //shader_red.use();
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle_1);
     glVertexAttribPointer(
@@ -174,7 +174,7 @@ void Develop::scenary_triangle_1()
 void Develop::scenary_triangle_2()
 {
     //std::cout << "Dariwing triangle\n";
-    //triangle_2.use();
+    //shader_green.use();
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle_2);
     glVertexAttribPointer(
