@@ -17,6 +17,11 @@ const GLfloat Develop::v_triangle_1[] = {
 		 0.0f,  1.0f, 0.0f,
 	};
 
+const GLfloat Develop::v_triangle_2[] = {
+		-0.5f, -0.5f, 0.0f,
+		 0.5f, -0.5f, 0.0f,
+		 0.0f,  0.5f, 0.0f,
+	};
 
 bool Develop::initialize(const char* title, int width, int height)
 {
@@ -62,6 +67,7 @@ bool Develop::initialize(const char* title, int width, int height)
 
     //>>
     triangle_1.build("tests/triangle_1.vs", "tests/triangle_1.fs");
+    triangle_2.build("tests/triangle_2.vs", "tests/triangle_2.fs");
 
 	//>>>>>
 	glGenVertexArrays(1, &vao);
@@ -70,6 +76,10 @@ bool Develop::initialize(const char* title, int width, int height)
     glGenBuffers(1, &vbo_triangle_1);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle_1);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(v_triangle_1), v_triangle_1, GL_STATIC_DRAW);
+
+    glGenBuffers(1, &vbo_triangle_2);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle_2);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(v_triangle_2), v_triangle_2, GL_STATIC_DRAW);
 
 	scenary = NULL;
 	running = true;
@@ -82,10 +92,15 @@ void Develop::handleEvents()
     {
         running = false;
     }
-    else if(glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+    else if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
     {
         std::cout << "Triangle\n";
         scenary = &Develop::scenary_triangle_1;
+    }
+    else if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+    {
+        std::cout << "Triangle\n";
+        scenary = &Develop::scenary_triangle_2;
     }
 }
 
@@ -123,6 +138,24 @@ void Develop::scenary_triangle_1()
     triangle_1.use();
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle_1);
+    glVertexAttribPointer(
+        0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
+        3,                  // size
+        GL_FLOAT,           // type
+        GL_FALSE,           // normalized?
+        0,                  // stride
+        (void*)0            // array buffer offset
+    );
+
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDisableVertexAttribArray(0);
+}
+void Develop::scenary_triangle_2()
+{
+    std::cout << "Dariwing triangle\n";
+    triangle_2.use();
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle_2);
     glVertexAttribPointer(
         0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
         3,                  // size
