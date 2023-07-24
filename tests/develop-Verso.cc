@@ -91,18 +91,23 @@ bool Develop::initialize(const char* title, int width, int height)
 	// Or, for an ortho camera :
 	//glm::mat4 Projection = glm::ortho(-10.0f,10.0f,-10.0f,10.0f,0.0f,100.0f); // In world coordinates
 
-	camera = glm::vec3(4,3,3);//posision de la camara
+	camera_position = glm::vec3(4,3,3);//posision de la camara
+	camera_target = glm::vec3(0,0,0);//posision de la camara
+	camera_direction = glm::normalize(camera_position - camera_target);
+	camera_rigth = glm::normalize(glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), camera_direction));
+	camera_up = glm::cross(camera_direction, camera_rigth);
+	camera_front = glm::vec3(0.0f, 0.0f, -1.0f);
 
 	// Camera matrix
-	view       = glm::lookAt(
-								camera, // Camera is at (4,3,3), in World Space
-								glm::vec3(0,0,0), // and looks at the origin
-								glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
-						   );
+	/*view       = glm::lookAt(
+								camera_position + camera_front, // Camera is at (4,3,3), in World Space
+								camera_target, // and looks at the origin
+								camera_up  // Head is up (set to 0,-1,0 to look upside-down)
+						   );*/
 	// Model matrix : an identity matrix (model will be at the origin)
 	model      = glm::mat4(1.0f);
 	// Our ModelViewProjection : multiplication of our 3 matrices
-	mvp        = projection * view * model;
+	//mvp        = projection * view * model;
 
     return true;
 }
@@ -123,12 +128,34 @@ void Develop::handleEvents()
         //std::cout << "Triangle\n";
         scenary = &Develop::scenary_triangle_2;
     }
+    else if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    {
+        camera_position += camera_speed * camera_front;
+    }
+    else if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+    {
+        camera_position -= camera_speed * camera_front;
+    }
+    else if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+    {
+        camera_position -= glm::normalize(glm::cross(camera_front, camera_up)) * camera_speed;
+    }
+    else if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+    {
+        camera_position += glm::normalize(glm::cross(camera_front, camera_up)) * camera_speed;
+    }
 }
 
 void Develop::update()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     shader_default.use();
+    view       = glm::lookAt(
+								camera_position + camera_front, // Camera is at (4,3,3), in World Space
+								camera_target, // and looks at the origin
+								camera_up  // Head is up (set to 0,-1,0 to look upside-down)
+						   );
+    mvp        = projection * view * model;
     glUniformMatrix4fv(mvp_matrix, 1, GL_FALSE, &mvp[0][0]);
 
     //>>

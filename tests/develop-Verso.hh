@@ -48,7 +48,6 @@ private://OpenGl Objects
 
     //camera
     glm::mat4 projection,view,model,mvp;
-	glm::vec3 camera,camera_direction,camera_target,camera_up,camera_rigth;
-	float camera_radius;
-	bool camera_rotate;
+	glm::vec3 camera_position,camera_direction,camera_target,camera_up,camera_rigth,camera_front;
+	const float camera_speed = 0.05f;
 };
