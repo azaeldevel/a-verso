@@ -28,11 +28,19 @@ public:
 public:
 
 private:
-
+    static const GLfloat v_triangle_1[];
 
 private://OpenGl Objects
 
     GLFWwindow* window;
+    GLuint vao;
+    GLuint vbo_triangle_1;
+    char menu_main,menu_shape,menu_triangle;
 
+    //>>>
+    verso_here::Shader triangle_1;
 
+    //>>>actions
+    void (Develop::*scenary)();
+    void scenary_triangle_1();
 };

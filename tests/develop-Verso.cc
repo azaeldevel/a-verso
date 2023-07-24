@@ -11,6 +11,12 @@
 #include "develop-Verso.hh"
 
 
+const GLfloat Develop::v_triangle_1[] = {
+		-1.0f, -1.0f, 0.0f,
+		 1.0f, -1.0f, 0.0f,
+		 0.0f,  1.0f, 0.0f,
+	};
+
 
 bool Develop::initialize(const char* title, int width, int height)
 {
@@ -38,7 +44,6 @@ bool Develop::initialize(const char* title, int width, int height)
 		return -1;
 	}
 	glfwMakeContextCurrent(window);
-
 	// Initialize GLEW
 	if (glewInit() != GLEW_OK)
     {
@@ -55,6 +60,18 @@ bool Develop::initialize(const char* title, int width, int height)
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
 
+    //>>
+    triangle_1.build("tests/triangle_1.vs", "tests/triangle_1.fs");
+
+	//>>>>>
+	glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+    glGenBuffers(1, &vbo_triangle_1);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle_1);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(v_triangle_1), v_triangle_1, GL_STATIC_DRAW);
+
+	scenary = NULL;
 	running = true;
     return true;
 }
@@ -65,12 +82,18 @@ void Develop::handleEvents()
     {
         running = false;
     }
+    else if(glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+    {
+        std::cout << "Triangle\n";
+        scenary = &Develop::scenary_triangle_1;
+    }
 }
 
 void Develop::update()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //>>
+    if(scenary) (this->*scenary)();
 
 
 }
@@ -87,11 +110,29 @@ void Develop::rendering()
 
 void Develop::clean()
 {
-
+    glDeleteBuffers(1, &vbo_triangle_1);
+	glDeleteVertexArrays(1, &vao);
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
 }
 
 
+void Develop::scenary_triangle_1()
+{
+    std::cout << "Dariwing triangle\n";
+    triangle_1.use();
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle_1);
+    glVertexAttribPointer(
+        0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
+        3,                  // size
+        GL_FLOAT,           // type
+        GL_FALSE,           // normalized?
+        0,                  // stride
+        (void*)0            // array buffer offset
+    );
 
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDisableVertexAttribArray(0);
+}
 
