@@ -203,6 +203,8 @@ bool Shader::link(GLuint vertex,GLuint fragment)
         // In this simple program, we'll just leave
         return false;
     }
+    glDetachShader(program, vertex);
+    glDetachShader(program, fragment);
 
 	return true;
 }

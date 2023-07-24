@@ -60,6 +60,7 @@ namespace oct::verso::v0
         void setFloat(const std::string &name, float value) const;
 
         bool build(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
+        bool build(const std::vector<shader>&);
 
     private:
         // the program ID
