@@ -66,9 +66,9 @@ bool Develop::initialize(const char* title, int width, int height)
 
 
     //>>
-    triangle_1.build("tests/triangle_1.vs", "tests/triangle_1.fs");
-    triangle_2.build("tests/triangle_2.vs", "tests/triangle_2.fs");
-    shader_3.build("tests/shader_3.vs", "tests/shader_3.fs");
+    triangle_1.build("tests/shaders/fixed-view.vs", "tests/shaders/color-red.fs");
+    triangle_2.build("tests/shaders/fixed-view.vs", "tests/shaders/color-green.fs");
+    shader_3.build("tests/shaders/mvp.vs", "tests/shaders/color-red.fs");
     mvp_matrix = glGetUniformLocation(shader_3, "MVP");
 
 	//>>>>>
@@ -133,8 +133,6 @@ void Develop::update()
 
     //>>
     if(scenary) (this->*scenary)();
-
-
 }
 
 void Develop::rendering()
