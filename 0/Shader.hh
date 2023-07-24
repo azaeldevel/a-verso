@@ -19,6 +19,30 @@ namespace oct::verso::v0
 {
     namespace core_here = oct::core::v3;
 
+    class shader
+    {
+    public:
+        shader() = default;
+        shader(const std::filesystem::path& path);
+        shader(const std::filesystem::path& path,GLenum);
+        shader(const std::string& code,GLenum);
+        ~shader();
+
+        operator GLuint()const;
+
+        GLuint compile(const std::filesystem::path&);
+        GLuint compile(const std::filesystem::path&,GLenum);
+        GLuint compile(const std::string&,GLenum);
+        GLuint compile(const GLchar*,GLenum);
+
+    private:
+        bool is_vextex_file(const std::filesystem::path&)const;
+        bool is_fragment_file(const std::filesystem::path&)const;
+
+    private:
+        GLuint ID;
+    };
+
     class Shader
     {
     public:
@@ -43,6 +67,7 @@ namespace oct::verso::v0
 
     private:
         GLuint compile(const std::filesystem::path&,GLenum);
+        GLuint link(GLuint,GLuint);
 
     };
 

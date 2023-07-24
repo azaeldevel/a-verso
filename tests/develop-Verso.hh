@@ -41,7 +41,7 @@ private://OpenGl Objects
     GLuint mvp_matrix;
 
     //>>>
-    verso_here::Shader shader_default,shader_red,shader_green;
+    verso_here::Shader *shader_default,shader_red,shader_green;
 
     //>>>actions
     void (Develop::*scenary)();
