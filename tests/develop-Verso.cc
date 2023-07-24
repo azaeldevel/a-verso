@@ -238,6 +238,11 @@ void Develop::handleEvents()
 
         }
     }
+    else if(glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS)
+    {
+        menu = Menu::none;
+        scenary = NULL;
+    }
     else if(menu == Menu::make_escenary)
     {
         if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
@@ -281,11 +286,6 @@ void Develop::handleEvents()
         else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
         {
             camera_position += glm::normalize(glm::cross(camera_front, camera_up)) * camera_speed;
-        }
-
-        if(glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
-        {
-            menu == Menu::camera_focused;
         }
     }
     else
