@@ -36,13 +36,19 @@ private://OpenGl Objects
     GLFWwindow* window;
     GLuint vao;
     GLuint vbo_triangle_1,vbo_triangle_2;
-    char menu_main,menu_shape,menu_triangle;
+    GLuint mvp_matrix;
 
     //>>>
-    verso_here::Shader triangle_1,triangle_2;
+    verso_here::Shader triangle_1,triangle_2,shader_3;
 
     //>>>actions
     void (Develop::*scenary)();
     void scenary_triangle_1();
     void scenary_triangle_2();
+
+    //camera
+    glm::mat4 projection,view,model,mvp;
+	glm::vec3 camera,camera_direction,camera_target,camera_up,camera_rigth;
+	float camera_radius;
+	bool camera_rotate;
 };
