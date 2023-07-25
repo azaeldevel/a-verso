@@ -58,6 +58,10 @@ namespace oct::verso::v0
         void setBool(const std::string &name, bool value) const;
         void setInt(const std::string &name, int value) const;
         void setFloat(const std::string &name, float value) const;
+        template<typename T> void set(const std::string &name, T v1, T v2, T v3) const
+        {
+            glUniform3f(glGetUniformLocation(program, name.c_str()), v1,v2,v3);
+        }
 
         bool build(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
         bool build(const std::vector<shader>&);

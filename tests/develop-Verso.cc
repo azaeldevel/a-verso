@@ -258,10 +258,10 @@ void Develop::handleEvents()
             action = &Develop::scenary_cube_1;
             menu = Menu::activated_escenary;
         }
-        else if(glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+        else if(glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
         {//lighting
             //std::cout << "Triangle\n";
-            action = &Develop::scenary_light_1;
+            scenary = &Develop::scenary_light_1;
             menu = Menu::activated_escenary;
         }
     }
@@ -407,6 +407,31 @@ void Develop::save(const std::filesystem::path& path,bool seq)
 
 void Develop::scenary_light_1()
 {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    shader_lighting.use();
+    shader_lighting.set("objectColor", 1.0f, 0.5f, 0.31f);
+    shader_lighting.set("lightColor",  1.0f, 1.0f, 1.0f);
+
+    view       = glm::lookAt(
+								camera_position + camera_front, // Camera is at (4,3,3), in World Space
+								camera_target, // and looks at the origin
+								camera_up  // Head is up (set to 0,-1,0 to look upside-down)
+						   );
+    mvp        = projection * view * model;
+    glUniformMatrix4fv(mvp_matrix, 1, GL_FALSE, &mvp[0][0]);
+
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_cube_1);
+    glVertexAttribPointer(
+        0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
+        3,                  // size
+        GL_FLOAT,           // type
+        GL_FALSE,           // normalized?
+        0,                  // stride
+        (void*)0            // array buffer offset
+    );
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glDisableVertexAttribArray(0);
 }
 
