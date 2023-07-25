@@ -10,6 +10,8 @@
 #include <core/3/Exception.hh>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #ifdef OCTETOS_AVERSO_TTD
     #include <iostream>
@@ -62,6 +64,7 @@ namespace oct::verso::v0
         {
             glUniform3f(glGetUniformLocation(program, name.c_str()), v1,v2,v3);
         }
+        void set(const std::string &name,  const glm::mat4& ) const;
 
         bool build(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
         bool build(const std::vector<shader>&);

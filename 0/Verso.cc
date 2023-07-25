@@ -9,23 +9,11 @@ namespace oct::verso::v0
     }
 
 
-    void Verso::initialize()
-    {
-        running = true;
-    }
     void Verso::handleEvents()
     {
     }
     void Verso::update()
     {
-    }
-    void Verso::rendering()
-    {
-
-    }
-    void Verso::clean()
-    {
-
     }
 
 
