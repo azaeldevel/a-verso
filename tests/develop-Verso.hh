@@ -39,18 +39,22 @@ private://OpenGl Objects
     int* buffer;
 
     GLFWwindow* window;
-    GLuint vao;
-    GLuint vbo_triangle_1,vbo_triangle_2,vbo_cube_1,vbo_cube_1_colors;
+    GLuint vao,vao_light;
+    GLuint vbo_triangle_1,vbo_triangle_2,vbo_cube_1,vbo_cube_1_colors,vbo_cube_2;
     GLuint mvp_matrix;
 
     //>>>
-    verso_here::Shader *shader_default,shader_red,shader_green;
+    verso_here::Shader *shader_default,shader_red,shader_green,shader_lighting,shader_light_cube;
 
     //>>>actions
-    void (Develop::*scenary)();
+    void (Develop::*action)();
     void scenary_triangle_1();
     void scenary_triangle_2();
     void scenary_cube_1();
+    void scenary_light_1();
+
+    //>>>actions
+    void (Develop::*scenary)();
 
     //camera
     glm::mat4 projection,view,model,mvp;

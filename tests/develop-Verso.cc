@@ -150,6 +150,8 @@ bool Develop::initialize(const char* title, int w, int h)
     //shader_default.build("tests/shaders/mvp.vs", "tests/shaders/color-green.fs");
     shader_red.build("tests/shaders/mvp.vs", "tests/shaders/color-red.fs");
     shader_green.build("tests/shaders/mvp.vs", "tests/shaders/color-green.fs");
+    shader_lighting.build("tests/light/1.colors.vs", "tests/light/1.colors.fs");
+    shader_light_cube.build("tests/light/1.light_cube.vs", "tests/light/1.light_cube.fs");
     shader_default = &shader_red;
     mvp_matrix = glGetUniformLocation(*shader_default, "MVP");
 
@@ -173,7 +175,15 @@ bool Develop::initialize(const char* title, int w, int h)
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_cube_1_colors);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(v_cube_1_colors), v_cube_1_colors, GL_STATIC_DRAW);
 
-	scenary = NULL;
+    glGenBuffers(1, &vbo_cube_2);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_cube_2);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(verso_here::unit_cube), verso_here::unit_cube, GL_STATIC_DRAW);
+
+	glGenVertexArrays(1, &vao_light);
+    glBindVertexArray(vao_light);
+
+	action = NULL;
+	scenary = &Develop::update;
 	running = true;
 
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
@@ -213,7 +223,7 @@ void Develop::handleEvents()
     else if(glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS)
     {
         menu = Menu::none;
-        scenary = NULL;
+        action = NULL;
     }
     else if(menu == Menu::none)
     {
@@ -231,21 +241,27 @@ void Develop::handleEvents()
     {
         //std::cout << "Wating for escenary\n";
         if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
-        {
+        {//triangulo 1
             //std::cout << "Triangle\n";
-            scenary = &Develop::scenary_triangle_1;
+            action = &Develop::scenary_triangle_1;
             menu = Menu::activated_escenary;
         }
         else if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
-        {
+        {//triangulo 2
             //std::cout << "Triangle\n";
-            scenary = &Develop::scenary_triangle_2;
+            action = &Develop::scenary_triangle_2;
             menu = Menu::activated_escenary;
         }
         else if(glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
-        {
+        {//Cubo 1
             //std::cout << "Triangle\n";
-            scenary = &Develop::scenary_cube_1;
+            action = &Develop::scenary_cube_1;
+            menu = Menu::activated_escenary;
+        }
+        else if(glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+        {//lighting
+            //std::cout << "Triangle\n";
+            action = &Develop::scenary_light_1;
             menu = Menu::activated_escenary;
         }
     }
@@ -296,13 +312,13 @@ void Develop::update()
     glUniformMatrix4fv(mvp_matrix, 1, GL_FALSE, &mvp[0][0]);
 
     //>>
-    if(scenary) (this->*scenary)();
+    if(action) (this->*action)();
 }
 
 void Develop::rendering()
 {
     handleEvents();
-    update();
+    (this->*scenary)();
 
     //save("image.tga",true);
     glfwSwapBuffers(window);
@@ -386,6 +402,11 @@ void Develop::save(const std::filesystem::path& path,bool seq)
      //stbi_flip_vertically_on_write(true);
      //stbi_write_png(path, width, height, nrChannels, buffer.data(), stride);
 
+
+}
+
+void Develop::scenary_light_1()
+{
 
 }
 
