@@ -151,6 +151,85 @@ namespace oct::verso::v0
 
     };
 
+    template<class C, unsigned char D,class V>
+    class Triangle : public Shape<C,D,V>
+    {
+    private:
+        static const size_t vetexs_count = 3;
+        static const size_t vetexs_base_size = vetexs_count * D;
+    public:
+        constexpr Triangle() = default;
+        constexpr Triangle(std::initializer_list<C>& l)
+        {
+            if(l.zise() < vetexs_base_size) throw core_here::exception("Para formar un triangulo se requieren 3 * D vertices osea, untotal de 9");
+            if(l.zise() > vetexs_base_size) throw core_here::exception("Para formar un triangulo se requieren 3 * D vertices osea, untotal de 9");
+
+            const C* l_base = l.begin();
+            const C* vertex_base = static_cast<C*>(vertexs);
+            for(size_t i = 0; i < l.zise();i++)
+            {
+                vertex_base[i] = l_base[i];
+            }
+        }
+        constexpr Triangle(const C ps[vetexs_base_size])
+        {
+            C* vertex_base = reinterpret_cast<C*>(&vertexs);
+            for(size_t i = 0; i < vetexs_base_size;i++)
+            {
+                vertex_base[i] = ps[i];
+            }
+        }
+
+        Point<C,D,V>& operator[] (size_t i)
+        {
+            if(i < vetexs_count) return vertexs[i];
+
+            throw std::out_of_range("Indice fuera de rango, deve ser menor que " + std::to_string(vetexs_count));
+        }
+
+    private:
+        Point<C,D,V> vertexs[vetexs_count];
+    };
+
+    template<class C, unsigned char D,class V>
+    class Cube : public Shape<C,D,V>
+    {
+    private:
+        static const size_t vetexs_count = 36;
+        static const size_t vetexs_base_size = vetexs_count * D;
+    public:
+        constexpr Cube() = default;
+        constexpr Cube(std::initializer_list<C>& l)
+        {
+            if(l.zise() < vetexs_base_size) throw core_here::exception("Para formar un triangulo se requieren 3 * D vertices osea, untotal de 9");
+            if(l.zise() > vetexs_base_size) throw core_here::exception("Para formar un triangulo se requieren 3 * D vertices osea, untotal de 9");
+
+            const C* l_base = l.begin();
+            const C* vertex_base = static_cast<C*>(vertexs);
+            for(size_t i = 0; i < l.zise();i++)
+            {
+                vertex_base[i] = l_base[i];
+            }
+        }
+        constexpr Cube(const C ps[vetexs_base_size])
+        {
+            C* vertex_base = reinterpret_cast<C*>(&vertexs);
+            for(size_t i = 0; i < vetexs_base_size;i++)
+            {
+                vertex_base[i] = ps[i];
+            }
+        }
+
+        constexpr Point<C,D,V>& operator[] (size_t i)
+        {
+            if(i < vetexs_count) return vertexs[i];
+
+            throw std::out_of_range("Indice fuera de rango, deve ser menor que " + std::to_string(vetexs_count));
+        }
+
+    private:
+        Point<C,D,V> vertexs[vetexs_count];
+    };
 
 
 }

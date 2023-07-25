@@ -61,6 +61,69 @@ void v0_math()
     verso_here::Point<float,3,float> p12 = glm::cross(p10,p11);
     /*std::cout << "Producto crusado es ";
     p12.printLn(std::cout);*/
+
+    const float v_triangle_1[3 * 3] = {
+		-1.0f, -1.0f, 0.0f,
+		 1.0f, -1.0f, 0.0f,
+		 0.0f,  1.0f, 0.0f,
+	};
+    verso_here::Triangle<float,3,float> triangle1(v_triangle_1);
+    //p1
+    CU_ASSERT(triangle1[0][0] + 1.0f < infimium);
+    CU_ASSERT(triangle1[0][1] + 1.0f < infimium);
+    CU_ASSERT(triangle1[0][2] < infimium);
+    //p2
+    CU_ASSERT(triangle1[1][0] - 1.0f < infimium);
+    CU_ASSERT(triangle1[1][1] + 1.0f < infimium);
+    CU_ASSERT(triangle1[1][2] < infimium);
+
+    const float v_cube_1[36 * 3] = {
+        -1.0f,-1.0f,-1.0f, // triangle 1 : begin
+    -1.0f,-1.0f, 1.0f,
+    -1.0f, 1.0f, 1.0f, // triangle 1 : end
+    1.0f, 1.0f,-1.0f, // triangle 2 : begin
+    -1.0f,-1.0f,-1.0f,
+    -1.0f, 1.0f,-1.0f, // triangle 2 : end
+    1.0f,-1.0f, 1.0f,
+    -1.0f,-1.0f,-1.0f,
+    1.0f,-1.0f,-1.0f,
+    1.0f, 1.0f,-1.0f,
+    1.0f,-1.0f,-1.0f,
+    -1.0f,-1.0f,-1.0f,
+    -1.0f,-1.0f,-1.0f,
+    -1.0f, 1.0f, 1.0f,
+    -1.0f, 1.0f,-1.0f,
+    1.0f,-1.0f, 1.0f,
+    -1.0f,-1.0f, 1.0f,
+    -1.0f,-1.0f,-1.0f,
+    -1.0f, 1.0f, 1.0f,
+    -1.0f,-1.0f, 1.0f,
+    1.0f,-1.0f, 1.0f,
+    1.0f, 1.0f, 1.0f,
+    1.0f,-1.0f,-1.0f,
+    1.0f, 1.0f,-1.0f,
+    1.0f,-1.0f,-1.0f,
+    1.0f, 1.0f, 1.0f,
+    1.0f,-1.0f, 1.0f,
+    1.0f, 1.0f, 1.0f,
+    1.0f, 1.0f,-1.0f,
+    -1.0f, 1.0f,-1.0f,
+    1.0f, 1.0f, 1.0f,
+    -1.0f, 1.0f,-1.0f,
+    -1.0f, 1.0f, 1.0f,
+    1.0f, 1.0f, 1.0f,
+    -1.0f, 1.0f, 1.0f,
+    1.0f,-1.0f, 1.0f
+	};
+    verso_here::Cube<float,3,float> cube1(v_cube_1);
+    //p1
+    CU_ASSERT(cube1[0][0] + 1.0f < infimium);
+    CU_ASSERT(cube1[0][1] + 1.0f < infimium);
+    CU_ASSERT(cube1[0][2] + 1.0f < infimium);
+    //p36
+    CU_ASSERT(cube1[35][0] - 1.0f < infimium);
+    CU_ASSERT(cube1[35][1] + 1.0f < infimium);
+    CU_ASSERT(cube1[35][2] - 1.0f < infimium);
 }
 
 void v0_opnegl_compatible()
