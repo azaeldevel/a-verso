@@ -11,8 +11,6 @@
 #include "verso-v0.hh"
 
 
-verso_here::Cube<GLfloat,3,GLfloat> Develop::cube_1(verso_here::unit_cube);
-
 
 void Develop::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -24,11 +22,8 @@ void Develop::framebuffer_size_callback(GLFWwindow* window, int width, int heigh
 
 bool Develop::initialize(const char* title, int w, int h)
 {
-	width = w;
-    height = h;
-
     // Initialise GLFW
-	if( !glfwInit() )
+	if(!glfwInit())
 	{
 		fprintf( stderr, "Failed to initialize GLFW\n" );
 		getchar();
@@ -78,6 +73,101 @@ bool Develop::initialize(const char* title, int w, int h)
     return true;
 }
 bool Develop::initialize()
+{
+
+    return true;
+}
+
+void Develop::handleEvents()
+{
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
+    {
+        running = false;
+    }
+    /*else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+    {
+        camera.walking_front(delta_time);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+    {
+        camera.walking_back(delta_time);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+    {
+        camera.walking_right(delta_time);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+    {
+        camera.walking_left(delta_time);
+    }
+    else
+    {
+
+    }*/
+
+
+}
+
+void Develop::update()
+{
+
+}
+
+void Develop::render()
+{
+    handleEvents();
+    update();
+    //glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    //glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    rendering();
+
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+
+}
+
+void Develop::rendering()
+{
+
+
+}
+
+void Develop::clean()
+{
+
+	// Close OpenGL window and terminate GLFW
+	glfwTerminate();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+bool Light::initialize()
 {
     shader_lighting.build("tests/light/1.colors.vs", "tests/light/1.colors.fs");
     shader_light_cube.build("tests/light/1.light_cube.vs", "tests/light/1.light_cube.fs");
@@ -150,72 +240,19 @@ bool Develop::initialize()
 
     light_position = glm::vec3(1.2f, 1.0f, 2.0f);
     camera.set(glm::vec3(4,3,3),glm::vec3(0,0,0));
+    aspect = 4/3;
 
     return true;
 }
-
-void Develop::handleEvents()
+void Light::render()
 {
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
-    {
-        running = false;
-    }
-    else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-    {
-        camera.walking_front(delta_time);
-    }
-    else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-    {
-        camera.walking_back(delta_time);
-    }
-    else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-    {
-        camera.walking_right(delta_time);
-    }
-    else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-    {
-        camera.walking_left(delta_time);
-    }
-    else
-    {
-
-    }
-
-
-}
-
-void Develop::update()
-{
-    float current_frame = static_cast<float>(glfwGetTime());
-    delta_time = current_frame - last_frame;
-    last_frame = current_frame;
-}
-
-void Develop::render()
-{
-    handleEvents();
-    update();
-    //glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-    //glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    rendering();
-
-    glfwSwapBuffers(window);
-    glfwPollEvents();
-
-}
-
-void Develop::rendering()
-{
-
     shader_lighting.use();
     shader_lighting.set("objectColor", 1.0f, 0.5f, 0.31f);
     shader_lighting.set("lightColor",  1.0f, 1.0f, 1.0f);
 
     // view/projection transformations
-    glm::mat4 projection = glm::perspective(glm::radians(camera.zoom()), (float)width / (float)height, 0.1f, 100.0f);
-    glm::mat4 view = camera;
+    projection = glm::perspective(glm::radians(camera.zoom()), aspect, 0.1f, 100.0f);
+    view = camera;
     shader_lighting.set("projection", projection);
     shader_lighting.set("view", view);
 
@@ -240,13 +277,45 @@ void Develop::rendering()
     glBindVertexArray(vao_cube_light);
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }
-
-void Develop::clean()
+void Light::clean()
 {
 
-	// Close OpenGL window and terminate GLFW
+    // Close OpenGL window and terminate GLFW
 	glfwTerminate();
 }
 
+void Light::update()
+{
+    float current_frame = static_cast<float>(glfwGetTime());
+    delta_time = current_frame - last_frame;
+    last_frame = current_frame;
+}
+void Light::handleEvents()
+{
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
+    {
+        running = false;
+    }
+    /*else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+    {
+        camera.walking_front(delta_time);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+    {
+        camera.walking_back(delta_time);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+    {
+        camera.walking_right(delta_time);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+    {
+        camera.walking_left(delta_time);
+    }
+    else
+    {
+
+    }*/
 
 
+}
