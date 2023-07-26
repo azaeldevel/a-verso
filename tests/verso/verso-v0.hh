@@ -50,11 +50,10 @@ public:
 
 };
 
-class Develop : public verso_here::verso
+class Develop : public verso_here::gl::Verso
 {
 public:
     //Game(const std::filesystem::path&);
-    bool initialize(const char* title, int width, int height);
     virtual void render();
     virtual void clean();
 
@@ -65,11 +64,8 @@ private:
     void update();
     void rendering();
     void save(const std::filesystem::path&,bool seq);
-    bool initialize();
+    virtual bool initialize();
 
-    static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 private:
-    GLFWwindow* window;
-    int width,height;
 
 };

@@ -111,9 +111,11 @@
 		</Compiler>
 		<Unit filename="0/Camera.cc">
 			<Option target="verso-light" />
+			<Option target="devel-verso" />
 		</Unit>
 		<Unit filename="0/Camera.hh">
 			<Option target="verso-light" />
+			<Option target="devel-verso" />
 		</Unit>
 		<Unit filename="0/Shader.cc">
 			<Option target="Debug" />
@@ -135,6 +137,12 @@
 		<Unit filename="0/Verso.hh" />
 		<Unit filename="0/shapes.cc" />
 		<Unit filename="0/shapes.hh" />
+		<Unit filename="0/verso-gl.cc">
+			<Option target="devel-verso" />
+		</Unit>
+		<Unit filename="0/verso-gl.hh">
+			<Option target="devel-verso" />
+		</Unit>
 		<Unit filename="tests/develop-2-Game.cc">
 			<Option target="tutorial-sdl-dbg" />
 		</Unit>
@@ -154,13 +162,13 @@
 			<Option target="tutorial-opengl-dbg" />
 		</Unit>
 		<Unit filename="tests/develop-Verso-main.cc">
-			<Option target="devel-verso" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="tests/develop-Verso.cc">
-			<Option target="devel-verso" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="tests/develop-Verso.hh">
-			<Option target="devel-verso" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="tests/ligth/main.cc">
 			<Option target="verso-light" />
@@ -179,6 +187,18 @@
 		</Unit>
 		<Unit filename="tests/v0.hh">
 			<Option target="testing-dbg-v0" />
+		</Unit>
+		<Unit filename="tests/verso/main.cc">
+			<Option target="devel-verso" />
+		</Unit>
+		<Unit filename="tests/verso/verso-v0.cc">
+			<Option target="devel-verso" />
+		</Unit>
+		<Unit filename="tests/verso/verso-v0.hh">
+			<Option target="devel-verso" />
+		</Unit>
+		<Unit filename="tests/verso/verso-v0hh">
+			<Option target="devel-verso" />
 		</Unit>
 		<Extensions>
 			<lib_finder>

@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
     }
 
     Develop g_game;
-    g_game.initialize("Developing Verso / Lighting research...",1024, 768);
+    g_game.create("Developing Verso / Lighting research...",1024, 768);
     while(g_game.is_running())
     {
         g_game.render();
