@@ -22,7 +22,7 @@ bool Develop::initialize()
     return true;
 }
 
-void Develop::handleEvents()
+void Develop::handle()
 {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
     {
@@ -59,7 +59,7 @@ void Develop::update()
 
 void Develop::render()
 {
-    handleEvents();
+    handle();
     update();
     //glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     //glClearColor(0.0f, 0.0f, 0.4f, 0.0f);

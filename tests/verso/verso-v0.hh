@@ -60,7 +60,7 @@ public:
 public:
 
 private:
-    void handleEvents();
+    void handle();
     void update();
     void rendering();
     void save(const std::filesystem::path&,bool seq);

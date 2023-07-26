@@ -15,7 +15,7 @@
 #include <Shader.hh>
 #include <Camera.hh>
 
-#include "Verso.hh"
+#include "verso.hh"
 
 namespace oct::verso::v0::gl
 {
