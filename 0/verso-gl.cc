@@ -11,7 +11,6 @@ void Scenary::set(GLFWwindow* w)
 }
 
 
-
 void Verso::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     // make sure the viewport matches the new window dimensions; note that width and

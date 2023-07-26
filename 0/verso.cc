@@ -4,7 +4,7 @@
 namespace oct::verso::v0
 {
 
-    void scenary::handleEvents()
+    void scenary::handle()
     {
     }
     void scenary::update()

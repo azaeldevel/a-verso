@@ -17,7 +17,7 @@ namespace oct::verso::v0
     public:
         virtual void render() = 0;
         virtual void clean() = 0;
-        void handleEvents();
+        void handle();
         void update();
 
         bool is_running();

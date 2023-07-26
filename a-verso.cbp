@@ -133,14 +133,18 @@
 			<Option target="devel-verso" />
 			<Option target="verso-light" />
 		</Unit>
-		<Unit filename="0/Verso.cc" />
-		<Unit filename="0/Verso.hh" />
 		<Unit filename="0/shapes.cc" />
 		<Unit filename="0/shapes.hh" />
 		<Unit filename="0/verso-gl.cc">
 			<Option target="devel-verso" />
 		</Unit>
 		<Unit filename="0/verso-gl.hh">
+			<Option target="devel-verso" />
+		</Unit>
+		<Unit filename="0/verso.cc">
+			<Option target="devel-verso" />
+		</Unit>
+		<Unit filename="0/verso.hh">
 			<Option target="devel-verso" />
 		</Unit>
 		<Unit filename="tests/develop-2-Game.cc">
