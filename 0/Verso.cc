@@ -4,21 +4,14 @@
 namespace oct::verso::v0
 {
 
-    Verso::~Verso()
+    void Scenary::handleEvents()
+    {
+    }
+    void Scenary::update()
     {
     }
 
-
-    void Verso::handleEvents()
-    {
-    }
-    void Verso::update()
-    {
-    }
-
-
-
-    bool Verso::is_running()
+    bool Scenary::is_running()
     {
         return running;
     }

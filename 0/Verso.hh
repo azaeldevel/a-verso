@@ -5,23 +5,28 @@
 
 namespace oct::verso::v0
 {
-    class Verso
+    class Scenary
     {
-    private:
+        private:
 
-    protected:
-        bool running;
+        protected:
+            bool running;
 
-        void handleEvents();
-        void update();
+            void handleEvents();
+            void update();
 
+        public:
+
+            virtual void render() = 0;
+            virtual void clean() = 0;
+
+            bool is_running();
+    };
+
+    class Verso : public Scenary
+    {
     public:
-        virtual ~Verso();
 
-        virtual void render() = 0;
-        virtual void clean() = 0;
-
-        bool is_running();
     };
 
 }
