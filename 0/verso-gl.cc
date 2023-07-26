@@ -13,6 +13,9 @@ void Verso::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 bool Verso::create(const char* title, int w, int h)
 {
+    width = w;
+    height = h;
+
     // Initialise GLFW
 	if( !glfwInit() )
 	{
@@ -28,7 +31,7 @@ bool Verso::create(const char* title, int w, int h)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Open a window and create its OpenGL context
-	window = glfwCreateWindow( 1024, 768, "Tutorial 01", NULL, NULL);
+	window = glfwCreateWindow( width, height, title, NULL, NULL);
 	if( window == NULL ){
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		getchar();
@@ -36,6 +39,7 @@ bool Verso::create(const char* title, int w, int h)
 		return -1;
 	}
 	glfwMakeContextCurrent(window);
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	// Initialize GLEW
 	if (glewInit() != GLEW_OK) {

@@ -13,12 +13,12 @@ namespace oct::verso::v0
         bool running;
 
     protected:
-        void handleEvents();
-        void update();
 
     public:
         virtual void render() = 0;
         virtual void clean() = 0;
+        void handleEvents();
+        void update();
 
         bool is_running();
     };
