@@ -122,6 +122,10 @@ Shader::Shader(const std::filesystem::path& vertexPath, const std::filesystem::p
 {
     build(vertexPath,fragmentPath);
 }
+Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath)
+{
+    build(vertexPath,fragmentPath);
+}
 
 Shader::operator GLuint()const
 {
@@ -166,6 +170,12 @@ GLuint Shader::compile(const std::filesystem::path& path,GLenum type)
 bool Shader::build(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath)
 {
     shader vertex(vertexPath,GL_VERTEX_SHADER),fragment(fragmentPath,GL_FRAGMENT_SHADER);
+
+	return link(vertex,fragment);
+}
+bool Shader::build(const std::string& vertexCode, const std::string& fragmentCode)
+{
+    shader vertex(vertexCode,GL_VERTEX_SHADER),fragment(fragmentCode,GL_FRAGMENT_SHADER);
 
 	return link(vertex,fragment);
 }

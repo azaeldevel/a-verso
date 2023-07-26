@@ -28,6 +28,112 @@ void Develop::handle()
     {
         running = false;
     }
+    else if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+    {
+        std::cout << "Cambieando de escenario..\n";
+        change(&p1l5);
+    }
+
+
+}
+
+
+void Develop::render()
+{
+    handle();
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    scenary->render();
+
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+
+}
+void Develop::clean()
+{
+    scenary->clean();
+    scenary = &default_scenary;
+	// Close OpenGL window and terminate GLFW
+	glfwTerminate();
+}
+
+
+
+const char *P1L5::vertexShaderSource = "#version 330 core\n"
+    "layout (location = 0) in vec3 aPos;\n"
+    "void main()\n"
+    "{\n"
+    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+    "}\0";
+const char *P1L5::fragmentShaderSource = "#version 330 core\n"
+    "out vec4 FragColor;\n"
+    "void main()\n"
+    "{\n"
+    "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+    "}\n\0";
+
+
+bool P1L5::initialize()
+{
+    // build and compile our shader program
+    // ------------------------------------
+    // vertex shader
+    shader_triangle.build(std::string(vertexShaderSource),std::string(fragmentShaderSource));
+
+    // set up vertex data (and buffer(s)) and configure vertex attributes
+    // ------------------------------------------------------------------
+    float vertices[] = {
+        -0.5f, -0.5f, 0.0f, // left
+         0.5f, -0.5f, 0.0f, // right
+         0.0f,  0.5f, 0.0f  // top
+    };
+
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+    glBindVertexArray(VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
+    // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
+    glBindVertexArray(0);
+
+    return true;
+}
+void P1L5::render()
+{
+    handle();
+    update();
+
+
+    shader_triangle.use();
+    glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+void P1L5::clean()
+{
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+}
+
+void P1L5::update()
+{
+
+}
+void P1L5::handle()
+{
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
+    {
+        running = false;
+    }
     /*else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
     {
         camera.walking_front(delta_time);
@@ -52,44 +158,6 @@ void Develop::handle()
 
 }
 
-void Develop::update()
-{
-
-}
-
-void Develop::render()
-{
-    handle();
-    update();
-    //glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-    //glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    rendering();
-
-    glfwSwapBuffers(window);
-    glfwPollEvents();
-
-}
-
-void Develop::rendering()
-{
-
-
-}
-
-void Develop::clean()
-{
-
-	// Close OpenGL window and terminate GLFW
-	glfwTerminate();
-}
-
-
-
-
-
-
 
 
 
@@ -113,8 +181,8 @@ void Develop::clean()
 
 bool Light::initialize()
 {
-    shader_lighting.build("tests/light/1.colors.vs", "tests/light/1.colors.fs");
-    shader_light_cube.build("tests/light/1.light_cube.vs", "tests/light/1.light_cube.fs");
+    shader_lighting.build(std::filesystem::path("tests/light/1.colors.vs"), std::filesystem::path("tests/light/1.colors.fs"));
+    shader_light_cube.build(std::filesystem::path("tests/light/1.light_cube.vs"), std::filesystem::path("tests/light/1.light_cube.fs"));
 
     float vertices[] = {
         -0.5f, -0.5f, -0.5f,

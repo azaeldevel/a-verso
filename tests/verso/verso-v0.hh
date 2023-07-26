@@ -9,10 +9,21 @@
 namespace verso_here = oct::verso::v0;
 
 
-class Trangle1 : public verso_here::gl::Scenary
-{
+class P1L5 : public verso_here::gl::Scenary
+{//Hello Triangle - Triangulo 1
 public:
+    virtual void render();
+    virtual void clean();
 
+private:
+    void handle();
+    void update();
+    virtual bool initialize();
+
+    static const char *vertexShaderSource;
+    static const char *fragmentShaderSource;
+    verso_here::Shader shader_triangle;
+    GLuint VBO, VAO;
 };
 
 class Trangle2 : public verso_here::gl::Scenary
@@ -24,7 +35,13 @@ public:
 class Cube1 : public verso_here::gl::Scenary
 {
 public:
+    virtual void render();
+    virtual void clean();
 
+private:
+    void handle();
+    void update();
+    virtual bool initialize();
 };
 
 class Light : public verso_here::gl::Scenary
@@ -61,11 +78,9 @@ public:
 
 private:
     void handle();
-    void update();
-    void rendering();
     void save(const std::filesystem::path&,bool seq);
     virtual bool initialize();
 
 private:
-
+    P1L5 p1l5;
 };

@@ -51,6 +51,7 @@ namespace oct::verso::v0
         Shader() = default;
         // constructor reads and builds the shader
         Shader(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
+        Shader(const std::string& vertexPath, const std::string& fragmentPath);
 
         operator GLuint()const;
 
@@ -67,6 +68,7 @@ namespace oct::verso::v0
         void set(const std::string &name,  const glm::mat4& ) const;
 
         bool build(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
+        bool build(const std::string& vertexCode, const std::string& fragmentCode);
         bool build(const std::vector<shader>&);
 
     private:

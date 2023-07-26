@@ -27,14 +27,28 @@ namespace oct::verso::v0::gl
         GLFWwindow* window;
 
     public:
+        void set(GLFWwindow*);
+    };
+
+    class Default : public Scenary
+    {
+    public:
+        virtual void render();
+        virtual void clean();
+
     };
 
     class Verso : public Scenary
     {
     private:
-        int width,height;
 
     protected:
+        int width,height;
+        Default default_scenary;
+        Scenary* scenary;
+
+
+        void change(Scenary*);
 
     public:
         virtual bool create(const char* title, int width, int height);
