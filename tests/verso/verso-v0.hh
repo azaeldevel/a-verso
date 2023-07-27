@@ -27,22 +27,30 @@ private:
     GLuint VBO, VAO;
 };
 
-class Trangle2 : public verso_here::gl::Scenary
-{
-public:
-
-};
-
 class Cube1 : public verso_here::gl::Scenary
 {
 public:
     virtual void render();
     virtual void clean();
+    virtual bool initialize();
 
 private:
     void handle();
     void update();
-    virtual bool initialize();
+
+    GLuint VertexArrayID,vertexbuffer,colorbuffer;
+    verso_here::Shader shader_cube;
+    glm::mat4 Projection,View,Model,MVP;
+    GLuint MatrixID;
+    static const GLfloat g_vertex_buffer_data[];
+    static const GLfloat g_color_buffer_data[];
+};
+
+
+class Trangle2 : public verso_here::gl::Scenary
+{
+public:
+
 };
 
 class Light : public verso_here::gl::Scenary
@@ -84,4 +92,5 @@ private:
 
 private:
     P1L5 p1l5;
+    Cube1 cube1;
 };

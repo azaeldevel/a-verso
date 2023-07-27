@@ -49,6 +49,7 @@ bool Verso::create(const char* title, int w, int h)
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	// Initialize GLEW
+	glewExperimental = true;
 	if (glewInit() != GLEW_OK) {
 		fprintf(stderr, "Failed to initialize GLEW\n");
 		getchar();
