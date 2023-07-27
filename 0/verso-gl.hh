@@ -16,6 +16,7 @@
 #include <Camera.hh>
 
 #include "verso.hh"
+#include "Camera.hh"
 
 namespace oct::verso::v0::gl
 {

@@ -42,7 +42,7 @@ namespace oct::verso::v0
         glm::mat4 view;
         float _zoom; //field of view , zoom
 
-        const float sensitivy =  0.1f;
+        const float sensitivy =  1.1f;
     };
 }
 

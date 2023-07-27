@@ -50,26 +50,32 @@ namespace oct::verso::v0
     void Camera::walking_front(float speed)
     {
         position += front * speed * sensitivy;
+        view = glm::lookAt(position,target,up);
     }
     void Camera::walking_back(float speed)
     {
         position -= front * speed * sensitivy;
+        view = glm::lookAt(position,target,up);
     }
     void Camera::walking_left(float speed)
     {
         position += glm::normalize(glm::cross(front, up)) * speed;
+        view = glm::lookAt(position,target,up);
     }
     void Camera::walking_right(float speed)
     {
         position -= glm::normalize(glm::cross(front, up)) * speed * sensitivy;
+        view = glm::lookAt(position,target,up);
     }
     void Camera::walking_up(float speed)
     {
         position += up * speed * sensitivy;
+        view = glm::lookAt(position,target,up);
     }
     void Camera::walking_down(float speed)
     {
         position -= up * speed * sensitivy;
+        view = glm::lookAt(position,target,up);
     }
 
 

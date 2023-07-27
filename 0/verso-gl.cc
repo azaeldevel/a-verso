@@ -46,6 +46,8 @@ bool Verso::create(const char* title, int w, int h)
 		return -1;
 	}
 	glfwMakeContextCurrent(window);
+	//glfwGetFramebufferSize(window, &width, &height);
+    //glViewport(0, 0, width, height);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	// Initialize GLEW

@@ -40,10 +40,12 @@ private:
 
     GLuint VertexArrayID,vertexbuffer,colorbuffer;
     verso_here::Shader shader_cube;
-    glm::mat4 Projection,View,Model,MVP;
+    glm::mat4 Projection,Model,MVP;
     GLuint MatrixID;
     static const GLfloat g_vertex_buffer_data[];
     static const GLfloat g_color_buffer_data[];
+    verso_here::Camera camera;
+    float delta_time, last_frame;
 };
 
 
