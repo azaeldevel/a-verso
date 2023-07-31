@@ -80,12 +80,32 @@ namespace oct::verso::v0
 
     void Camera::angle(float t)
     {
-        glm::mat4 r = glm::mat4(1.0f);
-        r[0] = glm::vec4(front.x,front.y,front.z,1.0f);
-        r = glm::rotate(r, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0));
-        front.x = r[0].x;
-        front.y= r[0].y;
-        front.z = r[0].z;
+        glm::mat4 mat(0.0f);
+
+        mat[0].x = cos(glm::radians(t));
+        mat[0].y = -sin(glm::radians(t));
+        mat[0].z = 0;
+        mat[0].w = 0;
+
+        mat[1].x = sin(glm::radians(t));
+        mat[1].y = cos(glm::radians(t));
+        mat[1].z = 0;
+        mat[1].w = 0;
+
+        mat[2].x = 0;
+        mat[2].y = 0;
+        mat[2].z = 1;
+        mat[2].w = 0;
+
+        mat[3].x = 0;
+        mat[3].y = 0;
+        mat[3].z = 0;
+        mat[3].w = 1;
+
+        glm::vec4 vec = glm::vec4(front,1.0f);
+        vec = mat * vec;
+        front = vec;
+
     }
 
 
