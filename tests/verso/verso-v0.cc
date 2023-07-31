@@ -37,7 +37,7 @@ void Develop::handle()
     }
     else if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
     {
-        std::cout << "Cambieando de escenario..\n";
+        //std::cout << "Cambieando de escenario..\n";
         change(&cube1);
     }
 
@@ -48,7 +48,7 @@ void Develop::handle()
 void Develop::render()
 {
     handle();
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
     scenary->render();
 
@@ -257,10 +257,10 @@ const GLfloat Cube1::g_color_buffer_data[] = {
 
 bool Cube1::initialize()
 {
-	// Enable depth test
-	//glEnable(GL_DEPTH_TEST);
-	// Accept fragment if it closer to the camera than the former one
-	//glDepthFunc(GL_LESS);
+	//Enable depth test
+	glEnable(GL_DEPTH_TEST);
+	//Accept fragment if it closer to the camera than the former one
+	glDepthFunc(GL_LESS);
 
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
@@ -383,6 +383,10 @@ void Cube1::handle()
     else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
     {
         camera.walking_left(delta_time);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+    {
+        camera.angle(50);
     }
     else
     {

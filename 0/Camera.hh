@@ -35,6 +35,7 @@ namespace oct::verso::v0
         void walking_up(float);
         void walking_down(float);
 
+        void angle(float);
 
     private:
         glm::vec3 position,target,direction,rigth,up;
