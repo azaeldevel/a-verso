@@ -386,7 +386,7 @@ void Cube1::handle()
     }
     else if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
     {
-        //camera.angle(50);
+        camera.angle(glfwGetTime());
     }
     else
     {

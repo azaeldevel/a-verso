@@ -84,22 +84,22 @@ namespace oct::verso::v0
 
         mat[0].x = cos(glm::radians(t));
         mat[0].y = -sin(glm::radians(t));
-        mat[0].z = 0;
-        mat[0].w = 0;
+        //mat[0].z = 0;
+        //mat[0].w = 0;
 
         mat[1].x = sin(glm::radians(t));
         mat[1].y = cos(glm::radians(t));
-        mat[1].z = 0;
-        mat[1].w = 0;
+        //mat[1].z = 0;
+        //mat[1].w = 0;
 
-        mat[2].x = 0;
-        mat[2].y = 0;
+        //mat[2].x = 0;
+        //mat[2].y = 0;
         mat[2].z = 1;
-        mat[2].w = 0;
+        //mat[2].w = 0;
 
-        mat[3].x = 0;
-        mat[3].y = 0;
-        mat[3].z = 0;
+        //mat[3].x = 0;
+        //mat[3].y = 0;
+        //mat[3].z = 0;
         mat[3].w = 1;
 
         glm::vec4 vec = glm::vec4(front,1.0f);
