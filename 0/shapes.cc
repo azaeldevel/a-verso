@@ -5,7 +5,7 @@ namespace oct::verso::v0
 {
 
 
-
+/*
 template<> Point<int,2,float>::Point(int p[2])
 {
     vector::x = p[0];
@@ -16,9 +16,9 @@ template<> Point<int,3,float>::Point(int p[3])
     vector::x = p[0];
     vector::y = p[1];
     vector::z = p[1];
-}
+}*/
 
-
+/*
 template<> Point<int,2,float>::Point(std::initializer_list<int>& l)
 {
     if(l.size() > 2) throw core_here::exception("La cantidad de datos indicados excede la capacidad del objetos");
@@ -91,9 +91,9 @@ template<> Point<int,4,float>::Point(std::initializer_list<int>& l)
         i++;
     }
 }
+*/
 
-
-
+/*
 template<> Point<int,2,float>& Point<int,2,float>::operator = (const Point<int,2,float>& p)
 {
     vector::x = p[0];
@@ -132,12 +132,12 @@ template<> Point<float,3,float>& Point<float,3,float>::operator = (const glm::ve
     vector::z = p[1];
 
     return *this;
-}
+}*/
 
 
 
 
-
+/*
 template<> float Point<int,2,float>::length() const
 {
     float d = 0;
@@ -176,13 +176,13 @@ template<> float Point<float,3,float>::length() const
     d +=  pow(vector::z,2);
 
     return sqrt(d);
-}
+}*/
 
 
 
 
 #ifdef OCTETOS_AVERSO_TTD
-    template<> void Point<int,3,float>::print(std::ostream& out)const
+    /*template<> void Point<int,3,float>::print(std::ostream& out)const
     {
         out << "(";
             out << vector::x << ",";
@@ -214,6 +214,6 @@ template<> float Point<float,3,float>::length() const
             out << vector::y;
             out << "," << vector::z;
         out << ")\n";
-    }
+    }*/
 #endif // OCTETOS_AVERSO_TTD
 }

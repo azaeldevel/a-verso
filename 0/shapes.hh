@@ -5,6 +5,7 @@
 #include <core/3/Exception.hh>
 #include <glm/glm.hpp>
 #include <vector>
+#include <numbers/0/vector.hh>
 
 #ifdef OCTETOS_AVERSO_TTD
     #include <iostream>
@@ -13,39 +14,58 @@
 namespace oct::verso::v0
 {
     namespace core_here = oct::core::v3;
+    namespace nums_here = oct::nums::v0;
     //template<class T> concept Dimension = std::is_base_of<U, T>::value;
 
     template<class C, unsigned char D,class V>
-    class Point  : public glm::vec<D,C,glm::packed_highp>
+    class Point  : public nums_here::vector<C,D,V>
     {
     public:
-        typedef glm::vec<D,C,glm::packed_highp> vector;
+        typedef glm::vec<D,C,glm::packed_highp> glm;
+        typedef nums_here::vector<C,D,V> BASE;
 
         //>>>Contructores
-        Point()
+        Point() = default;
+        Point(C p[D]) : BASE(p)
         {
         }
-        Point(C p[D]);
-        Point(C x, C y) : vector(x,y)
+        Point(C x, C y) : BASE(x,y)
         {
         }
-        Point(C x, C y,C z) : vector(x,y,z)
+        /*Point(C x, C y,C z) : BASE(x,y,z)
         {
         }
-        Point(C x, C y,C z, C w) : vector(x,y,z,w)
+        Point(C x, C y,C z, C w) : BASE(x,y,z,w)
+        {
+        }*/
+        Point(const Point& p) : BASE(p)
         {
         }
-        Point(const Point& p) : vector(p)
+        Point(const glm& v) : BASE((const BASE&)v)
         {
         }
-        Point(const glm::vec<D,C,glm::packed_highp>& v) : vector(v)
+        Point(const std::initializer_list<C>& l) : BASE(l)
         {
+            if(l.size() < D) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
+            if(l.size() > D) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
+
+            const C* c = std::data(l);
+            for(size_t i = 0; i < D; i++)
+            {
+                BASE::data[i] = c[i];
+            }
         }
-        Point(std::initializer_list<C>& l);
 
         //>>>Operadores
         Point& operator = (const Point& p);
-        Point& operator = (const glm::vec<D,C,glm::packed_highp>& p);
+        Point& operator = (const glm& p);
+        operator glm()
+        {
+            glm vec;
+            vec[0] = BASE::data[0];
+            vec[1] = BASE::data[1];
+            return vec;
+        }
 
         //>>>getters and setters
 
@@ -55,21 +75,27 @@ namespace oct::verso::v0
         /*
         *\brief Componente de this en la direction de b
         */
-        V length() const;
+        V length() const
+        {
+            V v = 0;
+            for(size_t i = 0; i < D; i++) v += pow(BASE::data[i],V(2));
+
+            return sqrt(v);
+        }
         V comp(const Point& b)
         {
-            V v = glm::dot((const vector&)*this,b);
+            V v = scalar(*this,b);
             v /= b.length();
 
             return v;
         }
         V distance(const Point& b)
         {
-            return glm::distance((const vector&)*this,b);
+            return ::glm::distance((const glm&)*this,b);
         }
         Point normalize() const
         {
-            return glm::normalize((const vector&)*this);
+            return ::glm::normalize((const glm&)*this);
         }
 
 #ifdef OCTETOS_AVERSO_TTD

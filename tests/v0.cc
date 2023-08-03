@@ -29,11 +29,11 @@ void v0_developing()
 
 void v0_math()
 {
-    verso_here::Point<int,2,float> p0;
+    verso_here::Point<int,2,float> p0{0,0};
     /*std::cout << std::endl;
     point1.print(std::cout);
     std::cout << std::endl;*/
-    verso_here::Point<int,3,float> O;
+    verso_here::Point<int,3,float> O{0,0,0};
 
     verso_here::Point<int,2,float> p2 {1,1};
     /*std::cout << std::endl;
@@ -56,11 +56,12 @@ void v0_math()
     p8.printLn(std::cout);*/
     CU_ASSERT(p8.length() - 1.0 < infimium);
 
-    verso_here::Point<float,3,float> p10(2, 3, 1);
-    verso_here::Point<float,3,float> p11(3, 1, -9);
-    verso_here::Point<float,3,float> p12 = glm::cross(p10,p11);
+    verso_here::Point<float,3,float> p10{2, 3, 1};
+    verso_here::Point<float,3,float> p11{3, 1, -9};
+    //verso_here::Point<float,3,float> p12 = p10 * p11;
     /*std::cout << "Producto crusado es ";
     p12.printLn(std::cout);*/
+
 
     const float v_triangle_1[3 * 3] = {
 		-1.0f, -1.0f, 0.0f,
@@ -124,6 +125,8 @@ void v0_math()
     CU_ASSERT(cube1[35][0] - 1.0f < infimium);
     CU_ASSERT(cube1[35][1] + 1.0f < infimium);
     CU_ASSERT(cube1[35][2] - 1.0f < infimium);
+
+
 }
 
 void v0_opnegl_compatible()
