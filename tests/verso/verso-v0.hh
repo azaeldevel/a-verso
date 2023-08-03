@@ -49,10 +49,24 @@ private:
 };
 
 
-class Trangle2 : public verso_here::gl::Scenary
-{
+class Triangle2 : public verso_here::gl::Scenary
+{//Hello Triangle - Triangulo 1
 public:
+    Triangle2();
+    virtual void render();
+    virtual void clean();
+    virtual bool initialize();
 
+private:
+    void handle();
+    void update();
+
+    static const char *vertexShaderSource;
+    static const char *fragmentShaderSource;
+    verso_here::Shader shader_triangle;
+    GLuint VBO, VAO;
+    static float vertices[];
+    verso_here::Triangle<float,3,float> triangle;
 };
 
 class Light : public verso_here::gl::Scenary
@@ -95,4 +109,5 @@ private:
 private:
     P1L5 p1l5;
     Cube1 cube1;
+    Triangle2 triangle2;
 };

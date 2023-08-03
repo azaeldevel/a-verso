@@ -174,6 +174,7 @@ namespace oct::verso::v0
     template<class C, unsigned char D,class V>
     class Circle : public Shape<C,D,V>
     {
+    public:
 
     };
 

@@ -20,6 +20,7 @@ bool Develop::initialize()
 {
     p1l5.initialize();
     cube1.initialize();
+    triangle2.initialize();
 
     return true;
 }
@@ -39,6 +40,11 @@ void Develop::handle()
     {
         //std::cout << "Cambieando de escenario..\n";
         change(&cube1);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+    {
+        //std::cout << "Cambieando de escenario..\n";
+        change(&triangle2);
     }
 
 
@@ -398,6 +404,115 @@ void Cube1::handle()
 
 
 
+
+
+
+
+
+
+const char *Triangle2::vertexShaderSource = "#version 330 core\n"
+    "layout (location = 0) in vec3 aPos;\n"
+    "void main()\n"
+    "{\n"
+    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+    "}\0";
+const char *Triangle2::fragmentShaderSource = "#version 330 core\n"
+    "out vec4 FragColor;\n"
+    "void main()\n"
+    "{\n"
+    "   FragColor = vec4(1.0f, 0.4f, 0.5f, 1.0f);\n"
+    "}\n\0";
+
+float Triangle2::vertices[] = {
+        -0.5f, -0.5f, 0.0f, // left
+         0.5f, -0.5f, 0.0f, // right
+         0.0f,  0.5f, 0.0f  // top
+    };
+//verso_here::Triangle<float,3,float> Triangle2::triangle(vertices);
+Triangle2::Triangle2() : triangle(vertices)
+{
+}
+bool Triangle2::initialize()
+{
+    // build and compile our shader program
+    // ------------------------------------
+    // vertex shader
+    shader_triangle.build(std::string(vertexShaderSource),std::string(fragmentShaderSource));
+
+    // set up vertex data (and buffer(s)) and configure vertex attributes
+    // ------------------------------------------------------------------
+
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+    glBindVertexArray(VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), reinterpret_cast<float*>(&triangle), GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
+    // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
+    glBindVertexArray(0);
+
+    return true;
+}
+void Triangle2::render()
+{
+    handle();
+    update();
+
+
+
+
+    shader_triangle.use();
+    glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+void Triangle2::clean()
+{
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+}
+
+void Triangle2::update()
+{
+
+}
+void Triangle2::handle()
+{
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
+    {
+        running = false;
+    }
+    else if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+    {
+
+    }
+    /*else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+    {
+        camera.walking_back(delta_time);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+    {
+        camera.walking_right(delta_time);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+    {
+        camera.walking_left(delta_time);
+    }
+    else
+    {
+
+    }*/
+
+
+}
 
 
 
