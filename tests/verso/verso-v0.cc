@@ -487,9 +487,7 @@ void Triangle2::clean()
 
 void Triangle2::update()
 {
-    triangle[0].rotate(0.0174533,axis);
-    triangle[1].rotate(0.0174533,axis);
-    triangle[2].rotate(0.0174533,axis);
+    triangle.rotate(0.0174533,axis);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), reinterpret_cast<float*>(&triangle), GL_STATIC_DRAW);

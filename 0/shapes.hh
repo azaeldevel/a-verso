@@ -214,6 +214,31 @@ namespace oct::verso::v0
             throw std::out_of_range("Indice fuera de rango, deve ser menor que " + std::to_string(vetexs_count));
         }
 
+
+        /**
+        *\brief Transformacion de tranlacion
+        */
+        void transl(const nums_here::vector<C,D,V>& v)
+        {
+            for(size_t i = 0; i < D; i++) vertexs[i].transl(v);
+        }
+
+        /**
+        *\brief Transformacion de scalado
+        */
+        void scale(const C& s)
+        {
+            for(size_t i = 0; i < D; i++) vertexs[i].scale(s);
+        }
+
+        /**
+        *\brief Transformacion de rotacions
+        */
+        void rotate(const C& angle,nums_here::axis axis)
+        {
+            for(size_t i = 0; i < D; i++) vertexs[i].rotate(angle,axis);
+        }
+
     private:
         Point<C,D,V> vertexs[vetexs_count];
     };
