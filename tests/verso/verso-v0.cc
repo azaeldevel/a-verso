@@ -452,7 +452,7 @@ bool Triangle2::initialize()
     triangle[2].rotate(0.05);*/
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), reinterpret_cast<float*>(&triangle), GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), reinterpret_cast<float*>(&triangle), GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
@@ -463,6 +463,7 @@ bool Triangle2::initialize()
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     glBindVertexArray(0);
+    axis = verso_here::nums_here::axis::x;
 
     return true;
 }
@@ -486,12 +487,12 @@ void Triangle2::clean()
 
 void Triangle2::update()
 {
-    triangle[0].rotate(0.0174533);
-    triangle[1].rotate(0.0174533);
-    triangle[2].rotate(0.0174533);
+    triangle[0].rotate(0.0174533,axis);
+    triangle[1].rotate(0.0174533,axis);
+    triangle[2].rotate(0.0174533,axis);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), reinterpret_cast<float*>(&triangle), GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), reinterpret_cast<float*>(&triangle), GL_STATIC_DRAW);
 }
 void Triangle2::handle()
 {
@@ -499,26 +500,18 @@ void Triangle2::handle()
     {
         running = false;
     }
-    else if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+    else if(glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
     {
-
+        axis = verso_here::nums_here::axis::x;
     }
-    /*else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+    else if(glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
     {
-        camera.walking_back(delta_time);
+        axis = verso_here::nums_here::axis::y;
     }
-    else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+    else if(glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
     {
-        camera.walking_right(delta_time);
+        axis = verso_here::nums_here::axis::z;
     }
-    else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-    {
-        camera.walking_left(delta_time);
-    }
-    else
-    {
-
-    }*/
 
 
 }
