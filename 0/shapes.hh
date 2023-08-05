@@ -16,6 +16,7 @@ namespace oct::verso::v0
     namespace core_here = oct::core::v3;
     //namespace nums_here = oct::nums::v0;
     //template<class T> concept Dimension = std::is_base_of<U, T>::value;
+    template<typename T> concept coordinate = std::same_as<T, int> || std::same_as<T, float>;
 
     enum class axis
     {
@@ -24,7 +25,7 @@ namespace oct::verso::v0
         z
     };
 
-    template<class C, unsigned char D,class V>
+    template<coordinate C, unsigned char D,class V = C>
     class Point  : public glm::vec<D,C,glm::packed_highp>
     {
     public:
@@ -33,19 +34,22 @@ namespace oct::verso::v0
 
         //>>>Contructores
         Point() = default;
-        Point(C p[D]) : BASE(p)
+        constexpr Point(C p[D]) : BASE(p)
         {
         }
-        Point(C x, C y) : BASE(x,y)
+        constexpr Point(C x, C y) : BASE(x,y)
         {
         }
-        Point(C x, C y,C z) : BASE(x,y,z)
+        constexpr Point(C x, C y,C z) : BASE(x,y,z)
         {
         }
-        Point(C x, C y,C z, C w) : BASE(x,y,z,w)
+        constexpr Point(C x, C y,C z, C w) : BASE(x,y,z,w)
         {
         }
-        Point(const Point& p) : BASE(p)
+        constexpr Point(const Point& p) : BASE(p)
+        {
+        }
+        constexpr Point(const GLM& p) : BASE(p)
         {
         }
         /*Point(const glm& v) : BASE((const BASE&)v)
@@ -64,7 +68,8 @@ namespace oct::verso::v0
         }*/
 
         //>>>Operadores
-        Point& operator = (const Point& p);
+        constexpr Point& operator = (const Point& p);
+        constexpr Point& operator = (const GLM& p);
 
         //>>>getters and setters
 
@@ -76,22 +81,22 @@ namespace oct::verso::v0
         /*
         *\brief Componente de this en la direction de b
         */
-        V length() const
+        constexpr V length() const
         {
             //return glm::length(*this);
         }
-        V comp(const Point& b)
+        constexpr V comp(const Point& b)
         {
             V v = scalar(b);
             v /= b.length();
 
             return v;
         }
-        V distance(const Point& b)
+        constexpr V distance(const Point& b)
         {
             return glm::distance(*this,b);
         }
-        void normalize() const
+        constexpr void normalize() const
         {
             V l = length();
             //for(size_t i = 0; i < D; i++) BASE::at(i) /= l;
@@ -101,7 +106,7 @@ namespace oct::verso::v0
         /**
         *\brief Transformacion de tranlacion
         */
-        void transl(const Point& v)
+        constexpr void transl(const Point& v)
         {
             //for(size_t i = 0; i < D; i++) vertexs[i].transl(v);
         }
@@ -109,7 +114,7 @@ namespace oct::verso::v0
         /**
         *\brief Transformacion de scalado
         */
-        void scale(const C& s)
+        constexpr void scale(const C& s)
         {
             //for(size_t i = 0; i < D; i++) vertexs[i].scale(s);
         }
@@ -118,7 +123,7 @@ namespace oct::verso::v0
         *\brief Transformacion de rotacion
         *\param axis Eje de rotacion
         **/
-        void rotate(const C& angle,axis a)
+        constexpr void rotate(const C& angle,axis a)
         {
             switch(a)
             {
@@ -153,11 +158,21 @@ namespace oct::verso::v0
 
     };
 
-    /*template<class C,class V> constexpr C Point<C,2,V>::scalar(const Point<C,2,V>& v)
+    /*template<class C, unsigned char D,class V>
+    constexpr C Point<C,D,V>::scalar(const Point<C,D,V>& v)
     {
 
         return 0;
-    }*/
+    }
+    Point& operator = (const Point& p)
+    {
+
+    }
+    Point& operator = (const GLM& p)
+    {
+
+    }
+    */
 
 
 

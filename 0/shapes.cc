@@ -93,46 +93,62 @@ template<> Point<int,4,float>::Point(std::initializer_list<int>& l)
 }
 */
 
-/*
-template<> Point<int,2,float>& Point<int,2,float>::operator = (const Point<int,2,float>& p)
+
+template<> constexpr Point<int,2,float>& Point<int,2,float>::operator = (const Point<int,2,float>& p)
 {
-    vector::x = p[0];
-    vector::y = p[1];
+    BASE::x = p.x;
+    BASE::y = p.y;
 
     return *this;
 }
-template<> Point<int,3,float>& Point<int,3,float>::operator = (const Point<int,3,float>& p)
+template<> constexpr Point<float,2>& Point<float,2,float>::operator = (const Point<float,2>& p)
 {
-    vector::x = p[0];
-    vector::y = p[1];
-    vector::z = p[1];
+    BASE::x = p.x;
+    BASE::y = p.y;
+
+
+    return *this;
+}
+template<> constexpr Point<int,3,float>& Point<int,3,float>::operator = (const Point<int,3,float>& p)
+{
+    BASE::x = p.x;
+    BASE::y = p.y;
+    BASE::z = p.z;
+
+    return *this;
+}
+template<> constexpr Point<float,3>& Point<float,3,float>::operator = (const Point<float,3>& p)
+{
+    BASE::x = p.x;
+    BASE::y = p.y;
+    BASE::z = p.z;
 
     return *this;
 }
 
-template<> Point<int,2,float>& Point<int,2,float>::operator = (const glm::vec<2,int,glm::packed_highp>& p)
+template<> constexpr Point<int,2,float>& Point<int,2,float>::operator = (const glm::vec<2,int,glm::packed_highp>& p)
 {
-    vector::x = p[0];
-    vector::y = p[1];
+    BASE::x = p.x;
+    BASE::y = p.y;
 
     return *this;
 }
-template<> Point<int,3,float>& Point<int,3,float>::operator = (const glm::vec<3,int,glm::packed_highp>& p)
+template<> constexpr Point<int,3,float>& Point<int,3,float>::operator = (const glm::vec<3,int,glm::packed_highp>& p)
 {
-    vector::x = p[0];
-    vector::y = p[1];
-    vector::z = p[1];
+    BASE::x = p.x;
+    BASE::y = p.y;
+    BASE::z = p.z;
 
     return *this;
 }
-template<> Point<float,3,float>& Point<float,3,float>::operator = (const glm::vec<3,float,glm::packed_highp>& p)
+template<> constexpr Point<float,3>& Point<float,3>::operator = (const glm::vec<3,float,glm::packed_highp>& p)
 {
-    vector::x = p[0];
-    vector::y = p[1];
-    vector::z = p[1];
+    BASE::x = p.x;
+    BASE::y = p.y;
+    BASE::z = p.z;
 
     return *this;
-}*/
+}
 
 
 
