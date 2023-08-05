@@ -5,7 +5,7 @@
 #include <core/3/Exception.hh>
 #include <glm/glm.hpp>
 #include <vector>
-#include <numbers/0/vector.hh>
+//#include <numbers/0/vector.hh>
 
 #ifdef OCTETOS_AVERSO_TTD
     #include <iostream>
@@ -14,15 +14,22 @@
 namespace oct::verso::v0
 {
     namespace core_here = oct::core::v3;
-    namespace nums_here = oct::nums::v0;
+    //namespace nums_here = oct::nums::v0;
     //template<class T> concept Dimension = std::is_base_of<U, T>::value;
 
+    enum class axis
+    {
+        x,
+        y,
+        z
+    };
+
     template<class C, unsigned char D,class V>
-    class Point  : public nums_here::vector<C,D,V>
+    class Point  : public glm::vec<D,C,glm::packed_highp>
     {
     public:
-        typedef glm::vec<D,C,glm::packed_highp> glm;
-        typedef nums_here::vector<C,D,V> BASE;
+        typedef glm::vec<D,C,glm::packed_highp> GLM;
+        typedef glm::vec<D,C,glm::packed_highp> BASE;
 
         //>>>Contructores
         Point() = default;
@@ -32,70 +39,111 @@ namespace oct::verso::v0
         Point(C x, C y) : BASE(x,y)
         {
         }
-        /*Point(C x, C y,C z) : BASE(x,y,z)
+        Point(C x, C y,C z) : BASE(x,y,z)
         {
         }
         Point(C x, C y,C z, C w) : BASE(x,y,z,w)
         {
-        }*/
+        }
         Point(const Point& p) : BASE(p)
         {
         }
-        Point(const glm& v) : BASE((const BASE&)v)
+        /*Point(const glm& v) : BASE((const BASE&)v)
         {
-        }
-        Point(const std::initializer_list<C>& l) : BASE(l)
+        }*/
+        /*Point(const std::initializer_list<C>& l)
         {
-            if(l.size() < D) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
-            if(l.size() > D) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
+            if(l.size() < L) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
+            if(l.size() > L) throw core_here::exception("La cantidad de datos execede la capacidad del objeto");
 
-            const C* c = std::data(l);
-            for(size_t i = 0; i < D; i++)
+            const T* c = std::data(l);
+            for(size_t i = 0; i < l.size(); i++)
             {
-                BASE::data[i] = c[i];
+                data[i] = c[i];
             }
-        }
+        }*/
 
         //>>>Operadores
         Point& operator = (const Point& p);
-        Point& operator = (const glm& p);
-        operator glm()
-        {
-            glm vec;
-            vec[0] = BASE::data[0];
-            vec[1] = BASE::data[1];
-            return vec;
-        }
 
         //>>>getters and setters
 
 
 
         //>>>
+        constexpr C scalar(const Point& v);
+
         /*
         *\brief Componente de this en la direction de b
         */
         V length() const
         {
-            V v = 0;
-            for(size_t i = 0; i < D; i++) v += pow(BASE::data[i],V(2));
-
-            return sqrt(v);
+            //return glm::length(*this);
         }
         V comp(const Point& b)
         {
-            V v = scalar(*this,b);
+            V v = scalar(b);
             v /= b.length();
 
             return v;
         }
         V distance(const Point& b)
         {
-            return ::glm::distance((const glm&)*this,b);
+            return glm::distance(*this,b);
         }
-        Point normalize() const
+        void normalize() const
         {
-            return ::glm::normalize((const glm&)*this);
+            V l = length();
+            //for(size_t i = 0; i < D; i++) BASE::at(i) /= l;
+        }
+
+
+        /**
+        *\brief Transformacion de tranlacion
+        */
+        void transl(const Point& v)
+        {
+            //for(size_t i = 0; i < D; i++) vertexs[i].transl(v);
+        }
+
+        /**
+        *\brief Transformacion de scalado
+        */
+        void scale(const C& s)
+        {
+            //for(size_t i = 0; i < D; i++) vertexs[i].scale(s);
+        }
+
+        /**
+        *\brief Transformacion de rotacion
+        *\param axis Eje de rotacion
+        **/
+        void rotate(const C& angle,axis a)
+        {
+            switch(a)
+            {
+            case axis::z:
+                {
+                    C x1 = GLM::x, y1 = GLM::y;
+                    GLM::x = x1 * cos(angle) - y1 * sin(angle);
+                    GLM::y = x1 * sin(angle) + y1 * cos(angle);
+                }
+                break;
+            case axis::y:
+                {
+                    C x1 = GLM::x, z1 = GLM::z;
+                    GLM::x = x1 * cos(angle) - z1 * sin(angle);
+                    GLM::z = x1 * sin(angle) + z1 * cos(angle);
+                }
+                break;
+            case axis::x:
+                {
+                    C y1 = GLM::y, z1 = GLM::z;
+                    GLM::y = y1 * cos(angle) - z1 * sin(angle);
+                    GLM::z = y1 * sin(angle) + z1 * cos(angle);
+                }
+                break;
+            }
         }
 
 #ifdef OCTETOS_AVERSO_TTD
@@ -104,6 +152,12 @@ namespace oct::verso::v0
 #endif // OCTETOS_AVERSO_TTD
 
     };
+
+    /*template<class C,class V> constexpr C Point<C,2,V>::scalar(const Point<C,2,V>& v)
+    {
+
+        return 0;
+    }*/
 
 
 
@@ -184,6 +238,8 @@ namespace oct::verso::v0
     private:
         static const size_t vetexs_count = 3;
         static const size_t vetexs_base_size = vetexs_count * D;
+        typedef glm::vec<D,C,glm::packed_highp> GLM;
+
     public:
         constexpr Triangle() = default;
         constexpr Triangle(std::initializer_list<C>& l)
@@ -214,29 +270,15 @@ namespace oct::verso::v0
             throw std::out_of_range("Indice fuera de rango, deve ser menor que " + std::to_string(vetexs_count));
         }
 
-
         /**
-        *\brief Transformacion de tranlacion
-        */
-        void transl(const nums_here::vector<C,D,V>& v)
+        *\brief Transformacion de rotacion
+        *\param axis Eje de rotacion
+        **/
+        void rotate(const C& angle,axis a)
         {
-            for(size_t i = 0; i < D; i++) vertexs[i].transl(v);
-        }
-
-        /**
-        *\brief Transformacion de scalado
-        */
-        void scale(const C& s)
-        {
-            for(size_t i = 0; i < D; i++) vertexs[i].scale(s);
-        }
-
-        /**
-        *\brief Transformacion de rotacions
-        */
-        void rotate(const C& angle,nums_here::axis axis)
-        {
-            for(size_t i = 0; i < D; i++) vertexs[i].rotate(angle,axis);
+            vertexs[0].rotate(angle,a);
+            vertexs[1].rotate(angle,a);
+            vertexs[2].rotate(angle,a);
         }
 
     private:

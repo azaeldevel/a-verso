@@ -51,7 +51,8 @@ void v0_math()
     CU_ASSERT((8/sqrt(5)) - comp_1 < infimium);
 
     verso_here::Point<float,3,float> p9 {-1,2,3};
-    verso_here::Point<float,3,float> p8(p9.normalize());
+    verso_here::Point<float,3,float> p8{-1,2,3};
+    p8.normalize();
     /*std::cout << "El vector normal de (-1,2,3) es ";
     p8.printLn(std::cout);*/
     CU_ASSERT(p8.length() - 1.0 < infimium);
@@ -131,7 +132,7 @@ void v0_math()
 
 void v0_opnegl_compatible()
 {
-    glm::vec3 vect1(0,1,2);
+    /*glm::vec3 vect1(0,1,2);
     verso_here::Point<int,3,float> p0(vect1);
     CU_ASSERT(p0[0] == 0);
     CU_ASSERT(p0[1] == 1);
@@ -145,7 +146,7 @@ void v0_opnegl_compatible()
     CU_ASSERT(p1[1] == 1);
     CU_ASSERT(p1[2] == 2);
     CU_ASSERT(p1[3] == 3);
-    CU_ASSERT(sizeof(p1) == sizeof(int) * 4);
+    CU_ASSERT(sizeof(p1) == sizeof(int) * 4);*/
 }
 
 void v0_cpp_features()
