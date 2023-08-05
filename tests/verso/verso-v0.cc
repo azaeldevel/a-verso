@@ -447,8 +447,12 @@ bool Triangle2::initialize()
     // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
     glBindVertexArray(VAO);
 
+    /*triangle[0].rotate(0.05);
+    triangle[1].rotate(0.05);
+    triangle[2].rotate(0.05);*/
+
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), reinterpret_cast<float*>(&triangle), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), reinterpret_cast<float*>(&triangle), GL_DYNAMIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
@@ -482,7 +486,12 @@ void Triangle2::clean()
 
 void Triangle2::update()
 {
+    triangle[0].rotate(0.0174533);
+    triangle[1].rotate(0.0174533);
+    triangle[2].rotate(0.0174533);
 
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), reinterpret_cast<float*>(&triangle), GL_DYNAMIC_DRAW);
 }
 void Triangle2::handle()
 {
