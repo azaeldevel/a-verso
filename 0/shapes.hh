@@ -98,7 +98,6 @@ namespace oct::verso::v0
 
 
         //>>>
-        constexpr C scalar(const Point& v);
 
         constexpr V comp(const Point& b)
         {
