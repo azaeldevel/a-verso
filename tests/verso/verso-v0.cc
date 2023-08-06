@@ -65,7 +65,7 @@ void Develop::render()
 void Develop::clean()
 {
     scenary->clean();
-    scenary = &default_scenary;
+    change();
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
 }

@@ -42,14 +42,14 @@ namespace oct::verso::v0::gl
     class Verso : public Scenary
     {
     private:
+        Default default_scenary;
 
     protected:
         int width,height;
-        Default default_scenary;
         Scenary* scenary;
 
 
-        void change(Scenary*);
+        void change(Scenary* = NULL);
 
     public:
         virtual bool create(const char* title, int width, int height);

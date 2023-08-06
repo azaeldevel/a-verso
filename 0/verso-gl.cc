@@ -77,7 +77,14 @@ bool Verso::create(const char* title, int w, int h)
 }
 void Verso::change(Scenary* s)
 {
-    scenary = s;
+    if(s)
+    {
+        scenary = s;
+    }
+    else
+    {
+        scenary = &default_scenary;
+    }
     scenary->set(window);
 }
 
