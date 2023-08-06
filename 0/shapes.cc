@@ -94,6 +94,7 @@ template<> Point<int,4,float>::Point(std::initializer_list<int>& l)
 */
 
 
+/*
 template<> constexpr Point<int,2,float>& Point<int,2,float>::operator = (const Point<int,2,float>& p)
 {
     BASE::x = p.x;
@@ -149,7 +150,7 @@ template<> constexpr Point<float,3>& Point<float,3>::operator = (const glm::vec<
 
     return *this;
 }
-
+*/
 
 
 

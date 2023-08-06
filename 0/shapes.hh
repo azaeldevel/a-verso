@@ -5,7 +5,7 @@
 #include <core/3/Exception.hh>
 #include <glm/glm.hpp>
 #include <vector>
-//#include <numbers/0/vector.hh>
+#include <numbers/0/vector.hh>
 
 #ifdef OCTETOS_AVERSO_TTD
     #include <iostream>
@@ -14,7 +14,7 @@
 namespace oct::verso::v0
 {
     namespace core_here = oct::core::v3;
-    //namespace nums_here = oct::nums::v0;
+    namespace nums_here = oct::nums::v0;
     //template<class T> concept Dimension = std::is_base_of<U, T>::value;
     template<typename T> concept coordinate = std::same_as<T, int> || std::same_as<T, float>;
 
@@ -25,12 +25,14 @@ namespace oct::verso::v0
         z
     };
 
+    //typedef glm::vector<float,2,glm::packed_highp> vec2;
+    //typedef glm::vector<float,3,glm::packed_highp> vec3;
     template<coordinate C, unsigned char D,class V = C>
-    class Point  : public glm::vec<D,C,glm::packed_highp>
+    class Point  : public nums_here::vector<C,D,V>
     {
     public:
         typedef glm::vec<D,C,glm::packed_highp> GLM;
-        typedef glm::vec<D,C,glm::packed_highp> BASE;
+        typedef nums_here::vector<C,D,V> BASE;
 
         //>>>Contructores
         Point() = default;
@@ -123,20 +125,20 @@ namespace oct::verso::v0
         *\brief Transformacion de rotacion
         *\param axis Eje de rotacion
         **/
-        constexpr void rotate(const C& angle,axis a)
+        /*constexpr void rotate(const C& angle,axis a)
         {
             switch(a)
             {
             case axis::z:
                 {
-                    C x1 = GLM::x, y1 = GLM::y;
+                    C x1 = BASE::x, y1 = BASE::y;
                     GLM::x = x1 * cos(angle) - y1 * sin(angle);
                     GLM::y = x1 * sin(angle) + y1 * cos(angle);
                 }
                 break;
             case axis::y:
                 {
-                    C x1 = GLM::x, z1 = GLM::z;
+                    C x1 = BASE::x, z1 = BASE::z;
                     GLM::x = x1 * cos(angle) - z1 * sin(angle);
                     GLM::z = x1 * sin(angle) + z1 * cos(angle);
                 }
@@ -149,7 +151,7 @@ namespace oct::verso::v0
                 }
                 break;
             }
-        }
+        }*/
 
 #ifdef OCTETOS_AVERSO_TTD
         void print(std::ostream& out)const;
@@ -289,7 +291,7 @@ namespace oct::verso::v0
         *\brief Transformacion de rotacion
         *\param axis Eje de rotacion
         **/
-        void rotate(const C& angle,axis a)
+        void rotate(const C& angle,nums_here::axis a)
         {
             vertexs[0].rotate(angle,a);
             vertexs[1].rotate(angle,a);

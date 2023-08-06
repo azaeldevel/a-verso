@@ -67,7 +67,7 @@ private:
     GLuint VBO, VAO;
     static float vertices[];
     verso_here::Triangle<float,3,float> triangle;
-    verso_here::axis axis;
+    verso_here::nums_here::axis axis;
 };
 
 class Light : public verso_here::gl::Scenary

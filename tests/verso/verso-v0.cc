@@ -459,7 +459,7 @@ bool Triangle2::initialize()
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     glBindVertexArray(0);
-    axis = verso_here::axis::x;
+    axis = verso_here::nums_here::axis::x;
 
     return true;
 }
@@ -496,15 +496,15 @@ void Triangle2::handle()
     }
     else if(glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
     {
-        axis = verso_here::axis::x;
+        axis = verso_here::nums_here::axis::x;
     }
     else if(glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
     {
-        axis = verso_here::axis::y;
+        axis = verso_here::nums_here::axis::y;
     }
     else if(glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
     {
-        axis = verso_here::axis::z;
+        axis = verso_here::nums_here::axis::z;
     }
 
 
