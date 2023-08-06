@@ -36,8 +36,6 @@ namespace oct::verso::v0
         void walking_up(float);
         void walking_down(float);
 
-        void angle(float);
-
     private:
         Point<float,3> position,target,direction,rigth,up;
         Point<float,3> front;
@@ -47,7 +45,7 @@ namespace oct::verso::v0
         const float sensitivy =  1.1f;
 
     private:
-        static glm::mat4 lookAt(const Point<float,3>&,const Point<float,3>&,const Point<float,3>&);
+        glm::mat4 lookAt();
     };
 }
 

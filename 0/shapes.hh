@@ -55,12 +55,9 @@ namespace oct::verso::v0
         constexpr Point(const nums_here::vector<C,D,V>& p) : BASE(p)
         {
         }
-        /*constexpr Point(const GLM& p)
+        constexpr Point(const GLM& p) : BASE(reinterpret_cast<const Point&>(p))
         {
-        }*/
-        /*Point(const glm& v) : BASE((const BASE&)v)
-        {
-        }*/
+        }
         /*Point(const std::initializer_list<C>& l)
         {
             if(l.size() < L) throw core_here::exception("La cantidad de datos indicados no es suficuente para inicializar el objeto");
@@ -80,12 +77,18 @@ namespace oct::verso::v0
 
             return *this;
         }
-        constexpr Point& operator = (const GLM& p);
+        constexpr Point& operator = (const GLM& p)
+        {
+            const Point& pnew = reinterpret_cast<const Point&>(p);
+
+            for(size_t i = 0; i < D; i++) BASE::data[i] = pnew[i];
+            return *this;
+        }
         operator GLM&()
         {
             return *reinterpret_cast<GLM*>(this);
         }
-        operator const GLM&()
+        operator const GLM&() const
         {
             return *reinterpret_cast<const GLM*>(this);
         }
@@ -97,19 +100,20 @@ namespace oct::verso::v0
         //>>>
         constexpr C scalar(const Point& v);
 
+        constexpr V comp(const Point& b)
+        {
+            V v = BASE::dot(b);
+            v /= b.length();
+
+            return v;
+        }
+
         /*
         *\brief Componente de this en la direction de b
         */
         /*constexpr V length() const
         {
             //return glm::length(*this);
-        }
-        constexpr V comp(const Point& b)
-        {
-            V v = scalar(b);
-            v /= b.length();
-
-            return v;
         }
         constexpr V distance(const Point& b)
         {

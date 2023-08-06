@@ -376,19 +376,19 @@ void Cube1::handle()
     }
     else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
     {
-        camera.walking_front(delta_time);
+        camera.walking_front(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
     {
-        camera.walking_back(delta_time);
+        camera.walking_back(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
     {
-        camera.walking_right(delta_time);
+        camera.walking_right(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
     {
-        camera.walking_left(delta_time);
+        camera.walking_left(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
     {

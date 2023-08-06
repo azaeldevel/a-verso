@@ -15,7 +15,7 @@ namespace oct::verso::v0
         rigth(nums_here::normalize(Point<float,3>(0.0f, 1.0f, 0.0f) * direction)),
         up(nums_here::normalize(direction * rigth)),
         front(nums_here::normalize(Point<float,3>(0.0f, 0.0f, -1.0f))),
-        view(lookAt(position,target,up)),
+        view(lookAt()),
         _zoom(45.0f)
     {
     }
@@ -24,11 +24,11 @@ namespace oct::verso::v0
     {
         position = p;
         target = t;
-        direction = nums_here::normalize(position-target);
+        direction = nums_here::normalize(position - target);
         rigth = nums_here::normalize(Point<float,3>(0.0f, 1.0f, 0.0f) * direction);
         up = nums_here::normalize(direction * rigth);
         front = nums_here::normalize(Point<float,3>(0.0f, 0.0f, -1.0f));
-        view = lookAt(position,target,up);
+        view = lookAt();
         _zoom = 45.0f;
     }
 
@@ -48,50 +48,43 @@ namespace oct::verso::v0
 
     void Camera::walking_front(float speed)
     {
-        position += front * speed * sensitivy;
-        view = lookAt(position,target,up);
+        position.printLn(std::cout);
+        position += front * speed;
+
+        view = lookAt();
+        position.printLn(std::cout);
+        std::cout << std::endl;
     }
     void Camera::walking_back(float speed)
     {
-        position -= front * speed * sensitivy;
-        view = lookAt(position,target,up);
+        position -= front * speed;
+        view = lookAt();
     }
     void Camera::walking_left(float speed)
     {
-        position += nums_here::normalize(front* up) * speed;
-        view = lookAt(position,target,up);
+        position += nums_here::normalize(front * up) * speed;
+        view = lookAt();
     }
     void Camera::walking_right(float speed)
     {
-        position -= nums_here::normalize(front* up) * speed * sensitivy;
-        view = lookAt(position,target,up);
+        position -= nums_here::normalize(front * up) * speed;
+        view = lookAt();
     }
     void Camera::walking_up(float speed)
     {
         position += up * speed * sensitivy;
-        view = lookAt(position,target,up);
+        view = lookAt();
     }
     void Camera::walking_down(float speed)
     {
         position -= up * speed * sensitivy;
-        view = lookAt(position,target,up);
+        view = lookAt();
     }
 
-    glm::mat4 Camera::lookAt(const Point<float,3>& p,const Point<float,3>& t,const Point<float,3>& u)
+    glm::mat4 Camera::lookAt()
     {
-        glm::mat4 mat;
-        //mat = glm::lookAt(position,target,up);
-
-        return mat;
+        return glm::lookAt(reinterpret_cast<glm::vec3&>(position),reinterpret_cast<glm::vec3&>(target),reinterpret_cast<glm::vec3&>(up));
     }
-
-
-    void Camera::angle(float t)
-    {
-
-
-    }
-
 
 
 }

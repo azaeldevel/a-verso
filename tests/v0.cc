@@ -132,7 +132,7 @@ void v0_math()
 
 void v0_opnegl_compatible()
 {
-    /*glm::vec3 vect1(0,1,2);
+    glm::vec3 vect1(0,1,2);
     verso_here::Point<int,3,float> p0(vect1);
     CU_ASSERT(p0[0] == 0);
     CU_ASSERT(p0[1] == 1);
@@ -146,7 +146,23 @@ void v0_opnegl_compatible()
     CU_ASSERT(p1[1] == 1);
     CU_ASSERT(p1[2] == 2);
     CU_ASSERT(p1[3] == 3);
-    CU_ASSERT(sizeof(p1) == sizeof(int) * 4);*/
+    CU_ASSERT(sizeof(p1) == sizeof(int) * 4);
+
+
+    verso_here::Point<int,4,float> p2;
+    p2 = vect2;
+    CU_ASSERT(p2[0] == 0);
+    CU_ASSERT(p2[1] == 1);
+    CU_ASSERT(p2[2] == 2);
+    CU_ASSERT(p2[3] == 3);
+    CU_ASSERT(sizeof(p2) == sizeof(int) * 4);
+
+    glm::vec3 vect3(0,9,7);
+    verso_here::Point<int,3,float> p3(vect3);
+    CU_ASSERT(p3[0] == 0);
+    CU_ASSERT(p3[1] == 9);
+    CU_ASSERT(p3[2] == 7);
+    CU_ASSERT(sizeof(p3) == sizeof(int) * 3);
 }
 
 void v0_cpp_features()
