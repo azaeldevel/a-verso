@@ -315,10 +315,11 @@ void Cube1::render()
     handle();
     update();
 
+    // Use our shader
+    shader_cube.use();
+
 
         MVP        = Projection * (glm::mat4&)camera * Model;
-		// Use our shader
-		shader_cube.use();
 
 		// Send our transformation to the currently bound shader,
 		// in the "MVP" uniform

@@ -36,6 +36,7 @@ namespace oct::verso::v0::gl
     public:
         virtual void render();
         virtual void clean();
+        virtual bool initialize();
 
     };
 
@@ -53,7 +54,7 @@ namespace oct::verso::v0::gl
 
     public:
         virtual bool create(const char* title, int width, int height);
-        virtual bool initialize() = 0;
+
 
         static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 

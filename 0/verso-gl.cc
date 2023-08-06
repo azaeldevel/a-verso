@@ -1,4 +1,8 @@
 
+#include<chrono>
+#include<thread>
+
+
 #include "verso-gl.hh"
 
 namespace oct::verso::v0::gl
@@ -70,7 +74,7 @@ bool Verso::create(const char* title, int w, int h)
     //>>>>>
 
     //<<<<<
-
+    default_scenary.initialize();
     this->initialize();
 	running = true;
     return true;
@@ -89,13 +93,22 @@ void Verso::change(Scenary* s)
 }
 
 
+
+
+
+
 void Default::render()
 {
-
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 }
 void Default::clean()
 {
 
+}
+bool Default::initialize()
+{
+
+    return true;
 }
 
 }
