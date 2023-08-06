@@ -126,6 +126,23 @@ Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath)
 {
     build(vertexPath,fragmentPath);
 }
+Shader::~Shader()
+{
+    if(program)
+    {
+        glDeleteProgram(program);
+        program = 0;
+    }
+}
+
+void Shader::clean()
+{
+    if(program)
+    {
+        glDeleteProgram(program);
+        program = 0;
+    }
+}
 
 Shader::operator GLuint()const
 {

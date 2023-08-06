@@ -18,9 +18,9 @@
 
 bool Develop::initialize()
 {
-    p1l5.initialize();
-    cube1.initialize();
-    triangle2.initialize();
+
+
+
 
     return true;
 }
@@ -53,8 +53,18 @@ void Develop::handle()
 
 void Develop::render()
 {
+    GLenum error = glGetError();
+    switch(error)
+    {
+    case GL_NO_ERROR:
+        break;
+
+    default:
+        std::cout << "Error " << error << ": desconocio.\n";
+    }
+
     handle();
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    //glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
     scenary->render();
 
@@ -126,15 +136,24 @@ void P1L5::render()
     handle();
     update();
 
-
+    glClear(GL_COLOR_BUFFER_BIT);
     shader_triangle.use();
+
+    // 1rst attribute buffer : vertices
+    //glEnableVertexAttribArray(0);
+    //glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    //glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+
     glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    //glDisableVertexAttribArray(0);
 }
 void P1L5::clean()
 {
-    glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
+    glDeleteVertexArrays(1, &VAO);
+    shader_triangle.clean();
 }
 
 void P1L5::update()
@@ -314,6 +333,7 @@ void Cube1::render()
 {
     handle();
     update();
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
     // Use our shader
     shader_cube.use();
@@ -358,9 +378,12 @@ void Cube1::render()
 }
 void Cube1::clean()
 {
+    glDisable(GL_DEPTH_TEST);
+
     glDeleteBuffers(1, &vertexbuffer);
 	glDeleteBuffers(1, &colorbuffer);
 	glDeleteVertexArrays(1, &VertexArrayID);
+	shader_cube.clean();
 }
 
 void Cube1::update()
@@ -468,18 +491,24 @@ void Triangle2::render()
 {
     handle();
     update();
-
-
-
-
+    glClear(GL_COLOR_BUFFER_BIT);
     shader_triangle.use();
+
+    // 1rst attribute buffer : vertices
+    //glEnableVertexAttribArray(0);
+    //glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    //glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+
     glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    //glDisableVertexAttribArray(0);
 }
 void Triangle2::clean()
 {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
+    shader_triangle.clean();
 }
 
 void Triangle2::update()

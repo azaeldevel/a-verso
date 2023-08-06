@@ -57,6 +57,7 @@ namespace oct::verso::v0::gl
 
 
         static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+        static void APIENTRY message_callback( GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam );
 
     };
 
