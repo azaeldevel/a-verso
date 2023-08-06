@@ -15,6 +15,7 @@ namespace oct::verso::v0
 {
     namespace core_here = oct::core::v3;
     namespace nums_here = oct::nums::v0;
+    namespace numbers = oct::nums::v0;
     //template<class T> concept Dimension = std::is_base_of<U, T>::value;
     template<typename T> concept coordinate = std::same_as<T, int> || std::same_as<T, float>;
 
@@ -76,8 +77,18 @@ namespace oct::verso::v0
         constexpr Point& operator = (const Point& p)
         {
             for(size_t i = 0; i < D; i++) BASE::data[i] = p[i];
+
+            return *this;
         }
         constexpr Point& operator = (const GLM& p);
+        operator GLM&()
+        {
+            return *reinterpret_cast<GLM*>(this);
+        }
+        operator const GLM&()
+        {
+            return *reinterpret_cast<const GLM*>(this);
+        }
 
         //>>>getters and setters
 
@@ -89,7 +100,7 @@ namespace oct::verso::v0
         /*
         *\brief Componente de this en la direction de b
         */
-        constexpr V length() const
+        /*constexpr V length() const
         {
             //return glm::length(*this);
         }
@@ -108,7 +119,7 @@ namespace oct::verso::v0
         {
             V l = length();
             for(size_t i = 0; i < D; i++) BASE::data[i] /= l;
-        }
+        }*/
 
 
         /**

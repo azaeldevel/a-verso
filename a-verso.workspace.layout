@@ -2,5 +2,5 @@
 <CodeBlocks_workspace_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveProject path="a-verso.cbp" />
-	<PreferredTarget name="devel-verso" />
+	<PreferredTarget name="tests-dbg-v0" />
 </CodeBlocks_workspace_layout_file>

@@ -287,7 +287,7 @@ bool Cube1::initialize()
 								glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
 						   );
     */
-    camera.set(glm::vec3(4,3,-3),glm::vec3(0,0,0));
+    camera.set(verso_here::Point<float,3>(4,3,-3),verso_here::Point<float,3>(0,0,0));
 	// Model matrix : an identity matrix (model will be at the origin)
 	Model      = glm::mat4(1.0f);
 	// Our ModelViewProjection : multiplication of our 3 matrices
@@ -392,7 +392,7 @@ void Cube1::handle()
     }
     else if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
     {
-        camera.angle(glfwGetTime());
+
     }
     else
     {
@@ -600,7 +600,7 @@ bool Light::initialize()
     glEnableVertexAttribArray(0);
 
     light_position = glm::vec3(1.2f, 1.0f, 2.0f);
-    camera.set(glm::vec3(4,3,3),glm::vec3(0,0,0));
+    camera.set(verso_here::Point<float,3>(4,3,3),verso_here::Point<float,3>(0,0,0));
     aspect = 4/3;
 
     return true;

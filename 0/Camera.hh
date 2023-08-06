@@ -10,18 +10,19 @@
 
 
 #include <core/3/Exception.hh>
+#include "shapes.hh"
 
 namespace oct::verso::v0
 {
-    namespace core_here = oct::core::v3;
+    //namespace core_here = oct::core::v3;
 
     class Camera
     {
     public:
         Camera() = default;
-        Camera(const glm::vec3& position,const glm::vec3& target);
+        Camera(const Point<float,3>& position,const Point<float,3>& target);
 
-        void set(const glm::vec3& position,const glm::vec3& target);
+        void set(const Point<float,3>& position,const Point<float,3>& target);
 
         float& zoom();
         const float& zoom() const;
@@ -38,12 +39,15 @@ namespace oct::verso::v0
         void angle(float);
 
     private:
-        glm::vec3 position,target,direction,rigth,up;
-        glm::vec3 front;
+        Point<float,3> position,target,direction,rigth,up;
+        Point<float,3> front;
         glm::mat4 view;
         float _zoom; //field of view , zoom
 
         const float sensitivy =  1.1f;
+
+    private:
+        static glm::mat4 lookAt(const Point<float,3>&,const Point<float,3>&,const Point<float,3>&);
     };
 }
 
