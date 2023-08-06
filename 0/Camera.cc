@@ -48,12 +48,12 @@ namespace oct::verso::v0
 
     void Camera::walking_front(float speed)
     {
-        position.printLn(std::cout);
+        //position.printLn(std::cout);
         position += front * speed;
 
         view = lookAt();
-        position.printLn(std::cout);
-        std::cout << std::endl;
+        //position.printLn(std::cout);
+        //std::cout << std::endl;
     }
     void Camera::walking_back(float speed)
     {

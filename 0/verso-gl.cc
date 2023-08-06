@@ -117,6 +117,7 @@ bool Verso::create(const char* title, int w, int h)
 	}
 	glfwMakeContextCurrent(window);
 	//std::cout << "calling..\n";
+
 #ifdef OCTETOS_AVERSO_V0_TTD
     int flags; glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
     if (flags & GL_CONTEXT_FLAG_DEBUG_BIT)
