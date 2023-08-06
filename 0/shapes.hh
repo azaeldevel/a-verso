@@ -51,9 +51,12 @@ namespace oct::verso::v0
         constexpr Point(const Point& p) : BASE(p)
         {
         }
-        constexpr Point(const GLM& p) : BASE(p)
+        constexpr Point(const nums_here::vector<C,D,V>& p) : BASE(p)
         {
         }
+        /*constexpr Point(const GLM& p)
+        {
+        }*/
         /*Point(const glm& v) : BASE((const BASE&)v)
         {
         }*/
@@ -70,7 +73,10 @@ namespace oct::verso::v0
         }*/
 
         //>>>Operadores
-        constexpr Point& operator = (const Point& p);
+        constexpr Point& operator = (const Point& p)
+        {
+            for(size_t i = 0; i < D; i++) BASE::data[i] = p[i];
+        }
         constexpr Point& operator = (const GLM& p);
 
         //>>>getters and setters
@@ -101,7 +107,7 @@ namespace oct::verso::v0
         constexpr void normalize() const
         {
             V l = length();
-            //for(size_t i = 0; i < D; i++) BASE::at(i) /= l;
+            for(size_t i = 0; i < D; i++) BASE::data[i] /= l;
         }
 
 
@@ -159,6 +165,9 @@ namespace oct::verso::v0
 #endif // OCTETOS_AVERSO_TTD
 
     };
+
+
+
 
     /*template<class C, unsigned char D,class V>
     constexpr C Point<C,D,V>::scalar(const Point<C,D,V>& v)
