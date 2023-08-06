@@ -282,6 +282,8 @@ const GLfloat Cube1::g_color_buffer_data[] = {
 
 bool Cube1::initialize()
 {
+    glGetIntegerv(GL_DEPTH_FUNC,&last_value);
+
 	//Enable depth test
 	glEnable(GL_DEPTH_TEST);
 	//Accept fragment if it closer to the camera than the former one
@@ -379,7 +381,7 @@ void Cube1::render()
 void Cube1::clean()
 {
     glDisable(GL_DEPTH_TEST);
-
+    glDepthFunc(last_value);
     glDeleteBuffers(1, &vertexbuffer);
 	glDeleteBuffers(1, &colorbuffer);
 	glDeleteVertexArrays(1, &VertexArrayID);

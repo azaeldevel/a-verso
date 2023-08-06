@@ -46,6 +46,7 @@ private:
     static const GLfloat g_color_buffer_data[];
     verso_here::Camera camera;
     float delta_time, last_frame;
+    GLint last_value;
 };
 
 
