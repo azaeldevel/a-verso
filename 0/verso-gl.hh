@@ -7,6 +7,7 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <source_location>
 //#include <ft2build.h>
 //#include FT_FREETYPE_H
 //#include <map>
@@ -26,6 +27,8 @@ namespace oct::verso::v0::gl
 
     protected:
         GLFWwindow* window;
+
+        static bool is_error(std::ostream&,const std::source_location location = std::source_location::current());
 
     public:
         void set(GLFWwindow*);

@@ -14,6 +14,25 @@ void Scenary::set(GLFWwindow* w)
     window = w;
 }
 
+bool Scenary::is_error(std::ostream& out,const std::source_location location)
+{
+    GLenum error = glGetError();
+    switch(error)
+    {
+    case GL_NO_ERROR:
+        return false;
+
+    default:
+        out << location.file_name() << '('
+              << location.line() << ':'
+              << location.column() << ") `"
+              << location.function_name() << "`: " << error << "\n";
+        return true;
+    }
+
+    return false;
+}
+
 
 void Verso::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -130,6 +149,7 @@ bool Verso::create(const char* title, int w, int h)
 	//glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	scenary = &default_scenary;
+	is_error(std::cout);
 
     //>>>>>
 
@@ -161,7 +181,7 @@ void Verso::change(Scenary* s)
 void Default::render()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }
 void Default::clean()
 {

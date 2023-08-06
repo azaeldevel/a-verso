@@ -53,16 +53,7 @@ void Develop::handle()
 
 void Develop::render()
 {
-    GLenum error = glGetError();
-    switch(error)
-    {
-    case GL_NO_ERROR:
-        break;
-
-    default:
-        std::cout << "Error " << error << ": desconocio.\n";
-    }
-
+    is_error(std::cout);
     handle();
     //glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
@@ -101,7 +92,9 @@ bool P1L5::initialize()
     // build and compile our shader program
     // ------------------------------------
     // vertex shader
+    is_error(std::cout);
     shader_triangle.build(std::string(vertexShaderSource),std::string(fragmentShaderSource));
+    is_error(std::cout);
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -115,6 +108,7 @@ bool P1L5::initialize()
     glGenBuffers(1, &VBO);
     // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
     glBindVertexArray(VAO);
+    is_error(std::cout);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -128,6 +122,7 @@ bool P1L5::initialize()
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     glBindVertexArray(0);
+    is_error(std::cout);
 
     return true;
 }
@@ -380,6 +375,7 @@ void Cube1::render()
 }
 void Cube1::clean()
 {
+    std::cout << "cleaning..\n";
     glDisable(GL_DEPTH_TEST);
     glDepthFunc(last_value);
     glDeleteBuffers(1, &vertexbuffer);
