@@ -94,7 +94,7 @@ bool Verso::create(const char* title, int w, int h)
 	//glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	scenary = &default_scenary;
-	is_error(std::cout);
+	//is_error(std::cout);
 
     //>>>>>
 
@@ -118,7 +118,13 @@ void Verso::change(Scenary* s)
     scenary->initialize();
     scenary->set(window);
 }
+bool Verso::is_scenary()const
+{
+    if(scenary == &default_scenary) return false;
+    if(scenary == NULL) return false;
 
+    return true;
+}
 
 
 
@@ -137,6 +143,12 @@ bool Default::initialize()
 {
 
     return true;
+}
+void Default::handle()
+{
+    if(not window) return;
+
+
 }
 
 }

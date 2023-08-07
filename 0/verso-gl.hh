@@ -41,6 +41,7 @@ namespace oct::verso::v0::gl
         virtual void render();
         virtual void clean();
         virtual bool initialize();
+        virtual void handle();
 
     };
 
@@ -55,6 +56,7 @@ namespace oct::verso::v0::gl
 
 
         void change(Scenary* = NULL);
+        bool is_scenary()const;
 
     public:
         Verso();

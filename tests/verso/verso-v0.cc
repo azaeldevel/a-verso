@@ -31,21 +31,10 @@ void Develop::handle()
     {
         running = false;
     }
-    /*else if(glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+    else if(glfwGetKey(window, GLFW_KEY_HOME) == GLFW_PRESS)
     {
-        //std::cout << "Cambieando de escenario..\n";
-        change(&p1l5);
+        change();
     }
-    else if(glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
-    {
-        //std::cout << "Cambieando de escenario..\n";
-        change(&cube1);
-    }
-    else if(glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
-    {
-        //std::cout << "Cambieando de escenario..\n";
-        change(&triangle2);
-    }*/
     else if(glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
     {
         //std::cout << "Cambieando de escenario..\n";
@@ -61,6 +50,15 @@ void Develop::handle()
         //std::cout << "Cambieando de escenario..\n";
         change(&jgci_3);
     }
+    else if(glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)
+    {
+        //std::cout << "Cambieando de escenario..\n";
+        change(&jgci_4);
+    }
+    else
+    {
+        scenary->handle();
+    }
 
 
 }
@@ -69,7 +67,6 @@ void Develop::handle()
 void Develop::render()
 {
     handle();
-
     scenary->render();
 
     glfwSwapBuffers(window);
@@ -782,13 +779,8 @@ void JGCI_1::update()
 {
 
 }
-void JGCI_1::handleEvents()
+void JGCI_1::handle()
 {
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
-    {
-        running = false;
-    }
-
 
 }
 
@@ -841,13 +833,8 @@ void JGCI_2::update()
 {
 
 }
-void JGCI_2::handleEvents()
+void JGCI_2::handle()
 {
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
-    {
-        running = false;
-    }
-
 
 }
 
@@ -925,11 +912,147 @@ void JGCI_3::update()
 {
 
 }
-void JGCI_3::handleEvents()
+void JGCI_3::handle()
 {
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
+
+
+}
+
+
+
+
+
+
+
+
+JGCI_4::JGCI_4() : rotate_x(0),rotate_y(0)
+{
+
+}
+bool JGCI_4::initialize()
+{
+    glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
+    glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
+    glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
+
+    //glDepthFunc(GL_LEQUAL);
+    glEnable(GL_DEPTH_TEST);
+    //glClearDepth(1.0);
+
+    glTranslatef(0,0,-16.0);
+
+    return true;
+}
+void JGCI_4::render()
+{
+    //  Clear screen and Z-buffer
+  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+
+  // Reset transformations
+  glLoadIdentity();
+
+  // Other Transformations
+  // glTranslatef( 0.1, 0.0, 0.0 );      // Not included
+  // glRotatef( 180, 0.0, 1.0, 0.0 );    // Not included
+
+  // Rotate when user changes rotate_x and rotate_y
+  glRotatef( rotate_x, 1.0, 0.0, 0.0 );
+  glRotatef( rotate_y, 0.0, 1.0, 0.0 );
+
+  // Other Transformations
+  // glScalef( 2.0, 2.0, 0.0 );          // Not included
+
+  //Multi-colored side - FRONT
+  glBegin(GL_POLYGON);
+
+  glColor3f( 1.0, 0.0, 0.0 );     glVertex3f(  0.5, -0.5, -0.5 );      // P1 is red
+  glColor3f( 0.0, 1.0, 0.0 );     glVertex3f(  0.5,  0.5, -0.5 );      // P2 is green
+  glColor3f( 0.0, 0.0, 1.0 );     glVertex3f( -0.5,  0.5, -0.5 );      // P3 is blue
+  glColor3f( 1.0, 0.0, 1.0 );     glVertex3f( -0.5, -0.5, -0.5 );      // P4 is purple
+
+  glEnd();
+
+  // White side - BACK
+  glBegin(GL_POLYGON);
+  glColor3f(   1.0,  1.0, 1.0 );
+  glVertex3f(  0.5, -0.5, 0.5 );
+  glVertex3f(  0.5,  0.5, 0.5 );
+  glVertex3f( -0.5,  0.5, 0.5 );
+  glVertex3f( -0.5, -0.5, 0.5 );
+  glEnd();
+
+  // Purple side - RIGHT
+  glBegin(GL_POLYGON);
+  glColor3f(  1.0,  0.0,  1.0 );
+  glVertex3f( 0.5, -0.5, -0.5 );
+  glVertex3f( 0.5,  0.5, -0.5 );
+  glVertex3f( 0.5,  0.5,  0.5 );
+  glVertex3f( 0.5, -0.5,  0.5 );
+  glEnd();
+
+  // Green side - LEFT
+  glBegin(GL_POLYGON);
+  glColor3f(   0.0,  1.0,  0.0 );
+  glVertex3f( -0.5, -0.5,  0.5 );
+  glVertex3f( -0.5,  0.5,  0.5 );
+  glVertex3f( -0.5,  0.5, -0.5 );
+  glVertex3f( -0.5, -0.5, -0.5 );
+  glEnd();
+
+  // Blue side - TOP
+  glBegin(GL_POLYGON);
+  glColor3f(   0.0,  0.0,  1.0 );
+  glVertex3f(  0.5,  0.5,  0.5 );
+  glVertex3f(  0.5,  0.5, -0.5 );
+  glVertex3f( -0.5,  0.5, -0.5 );
+  glVertex3f( -0.5,  0.5,  0.5 );
+  glEnd();
+
+  // Red side - BOTTOM
+  glBegin(GL_POLYGON);
+  glColor3f(   1.0,  0.0,  0.0 );
+  glVertex3f(  0.5, -0.5, -0.5 );
+  glVertex3f(  0.5, -0.5,  0.5 );
+  glVertex3f( -0.5, -0.5,  0.5 );
+  glVertex3f( -0.5, -0.5, -0.5 );
+  glEnd();
+
+    glFlush();
+
+    // Forzamos el dibujado
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+}
+void JGCI_4::clean()
+{
+    //std::cout << "cleaning..\n";
+    glDisable(GL_DEPTH_TEST);
+    glEnable(last_GL_DEPTH_TEST);
+    glDepthFunc(last_GL_DEPTH_FUNC);
+    glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+}
+
+void JGCI_4::update()
+{
+
+}
+void JGCI_4::handle()
+{
+    if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
     {
-        running = false;
+        //std::cout << "rotate_x : " << rotate_x << "\n";
+        rotate_x += 5;
+    }
+    else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+    {
+        rotate_x -= 5;
+    }
+    else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+    {
+        rotate_y += 5;
+    }
+    else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+    {
+        rotate_y -= 5;
     }
 
 

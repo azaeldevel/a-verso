@@ -9,83 +9,6 @@
 namespace verso_here = oct::verso::v0;
 
 
-
-class JGCI_1 : public verso_here::gl::Scenary
-{
-private:
-
-
-private:
-    void handleEvents();
-    void update();
-
-public:
-    bool initialize();
-    virtual void render();
-    virtual void clean();
-
-};
-
-class JGCI_2 : public verso_here::gl::Scenary
-{
-private:
-
-
-private:
-    void handleEvents();
-    void update();
-
-public:
-    bool initialize();
-    virtual void render();
-    virtual void clean();
-
-};
-
-class JGCI_3 : public verso_here::gl::Scenary
-{
-private:
-    GLint last_GL_DEPTH_FUNC,last_GL_DEPTH_TEST;
-    GLfloat last_GL_DEPTH_CLEAR_VALUE;
-
-private:
-    void handleEvents();
-    void update();
-
-
-public:
-    bool initialize();
-    virtual void render();
-    virtual void clean();
-
-};
-
-
-class Develop : public verso_here::gl::Verso
-{
-public:
-    //Game(const std::filesystem::path&);
-    virtual void render();
-    virtual void clean();
-
-public:
-
-private:
-    void handle();
-    void save(const std::filesystem::path&,bool seq);
-    virtual bool initialize();
-
-private:
-    //P1L5 p1l5;
-    //Cube1 cube1;
-    //Triangle2 triangle2;
-    JGCI_1 jgci_1;
-    JGCI_2 jgci_2;
-    JGCI_3 jgci_3;
-};
-
-
-
 class P1L5 : public verso_here::gl::Scenary
 {//Hello Triangle - Triangulo 1
 public:
@@ -170,3 +93,105 @@ public:
     virtual void clean();
 
 };
+
+class JGCI_1 : public verso_here::gl::Scenary
+{
+private:
+
+
+private:
+    virtual void handle();
+    void update();
+
+public:
+    bool initialize();
+    virtual void render();
+    virtual void clean();
+
+};
+
+class JGCI_2 : public verso_here::gl::Scenary
+{
+private:
+
+
+private:
+    virtual void handle();
+    void update();
+
+public:
+    bool initialize();
+    virtual void render();
+    virtual void clean();
+
+};
+
+class JGCI_3 : public verso_here::gl::Scenary
+{
+private:
+    GLint last_GL_DEPTH_FUNC,last_GL_DEPTH_TEST;
+    GLfloat last_GL_DEPTH_CLEAR_VALUE;
+
+private:
+    virtual void handle();
+    void update();
+
+
+public:
+    bool initialize();
+    virtual void render();
+    virtual void clean();
+
+};
+
+/**
+*\brief Dibuja un cubo y puede rotarlo
+*
+**/
+class JGCI_4 : public verso_here::gl::Scenary
+{
+private:
+    GLint last_GL_DEPTH_FUNC,last_GL_DEPTH_TEST;
+    GLfloat last_GL_DEPTH_CLEAR_VALUE;
+    float rotate_x,rotate_y;
+
+private:
+    virtual void handle();
+    void update();
+
+
+public:
+    JGCI_4();
+    bool initialize();
+    virtual void render();
+    virtual void clean();
+
+};
+
+
+class Develop : public verso_here::gl::Verso
+{
+public:
+    //Game(const std::filesystem::path&);
+    virtual void render();
+    virtual void clean();
+
+public:
+
+private:
+    void handle();
+    void save(const std::filesystem::path&,bool seq);
+    virtual bool initialize();
+
+private:
+    //P1L5 p1l5;
+    //Cube1 cube1;
+    //Triangle2 triangle2;
+    JGCI_1 jgci_1;
+    JGCI_2 jgci_2;
+    JGCI_3 jgci_3;
+    JGCI_4 jgci_4;
+};
+
+
+
