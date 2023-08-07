@@ -689,7 +689,7 @@ void Light::handleEvents()
 {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
     {
-        //running = false;
+        running = false;
     }
     /*else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
     {
