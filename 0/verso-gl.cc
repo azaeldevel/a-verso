@@ -106,17 +106,20 @@ bool Verso::create(const char* title, int w, int h)
 }
 void Verso::change(Scenary* s)
 {
+    std::cout << "Changing..\n";
+    scenary->clean();
+    std::cout << "Changed..\n";
+
     if(s)
     {
-        scenary->clean();
         scenary = s;
+        scenary->set(window);
+        scenary->initialize();
     }
     else
     {
         scenary = &default_scenary;
     }
-    scenary->initialize();
-    scenary->set(window);
 }
 bool Verso::is_scenary()const
 {

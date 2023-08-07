@@ -19,9 +19,6 @@
 bool Develop::initialize()
 {
 
-
-
-
     return true;
 }
 
@@ -47,8 +44,9 @@ void Develop::handle()
     }
     else if(glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS)
     {
-        //std::cout << "Cambieando de escenario..\n";
+        std::cout << "\nCambieando de escenario..\n";
         change(&jgci_3);
+        std::cout << "Cambiado el escenario..\n";
     }
     else if(glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)
     {
@@ -75,7 +73,6 @@ void Develop::render()
 }
 void Develop::clean()
 {
-    change();
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
 }
@@ -772,7 +769,8 @@ void JGCI_1::render()
 }
 void JGCI_1::clean()
 {
-
+    glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_MODELVIEW);
 }
 
 void JGCI_1::update()
@@ -826,7 +824,8 @@ void JGCI_2::render()
 }
 void JGCI_2::clean()
 {
-
+    glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_MODELVIEW);
 }
 
 void JGCI_2::update()
@@ -901,7 +900,9 @@ void JGCI_3::render()
 }
 void JGCI_3::clean()
 {
-    //std::cout << "cleaning..\n";
+    std::cout << "cleaning Cuadro y triangulo ..\n";
+    glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_MODELVIEW);
     glDisable(GL_DEPTH_TEST);
     glEnable(last_GL_DEPTH_TEST);
     glDepthFunc(last_GL_DEPTH_FUNC);
@@ -1025,6 +1026,9 @@ void JGCI_4::render()
 void JGCI_4::clean()
 {
     //std::cout << "cleaning..\n";
+    std::cout << "cleaning Cubo..\n";
+    glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_MODELVIEW);
     glDisable(GL_DEPTH_TEST);
     glEnable(last_GL_DEPTH_TEST);
     glDepthFunc(last_GL_DEPTH_FUNC);
