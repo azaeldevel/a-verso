@@ -104,7 +104,7 @@ private:
     void update();
 
 public:
-    bool initialize();
+    bool active();
     virtual void render();
     virtual void clean();
 
@@ -120,7 +120,7 @@ private:
     void update();
 
 public:
-    bool initialize();
+    bool active();
     virtual void render();
     virtual void clean();
 
@@ -138,7 +138,7 @@ private:
 
 
 public:
-    bool initialize();
+    bool active();
     virtual void render();
     virtual void clean();
 
@@ -162,7 +162,7 @@ private:
 
 public:
     JGCI_4();
-    bool initialize();
+    bool active();
     virtual void render();
     virtual void clean();
 
@@ -181,7 +181,7 @@ public:
 private:
     void handle();
     void save(const std::filesystem::path&,bool seq);
-    virtual bool initialize();
+    virtual bool active();
 
 private:
     //P1L5 p1l5;

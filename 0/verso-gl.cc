@@ -99,8 +99,8 @@ bool Verso::create(const char* title, int w, int h)
     //>>>>>
 
     //<<<<<
-    default_scenary.initialize();
-    this->initialize();
+    default_scenary.active();
+    this->active();
 	running = true;
     return true;
 }
@@ -114,7 +114,7 @@ void Verso::change(Scenary* s)
     {
         scenary = s;
         scenary->set(window);
-        scenary->initialize();
+        scenary->active();
     }
     else
     {
@@ -142,7 +142,7 @@ void Default::clean()
 {
 
 }
-bool Default::initialize()
+bool Default::active()
 {
 
     return true;

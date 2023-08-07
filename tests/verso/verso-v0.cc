@@ -16,7 +16,7 @@
 
 
 
-bool Develop::initialize()
+bool Develop::active()
 {
 
     return true;
@@ -727,7 +727,7 @@ void Light::handleEvents()
 
 
 
-bool JGCI_1::initialize()
+bool JGCI_1::active()
 {
 
 
@@ -784,7 +784,7 @@ void JGCI_1::handle()
 
 
 
-bool JGCI_2::initialize()
+bool JGCI_2::active()
 {
 
 
@@ -839,7 +839,7 @@ void JGCI_2::handle()
 
 
 
-bool JGCI_3::initialize()
+bool JGCI_3::active()
 {
     glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
     glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
@@ -930,7 +930,7 @@ JGCI_4::JGCI_4() : rotate_x(0),rotate_y(0)
 {
 
 }
-bool JGCI_4::initialize()
+bool JGCI_4::active()
 {
     glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
     glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);

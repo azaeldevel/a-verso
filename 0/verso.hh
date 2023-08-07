@@ -17,7 +17,7 @@ namespace oct::verso::v0
     public:
         virtual void render() = 0;
         virtual void clean() = 0;
-        virtual bool initialize() = 0;
+        virtual bool active() = 0;
         virtual void handle() = 0;
         void update();
 

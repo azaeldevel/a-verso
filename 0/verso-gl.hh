@@ -40,7 +40,7 @@ namespace oct::verso::v0::gl
     public:
         virtual void render();
         virtual void clean();
-        virtual bool initialize();
+        virtual bool active();
         virtual void handle();
 
     };
