@@ -29,6 +29,7 @@ namespace oct::verso::v0::gl
         GLFWwindow* window;
 
         static bool is_error(std::ostream&,const std::source_location location = std::source_location::current());
+        static void error_callback(int error, const char* description);
 
     public:
         void set(GLFWwindow*);
@@ -56,11 +57,12 @@ namespace oct::verso::v0::gl
         void change(Scenary* = NULL);
 
     public:
+        Verso();
+
         virtual bool create(const char* title, int width, int height);
 
 
         static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-        static void APIENTRY message_callback( GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam );
 
     };
 

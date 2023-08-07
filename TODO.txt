@@ -1,0 +1,2 @@
+Eliminar interferencias entre esenarios
+Verificar version OpenGL disponible

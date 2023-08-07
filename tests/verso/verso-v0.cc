@@ -375,7 +375,7 @@ void Cube1::render()
 }
 void Cube1::clean()
 {
-    std::cout << "cleaning..\n";
+    //std::cout << "cleaning..\n";
     glDisable(GL_DEPTH_TEST);
     glDepthFunc(last_value);
     glDeleteBuffers(1, &vertexbuffer);
