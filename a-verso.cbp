@@ -108,8 +108,8 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall -pedantic --std=c++20" />
-			<Add option="-DOCTETOS_VERSO_OPENGL_MAJOR=3" />
-			<Add option="-DOCTETOS_VERSO_OPENGL_MINOR=3" />
+			<Add option="-DOCTETOS_VERSO_OPENGL_MAJOR=1" />
+			<Add option="-DOCTETOS_VERSO_OPENGL_MINOR=0" />
 			<Add directory="/home/azael/develop/octetos" />
 		</Compiler>
 		<Unit filename="0/Camera.cc">
