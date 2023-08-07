@@ -10,9 +10,6 @@ namespace oct::verso::v0
     private:
 
     protected:
-        bool running;
-
-    protected:
 
     public:
         virtual void render() = 0;
@@ -27,6 +24,9 @@ namespace oct::verso::v0
     class verso : public scenary
     {
     public:
+
+    protected:
+        bool running;
 
     };
 

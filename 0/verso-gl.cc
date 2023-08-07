@@ -128,7 +128,10 @@ bool Verso::is_scenary()const
 
     return true;
 }
-
+bool Verso::is_running()
+{
+    return running;
+}
 
 
 

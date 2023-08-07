@@ -165,7 +165,7 @@ void P1L5::handle()
 {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
     {
-        running = false;
+        //running = false;
     }
     /*else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
     {
@@ -400,7 +400,7 @@ void Cube1::handle()
 {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
     {
-        running = false;
+        //running = false;
     }
     else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
     {
@@ -526,7 +526,7 @@ void Triangle2::handle()
 {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
     {
-        running = false;
+        //running = false;
     }
     else if(glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
     {
@@ -689,7 +689,7 @@ void Light::handleEvents()
 {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
     {
-        running = false;
+        //running = false;
     }
     /*else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
     {

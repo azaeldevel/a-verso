@@ -53,6 +53,7 @@ namespace oct::verso::v0::gl
     protected:
         int width,height;
         Scenary* scenary;
+        bool running;
 
 
         void change(Scenary* = NULL);
@@ -62,7 +63,7 @@ namespace oct::verso::v0::gl
         Verso();
 
         virtual bool create(const char* title, int width, int height);
-
+        bool is_running();
 
         static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 

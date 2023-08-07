@@ -11,10 +11,6 @@ namespace oct::verso::v0
     {
     }
 
-    bool scenary::is_running()
-    {
-        return running;
-    }
 
 
 }
