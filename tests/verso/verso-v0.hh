@@ -76,9 +76,9 @@ private:
     virtual bool initialize();
 
 private:
-    P1L5 p1l5;
-    Cube1 cube1;
-    Triangle2 triangle2;
+    //P1L5 p1l5;
+    //Cube1 cube1;
+    //Triangle2 triangle2;
     JGCI_1 jgci_1;
     JGCI_2 jgci_2;
     JGCI_3 jgci_3;

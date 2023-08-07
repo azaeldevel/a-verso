@@ -914,7 +914,7 @@ void JGCI_3::render()
 }
 void JGCI_3::clean()
 {
-    std::cout << "cleaning..\n";
+    //std::cout << "cleaning..\n";
     glDisable(GL_DEPTH_TEST);
     glEnable(last_GL_DEPTH_TEST);
     glDepthFunc(last_GL_DEPTH_FUNC);
