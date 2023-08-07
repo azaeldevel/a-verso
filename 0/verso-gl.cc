@@ -108,6 +108,7 @@ void Verso::change(Scenary* s)
 {
     if(s)
     {
+        scenary->clean();
         scenary = s;
     }
     else

@@ -127,6 +127,25 @@ public:
 
 };
 
+class JGCI_3 : public verso_here::gl::Scenary
+{
+private:
+    GLint last_GL_DEPTH_FUNC,last_GL_DEPTH_TEST;
+    GLfloat last_GL_DEPTH_CLEAR_VALUE;
+
+private:
+    void handleEvents();
+    void update();
+
+
+public:
+    bool initialize();
+    virtual void render();
+    virtual void clean();
+
+};
+
+
 class Develop : public verso_here::gl::Verso
 {
 public:
@@ -147,4 +166,5 @@ private:
     Triangle2 triangle2;
     JGCI_1 jgci_1;
     JGCI_2 jgci_2;
+    JGCI_3 jgci_3;
 };
