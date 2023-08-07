@@ -46,6 +46,11 @@ void Develop::handle()
         //std::cout << "Cambieando de escenario..\n";
         change(&triangle2);
     }
+    else if(glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+    {
+        //std::cout << "Cambieando de escenario..\n";
+        change(&jgci_1);
+    }
 
 
 }
@@ -705,6 +710,79 @@ void Light::handleEvents()
     {
 
     }*/
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+bool JGCI_1::initialize()
+{
+
+
+    return true;
+}
+void JGCI_1::render()
+{
+    glClearColor(0.0,0.0,0.0,0.0);
+    // Color de fondo: negro
+    glClear(GL_COLOR_BUFFER_BIT);
+    // Boramos la pantalla
+    glMatrixMode(GL_PROJECTION);
+    // Modo proyección
+    glLoadIdentity();
+    // Cargamos la matriz identidad
+    glOrtho(-1.0,1.0,-1.0,1.0,-1.0,1.0);
+    // Proyección ortográfica, dentro del cubo señalado
+    glMatrixMode(GL_MODELVIEW);
+    // Modo de modelado
+    glBegin(GL_TRIANGLES);
+    // Dibujamos un triángulo
+    glColor3f(1.0,0.0,0.0);
+    // Color del primer vértice: rojo
+    glVertex3f(0.0,0.8,0.0);
+    // Coordenadas del primer vértice
+    glColor3f(0.0,1.0,0.0);
+    // Color del segundo vértice: verde
+    glVertex3f(-0.6,-0.2,0.0);
+    // Coordenadas del segundo vértice
+    glColor3f(0.0,0.0,1.0);
+    // Color del tercer vértice: azúl
+    glVertex3f(0.6,-0.2,0.0);
+    // Coordenadas del tercer vértice
+    glEnd();
+    // Terminamos de dibujar
+    glFlush();
+    // Forzamos el dibujado
+    sleep(1);
+}
+void JGCI_1::clean()
+{
+
+    // Close OpenGL window and terminate GLFW
+	glfwTerminate();
+}
+
+void JGCI_1::update()
+{
+
+}
+void JGCI_1::handleEvents()
+{
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
+    {
+        running = false;
+    }
 
 
 }

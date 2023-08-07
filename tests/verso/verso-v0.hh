@@ -94,6 +94,23 @@ public:
 
 };
 
+
+class JGCI_1 : public verso_here::gl::Scenary
+{
+private:
+
+
+private:
+    void handleEvents();
+    void update();
+
+public:
+    bool initialize();
+    virtual void render();
+    virtual void clean();
+
+};
+
 class Develop : public verso_here::gl::Verso
 {
 public:
@@ -112,4 +129,5 @@ private:
     P1L5 p1l5;
     Cube1 cube1;
     Triangle2 triangle2;
+    JGCI_1 jgci_1;
 };
