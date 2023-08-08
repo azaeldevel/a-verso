@@ -100,7 +100,6 @@ private:
 
 
 private:
-    virtual void handle();
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
@@ -117,7 +116,6 @@ private:
 
 
 private:
-    virtual void handle();
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
@@ -135,7 +133,6 @@ private:
     GLfloat last_GL_DEPTH_CLEAR_VALUE;
 
 private:
-    virtual void handle();
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 

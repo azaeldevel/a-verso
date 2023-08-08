@@ -781,10 +781,6 @@ void JGCI_1::update()
 {
 
 }
-void JGCI_1::handle()
-{
-
-}
 
 void JGCI_1::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -843,10 +839,6 @@ void JGCI_2::clean()
 }
 
 void JGCI_2::update()
-{
-
-}
-void JGCI_2::handle()
 {
 
 }
@@ -935,11 +927,6 @@ void JGCI_3::clean()
 
 void JGCI_3::update()
 {
-
-}
-void JGCI_3::handle()
-{
-
 
 }
 
