@@ -18,7 +18,7 @@ namespace oct::verso::v0
         //virtual void handle() = 0;
         void update();
 
-        bool is_running();
+        //bool is_running();
     };
 
     class verso : public scenary

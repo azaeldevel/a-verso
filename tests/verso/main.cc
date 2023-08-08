@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
     //std::cout << "creating..\n";
     g_game.create("Developing / Tutorial - Learning OpenGL...",1024, 768);
     //std::cout << "created..\n";
-    while(g_game.is_running())
+    while(g_game.is_runnig)
     {
         //std::cout << "rendering..\n";
         g_game.render();

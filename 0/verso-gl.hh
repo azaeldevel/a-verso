@@ -44,20 +44,10 @@ namespace oct::verso::v0::gl
         void set(GLFWwindow*);
     };
 
-    class Default : public Scenary
-    {
-    public:
-        virtual void render();
-        virtual void clean();
-        virtual bool active();
-        virtual void handle();
-
-    };
 
     class Verso : public Scenary
     {
     private:
-        Default default_scenary;
         static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
     protected:
@@ -71,7 +61,6 @@ namespace oct::verso::v0::gl
         Verso();
 
         virtual bool create(const char* title, int width, int height);
-        bool is_running();
         void change(Scenary* = NULL);
         static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 

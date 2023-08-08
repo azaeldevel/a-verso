@@ -145,15 +145,11 @@ void Verso::change(Scenary* s)
 }
 bool Verso::is_scenary()const
 {
-    if(scenary == &default_scenary) return false;
-    if(scenary == NULL) return false;
+    if(scenary) return true;
 
-    return true;
+    return false;
 }
-bool Verso::is_running()
-{
-    return running;
-}
+
 void Verso::stop()
 {
     running = false;
@@ -163,26 +159,5 @@ void Verso::run()
     running = true;
 }
 
-
-
-void Default::render()
-{
-
-}
-void Default::clean()
-{
-
-}
-bool Default::active()
-{
-
-    return true;
-}
-void Default::handle()
-{
-    if(not window) return;
-
-
-}
 
 }
