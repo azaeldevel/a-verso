@@ -113,7 +113,7 @@ bool Verso::create(const char* title, int w, int h)
 	// Dark blue background
 	//glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-	scenary = &default_scenary;
+	scenary = NULL;
     glfwSetWindowUserPointer(window,this);
 	//is_error(std::cout);
 
@@ -127,9 +127,9 @@ bool Verso::create(const char* title, int w, int h)
 }
 void Verso::change(Scenary* s)
 {
-    std::cout << "Changing..\n";
-    scenary->clean();
-    std::cout << "Changed..\n";
+    //std::cout << "Changing..\n";
+    if(scenary) scenary->clean();
+    //std::cout << "Changed..\n";
 
     if(s)
     {
@@ -139,7 +139,8 @@ void Verso::change(Scenary* s)
     }
     else
     {
-        scenary = &default_scenary;
+        scenary = NULL;
+        this->active();
     }
 }
 bool Verso::is_scenary()const
@@ -166,8 +167,7 @@ void Verso::run()
 
 void Default::render()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
 }
 void Default::clean()
 {

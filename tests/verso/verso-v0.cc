@@ -35,9 +35,9 @@ void Develop::key_callback(GLFWwindow* window, int key, int scancode, int action
     }
     else if(GLFW_KEY_3 == key && action == GLFW_PRESS)
     {
-        std::cout << "\nCambieando de escenario..\n";
+        //std::cout << "\nCambieando de escenario..\n";
         WINDOW(window,Develop)->change(&WINDOW(window,Develop)->jgci_3);
-        std::cout << "Cambiado el escenario..\n";
+        //std::cout << "Cambiado el escenario..\n";
     }
     else if(GLFW_KEY_4 == key && action == GLFW_PRESS)
     {
@@ -56,49 +56,20 @@ bool Develop::active()
     return true;
 }
 
-void Develop::handle()
-{
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
-    {
-        running = false;
-    }
-    else if(glfwGetKey(window, GLFW_KEY_HOME) == GLFW_PRESS)
-    {
-        change();
-    }
-    else if(glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
-    {
-        //std::cout << "Cambieando de escenario..\n";
-        change(&jgci_1);
-    }
-    else if(glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
-    {
-        //std::cout << "Cambieando de escenario..\n";
-        change(&jgci_2);
-    }
-    else if(glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS)
-    {
-        std::cout << "\nCambieando de escenario..\n";
-        change(&jgci_3);
-        std::cout << "Cambiado el escenario..\n";
-    }
-    else if(glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)
-    {
-        //std::cout << "Cambieando de escenario..\n";
-        change(&jgci_4);
-    }
-    else
-    {
-        scenary->handle();
-    }
-
-
-}
 
 
 void Develop::render()
 {
-    scenary->render();
+    if(scenary)
+    {
+        scenary->render();
+    }
+    else
+    {
+        glClear(GL_COLOR_BUFFER_BIT);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+
 
     glfwSwapBuffers(window);
     glfwPollEvents();
@@ -762,7 +733,7 @@ void Light::handleEvents()
 
 bool JGCI_1::active()
 {
-
+    glfwSetKeyCallback(window, JGCI_1::key_callback);
 
     return true;
 }
@@ -828,6 +799,7 @@ void JGCI_1::key_callback(GLFWwindow* window, int key, int scancode, int action,
 
 bool JGCI_2::active()
 {
+    glfwSetKeyCallback(window, JGCI_2::key_callback);
 
 
     return true;
@@ -899,6 +871,7 @@ bool JGCI_3::active()
     glDepthFunc(GL_LEQUAL);
     glEnable(GL_DEPTH_TEST);
     glClearDepth(1.0);
+    glfwSetKeyCallback(window, JGCI_3::key_callback);
 
     return true;
 }
@@ -1001,6 +974,7 @@ bool JGCI_4::active()
     //glClearDepth(1.0);
 
     glTranslatef(0,0,-16.0);
+    glfwSetKeyCallback(window, JGCI_4::key_callback);
 
     return true;
 }
@@ -1125,25 +1099,25 @@ void JGCI_4::handle()
 void JGCI_4::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
-    if(GLFW_KEY_ESCAPE == key)
+    if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
     {
-        //std::cout << "Closing...\n";
+        std::cout << "Closing JGCI_4...\n";
         WINDOW(window,Develop)->change();
     }
-    else if(GLFW_KEY_UP == key)
+    else if(GLFW_KEY_UP == key && action == GLFW_PRESS)
     {
         //std::cout << "rotate_x : " << rotate_x << "\n";
         WINDOW(window,Develop)->jgci_4.rotate_x += 5;
     }
-    else if(GLFW_KEY_DOWN == key)
+    else if(GLFW_KEY_DOWN == key && action == GLFW_PRESS)
     {
         WINDOW(window,Develop)->jgci_4.rotate_x -= 5;
     }
-    else if(GLFW_KEY_RIGHT == key)
+    else if(GLFW_KEY_RIGHT == key && action == GLFW_PRESS)
     {
         WINDOW(window,Develop)->jgci_4.rotate_y += 5;
     }
-    else if(GLFW_KEY_LEFT == key)
+    else if(GLFW_KEY_LEFT == key && action == GLFW_PRESS)
     {
         WINDOW(window,Develop)->jgci_4.rotate_y -= 5;
     }
