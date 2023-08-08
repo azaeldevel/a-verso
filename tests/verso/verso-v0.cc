@@ -9,7 +9,7 @@
 #endif
 
 #include "verso-v0.hh"
-
+#include <draw.hh>
 
 
 
@@ -43,6 +43,11 @@ void Develop::key_callback(GLFWwindow* window, int key, int scancode, int action
     {
         //std::cout << "Cambieando de escenario..\n";
         WINDOW(window,Develop)->change(&WINDOW(window,Develop)->jgci_4);
+    }
+    else if(GLFW_KEY_5 == key && action == GLFW_PRESS)
+    {
+        //std::cout << "Cambieando de escenario..\n";
+        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->jgci_5);
     }
 
 }
@@ -1087,5 +1092,79 @@ void JGCI_4::key_callback(GLFWwindow* window, int key, int scancode, int action,
     else if(GLFW_KEY_LEFT == key && action == GLFW_PRESS)
     {
         WINDOW(window,Develop)->jgci_4.rotate_y -= 5;
+    }
+}
+
+
+
+
+
+
+
+JGCI_5::JGCI_5() : tri1(numbers_here::vector<float>(0,0,0), 1.0)
+{
+
+}
+bool JGCI_5::active()
+{
+    glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
+    glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
+    glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
+
+    //glDepthFunc(GL_LEQUAL);
+    glEnable(GL_DEPTH_TEST);
+    //glClearDepth(1.0);
+
+
+    glfwSetKeyCallback(window, JGCI_5::key_callback);
+
+    return true;
+}
+void JGCI_5::render()
+{
+
+    // Color de fondo: negro
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // Boramos la pantalla
+    glMatrixMode(GL_PROJECTION);
+    // Modo proyección
+    glLoadIdentity();
+    // Cargamos la matriz identidad
+    gluPerspective(0.0,1.0,1.0,100.0);//glOrtho(-1.0,1.0,-1.0,1.0,-1.0,1.0);
+    // Proyección ortográfica, dentro del cubo señalado
+    glMatrixMode(GL_MODELVIEW);
+    // Modo de modelado
+    verso_here::draw(tri1);
+    // Terminamos de dibujar
+    glFlush();
+    // Forzamos el dibujado
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+}
+void JGCI_5::clean()
+{
+    //std::cout << "cleaning..\n";
+    //std::cout << "cleaning Cubo..\n";
+    glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glDisable(GL_DEPTH_TEST);
+    glEnable(last_GL_DEPTH_TEST);
+    glDepthFunc(last_GL_DEPTH_FUNC);
+    glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+}
+
+void JGCI_5::update()
+{
+
+}
+
+
+void JGCI_5::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
+    if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Closing JGCI_4...\n";
+        WINDOW(window,Develop)->change();
     }
 }

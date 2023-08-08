@@ -1,11 +1,12 @@
 
-
+#include <numbers/0/shapes.hh>
 
 #include <verso-gl.hh>
+#include <draw.hh>
 
 
 
-
+namespace numbers_here = oct::nums::v0;
 namespace verso_here = oct::verso::v0;
 
 
@@ -169,6 +170,32 @@ public:
 };
 
 
+/**
+*\brief Dibuja un cubo y puede rotarlo
+*
+**/
+class JGCI_5 : public verso_here::gl::Scenary
+{
+private:
+    GLint last_GL_DEPTH_FUNC,last_GL_DEPTH_TEST;
+    GLfloat last_GL_DEPTH_CLEAR_VALUE;
+
+
+private:
+    void update();
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    numbers_here::Triangle<float> tri1;
+
+public:
+    JGCI_5();
+    bool active();
+    virtual void render();
+    virtual void clean();
+
+};
+
+
+
 class Develop : public verso_here::gl::Verso
 {
 public:
@@ -181,6 +208,7 @@ public:
     JGCI_2 jgci_2;
     JGCI_3 jgci_3;
     JGCI_4 jgci_4;
+    JGCI_5 jgci_5;
 
 private:
     void handle();
