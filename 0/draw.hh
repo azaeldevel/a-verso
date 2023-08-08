@@ -2,8 +2,11 @@
 #ifndef OCTETOS_AVERSO_DRAW_HH
 #define OCTETOS_AVERSO_DRAW_HH
 
+#include <GL/glew.h>
+
 #include <core/3/Exception.hh>
-#include <numbers/0/vector.hh>
+//#include <numbers/0/vector.hh>
+#include <numbers/0/shapes.hh>
 
 
 namespace oct::verso::v0
@@ -11,26 +14,62 @@ namespace oct::verso::v0
     namespace core_here = oct::core::v3;
     namespace numbers = oct::nums::v0;
 
-    typedef numbers::vector<float,3> Color;
-
-    template<numbers::number C, size_t D = 3,numbers::number V = C> constexpr void draw(const numbers::Triangle<C,D,V>& triangle)
+    template<numbers::number T,size_t L = 3,numbers::number V = T> class Color : public numbers::sequence<T,L>
     {
-        glBegin(GL_TRIANGLES);
-            // Dibujamos un triángulo
-            glColor3f(1.0,0.0,0.0);
-            // Color del primer vértice: rojo
-            glVertex3f(triangle[0].x(),triangle[0].y(),triangle[0].z());
-            // Coordenadas del primer vértice
-            glColor3f(0.0,1.0,0.0);
-            // Color del segundo vértice: verde
-            glVertex3f(triangle[1].x(),triangle[1].y(),triangle[1].z());
-            // Coordenadas del segundo vértice
-            glColor3f(0.0,0.0,1.0);
-            // Color del tercer vértice: azúl
-            glVertex3f(triangle[2].x(),triangle[2].y(),triangle[2].z());
-            // Coordenadas del tercer vértice
-        glEnd();
-    }
+    private:
+        typedef numbers::sequence<T,L> BASE;
+    public:
+        Color() = default;
+        constexpr Color(const T& v) : BASE(v)
+        {
+        }
+        /*constexpr vector(const T v[L]) : sequence<T,L>(v)
+        {
+        }*/
+        constexpr Color(const Color& v) : BASE(v)
+        {
+        }
+        constexpr Color(const std::initializer_list<T>& l) : BASE(l)
+        {
+        }
+
+        constexpr bool operator == (const Color& s)
+        {
+            for(size_t i = 0; i < L; i++) if(BASE::data[i] != s[i]) return false;
+
+            return true;
+        }
+
+
+        constexpr Color operator + (const Color& s)
+        {
+            Color res;
+            for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] + s[i];
+
+            return res;
+        }
+        constexpr Color operator - (const Color& s)
+        {
+            Color res;
+            for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] - s[i];
+
+            return res;
+        }
+        constexpr Color operator * (const T& s)
+        {
+            Color res;
+            for(size_t i = 0; i < L; i++) BASE::data[i] *= s;
+
+            return res;
+        }
+
+    };
+
+    static const Color<float,3> red{1.0f,0.0f,0.0f};
+    static const Color<float,3> green{0.0f,1.0f,0.0f};
+    static const Color<float,3> blue{0.0f,0.0f,1.0f};
+
+    void draw(const numbers::Triangle<float,3,float>& triangle);
 
 }
 
