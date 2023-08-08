@@ -19,8 +19,17 @@
 #include "verso.hh"
 #include "Camera.hh"
 
+#define WINDOW(W,C) reinterpret_cast<C*>(glfwGetWindowUserPointer(W))
+
+
 namespace oct::verso::v0::gl
 {
+
+    template<class V> V* WND(GLFWwindow* w)
+    {
+        return reinterpret_cast<V*>(glfwGetWindowUserPointer(w));
+    }
+
     class Scenary : public scenary
     {
     private:
@@ -49,14 +58,13 @@ namespace oct::verso::v0::gl
     {
     private:
         Default default_scenary;
+        static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
     protected:
         int width,height;
         Scenary* scenary;
         bool running;
 
-
-        void change(Scenary* = NULL);
         bool is_scenary()const;
 
     public:
@@ -64,8 +72,13 @@ namespace oct::verso::v0::gl
 
         virtual bool create(const char* title, int width, int height);
         bool is_running();
-
+        void change(Scenary* = NULL);
         static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
+        const bool& is_runnig;
+        void stop();
+        void run();
+        //void runnig(bool);
 
     };
 

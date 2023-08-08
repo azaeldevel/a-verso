@@ -102,6 +102,7 @@ private:
 private:
     virtual void handle();
     void update();
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 public:
     bool active();
@@ -118,6 +119,7 @@ private:
 private:
     virtual void handle();
     void update();
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 public:
     bool active();
@@ -135,6 +137,7 @@ private:
 private:
     virtual void handle();
     void update();
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 
 public:
@@ -158,6 +161,7 @@ private:
 private:
     virtual void handle();
     void update();
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 
 public:
@@ -177,20 +181,21 @@ public:
     virtual void clean();
 
 public:
+    JGCI_1 jgci_1;
+    JGCI_2 jgci_2;
+    JGCI_3 jgci_3;
+    JGCI_4 jgci_4;
 
 private:
     void handle();
     void save(const std::filesystem::path&,bool seq);
     virtual bool active();
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 private:
     //P1L5 p1l5;
     //Cube1 cube1;
     //Triangle2 triangle2;
-    JGCI_1 jgci_1;
-    JGCI_2 jgci_2;
-    JGCI_3 jgci_3;
-    JGCI_4 jgci_4;
 };
 
 

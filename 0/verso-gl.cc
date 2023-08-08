@@ -34,25 +34,41 @@ bool Scenary::is_error(std::ostream& out,const std::source_location location)
 }
 
 
+
+
+
+
+
 void Verso::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     // make sure the viewport matches the new window dimensions; note that width and
     // height will be significantly larger than specified on retina displays.
+    //std::cout << "void Verso::framebuffer_size_callback(GLFWwindow*,int,int)\n";
     glViewport(0, 0, width, height);
+}
+void Verso::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    //std::cout << "void Verso::key_callback(GLFWwindow*,int, int,int,int)()\n";
+    if(GLFW_KEY_ESCAPE == key)
+    {
+        //std::cout << "Closing verso...\n";
+        WINDOW(window,Verso)->stop();
+    }
 }
 void Scenary::error_callback(int error, const char* description)
 {
     fprintf(stderr, "Error: %s\n", description);
 }
-Verso::Verso()
+
+
+Verso::Verso() : is_runnig(running)
 {
-    glfwSetErrorCallback(error_callback);
+
 }
 bool Verso::create(const char* title, int w, int h)
 {
     width = w;
     height = h;
-
 
     // Initialise GLFW
 	if( !glfwInit() )
@@ -65,7 +81,7 @@ bool Verso::create(const char* title, int w, int h)
 	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, OCTETOS_VERSO_OPENGL_MAJOR);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, OCTETOS_VERSO_OPENGL_MINOR);
-	glfwWindowHint(GLFW_CONTEXT_NO_ERROR, GL_FALSE);
+	//glfwWindowHint(GLFW_CONTEXT_NO_ERROR, GL_FALSE);
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 #if OCTETOS_VERSO_OPENGL_MAJOR >= 3 && OCTETOS_VERSO_OPENGL_MINOR >= 0
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
@@ -80,28 +96,33 @@ bool Verso::create(const char* title, int w, int h)
 	// Open a window and create its OpenGL context
 	window = glfwCreateWindow( width, height, title, NULL, NULL);
 	if( window == NULL ) return false;
+
+	glfwSetErrorCallback(error_callback);
+	glfwSetFramebufferSizeCallback(window, Verso::framebuffer_size_callback);
+	glfwSetKeyCallback(window, Verso::key_callback);
+
 	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	// Initialize GLEW
 	glewExperimental = true;
 	if (glewInit() != GLEW_OK) return false;
 
 	// Ensure we can capture the escape key being pressed below
-	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+	//glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
 	// Dark blue background
 	//glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	scenary = &default_scenary;
+    glfwSetWindowUserPointer(window,this);
 	//is_error(std::cout);
 
     //>>>>>
 
     //<<<<<
-    default_scenary.active();
+    //default_scenary.active();
     this->active();
-	running = true;
+	run();
     return true;
 }
 void Verso::change(Scenary* s)
@@ -132,7 +153,14 @@ bool Verso::is_running()
 {
     return running;
 }
-
+void Verso::stop()
+{
+    running = false;
+}
+void Verso::run()
+{
+    running = true;
+}
 
 
 
