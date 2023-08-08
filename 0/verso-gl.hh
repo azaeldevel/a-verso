@@ -60,8 +60,20 @@ namespace oct::verso::v0::gl
     public:
         Verso();
 
+
+        /**
+        *\brief Crea una venta
+        *\param title Es el texto que aparece como titulo de la ventana
+        *\param width Ancho de la ventana
+        *\param height Alto de la ventana
+        **/
         virtual bool create(const char* title, int width, int height);
-        void change(Scenary* = NULL);
+
+        /**
+        *\brief Activa el esenrio indicado
+        *\param scenary un puntero al esenario que se desea activa, si se indica NULL, no se cargara algun escerio
+        **/
+        void change(Scenary* scenary = NULL);
         static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
         const bool& is_runnig;
