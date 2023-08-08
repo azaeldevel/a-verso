@@ -69,6 +69,8 @@ namespace oct::verso::v0
     static const Color<float,3> green{0.0f,1.0f,0.0f};
     static const Color<float,3> blue{0.0f,0.0f,1.0f};
 
+
+    void draw(const numbers::Triangle<float,2,float>& triangle);
     void draw(const numbers::Triangle<float,3,float>& triangle);
 
 }
