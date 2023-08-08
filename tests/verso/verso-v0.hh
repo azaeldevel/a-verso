@@ -159,7 +159,6 @@ private:
     float rotate_x,rotate_y;
 
 private:
-    virtual void handle();
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 

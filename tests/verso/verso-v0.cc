@@ -1060,9 +1060,10 @@ void JGCI_4::render()
 void JGCI_4::clean()
 {
     //std::cout << "cleaning..\n";
-    std::cout << "cleaning Cubo..\n";
+    //std::cout << "cleaning Cubo..\n";
     glMatrixMode(GL_PROJECTION);
     glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
     glDisable(GL_DEPTH_TEST);
     glEnable(last_GL_DEPTH_TEST);
     glDepthFunc(last_GL_DEPTH_FUNC);
@@ -1073,35 +1074,14 @@ void JGCI_4::update()
 {
 
 }
-void JGCI_4::handle()
-{
-    if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-    {
-        //std::cout << "rotate_x : " << rotate_x << "\n";
-        rotate_x += 5;
-    }
-    else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-    {
-        rotate_x -= 5;
-    }
-    else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-    {
-        rotate_y += 5;
-    }
-    else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-    {
-        rotate_y -= 5;
-    }
 
-
-}
 
 void JGCI_4::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
     if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
     {
-        std::cout << "Closing JGCI_4...\n";
+        //std::cout << "Closing JGCI_4...\n";
         WINDOW(window,Develop)->change();
     }
     else if(GLFW_KEY_UP == key && action == GLFW_PRESS)
