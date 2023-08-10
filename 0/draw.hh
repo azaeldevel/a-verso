@@ -72,6 +72,22 @@ namespace oct::verso::v0
 
     void draw(const numbers::Triangle<float,2,float>& triangle);
     void draw(const numbers::Triangle<float,3,float>& triangle);
+    void draw(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1);
+    template<size_t B> void draw(const numbers::Pyramid<float,B,3,float>& pyramid)
+    {
+        std::cout << "Drawing pyramid : base " << B << "\n";
+        const auto& shape = (numbers::Shape<float,3,B + 1,float>&)pyramid;
+        const auto& base = (numbers::Triangle<float,3,float>&)shape;
+        const auto& cusp = shape[B];
+        pyramid.printLn(std::cout);
+        base.printLn(std::cout);
+        cusp.printLn(std::cout);
+        draw(base);
+        for(size_t i = 0; i < B; i++)
+        {
+            draw(base[i],cusp);
+        }
+    }
 
 }
 

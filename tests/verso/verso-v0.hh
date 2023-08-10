@@ -45,7 +45,7 @@ private:
     GLuint MatrixID;
     static const GLfloat g_vertex_buffer_data[];
     static const GLfloat g_color_buffer_data[];
-    verso_here::Camera camera;
+    verso_here::v2::Camera camera;
     float delta_time, last_frame;
     GLint last_value;
 };
@@ -78,7 +78,7 @@ private:
     verso_here::Shader shader_lighting,shader_light_cube;
     GLuint vao_cube,vao_cube_light;
     GLuint vbo_cube;
-    verso_here::Camera camera;
+    verso_here::v2::Camera camera;
     glm::mat4 projection,view,model,mvp;
     glm::vec3 light_position;
     float delta_time, last_frame;
@@ -195,6 +195,41 @@ public:
 };
 
 
+/**
+*\brief Dibuja un cubo y puede rotarlo
+*
+**/
+class Triangles : public verso_here::gl::Scenary
+{
+private:
+    GLint last_GL_DEPTH_FUNC,last_GL_DEPTH_TEST;
+    GLfloat last_GL_DEPTH_CLEAR_VALUE;
+
+
+private:
+    void update();
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    numbers_here::Triangle<float> equilateral;
+    numbers_here::Scalene<float> rectangular;
+    numbers_here::Isosceles<float> isosceles;
+    numbers_here::Pyramid<float,3> pyramid;
+    verso_here::v1::Camera camera;
+
+    void (Triangles::*action_draw)();
+    void draw_rectangeluar();
+    void draw_isosceles();
+    void draw_equilateral();
+    void draw_pyramid();
+
+
+public:
+    Triangles();
+    bool active();
+    virtual void render();
+    virtual void clean();
+
+};
+
 
 class Develop : public verso_here::gl::Verso
 {
@@ -209,6 +244,7 @@ public:
     JGCI_3 jgci_3;
     JGCI_4 jgci_4;
     JGCI_5 jgci_5;
+    Triangles triangles;
 
 private:
     void handle();

@@ -3,6 +3,21 @@
 
 namespace oct::verso::v0
 {
+    void draw(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1)
+    {
+        /*std::cout << "Line front ";
+        p0.print(std::cout);
+        std::cout << " to ";
+        p1.printLn(std::cout);*/
+        glBegin(GL_LINES);
+            // Dibujamos un triángulo
+            glColor3f(1.0,1.0,1.0);
+            // Color del primer vértice: rojo
+            glVertex3f(p0.x(),p0.y(),p0.z());
+            // Color del segundo vértice: verde
+            glVertex3f(p1.x(),p1.y(),p1.z());
+        glEnd();
+    }
 
     void draw(const numbers::Triangle<float,3,float>& triangle)
     {

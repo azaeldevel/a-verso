@@ -12,7 +12,31 @@
 #include <core/3/Exception.hh>
 #include "shapes.hh"
 
-namespace oct::verso::v0
+namespace oct::verso::v0::v1
+{
+    class Camera
+    {
+    public:
+        Camera() = default;
+        Camera(const Point<float,3>& position,const Point<float,3>& target);
+
+        void set(const Point<float,3>& position,const Point<float,3>& target);
+
+        void walking_front(float);
+        void walking_back(float);
+        void walking_left(float);
+        void walking_right(float);
+        void walking_up(float);
+        void walking_down(float);
+
+        void lookAt();
+
+    private:
+        Point<float,3> position,target,direction,rigth,up,front;
+
+    };
+}
+namespace oct::verso::v0::v2
 {
     //namespace core_here = oct::core::v3;
 
@@ -47,6 +71,9 @@ namespace oct::verso::v0
     private:
         glm::mat4 lookAt();
     };
+}
+namespace oct::verso::v0
+{
 }
 
 #endif // OCTETOS_AVERSO_SHAPES_HH
