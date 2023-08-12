@@ -14,7 +14,7 @@ namespace oct::verso::v0
     namespace core_here = oct::core::v3;
     namespace numbers = oct::nums::v0;
 
-    template<numbers::number T,size_t L = 3,numbers::number V = T> class Color : public numbers::sequence<T,L>
+    template<numbers::number T = float, size_t L = 3> class Color : public numbers::sequence<T,L>
     {
     private:
         typedef numbers::sequence<T,L> BASE;
@@ -63,6 +63,33 @@ namespace oct::verso::v0
             return res;
         }
 
+
+        constexpr T& r()
+        {
+            return BASE::data[0];
+        }
+        constexpr const T& r() const
+        {
+            return BASE::data[0];
+        }
+        constexpr T& g()
+        {
+            return BASE::data[1];
+        }
+        constexpr const T& g() const
+        {
+            return BASE::data[1];
+        }
+        constexpr T& b()
+        {
+            return BASE::data[2];
+        }
+        constexpr const T& b() const
+        {
+            return BASE::data[2];
+        }
+
+
     };
 
     static const Color<float,3> red{1.0f,0.0f,0.0f};
@@ -72,21 +99,27 @@ namespace oct::verso::v0
 
     void draw(const numbers::Triangle<float,2,float>& triangle);
     void draw(const numbers::Triangle<float,3,float>& triangle);
+    void draw(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2);
+    void draw(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const Color<float,3>& c);
+
     void draw(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1);
+
     template<size_t B> void draw(const numbers::Pyramid<float,B,3,float>& pyramid)
     {
-        std::cout << "Drawing pyramid : base " << B << "\n";
+        //std::cout << "Drawing pyramid : base " << B << "\n";
+        Color<float,3> color(0);
         const auto& shape = (numbers::Shape<float,3,B + 1,float>&)pyramid;
         const auto& base = (numbers::Triangle<float,3,float>&)shape;
         const auto& cusp = shape[B];
-        pyramid.printLn(std::cout);
-        base.printLn(std::cout);
-        cusp.printLn(std::cout);
         draw(base);
         for(size_t i = 0; i < B; i++)
         {
+            color[i] = 1.0f;
+            draw(shape[i],shape[i+1],cusp,color);
             draw(base[i],cusp);
+            color[i] = 0.0f;
         }
+        draw(shape[B - 1],shape[0],cusp,color);
     }
 
 }
