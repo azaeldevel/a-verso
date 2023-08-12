@@ -205,7 +205,6 @@ private:
     GLint last_GL_DEPTH_FUNC,last_GL_DEPTH_TEST;
     GLfloat last_GL_DEPTH_CLEAR_VALUE;
 
-
 private:
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -220,7 +219,6 @@ private:
     void draw_isosceles();
     void draw_equilateral();
     void draw_pyramid();
-
 
 public:
     Triangles();

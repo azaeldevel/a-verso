@@ -1229,8 +1229,6 @@ void Triangles::render()
     // Terminamos de dibujar
     glFlush();
 
-
-
     // Forzamos el dibujado
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }
