@@ -96,15 +96,15 @@ namespace oct::verso::v0
     static const Color<float,3> green{0.0f,1.0f,0.0f};
     static const Color<float,3> blue{0.0f,0.0f,1.0f};
 
+    void draw(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2);
 
     void draw(const numbers::Triangle<float,2,float>& triangle);
     void draw(const numbers::Triangle<float,3,float>& triangle);
-    void draw(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2);
-    void draw(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const Color<float,3>& c);
+    void draw_triangle(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const Color<float,3>& c);
 
     void draw(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1);
 
-    template<size_t B> void draw(const numbers::Pyramid<float,B,3,float>& pyramid)
+    template<size_t B> void draw(const numbers::Pyramid<float,3,B,float>& pyramid)
     {
         //std::cout << "Drawing pyramid : base " << B << "\n";
         Color<float,3> color(0);
@@ -115,11 +115,11 @@ namespace oct::verso::v0
         for(size_t i = 0; i < B; i++)
         {
             color[i] = 1.0f;
-            draw(shape[i],shape[i+1],cusp,color);
+            draw_triangle(shape[i],shape[i+1],cusp,color);
             draw(base[i],cusp);
             color[i] = 0.0f;
         }
-        draw(shape[B - 1],shape[0],cusp,color);
+        draw_triangle(shape[B - 1],shape[0],cusp,color);
     }
 
 }

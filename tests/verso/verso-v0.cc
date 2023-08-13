@@ -1187,7 +1187,6 @@ void JGCI_5::key_callback(GLFWwindow* window, int key, int scancode, int action,
 
 Triangles::Triangles() : equilateral(numbers_here::vector<float>(0,0,0), 1.0),rectangular(numbers_here::vector<float>(0,0,0), 1.0,1.0),isosceles(numbers_here::vector<float>(0,0,0), 1.0,1.0),pyramid(rectangular,numbers_here::vector<float>(0,0,1.0)),action_draw(&Triangles::draw_rectangeluar)
 {
-
 }
 bool Triangles::active()
 {
@@ -1242,7 +1241,6 @@ void Triangles::clean()
     glDepthFunc(last_GL_DEPTH_FUNC);
     glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
 }
-
 void Triangles::update()
 {
 

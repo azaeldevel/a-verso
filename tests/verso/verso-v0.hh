@@ -211,7 +211,7 @@ private:
     numbers_here::Triangle<float> equilateral;
     numbers_here::Scalene<float> rectangular;
     numbers_here::Isosceles<float> isosceles;
-    numbers_here::Pyramid<float,3> pyramid;
+    numbers_here::Pyramid<float,3,3> pyramid;
     verso_here::v1::Camera camera;
 
     void (Triangles::*action_draw)();

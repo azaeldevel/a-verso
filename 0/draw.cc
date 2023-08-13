@@ -55,7 +55,7 @@ namespace oct::verso::v0
             // Coordenadas del tercer vértice
         glEnd();
     }
-    void draw(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const Color<float,3>& color)
+    void draw_triangle(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const Color<float,3>& color)
     {
         glBegin(GL_TRIANGLES);
             // Dibujamos un triángulo
