@@ -54,6 +54,11 @@ void Develop::key_callback(GLFWwindow* window, int key, int scancode, int action
         //std::cout << "Cambieando de escenario..\n";
         WINDOW(window,Develop)->change(&WINDOW(window,Develop)->triangles);
     }
+    else if(GLFW_KEY_7 == key && action == GLFW_PRESS)
+    {
+        //std::cout << "Cambieando de escenario..\n";
+        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->shapes);
+    }
 
 }
 
@@ -1308,4 +1313,148 @@ void Triangles::draw_equilateral()
 void Triangles::draw_pyramid()
 {
     verso_here::draw(pyramid);
+}
+
+
+
+
+
+
+
+
+
+
+Shapes::Shapes() : equilateral(numbers_here::vector<float>(0,0,0), 1.0),rectangular(numbers_here::vector<float>(0,0,0), 1.0,1.0),isosceles(numbers_here::vector<float>(0,0,0), 1.0,1.0),pyramid(rectangular,numbers_here::vector<float>(0,0,1.0)),action_draw(&Shapes::draw_rectangeluar)
+{
+}
+bool Shapes::active()
+{
+    glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
+    glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
+    glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
+
+    //glDepthFunc(GL_LEQUAL);
+    glEnable(GL_DEPTH_TEST);
+    //glClearDepth(1.0);
+
+    glfwSetKeyCallback(window, Shapes::key_callback);
+    camera.set(verso_here::Point<float,3>(3,0,0),verso_here::Point<float,3>(0,0,0));
+
+    // Boramos la pantalla
+    glMatrixMode(GL_PROJECTION);
+    glRotated(0.001,1.0,0.0,1.0);
+    glLoadIdentity();
+
+    gluPerspective(0.0,1.0,1.0,100.0);//glOrtho(-1.0,1.0,-1.0,1.0,-1.0,1.0);
+    glMatrixMode(GL_MODELVIEW);
+    //glTranslatef(0.1,0,0);
+    //glRotatef(10,1,0,0);
+    //gluLookAt(3,3,3,0,0,0,0,1,0);
+    //camera.lookAt();
+
+    numbers_here::vector<float> vec3(0,0,0);
+    rectangle.create(vec3, 1.0);
+
+    return true;
+}
+void Shapes::render()
+{
+    // Color de fondo: negro
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glMatrixMode(GL_MODELVIEW);
+    glRotatef(1,1,0,0);
+
+    // Modo de modelado
+    (this->*action_draw)();
+    // Terminamos de dibujar
+    glFlush();
+
+    // Forzamos el dibujado
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+}
+void Shapes::clean()
+{
+    glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glDisable(GL_DEPTH_TEST);
+    glEnable(last_GL_DEPTH_TEST);
+    glDepthFunc(last_GL_DEPTH_FUNC);
+    glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+}
+void Shapes::update()
+{
+}
+
+
+void Shapes::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Closing JGCI_4...\n";
+        WINDOW(window,Develop)->change();
+    }
+    else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+    {
+        WINDOW(window,Develop)->shapes.camera.walking_front(1.5);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+    {
+        WINDOW(window,Develop)->shapes.camera.walking_back(1.5);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+    {
+        WINDOW(window,Develop)->shapes.camera.walking_right(1.5);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+    {
+        WINDOW(window,Develop)->shapes.camera.walking_left(1.5);
+    }
+    else if(GLFW_KEY_R == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Cambiado tirnago : Escaleno\n";
+        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_rectangeluar;
+    }
+    else if(GLFW_KEY_E == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Cambiado tirnago : Equlatero\n";
+        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_equilateral;
+    }
+    else if(GLFW_KEY_I == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Cambiado tirnago : Isoceles\n";
+        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_isosceles;
+    }
+    else if(GLFW_KEY_P == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Cambiado tirnago : Isoceles\n";
+        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_pyramid;
+    }
+    else if(GLFW_KEY_S == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Cambiado tirnago : Isoceles\n";
+        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_rectangle;
+    }
+}
+
+void Shapes::draw_rectangeluar()
+{
+    verso_here::draw(rectangular);
+}
+void Shapes::draw_isosceles()
+{
+    verso_here::draw(isosceles);
+}
+void Shapes::draw_equilateral()
+{
+    verso_here::draw(equilateral);
+}
+void Shapes::draw_pyramid()
+{
+    verso_here::draw(pyramid);
+}
+void Shapes::draw_rectangle()
+{
+    verso_here::draw(rectangle);
 }

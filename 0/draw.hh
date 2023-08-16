@@ -128,6 +128,9 @@ namespace oct::verso::v0
         draw_triangle(shape[B - 1],shape[0],cusp,color);
     }
 
+
+    void draw(const numbers::Rectangle<float,3,float>&);
+
 }
 
 #endif // OCTETOS_AVERSO_SHAPES_HH

@@ -229,6 +229,41 @@ public:
 };
 
 
+/**
+*\brief Dibuja un cubo y puede rotarlo
+*
+**/
+class Shapes : public verso_here::gl::Scenary
+{
+private:
+    GLint last_GL_DEPTH_FUNC,last_GL_DEPTH_TEST;
+    GLfloat last_GL_DEPTH_CLEAR_VALUE;
+
+private:
+    void update();
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    numbers_here::Triangle<float> equilateral;
+    numbers_here::Scalene<float> rectangular;
+    numbers_here::Isosceles<float> isosceles;
+    numbers_here::Pyramid<float,3,3> pyramid;
+    numbers_here::Rectangle<float> rectangle;
+    verso_here::v1::Camera camera;
+
+    void (Shapes::*action_draw)();
+    void draw_rectangeluar();
+    void draw_isosceles();
+    void draw_equilateral();
+    void draw_pyramid();
+    void draw_rectangle();
+
+public:
+    Shapes();
+    bool active();
+    virtual void render();
+    virtual void clean();
+
+};
+
 class Develop : public verso_here::gl::Verso
 {
 public:
@@ -243,6 +278,7 @@ public:
     JGCI_4 jgci_4;
     JGCI_5 jgci_5;
     Triangles triangles;
+    Shapes shapes;
 
 private:
     void handle();

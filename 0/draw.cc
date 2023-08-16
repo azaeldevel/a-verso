@@ -108,4 +108,26 @@ namespace oct::verso::v0
         glEnd();
     }
 
+    void draw(const numbers::Rectangle<float,3,float>& rect)
+    {
+        glBegin(GL_POLYGON);
+            // Dibujamos un triángulo
+            glColor3f(1.0,0.0,0.0);
+            // Color del primer vértice: rojo
+            glVertex3f(rect[0].x(),rect[0].y(),rect[0].z());
+            // Coordenadas del primer vértice
+            glColor3f(0.0,1.0,0.0);
+            // Color del segundo vértice: verde
+            glVertex3f(rect[1].x(),rect[1].y(),rect[1].z());
+            // Coordenadas del segundo vértice
+            glColor3f(0.0,0.0,1.0);
+            // Color del tercer vértice: azúl
+            glVertex3f(rect[2].x(),rect[2].y(),rect[2].z());
+            // Coordenadas del tercer vértice
+            glColor3f(0.0,0.0,0.0);
+            // Color del tercer vértice: azúl
+            glVertex3f(rect[3].x(),rect[3].y(),rect[3].z());
+        glEnd();
+    }
+
 }
