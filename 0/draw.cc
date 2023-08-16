@@ -3,6 +3,22 @@
 
 namespace oct::verso::v0
 {
+    void draw(const numbers::Line<float,3,float>& line)
+    {
+        /*std::cout << "Line front ";
+        p0.print(std::cout);
+        std::cout << " to ";
+        p1.printLn(std::cout);*/
+        glBegin(GL_LINES);
+            // Dibujamos un triángulo
+            glColor3f(1.0,1.0,1.0);
+            // Color del primer vértice: rojo
+            glVertex3f(line[0].x(),line[0].y(),line[0].z());
+            // Color del segundo vértice: verde
+            glVertex3f(line[1].x(),line[1].y(),line[1].z());
+        glEnd();
+    }
+
     void draw(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1)
     {
         /*std::cout << "Line front ";
@@ -70,6 +86,24 @@ namespace oct::verso::v0
             glColor3f(color.r(),color.g(),color.b());
             // Color del tercer vértice: azúl
             glVertex3f(p2.x(),p2.y(),p2.z());
+            // Coordenadas del tercer vértice
+        glEnd();
+    }
+    void draw_triangle(const numbers::Line<float,3,float>& base, const numbers::vector<float,3,float>& cusp, const Color<float,3>& color)
+    {
+        glBegin(GL_TRIANGLES);
+            // Dibujamos un triángulo
+            glColor3f(color.r(),color.g(),color.b());
+            // Color del primer vértice: rojo
+            glVertex3f(base[0].x(),base[0].y(),base[0].z());
+            // Coordenadas del primer vértice
+            glColor3f(color.r(),color.g(),color.b());
+            // Color del segundo vértice: verde
+            glVertex3f(base[1].x(),base[1].y(),base[1].z());
+            // Coordenadas del segundo vértice
+            glColor3f(color.r(),color.g(),color.b());
+            // Color del tercer vértice: azúl
+            glVertex3f(cusp.x(),cusp.y(),cusp.z());
             // Coordenadas del tercer vértice
         glEnd();
     }

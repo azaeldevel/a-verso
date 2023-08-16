@@ -23,9 +23,11 @@ namespace oct::verso::v0
         constexpr Color(const T& v) : BASE(v)
         {
         }
-        /*constexpr vector(const T v[L]) : sequence<T,L>(v)
+        /*
+        constexpr vector(const T v[L]) : sequence<T,L>(v)
         {
-        }*/
+        }
+        */
         constexpr Color(const Color& v) : BASE(v)
         {
         }
@@ -96,11 +98,14 @@ namespace oct::verso::v0
     static const Color<float,3> green{0.0f,1.0f,0.0f};
     static const Color<float,3> blue{0.0f,0.0f,1.0f};
 
+    void draw(const numbers::Line<float,3,float>&);
+
     void draw(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2);
 
     void draw(const numbers::Triangle<float,2,float>& triangle);
     void draw(const numbers::Triangle<float,3,float>& triangle);
     void draw_triangle(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const Color<float,3>& c);
+    void draw_triangle(const numbers::Line<float,3,float>& base, const numbers::vector<float,3,float>& cusp, const Color<float,3>& c);
 
     void draw(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1);
 
@@ -116,6 +121,7 @@ namespace oct::verso::v0
         {
             color[i] = 1.0f;
             draw_triangle(shape[i],shape[i+1],cusp,color);
+            //draw_triangle(shape.from(2,i),cusp,color);
             draw(base[i],cusp);
             color[i] = 0.0f;
         }
