@@ -110,7 +110,7 @@ namespace oct::verso::v0
 
     void draw(const numbers::Rectangle<float,3,float>& rect)
     {
-        glBegin(GL_POLYGON);
+        glBegin(GL_QUADS);
             // Dibujamos un triángulo
             glColor3f(1.0,0.0,0.0);
             // Color del primer vértice: rojo
