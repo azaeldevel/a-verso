@@ -94,9 +94,12 @@ namespace oct::verso::v0
 
     };
 
-    static const Color<float,3> red{1.0f,0.0f,0.0f};
-    static const Color<float,3> green{0.0f,1.0f,0.0f};
-    static const Color<float,3> blue{0.0f,0.0f,1.0f};
+    namespace colors
+    {
+        static const Color<float,3> red{1.0f,0.0f,0.0f};
+        static const Color<float,3> green{0.0f,1.0f,0.0f};
+        static const Color<float,3> blue{0.0f,0.0f,1.0f};
+    }
 
     void draw(const numbers::Line<float,3,float>&);
 
@@ -131,6 +134,18 @@ namespace oct::verso::v0
 
     void draw(const numbers::Rectangle<float,3,float>&);
 
+
+    template<size_t P>void draw(const numbers::Circle<float,3,P>& circle,const Color<float,3>& color)
+    {
+        glBegin(GL_LINES);
+            glColor3f(color.r(),color.g(),color.b());
+            for(size_t i = 1; i < circle.size(); i++)
+            {
+                glVertex3f(circle[i-1].x(),circle[i-1].y(),circle[i-1].z());
+                glVertex3f(circle[i].x(),circle[i].y(),circle[i].z());
+            }
+        glEnd();
+    }
 }
 
 #endif // OCTETOS_AVERSO_SHAPES_HH

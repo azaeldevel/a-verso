@@ -247,6 +247,7 @@ private:
     numbers_here::Isosceles<float> isosceles;
     numbers_here::Pyramid<float,3,3> pyramid;
     numbers_here::Rectangle<float> rectangle;
+    numbers_here::Circle<float,3,100> circle;
     verso_here::v1::Camera camera;
 
     void (Shapes::*action_draw)();
@@ -255,6 +256,7 @@ private:
     void draw_equilateral();
     void draw_pyramid();
     void draw_rectangle();
+    void draw_circle();
 
 public:
     Shapes();

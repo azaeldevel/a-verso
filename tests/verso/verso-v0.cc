@@ -1352,8 +1352,9 @@ bool Shapes::active()
     //gluLookAt(3,3,3,0,0,0,0,1,0);
     //camera.lookAt();
 
-    numbers_here::vector<float> vec3(0,0,0);
-    rectangle.create(vec3, 1.0);
+    numbers_here::vector<float> vecO(0,0,0);
+    rectangle.create(vecO, 1.0);
+    circle.create(vecO, 1.0);
 
     return true;
 }
@@ -1436,6 +1437,11 @@ void Shapes::key_callback(GLFWwindow* window, int key, int scancode, int action,
         //std::cout << "Cambiado tirnago : Isoceles\n";
         WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_rectangle;
     }
+    else if(GLFW_KEY_C == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Cambiado tirnago : Isoceles\n";
+        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_circle;
+    }
 }
 
 void Shapes::draw_rectangeluar()
@@ -1457,4 +1463,8 @@ void Shapes::draw_pyramid()
 void Shapes::draw_rectangle()
 {
     verso_here::draw(rectangle);
+}
+void Shapes::draw_circle()
+{
+    verso_here::draw(circle,verso_here::colors::red);
 }
