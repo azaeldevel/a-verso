@@ -137,11 +137,11 @@ namespace oct::verso::v0
 
     template<size_t P>void draw(const numbers::Circle<float,3,P>& circle,const Color<float,3>& color)
     {
-        glBegin(GL_LINES);
+        glBegin(GL_LINE_LOOP);
             glColor3f(color.r(),color.g(),color.b());
             for(size_t i = 1; i < circle.size(); i++)
             {
-                glVertex3f(circle[i-1].x(),circle[i-1].y(),circle[i-1].z());
+                //glVertex3f(circle[i-1].x(),circle[i-1].y(),circle[i-1].z());
                 glVertex3f(circle[i].x(),circle[i].y(),circle[i].z());
             }
         glEnd();
