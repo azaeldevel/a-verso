@@ -11,7 +11,7 @@ namespace oct::verso::v0
         p1.printLn(std::cout);*/
         glBegin(GL_LINE_LOOP);
             // Dibujamos un triángulo
-            glColor3f(1.0,1.0,1.0);
+            //glColor3f(1.0,1.0,1.0);
             // Color del primer vértice: rojo
             glVertex3f(line[0].x(),line[0].y(),line[0].z());
             // Color del segundo vértice: verde
@@ -34,15 +34,15 @@ namespace oct::verso::v0
     {
         glBegin(GL_LINE_LOOP);
             // Dibujamos un triángulo
-            glColor3f(1.0,0.0,0.0);
+            //glColor3f(1.0,0.0,0.0);
             // Color del primer vértice: rojo
             glVertex3f(triangle[0].x(),triangle[0].y(),triangle[0].z());
             // Coordenadas del primer vértice
-            glColor3f(0.0,1.0,0.0);
+            //glColor3f(0.0,1.0,0.0);
             // Color del segundo vértice: verde
             glVertex3f(triangle[1].x(),triangle[1].y(),triangle[1].z());
             // Coordenadas del segundo vértice
-            glColor3f(0.0,0.0,1.0);
+            //glColor3f(0.0,0.0,1.0);
             // Color del tercer vértice: azúl
             glVertex3f(triangle[2].x(),triangle[2].y(),triangle[2].z());
             // Coordenadas del tercer vértice
@@ -52,15 +52,15 @@ namespace oct::verso::v0
     {
         glBegin(GL_LINE_LOOP);
             // Dibujamos un triángulo
-            glColor3f(1.0,0.0,0.0);
+            //glColor3f(1.0,0.0,0.0);
             // Color del primer vértice: rojo
             glVertex3f(p0.x(),p0.y(),p0.z());
             // Coordenadas del primer vértice
-            glColor3f(0.0,1.0,0.0);
+            //glColor3f(0.0,1.0,0.0);
             // Color del segundo vértice: verde
             glVertex3f(p1.x(),p1.y(),p1.z());
             // Coordenadas del segundo vértice
-            glColor3f(0.0,0.0,1.0);
+            //glColor3f(0.0,0.0,1.0);
             // Color del tercer vértice: azúl
             glVertex3f(p2.x(),p2.y(),p2.z());
             // Coordenadas del tercer vértice
@@ -70,15 +70,15 @@ namespace oct::verso::v0
     {
         glBegin(GL_LINE_LOOP);
             // Dibujamos un triángulo
-            glColor3f(color.r(),color.g(),color.b());
+            //glColor3f(color.r(),color.g(),color.b());
             // Color del primer vértice: rojo
             glVertex3f(p0.x(),p0.y(),p0.z());
             // Coordenadas del primer vértice
-            glColor3f(color.r(),color.g(),color.b());
+            //glColor3f(color.r(),color.g(),color.b());
             // Color del segundo vértice: verde
             glVertex3f(p1.x(),p1.y(),p1.z());
             // Coordenadas del segundo vértice
-            glColor3f(color.r(),color.g(),color.b());
+            //glColor3f(color.r(),color.g(),color.b());
             // Color del tercer vértice: azúl
             glVertex3f(p2.x(),p2.y(),p2.z());
             // Coordenadas del tercer vértice
@@ -88,15 +88,15 @@ namespace oct::verso::v0
     {
         glBegin(GL_LINE_LOOP);
             // Dibujamos un triángulo
-            glColor3f(color.r(),color.g(),color.b());
+            //glColor3f(color.r(),color.g(),color.b());
             // Color del primer vértice: rojo
             glVertex3f(base[0].x(),base[0].y(),base[0].z());
             // Coordenadas del primer vértice
-            glColor3f(color.r(),color.g(),color.b());
+            //glColor3f(color.r(),color.g(),color.b());
             // Color del segundo vértice: verde
             glVertex3f(base[1].x(),base[1].y(),base[1].z());
             // Coordenadas del segundo vértice
-            glColor3f(color.r(),color.g(),color.b());
+            //glColor3f(color.r(),color.g(),color.b());
             // Color del tercer vértice: azúl
             glVertex3f(cusp.x(),cusp.y(),cusp.z());
             // Coordenadas del tercer vértice
@@ -106,19 +106,19 @@ namespace oct::verso::v0
     {
         glBegin(GL_LINE_LOOP);
             // Dibujamos un triángulo
-            glColor3f(1.0,0.0,0.0);
+            //glColor3f(1.0,0.0,0.0);
             // Color del primer vértice: rojo
             glVertex3f(rect[0].x(),rect[0].y(),rect[0].z());
             // Coordenadas del primer vértice
-            glColor3f(0.0,1.0,0.0);
+            //glColor3f(0.0,1.0,0.0);
             // Color del segundo vértice: verde
             glVertex3f(rect[1].x(),rect[1].y(),rect[1].z());
             // Coordenadas del segundo vértice
-            glColor3f(0.0,0.0,1.0);
+            //glColor3f(0.0,0.0,1.0);
             // Color del tercer vértice: azúl
             glVertex3f(rect[2].x(),rect[2].y(),rect[2].z());
             // Coordenadas del tercer vértice
-            glColor3f(0.0,0.0,0.0);
+            //glColor3f(0.0,0.0,0.0);
             // Color del tercer vértice: azúl
             glVertex3f(rect[3].x(),rect[3].y(),rect[3].z());
         glEnd();
@@ -137,15 +137,15 @@ namespace oct::verso::v0
     {
         glBegin(GL_LINES);
             // Dibujamos un triángulo
-            glColor3f(1.0,0.0,0.0);
+            //glColor3f(1.0,0.0,0.0);
             // Color del primer vértice: rojo
             glVertex3f(triangle[0].x(),triangle[0].y(),triangle[0].z());
             // Coordenadas del primer vértice
-            glColor3f(0.0,1.0,0.0);
+            //glColor3f(0.0,1.0,0.0);
             // Color del segundo vértice: verde
             glVertex3f(triangle[1].x(),triangle[1].y(),triangle[1].z());
             // Coordenadas del segundo vértice
-            glColor3f(0.0,0.0,1.0);
+            //glColor3f(0.0,0.0,1.0);
             // Color del tercer vértice: azúl
             glVertex3f(triangle[2].x(),triangle[2].y(),triangle[2].z());
             // Coordenadas del tercer vértice
@@ -155,15 +155,15 @@ namespace oct::verso::v0
     {
         glBegin(GL_TRIANGLES);
             // Dibujamos un triángulo
-            glColor3f(1.0,0.0,0.0);
+            //glColor3f(1.0,0.0,0.0);
             // Color del primer vértice: rojo
             glVertex3f(p0.x(),p0.y(),p0.z());
             // Coordenadas del primer vértice
-            glColor3f(0.0,1.0,0.0);
+            //glColor3f(0.0,1.0,0.0);
             // Color del segundo vértice: verde
             glVertex3f(p1.x(),p1.y(),p1.z());
             // Coordenadas del segundo vértice
-            glColor3f(0.0,0.0,1.0);
+            //glColor3f(0.0,0.0,1.0);
             // Color del tercer vértice: azúl
             glVertex3f(p2.x(),p2.y(),p2.z());
             // Coordenadas del tercer vértice
@@ -173,15 +173,15 @@ namespace oct::verso::v0
     {
         glBegin(GL_TRIANGLES);
             // Dibujamos un triángulo
-            glColor3f(color.r(),color.g(),color.b());
+            //glColor3f(color.r(),color.g(),color.b());
             // Color del primer vértice: rojo
             glVertex3f(p0.x(),p0.y(),p0.z());
             // Coordenadas del primer vértice
-            glColor3f(color.r(),color.g(),color.b());
+            //glColor3f(color.r(),color.g(),color.b());
             // Color del segundo vértice: verde
             glVertex3f(p1.x(),p1.y(),p1.z());
             // Coordenadas del segundo vértice
-            glColor3f(color.r(),color.g(),color.b());
+            //glColor3f(color.r(),color.g(),color.b());
             // Color del tercer vértice: azúl
             glVertex3f(p2.x(),p2.y(),p2.z());
             // Coordenadas del tercer vértice
@@ -191,15 +191,15 @@ namespace oct::verso::v0
     {
         glBegin(GL_TRIANGLES);
             // Dibujamos un triángulo
-            glColor3f(color.r(),color.g(),color.b());
+            //glColor3f(color.r(),color.g(),color.b());
             // Color del primer vértice: rojo
             glVertex3f(base[0].x(),base[0].y(),base[0].z());
             // Coordenadas del primer vértice
-            glColor3f(color.r(),color.g(),color.b());
+            //glColor3f(color.r(),color.g(),color.b());
             // Color del segundo vértice: verde
             glVertex3f(base[1].x(),base[1].y(),base[1].z());
             // Coordenadas del segundo vértice
-            glColor3f(color.r(),color.g(),color.b());
+            //glColor3f(color.r(),color.g(),color.b());
             // Color del tercer vértice: azúl
             glVertex3f(cusp.x(),cusp.y(),cusp.z());
             // Coordenadas del tercer vértice
@@ -209,19 +209,19 @@ namespace oct::verso::v0
     {
         glBegin(GL_QUADS);
             // Dibujamos un triángulo
-            glColor3f(1.0,0.0,0.0);
+            //glColor3f(1.0,0.0,0.0);
             // Color del primer vértice: rojo
             glVertex3f(rect[0].x(),rect[0].y(),rect[0].z());
             // Coordenadas del primer vértice
-            glColor3f(0.0,1.0,0.0);
+            //glColor3f(0.0,1.0,0.0);
             // Color del segundo vértice: verde
             glVertex3f(rect[1].x(),rect[1].y(),rect[1].z());
             // Coordenadas del segundo vértice
-            glColor3f(0.0,0.0,1.0);
+            //glColor3f(0.0,0.0,1.0);
             // Color del tercer vértice: azúl
             glVertex3f(rect[2].x(),rect[2].y(),rect[2].z());
             // Coordenadas del tercer vértice
-            glColor3f(0.0,0.0,0.0);
+            //glColor3f(0.0,0.0,0.0);
             // Color del tercer vértice: azúl
             glVertex3f(rect[3].x(),rect[3].y(),rect[3].z());
         glEnd();
