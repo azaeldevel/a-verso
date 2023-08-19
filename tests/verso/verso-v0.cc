@@ -1146,7 +1146,7 @@ void JGCI_5::render()
     // Proyección ortográfica, dentro del cubo señalado
     glMatrixMode(GL_MODELVIEW);
     // Modo de modelado
-    verso_here::draw(tri1);
+    verso_here::outline(tri1);
     // Terminamos de dibujar
     glFlush();
     // Forzamos el dibujado
@@ -1300,19 +1300,19 @@ void Triangles::key_callback(GLFWwindow* window, int key, int scancode, int acti
 
 void Triangles::draw_rectangeluar()
 {
-    verso_here::draw(rectangular);
+    verso_here::outline(rectangular);
 }
 void Triangles::draw_isosceles()
 {
-    verso_here::draw(isosceles);
+    verso_here::outline(isosceles);
 }
 void Triangles::draw_equilateral()
 {
-    verso_here::draw(equilateral);
+    verso_here::outline(equilateral);
 }
 void Triangles::draw_pyramid()
 {
-    verso_here::draw(pyramid);
+    verso_here::outline(pyramid);
 }
 
 
@@ -1446,25 +1446,25 @@ void Shapes::key_callback(GLFWwindow* window, int key, int scancode, int action,
 
 void Shapes::draw_rectangeluar()
 {
-    verso_here::draw(rectangular);
+    verso_here::outline(rectangular);
 }
 void Shapes::draw_isosceles()
 {
-    verso_here::draw(isosceles);
+    verso_here::outline(isosceles);
 }
 void Shapes::draw_equilateral()
 {
-    verso_here::draw(equilateral);
+    verso_here::outline(equilateral);
 }
 void Shapes::draw_pyramid()
 {
-    verso_here::draw(pyramid);
+    verso_here::outline(pyramid);
 }
 void Shapes::draw_rectangle()
 {
-    verso_here::draw(rectangle);
+    verso_here::outline(rectangle);
 }
 void Shapes::draw_circle()
 {
-    verso_here::draw(circle,verso_here::colors::red);
+    verso_here::outline(circle,verso_here::colors::red);
 }

@@ -101,41 +101,40 @@ namespace oct::verso::v0
         static const Color<float,3> blue{0.0f,0.0f,1.0f};
     }
 
-    void draw(const numbers::Line<float,3,float>&);
+    void outline(const numbers::Line<float,3,float>&);
 
-    void draw(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2);
+    void outline(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2);
 
-    void draw(const numbers::Triangle<float,2,float>& triangle);
-    void draw(const numbers::Triangle<float,3,float>& triangle);
-    void draw_triangle(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const Color<float,3>& c);
-    void draw_triangle(const numbers::Line<float,3,float>& base, const numbers::vector<float,3,float>& cusp, const Color<float,3>& c);
+    void outline(const numbers::Triangle<float,2,float>& triangle);
+    void outline(const numbers::Triangle<float,3,float>& triangle);
+    void outline_triangle(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const Color<float,3>& c);
+    void outline_triangle(const numbers::Line<float,3,float>& base, const numbers::vector<float,3,float>& cusp, const Color<float,3>& c);
 
-    void draw(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1);
+    void outline(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1);
 
-    template<size_t B> void draw(const numbers::Pyramid<float,3,B,float>& pyramid)
+    template<size_t B> void outline(const numbers::Pyramid<float,3,B,float>& pyramid)
     {
         //std::cout << "Drawing pyramid : base " << B << "\n";
         Color<float,3> color(0);
         const auto& shape = (numbers::Shape<float,3,B + 1,float>&)pyramid;
         const auto& base = (numbers::Triangle<float,3,float>&)shape;
         const auto& cusp = shape[B];
-        draw(base);
+        outline(base);
         for(size_t i = 0; i < B; i++)
         {
             color[i] = 1.0f;
-            draw_triangle(shape[i],shape[i+1],cusp,color);
+            outline_triangle(shape[i],shape[i+1],cusp,color);
             //draw_triangle(shape.from(2,i),cusp,color);
-            draw(base[i],cusp);
+            outline(base[i],cusp);
             color[i] = 0.0f;
         }
-        draw_triangle(shape[B - 1],shape[0],cusp,color);
+        outline_triangle(shape[B - 1],shape[0],cusp,color);
     }
 
+    void outline(const numbers::Rectangle<float,3,float>&);
 
-    void draw(const numbers::Rectangle<float,3,float>&);
 
-
-    template<size_t P>void draw(const numbers::Circle<float,3,P>& circle,const Color<float,3>& color)
+    template<size_t P>void outline(const numbers::Circle<float,3,P>& circle,const Color<float,3>& color)
     {
         glBegin(GL_LINE_LOOP);
             glColor3f(color.r(),color.g(),color.b());
