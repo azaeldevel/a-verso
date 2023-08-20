@@ -1446,7 +1446,12 @@ void Shapes::key_callback(GLFWwindow* window, int key, int scancode, int action,
 
 void Shapes::draw_rectangeluar()
 {
-    verso_here::outline(rectangular);
+    verso_here::numbers::sequence<verso_here::Color<float,3>,3> colors;
+    colors[0] = verso_here::colors::red;
+    colors[1] = verso_here::colors::green;
+    colors[2] = verso_here::colors::blue;
+    glColor3f(1.0,1.0,1.0);
+    verso_here::outline(rectangular,colors);
 }
 void Shapes::draw_isosceles()
 {
