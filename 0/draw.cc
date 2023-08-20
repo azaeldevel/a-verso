@@ -102,6 +102,29 @@ namespace oct::verso::v0
             // Coordenadas del tercer vértice
         glEnd();
     }
+
+    void outline(const numbers::Triangle<float,3,float>& triangle,const numbers::sequence<Color<float,3>,3>& colors)
+    {
+        glBegin(GL_LINE_LOOP);
+            // Dibujamos un triángulo
+            glColor3f(colors[0].r(),colors[0].g(),colors[0].b());
+            // Color del primer vértice: rojo
+            glVertex3f(triangle[0].x(),triangle[0].y(),triangle[0].z());
+            // Coordenadas del primer vértice
+            glColor3f(colors[1].r(),colors[1].g(),colors[1].b());
+            // Color del segundo vértice: verde
+            glVertex3f(triangle[1].x(),triangle[1].y(),triangle[1].z());
+            // Coordenadas del segundo vértice
+            glColor3f(colors[2].r(),colors[2].g(),colors[2].b());
+            // Color del tercer vértice: azúl
+            glVertex3f(triangle[2].x(),triangle[2].y(),triangle[2].z());
+            // Coordenadas del tercer vértice
+        glEnd();
+    }
+
+
+
+
     void outline(const numbers::Rectangle<float,3,float>& rect)
     {
         glBegin(GL_LINE_LOOP);
@@ -135,7 +158,7 @@ namespace oct::verso::v0
 
     void polygon(const numbers::Triangle<float,3,float>& triangle)
     {
-        glBegin(GL_LINES);
+        glBegin(GL_TRIANGLES);
             // Dibujamos un triángulo
             //glColor3f(1.0,0.0,0.0);
             // Color del primer vértice: rojo
@@ -205,6 +228,7 @@ namespace oct::verso::v0
             // Coordenadas del tercer vértice
         glEnd();
     }
+
     void polygon(const numbers::Rectangle<float,3,float>& rect)
     {
         glBegin(GL_QUADS);
