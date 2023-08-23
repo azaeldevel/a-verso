@@ -1369,6 +1369,7 @@ void Shapes::render()
     // Modo de modelado
     (this->*action_draw)();
     // Terminamos de dibujar
+
     glFlush();
 
     // Forzamos el dibujado
@@ -1442,6 +1443,11 @@ void Shapes::key_callback(GLFWwindow* window, int key, int scancode, int action,
         //std::cout << "Cambiado tirnago : Isoceles\n";
         WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_circle;
     }
+    else if(GLFW_KEY_D == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Cambiado tirnago : Isoceles\n";
+        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_disk;
+    }
 }
 
 void Shapes::draw_rectangeluar()
@@ -1472,4 +1478,8 @@ void Shapes::draw_rectangle()
 void Shapes::draw_circle()
 {
     verso_here::outline(circle,verso_here::colors::red);
+}
+void Shapes::draw_disk()
+{
+    disk.create(0.2,1,20,10,0,270);
 }

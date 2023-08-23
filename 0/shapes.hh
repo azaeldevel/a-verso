@@ -26,6 +26,7 @@ namespace oct::verso::v0
         z
     };
 
+
     //typedef glm::vector<float,2,glm::packed_highp> vec2;
     //typedef glm::vector<float,3,glm::packed_highp> vec3;
     template<coordinate C, unsigned char D,class V = C>

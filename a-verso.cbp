@@ -142,6 +142,12 @@
 		<Unit filename="0/draw.hh">
 			<Option target="devel-verso" />
 		</Unit>
+		<Unit filename="0/quadric.cc">
+			<Option target="devel-verso" />
+		</Unit>
+		<Unit filename="0/quadric.hh">
+			<Option target="devel-verso" />
+		</Unit>
 		<Unit filename="0/shapes.cc" />
 		<Unit filename="0/shapes.hh" />
 		<Unit filename="0/verso-gl.cc">

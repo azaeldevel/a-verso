@@ -3,6 +3,7 @@
 
 #include <verso-gl.hh>
 #include <draw.hh>
+#include <quadric.hh>
 
 
 
@@ -248,6 +249,7 @@ private:
     numbers_here::Pyramid<float,3,3> pyramid;
     numbers_here::Rectangle<float> rectangle;
     numbers_here::Circle<float,3,1000> circle;
+    verso_here::gl::Disk<GLdouble> disk;
     verso_here::v1::Camera camera;
 
     void (Shapes::*action_draw)();
@@ -257,6 +259,7 @@ private:
     void draw_pyramid();
     void draw_rectangle();
     void draw_circle();
+    void draw_disk();
 
 public:
     Shapes();
