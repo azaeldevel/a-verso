@@ -1552,7 +1552,7 @@ void Design::render()
 
     axis.create();
 
-
+    glFlush();
     // Forzamos el dibujado
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }

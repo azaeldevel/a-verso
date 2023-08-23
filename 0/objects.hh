@@ -75,6 +75,7 @@ namespace oct::verso::v0::gl
         Arrow<C> arrows;
         numbers::vector<C,3> O;
         Color<float,3> O_colors;
+        //Sphere<C> sphere;
 
     public:
         Axis() : O(0),O_colors(colors::white)
@@ -86,11 +87,8 @@ namespace oct::verso::v0::gl
             arrows.create(colors::red,numbers::axis::x);
             arrows.create(colors::green,numbers::axis::y);
             arrows.create(colors::blue,numbers::axis::z);
-
-            glBegin(GL_POINTS);
-                glColor3f(O_colors.r(),O_colors.g(),O_colors.b());
-                glVertex3d(O.x(),O.y(),O.z());
-            glEnd();
+            colors::white.active();
+            //sphere.create(1,20,20);
         }
 
     };

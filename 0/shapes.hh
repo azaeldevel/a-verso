@@ -113,11 +113,11 @@ namespace oct::verso::v0
 
     namespace colors
     {
-        static const Color<float,3> red{1.0f,0.0f,0.0f};
-        static const Color<float,3> green{0.0f,1.0f,0.0f};
-        static const Color<float,3> blue{0.0f,0.0f,1.0f};
-        static const Color<float,3> black{0.0f,0.0f,0.0f};
-        static const Color<float,3> white{1.0f,1.0f,1.0f};
+        static const Color red{1.0f,0.0f,0.0f};
+        static const Color green{0.0f,1.0f,0.0f};
+        static const Color blue{0.0f,0.0f,1.0f};
+        static const Color black{0.0f,0.0f,0.0f};
+        static const Color white{1.0f,1.0f,1.0f};
     }
 
 
