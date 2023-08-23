@@ -59,6 +59,11 @@ void Develop::key_callback(GLFWwindow* window, int key, int scancode, int action
         //std::cout << "Cambieando de escenario..\n";
         WINDOW(window,Develop)->change(&WINDOW(window,Develop)->shapes);
     }
+    else if(GLFW_KEY_8 == key && action == GLFW_PRESS)
+    {
+        //std::cout << "Cambieando de escenario..\n";
+        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->design);
+    }
 
 }
 
@@ -1501,3 +1506,97 @@ void Shapes::draw_sphere()
 {
     sphere.create(0.2,100,100);
 }
+
+
+
+
+
+
+
+
+
+
+Design::Design()
+{
+}
+bool Design::active()
+{
+    glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
+    glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
+    glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
+
+    //glDepthFunc(GL_LEQUAL);
+    glEnable(GL_DEPTH_TEST);
+    //glClearDepth(1.0);
+
+    glfwSetKeyCallback(window, Design::key_callback);
+
+    /*glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt(0,0,5,0,0,0,0,1,0);*/
+
+
+    return true;
+}
+void Design::render()
+{
+    // Color de fondo: negro
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glMatrixMode(GL_MODELVIEW);
+    //glLoadIdentity();
+    //gluLookAt(0,50,0,0,0,0,0,0,1);
+    //glLoadIdentity();
+    glTranslatef(2,0,0);
+    //glRotatef(10,1,1,0);
+
+    axis.create();
+
+
+    // Forzamos el dibujado
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+}
+void Design::clean()
+{
+    glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glDisable(GL_DEPTH_TEST);
+    glEnable(last_GL_DEPTH_TEST);
+    glDepthFunc(last_GL_DEPTH_FUNC);
+    glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+}
+void Design::update()
+{
+
+}
+
+
+void Design::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
+    if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Closing JGCI_4...\n";
+        WINDOW(window,Develop)->change();
+    }
+    else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+    {
+        WINDOW(window,Develop)->design.camera.walking_front(1.5);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+    {
+        WINDOW(window,Develop)->design.camera.walking_back(1.5);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+    {
+        WINDOW(window,Develop)->design.camera.walking_right(1.5);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+    {
+        WINDOW(window,Develop)->design.camera.walking_left(1.5);
+    }
+
+
+}
+

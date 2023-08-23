@@ -7,99 +7,10 @@
 #include <core/3/Exception.hh>
 //#include <numbers/0/vector.hh>
 #include <numbers/0/shapes.hh>
-
+#include "shapes.hh"
 
 namespace oct::verso::v0
 {
-    namespace core_here = oct::core::v3;
-    namespace numbers = oct::nums::v0;
-
-    template<numbers::number T = float, size_t L = 3> class Color : public numbers::sequence<T,L>
-    {
-    private:
-        typedef numbers::sequence<T,L> BASE;
-    public:
-        Color() = default;
-        constexpr Color(const T& v) : BASE(v)
-        {
-        }
-        /*
-        constexpr vector(const T v[L]) : sequence<T,L>(v)
-        {
-        }
-        */
-        constexpr Color(const Color& v) : BASE(v)
-        {
-        }
-        constexpr Color(const std::initializer_list<T>& l) : BASE(l)
-        {
-        }
-
-        constexpr bool operator == (const Color& s)
-        {
-            for(size_t i = 0; i < L; i++) if(BASE::data[i] != s[i]) return false;
-
-            return true;
-        }
-
-
-        constexpr Color operator + (const Color& s)
-        {
-            Color res;
-            for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] + s[i];
-
-            return res;
-        }
-        constexpr Color operator - (const Color& s)
-        {
-            Color res;
-            for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] - s[i];
-
-            return res;
-        }
-        constexpr Color operator * (const T& s)
-        {
-            Color res;
-            for(size_t i = 0; i < L; i++) BASE::data[i] *= s;
-
-            return res;
-        }
-
-
-        constexpr T& r()
-        {
-            return BASE::data[0];
-        }
-        constexpr const T& r() const
-        {
-            return BASE::data[0];
-        }
-        constexpr T& g()
-        {
-            return BASE::data[1];
-        }
-        constexpr const T& g() const
-        {
-            return BASE::data[1];
-        }
-        constexpr T& b()
-        {
-            return BASE::data[2];
-        }
-        constexpr const T& b() const
-        {
-            return BASE::data[2];
-        }
-
-
-    };
-
-    namespace colors
-    {
-        static const Color<float,3> red{1.0f,0.0f,0.0f};
-        static const Color<float,3> green{0.0f,1.0f,0.0f};
-        static const Color<float,3> blue{0.0f,0.0f,1.0f};
-    }
 
     void outline(const numbers::Line<float,3,float>&);
 
@@ -147,8 +58,6 @@ namespace oct::verso::v0
             }
         glEnd();
     }
-
-
 
 
     void polygon(const numbers::Triangle<float,2,float>& triangle);

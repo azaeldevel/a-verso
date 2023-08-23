@@ -26,6 +26,101 @@ namespace oct::verso::v0
         z
     };
 
+    template<numbers::number T = float, size_t L = 3> class Color : public numbers::sequence<T,L>
+    {
+    private:
+        typedef numbers::sequence<T,L> BASE;
+    public:
+        Color() = default;
+        constexpr Color(const T& v) : BASE(v)
+        {
+        }
+        /*
+        constexpr vector(const T v[L]) : sequence<T,L>(v)
+        {
+        }
+        */
+        constexpr Color(const Color& v) : BASE(v)
+        {
+        }
+        constexpr Color(const std::initializer_list<T>& l) : BASE(l)
+        {
+        }
+
+        constexpr bool operator == (const Color& s)
+        {
+            for(size_t i = 0; i < L; i++) if(BASE::data[i] != s[i]) return false;
+
+            return true;
+        }
+
+
+        constexpr Color operator + (const Color& s)
+        {
+            Color res;
+            for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] + s[i];
+
+            return res;
+        }
+        constexpr Color operator - (const Color& s)
+        {
+            Color res;
+            for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] - s[i];
+
+            return res;
+        }
+        constexpr Color operator * (const T& s)
+        {
+            Color res;
+            for(size_t i = 0; i < L; i++) BASE::data[i] *= s;
+
+            return res;
+        }
+
+
+        constexpr T& r()
+        {
+            return BASE::data[0];
+        }
+        constexpr const T& r() const
+        {
+            return BASE::data[0];
+        }
+        constexpr T& g()
+        {
+            return BASE::data[1];
+        }
+        constexpr const T& g() const
+        {
+            return BASE::data[1];
+        }
+        constexpr T& b()
+        {
+            return BASE::data[2];
+        }
+        constexpr const T& b() const
+        {
+            return BASE::data[2];
+        }
+
+        void active() const
+        {
+            glColor3f(BASE::data[0],BASE::data[1],BASE::data[2]);
+        }
+
+
+    };
+
+    namespace colors
+    {
+        static const Color<float,3> red{1.0f,0.0f,0.0f};
+        static const Color<float,3> green{0.0f,1.0f,0.0f};
+        static const Color<float,3> blue{0.0f,0.0f,1.0f};
+        static const Color<float,3> black{0.0f,0.0f,0.0f};
+        static const Color<float,3> white{1.0f,1.0f,1.0f};
+    }
+
+
 
     //typedef glm::vector<float,2,glm::packed_highp> vec2;
     //typedef glm::vector<float,3,glm::packed_highp> vec3;

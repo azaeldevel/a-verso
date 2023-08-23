@@ -59,7 +59,7 @@ namespace oct::verso::v0::gl
 
     public:
         Disk() = default;
-        Disk(C inner, C outer,GLint slices,GLint loops)
+        Disk(const C& inner,const C& outer,GLint slices,GLint loops)
         {
             create(inner, outer, slices, loops);
         }
@@ -136,6 +136,34 @@ namespace oct::verso::v0::gl
         }
 
 
+
+
+    };
+
+
+    /**
+    *\brief Crea un Cilindro OpenGL
+    */
+    template<numbers::number C = GLdouble>
+    class Circle : public Disk<C>
+    {
+    private:
+
+
+    public:
+        typedef Disk<C> BASE;
+
+    public:
+        Circle() = default;
+        Circle(const C& radius,GLint slices,GLint loops) : BASE(radius,radius,slices,loops)
+        {
+            create(radius, slices, loops);
+        }
+
+        void create(const C& radius,GLint slices,GLint loops)
+        {
+            BASE::create(radius, radius, slices, loops);
+        }
 
 
     };

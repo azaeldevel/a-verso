@@ -4,6 +4,7 @@
 #include <verso-gl.hh>
 #include <draw.hh>
 #include <quadric.hh>
+#include <objects.hh>
 
 
 
@@ -273,6 +274,32 @@ public:
 
 };
 
+
+/**
+*\brief Dibuja un cubo y puede rotarlo
+*
+**/
+class Design : public verso_here::gl::Scenary
+{
+private:
+    GLint last_GL_DEPTH_FUNC,last_GL_DEPTH_TEST;
+    GLfloat last_GL_DEPTH_CLEAR_VALUE;
+
+private:
+    void update();
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    verso_here::v1::Camera camera;
+    //verso_here::gl::Arrow<GLdouble> axis;
+    verso_here::gl::Axis<GLdouble> axis;
+
+public:
+    Design();
+    bool active();
+    virtual void render();
+    virtual void clean();
+
+};
+
 class Develop : public verso_here::gl::Verso
 {
 public:
@@ -288,6 +315,7 @@ public:
     JGCI_5 jgci_5;
     Triangles triangles;
     Shapes shapes;
+    Design design;
 
 private:
     void handle();
@@ -296,9 +324,7 @@ private:
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 private:
-    //P1L5 p1l5;
-    //Cube1 cube1;
-    //Triangle2 triangle2;
+
 };
 
 

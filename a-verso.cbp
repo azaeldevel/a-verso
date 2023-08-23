@@ -142,6 +142,9 @@
 		<Unit filename="0/draw.hh">
 			<Option target="devel-verso" />
 		</Unit>
+		<Unit filename="0/objects.hh">
+			<Option target="devel-verso" />
+		</Unit>
 		<Unit filename="0/quadric.cc">
 			<Option target="devel-verso" />
 		</Unit>
