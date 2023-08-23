@@ -1453,6 +1453,11 @@ void Shapes::key_callback(GLFWwindow* window, int key, int scancode, int action,
         //std::cout << "Cambiado tirnago : Isoceles\n";
         WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_cilinder;
     }
+    else if(GLFW_KEY_H == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Cambiado tirnago : Isoceles\n";
+        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_sphere;
+    }
 }
 
 void Shapes::draw_rectangeluar()
@@ -1491,4 +1496,8 @@ void Shapes::draw_disk()
 void Shapes::draw_cilinder()
 {
     cilinder.create(0.2,0.2,0.8,100,100);
+}
+void Shapes::draw_sphere()
+{
+    sphere.create(0.2,100,100);
 }

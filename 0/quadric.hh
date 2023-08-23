@@ -80,7 +80,7 @@ namespace oct::verso::v0::gl
 
 
     /**
-    *\brief Crea un Disk OpenGL
+    *\brief Crea un Cilindro OpenGL
     */
     template<numbers::number C = GLdouble>
     class Cilinder : public Quadric<C>
@@ -101,6 +101,38 @@ namespace oct::verso::v0::gl
         void create(const C& base, const C& top,const C& height, GLint slices,GLint stacks)
         {
             gluCylinder(BASE::quadric, base, top,height, slices, stacks);
+        }
+
+
+
+
+    };
+
+
+
+
+    /**
+    *\brief Crea un Cilindro OpenGL
+    */
+    template<numbers::number C = GLdouble>
+    class Sphere : public Quadric<C>
+    {
+    private:
+
+
+    public:
+        typedef Quadric<C> BASE;
+
+    public:
+        Sphere() = default;
+        Sphere(const C& radio, GLint slices,GLint stacks)
+        {
+            create(radio, slices, stacks);
+        }
+
+        void create(const C& radio, GLint slices,GLint stacks)
+        {
+            gluSphere(BASE::quadric, radio, slices, stacks);
         }
 
 

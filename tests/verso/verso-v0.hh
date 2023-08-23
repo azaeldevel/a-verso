@@ -251,6 +251,7 @@ private:
     numbers_here::Circle<float,3,1000> circle;
     verso_here::gl::Disk<GLdouble> disk;
     verso_here::gl::Cilinder<GLdouble> cilinder;
+    verso_here::gl::Sphere<GLdouble> sphere;
     verso_here::v1::Camera camera;
 
     void (Shapes::*action_draw)();
@@ -262,6 +263,7 @@ private:
     void draw_circle();
     void draw_disk();
     void draw_cilinder();
+    void draw_sphere();
 
 public:
     Shapes();
