@@ -64,15 +64,45 @@ namespace oct::verso::v0::gl
             create(inner, outer, slices, loops);
         }
 
-        void create(C inner, C outer,GLint slices,GLint loops)
+        void create(const C& inner,const C& outer,GLint slices,GLint loops)
         {
             gluDisk(BASE::quadric, inner, outer, slices, loops);
         }
 
-        void create(C inner, C outer,GLint slices,GLint loops,numbers::Degree<GLdouble> degree,numbers::Degree<GLdouble> sweep)
+        void create(const C& inner,const C& outer,GLint slices,GLint loops,numbers::Degree<C> degree,numbers::Degree<C> sweep)
         {
             gluPartialDisk(BASE::quadric, inner, outer, slices, loops,degree,sweep);
         }
+
+
+
+    };
+
+
+    /**
+    *\brief Crea un Disk OpenGL
+    */
+    template<numbers::number C = GLdouble>
+    class Cilinder : public Quadric<C>
+    {
+    private:
+
+
+    public:
+        typedef Quadric<C> BASE;
+
+    public:
+        Cilinder() = default;
+        Cilinder(const C& base, const C& top,const C& height, GLint slices,GLint stacks)
+        {
+            create(base, top,height, slices, stacks);
+        }
+
+        void create(const C& base, const C& top,const C& height, GLint slices,GLint stacks)
+        {
+            gluCylinder(BASE::quadric, base, top,height, slices, stacks);
+        }
+
 
 
 

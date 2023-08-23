@@ -250,6 +250,7 @@ private:
     numbers_here::Rectangle<float> rectangle;
     numbers_here::Circle<float,3,1000> circle;
     verso_here::gl::Disk<GLdouble> disk;
+    verso_here::gl::Cilinder<GLdouble> cilinder;
     verso_here::v1::Camera camera;
 
     void (Shapes::*action_draw)();
@@ -260,6 +261,7 @@ private:
     void draw_rectangle();
     void draw_circle();
     void draw_disk();
+    void draw_cilinder();
 
 public:
     Shapes();
