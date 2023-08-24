@@ -290,7 +290,8 @@ private:
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
     verso_here::v1::Camera camera;
     //verso_here::gl::Arrow<GLdouble> axis;
-    verso_here::gl::Axis<GLdouble> axis;
+    //verso_here::gl::Axis<GLdouble> axis;
+    verso_here::gl::Plane<GLdouble> plane;
 
 public:
     Design();

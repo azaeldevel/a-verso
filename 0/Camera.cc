@@ -8,7 +8,7 @@
 #include "Camera.hh"
 namespace oct::verso::v0::v1
 {
-    Camera::Camera(const Point<float,3>& p,const Point<float,3>& t)
+    Camera::Camera(const numbers::vector<float,3>& p,const numbers::vector<float,3>& t)
         :
         position(p),
         target(t),
@@ -19,7 +19,7 @@ namespace oct::verso::v0::v1
     {
     }
 
-    void Camera::set(const Point<float,3>& p,const Point<float,3>& t)
+    void Camera::set(const numbers::vector<float,3>& p,const numbers::vector<float,3>& t)
     {
         position = p;
         target = t;
@@ -54,6 +54,38 @@ namespace oct::verso::v0::v1
         position -= up * speed;
     }
 
+    /*numbers::matrix<float,4,4,float>& Camera::lookAt()
+    {
+        numbers::matrix<float,4,4,float> pos(0),trans(0);
+        //vector rigth
+        trans[0][0] = rigth[0];
+        trans[0][1] = rigth[1];
+        trans[0][2] = rigth[2];
+        //vector up
+        trans[1][0] = up[0];
+        trans[1][1] = up[1];
+        trans[1][2] = up[2];
+        //vector up
+        trans[2][0] = direction[0];
+        trans[2][1] = direction[1];
+        trans[2][2] = direction[2];
+
+        trans[3][3] = 1;
+
+        //position matrix
+        pos[0][0] = 1;
+        pos[1][1] = 1;
+        pos[2][2] = 1;
+        pos[3][3] = 1;
+        //
+        pos[0][3] = -position[0];
+        pos[1][3] = -position[1];
+        pos[2][3] = -position[2];
+
+        view = trans * pos;
+
+        return view;
+    }*/
     void Camera::lookAt()
     {
         gluLookAt((double)position.x(),(double)position.y(),(double)position.z(),(double)target.x(),(double)target.y(),(double)target.z(),(double)up.x(),(double)up.y(),(double)up.z());

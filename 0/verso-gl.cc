@@ -112,7 +112,7 @@ bool Verso::create(const char* title, int w, int h)
 
 	// Dark blue background
 	//glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	//glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	scenary = NULL;
     glfwSetWindowUserPointer(window,this);
 	//is_error(std::cout);
@@ -157,6 +157,10 @@ void Verso::stop()
 void Verso::run()
 {
     running = true;
+}
+float Verso::aspect()const
+{
+    return float(width)/float(height);
 }
 
 

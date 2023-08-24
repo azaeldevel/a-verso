@@ -26,7 +26,7 @@ namespace oct::verso::v0
         z
     };
 
-    template<numbers::number T = float, size_t L = 3> class Color : public numbers::sequence<T,L>
+    template<numbers::number T = float, size_t L = 4> class Color : public numbers::sequence<T,L>
     {
     private:
         typedef numbers::sequence<T,L> BASE;
@@ -111,13 +111,68 @@ namespace oct::verso::v0
 
     };
 
+    void active(const Color<float,3>&);
+    void active(const Color<float,4>&);
+
+
+    template<numbers::number T> class RGB : public Color<T,3>
+    {
+    private:
+        typedef Color<T,3> BASE;
+    public:
+        RGB() = default;
+        constexpr RGB(const T& v) : BASE(v)
+        {
+        }
+        constexpr RGB(const RGB& v) : BASE(v)
+        {
+        }
+        constexpr RGB(const std::initializer_list<T>& l) : BASE(l)
+        {
+        }
+
+
+        void active() const
+        {
+            glColor3f(BASE::data[0],BASE::data[1],BASE::data[2]);
+        }
+    };
+
+    template<numbers::number T> class RGBA : public Color<T,4>
+    {
+    private:
+        typedef Color<T,4> BASE;
+    public:
+        RGBA() = default;
+        constexpr RGBA(const T& v) : BASE(v)
+        {
+        }
+        constexpr RGBA(const RGBA& v) : BASE(v)
+        {
+        }
+        constexpr RGBA(const std::initializer_list<T>& l) : BASE(l)
+        {
+        }
+
+
+        void active() const
+        {
+            glColor4f(BASE::data[0],BASE::data[1],BASE::data[2],BASE::data[3]);
+        }
+    };
+
+
     namespace colors
     {
-        static const Color red{1.0f,0.0f,0.0f};
-        static const Color green{0.0f,1.0f,0.0f};
-        static const Color blue{0.0f,0.0f,1.0f};
-        static const Color black{0.0f,0.0f,0.0f};
-        static const Color white{1.0f,1.0f,1.0f};
+        static const Color<float> red{1.0f,0.0f,0.0f,1};
+        static const Color<float> green{0.0f,1.0f,0.0f,1};
+        static const Color<float> blue{0.0f,0.0f,1.0f,1};
+        static const Color<float> black{0.0f,0.0f,0.0f,1};
+        static const Color<float> white{1.0f,1.0f,1.0f,1};
+
+        //themes
+        //static const Color<int> rgba{255,255,255,1};
+        static const RGBA<float> coordenade{0.81f,0.8f,0.7f,0.2f};
     }
 
 

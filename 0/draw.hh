@@ -18,17 +18,17 @@ namespace oct::verso::v0
 
     void outline(const numbers::Triangle<float,2,float>& triangle);
     void outline(const numbers::Triangle<float,3,float>& triangle);
-    void outline_triangle(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const Color<float,3>& c);
-    void outline_triangle(const numbers::Line<float,3,float>& base, const numbers::vector<float,3,float>& cusp, const Color<float,3>& c);
+    void outline_triangle(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const Color<float>& c);
+    void outline_triangle(const numbers::Line<float,3,float>& base, const numbers::vector<float,3,float>& cusp, const Color<float>& c);
 
-    void outline(const numbers::Triangle<float,3,float>&,const numbers::sequence<Color<float,3>,3>&);
+    void outline(const numbers::Triangle<float,3,float>&,const numbers::sequence<Color<float>,3>&);
 
     void outline(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1);
 
     template<size_t B> void outline(const numbers::Pyramid<float,3,B,float>& pyramid)
     {
         //std::cout << "Drawing pyramid : base " << B << "\n";
-        Color<float,3> color(0);
+        Color<float> color(0);
         const auto& shape = (numbers::Shape<float,3,B + 1,float>&)pyramid;
         const auto& base = (numbers::Triangle<float,3,float>&)shape;
         const auto& cusp = shape[B];
@@ -47,7 +47,7 @@ namespace oct::verso::v0
     void outline(const numbers::Rectangle<float,3,float>&);
 
 
-    template<size_t P>void outline(const numbers::Circle<float,3,P>& circle,const Color<float,3>& color)
+    template<size_t P>void outline(const numbers::Circle<float,3,P>& circle,const Color<float>& color)
     {
         glBegin(GL_LINE_LOOP);
             //glColor3f(color.r(),color.g(),color.b());
@@ -62,8 +62,8 @@ namespace oct::verso::v0
 
     void polygon(const numbers::Triangle<float,2,float>& triangle);
     void polygon(const numbers::Triangle<float,3,float>& triangle);
-    void polygon_triangle(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const Color<float,3>& c);
-    void polygon_triangle(const numbers::Line<float,3,float>& base, const numbers::vector<float,3,float>& cusp, const Color<float,3>& c);
+    void polygon_triangle(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const Color<float>& c);
+    void polygon_triangle(const numbers::Line<float,3,float>& base, const numbers::vector<float,3,float>& cusp, const Color<float>& c);
 
     void polygon(const numbers::Rectangle<float,3,float>&);
 

@@ -1,9 +1,20 @@
 
+#include <GLFW/glfw3.h>
+
+
 #include "shapes.hh"
 
 namespace oct::verso::v0
 {
 
+    void active(const Color<float,3>& color)
+    {
+        glColor3f(color[0],color[0],color[0]);
+    }
+    void active(const Color<float,4>& color)
+    {
+        glColor4f(color.r(),color.g(),color.b(),color[3]);
+    }
 
 /*
 template<> Point<int,2,float>::Point(int p[2])

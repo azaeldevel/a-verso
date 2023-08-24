@@ -24,6 +24,7 @@
 
 namespace oct::verso::v0::gl
 {
+    class Verso;
 
     template<class V> V* WND(GLFWwindow* w)
     {
@@ -36,6 +37,7 @@ namespace oct::verso::v0::gl
 
     protected:
         GLFWwindow* window;
+        Verso* verso;
 
         static bool is_error(std::ostream&,const std::source_location location = std::source_location::current());
         static void error_callback(int error, const char* description);
@@ -80,6 +82,8 @@ namespace oct::verso::v0::gl
         void stop();
         void run();
         //void runnig(bool);
+
+        float aspect()const;
 
     };
 

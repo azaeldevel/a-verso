@@ -93,6 +93,47 @@ namespace oct::verso::v0::gl
 
     };
 
+    template<numbers::number N>
+    class Plane
+    {
+
+    private:
+        N width,high;
+        //size_t units;
+
+    public:
+        Plane() : width(30),high(30)
+        {
+        }
+
+        void create()
+        {
+            N width_media = width / N(2);
+            N high_media = high / N(2);
+
+            glBegin(GL_LINES);
+                colors::coordenade.active();
+                for(int i = -high_media + 1; i < high_media; i++)
+                {
+                    glVertex3f(-width_media,0,i);
+                    glVertex3f(width_media,0,i);
+                }
+                for(int i = -width_media + 1; i < width_media; i++)
+                {
+                    glVertex3f(i,0,-width_media);
+                    glVertex3f(i,0,width_media);
+                }
+                colors::red.active();
+                glVertex3f(-0.5,0,0);
+                glVertex3f(0.5,0,0);
+                colors::green.active();
+                glVertex3f(0,0,-0.5);
+                glVertex3f(0,0,0.5);
+            glEnd();
+        }
+
+    };
+
 }
 
 #endif // OCTETOS_AVERSO_SHAPES_HH

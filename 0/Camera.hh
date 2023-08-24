@@ -11,6 +11,7 @@
 
 #include <core/3/Exception.hh>
 #include "shapes.hh"
+#include <numbers/0/matrix.hh>
 
 namespace oct::verso::v0::v1
 {
@@ -18,9 +19,9 @@ namespace oct::verso::v0::v1
     {
     public:
         Camera() = default;
-        Camera(const Point<float,3>& position,const Point<float,3>& target);
+        Camera(const numbers::vector<float,3>& position,const numbers::vector<float,3>& target);
 
-        void set(const Point<float,3>& position,const Point<float,3>& target);
+        void set(const numbers::vector<float,3>& position,const numbers::vector<float,3>& target);
 
         void walking_front(float);
         void walking_back(float);
@@ -29,10 +30,12 @@ namespace oct::verso::v0::v1
         void walking_up(float);
         void walking_down(float);
 
+        //numbers::matrix<float,4,4,float>& lookAt();
         void lookAt();
 
     private:
-        Point<float,3> position,target,direction,rigth,up,front;
+        numbers::vector<float,3> position,target,direction,rigth,up,front;
+        numbers::matrix<float,4,4,float> view;
 
     };
 }

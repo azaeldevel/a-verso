@@ -1467,7 +1467,7 @@ void Shapes::key_callback(GLFWwindow* window, int key, int scancode, int action,
 
 void Shapes::draw_rectangeluar()
 {
-    verso_here::numbers::sequence<verso_here::Color<float,3>,3> colors;
+    verso_here::numbers::sequence<verso_here::Color<float>,3> colors;
     colors[0] = verso_here::colors::red;
     colors[1] = verso_here::colors::green;
     colors[2] = verso_here::colors::blue;
@@ -1528,12 +1528,10 @@ bool Design::active()
     //glDepthFunc(GL_LEQUAL);
     glEnable(GL_DEPTH_TEST);
     //glClearDepth(1.0);
+    glClearColor(0, 0, 0, 1);
 
     glfwSetKeyCallback(window, Design::key_callback);
-
-    /*glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt(0,0,5,0,0,0,0,1,0);*/
+    camera.set(verso_here::numbers::vector<float,3>(0,5,10),verso_here::numbers::vector<float,3>(0,0,0));
 
 
     return true;
@@ -1543,14 +1541,17 @@ void Design::render()
     // Color de fondo: negro
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glMatrixMode(GL_MODELVIEW);
-    //glLoadIdentity();
-    //gluLookAt(0,50,0,0,0,0,0,0,1);
-    //glLoadIdentity();
-    glTranslatef(2,0,0);
-    //glRotatef(10,1,1,0);
+    glLoadIdentity();
+    //gluLookAt (0, 10.0, 10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    camera.lookAt();
+    glMatrixMode (GL_PROJECTION);
+    glLoadIdentity ();
+    //glFrustum (-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
+    gluPerspective(60,WINDOW(window,Develop)->aspect(),1,40);
+    glMatrixMode (GL_MODELVIEW);
 
-    axis.create();
+
+    plane.create();
 
     glFlush();
     // Forzamos el dibujado
@@ -1595,6 +1596,10 @@ void Design::key_callback(GLFWwindow* window, int key, int scancode, int action,
     else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
     {
         WINDOW(window,Develop)->design.camera.walking_left(1.5);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
+    {
+        WINDOW(window,Develop)->design.camera.walking_up(1.5);
     }
 
 
