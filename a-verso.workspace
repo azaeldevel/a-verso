@@ -3,5 +3,6 @@
 	<Workspace title="Workspace">
 		<Project filename="../numbers/numbers.cbp" />
 		<Project filename="a-verso.cbp" />
+		<Project filename="../core/core-v3.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

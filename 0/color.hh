@@ -6,10 +6,10 @@
 
 namespace oct::verso::v0
 {
-    template<numbers::number T = float, size_t L = 4> class Color : public numbers::sequence<T,L>
+    template<numbers::number T = float, size_t L = 4> class Color : public core::array<T,L>
     {
     private:
-        typedef numbers::sequence<T,L> BASE;
+        typedef core::array<T,L> BASE;
     public:
         Color() = default;
         constexpr Color(const T& v) : BASE(v)

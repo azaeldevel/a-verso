@@ -21,7 +21,7 @@ namespace oct::verso::v0
     void outline_triangle(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const Color<float>& c);
     void outline_triangle(const numbers::Line<float,3,float>& base, const numbers::vector<float,3,float>& cusp, const Color<float>& c);
 
-    void outline(const numbers::Triangle<float,3,float>&,const numbers::sequence<Color<float>,3>&);
+    void outline(const numbers::Triangle<float,3,float>&,const numbers::core::array<Color<float>,3>&);
 
     void outline(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1);
 

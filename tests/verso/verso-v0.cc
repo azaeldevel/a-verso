@@ -1467,7 +1467,7 @@ void Shapes::key_callback(GLFWwindow* window, int key, int scancode, int action,
 
 void Shapes::draw_rectangeluar()
 {
-    verso_here::numbers::sequence<verso_here::Color<float>,3> colors;
+    verso_here::numbers::core::array<verso_here::Color<float>,3> colors;
     colors[0] = verso_here::colors::red;
     colors[1] = verso_here::colors::green;
     colors[2] = verso_here::colors::blue;

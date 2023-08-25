@@ -103,7 +103,7 @@ namespace oct::verso::v0
         glEnd();
     }
 
-    void outline(const numbers::Triangle<float,3,float>& triangle,const numbers::sequence<Color<float>,3>& colors)
+    void outline(const numbers::Triangle<float,3,float>& triangle,const numbers::core::array<Color<float>,3>& colors)
     {
         glBegin(GL_LINE_LOOP);
             // Dibujamos un triángulo
