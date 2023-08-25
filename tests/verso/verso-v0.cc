@@ -1209,7 +1209,7 @@ bool Triangles::active()
     //glClearDepth(1.0);
 
     glfwSetKeyCallback(window, Triangles::key_callback);
-    camera.set(verso_here::Point<float,3>(3,0,0),verso_here::Point<float,3>(0,0,0));
+    camera.lookAt(verso_here::Point<float,3>(3,0,0),verso_here::Point<float,3>(0,0,0));
 
     // Boramos la pantalla
     glMatrixMode(GL_PROJECTION);
@@ -1343,7 +1343,7 @@ bool Shapes::active()
     //glClearDepth(1.0);
 
     glfwSetKeyCallback(window, Shapes::key_callback);
-    camera.set(verso_here::Point<float,3>(3,0,0),verso_here::Point<float,3>(0,0,0));
+    //camera.lo(verso_here::Point<float,3>(3,0,0),verso_here::Point<float,3>(0,0,0));
 
     // Boramos la pantalla
     glMatrixMode(GL_PROJECTION);
@@ -1531,7 +1531,7 @@ bool Design::active()
     glClearColor(0, 0, 0, 1);
 
     glfwSetKeyCallback(window, Design::key_callback);
-    camera.set(verso_here::numbers::vector<float,3>(0,5,10),verso_here::numbers::vector<float,3>(0,0,0));
+    camera.lookAt(verso_here::numbers::vector<float,3>(0,5,10),verso_here::numbers::vector<float,3>(0,0,0));
 
 
     return true;
@@ -1541,15 +1541,14 @@ void Design::render()
     // Color de fondo: negro
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glLoadIdentity();
-    //gluLookAt (0, 10.0, 10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    //glLoadIdentity();
+    //gluLookAt(0, 10.0, 10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
     camera.lookAt();
-    glMatrixMode (GL_PROJECTION);
-    glLoadIdentity ();
+    //glMatrixMode (GL_PROJECTION);
+    //glLoadIdentity ();
     //glFrustum (-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
-    gluPerspective(60,WINDOW(window,Develop)->aspect(),1,40);
+    camera.perspective(60,WINDOW(window,Develop)->aspect(),1,40);
     glMatrixMode (GL_MODELVIEW);
-
 
     plane.create();
 

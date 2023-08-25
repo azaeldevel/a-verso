@@ -19,7 +19,7 @@ namespace oct::verso::v0::v1
     {
     }
 
-    void Camera::set(const numbers::vector<float,3>& p,const numbers::vector<float,3>& t)
+    void Camera::lookAt(const numbers::vector<float,3>& p,const numbers::vector<float,3>& t)
     {
         position = p;
         target = t;
@@ -27,6 +27,13 @@ namespace oct::verso::v0::v1
         rigth = nums_here::normalize(Point<float,3>(0.0f, 1.0f, 0.0f) * direction);
         up = nums_here::normalize(direction * rigth);
         front = nums_here::normalize(Point<float,3>(0.0f, 0.0f, -1.0f));
+        glLoadIdentity();
+        gluLookAt((double)position.x(),(double)position.y(),(double)position.z(),(double)target.x(),(double)target.y(),(double)target.z(),(double)up.x(),(double)up.y(),(double)up.z());
+    }
+    void Camera::lookAt()
+    {
+        glLoadIdentity();
+        gluLookAt((double)position.x(),(double)position.y(),(double)position.z(),(double)target.x(),(double)target.y(),(double)target.z(),(double)up.x(),(double)up.y(),(double)up.z());
     }
 
     void Camera::walking_front(float speed)
@@ -57,6 +64,13 @@ namespace oct::verso::v0::v1
     void Camera::rotate_up(float speed)
     {
 
+    }
+
+    void Camera::perspective(double fov,double aspect,double near,double far)
+    {
+        glMatrixMode (GL_PROJECTION);
+        glLoadIdentity ();
+        gluPerspective(fov,aspect,near,far);
     }
 
     /*numbers::matrix<float,4,4,float>& Camera::lookAt()
@@ -91,10 +105,6 @@ namespace oct::verso::v0::v1
 
         return view;
     }*/
-    void Camera::lookAt()
-    {
-        gluLookAt((double)position.x(),(double)position.y(),(double)position.z(),(double)target.x(),(double)target.y(),(double)target.z(),(double)up.x(),(double)up.y(),(double)up.z());
-    }
 
 }
 namespace oct::verso::v0::v2
