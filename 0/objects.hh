@@ -8,28 +8,42 @@ namespace oct::verso::v0::gl
 {
 
     /**
-    *\brief Dibuja una flecha
-    */
-    class Enty
-    {
-
-    };
-
-    /**
     *\brief Cualquier ente que tenga un representacion visual
     */
-    class Object : public Enty
+    class Object : public core::Entity
     {
 
     };
 
     /**
-    *\brief Manipulable en tiempo de ejecucion
+    *\brief Homanoide
     */
-    class Runable : public Object
+    class Humanoid : public Object
+    {
+    private:
+        void pivoting();
+
+    protected:
+        float tall;
+        float pivots[6];//pivotes corporales
+
+    public:
+        Humanoid() = default;
+        /**
+        *\brief Contructor
+        *\param tall Altura del sujeto
+        */
+        Humanoid(float tall);
+    };
+
+    /**
+    *\brief Manipulable en tiempo de ejecucion(clase abstracta)
+    */
+    class Interactive : public Object
     {
 
     };
+
 
 
 
