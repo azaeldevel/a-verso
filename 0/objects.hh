@@ -10,101 +10,48 @@ namespace oct::verso::v0::gl
     /**
     *\brief Dibuja una flecha
     */
-    template<numbers::number C = GLdouble>
-    class Arrow
+    class Enty
     {
-    private:
-
-    protected:
-        Cilinder<C> body,head;
-        C base_radius,body_size,head_size;
-
-    public:
-        Arrow() : base_radius(0.01),body_size(0.9),head_size(0.1)
-        {
-        }
-
-        void create(const Color<float>& color,numbers::axis axis)
-        {
-            glPushMatrix();
-            //glMatrixMode(GL_MODELVIEW);
-            color.active();
-            if(axis == numbers::axis::x)
-            {
-                glLoadIdentity();
-                glRotatef(90,0,1,0);
-                body.create(base_radius,base_radius,body_size,20,20);
-                glLoadIdentity();
-                glTranslatef(body_size,0,0);
-                glRotatef(90,0,1,0);
-                head.create(base_radius * 2,0,head_size,20,20);
-            }
-            else if(axis == numbers::axis::y)
-            {
-                glLoadIdentity();
-                glRotatef(-90,1,0,0);
-                body.create(base_radius,base_radius,body_size,20,20);
-                glLoadIdentity();
-                glTranslatef(0,body_size,0);
-                glRotatef(-90,1,0,0);
-                head.create(base_radius * 2,0,head_size,20,20);
-            }
-            else if(axis == numbers::axis::z)
-            {
-                glLoadIdentity();
-                body.create(base_radius,base_radius,body_size,20,20);
-                glLoadIdentity();
-                glTranslatef(0,0,body_size);
-                head.create(base_radius * 2,0,head_size,20,20);
-            }
-            glPopMatrix();
-            //glMatrixMode(GL_MODELVIEW);
-        }
 
     };
 
     /**
-    *\brief Dibuja una flecha
+    *\brief Cualquier ente que tenga un representacion visual
     */
-    template<numbers::number C = GLdouble>
-    class Axis
+    class Object : public Enty
     {
-    private:
-
-    protected:
-        Arrow<C> arrows;
-        numbers::vector<C,3> O;
-        Color<float,3> O_colors;
-        //Sphere<C> sphere;
-
-    public:
-        Axis() : O(0),O_colors(colors::white)
-        {
-        }
-
-        void create()
-        {
-            arrows.create(colors::red,numbers::axis::x);
-            arrows.create(colors::green,numbers::axis::y);
-            arrows.create(colors::blue,numbers::axis::z);
-            colors::white.active();
-            //sphere.create(1,20,20);
-        }
 
     };
 
+    /**
+    *\brief Manipulable en tiempo de ejecucion
+    */
+    class Runable : public Object
+    {
+
+    };
+
+
+
+
     template<numbers::number N>
-    class Plane
+    class Plane : public Object
     {
 
     private:
         N width,high;
         //size_t units;
-        Cilinder<GLdouble> O;
+        Sphere<GLdouble> O;
 
 
     public:
-        Plane() : width(30),high(30)
+        Plane() : width(50),high(50)
+        {
+        }
+        Plane(N size) : width(size),high(size)
+        {
+        }
+        Plane(N w,N h) : width(w),high(h)
         {
         }
 
@@ -142,7 +89,8 @@ namespace oct::verso::v0::gl
                 glVertex3f(0,0,0.5);
             glEnd();
 
-            //O.create(0.1,0.1,0.2,10,10);
+            colors::white.active();
+            O.create(1.0f/16.0f,10,10);
         }
 
     };

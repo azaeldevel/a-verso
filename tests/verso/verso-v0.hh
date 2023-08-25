@@ -290,12 +290,36 @@ private:
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
     verso_here::v1::Camera camera;
     char camera_transform;
-    //verso_here::gl::Arrow<GLdouble> axis;
-    //verso_here::gl::Axis<GLdouble> axis;
     verso_here::gl::Plane<GLdouble> plane;
 
 public:
     Design();
+    bool active();
+    virtual void render();
+    virtual void clean();
+
+};
+
+
+/**
+*\brief Dibuja un cubo y puede rotarlo
+*
+**/
+class Character : public verso_here::gl::Scenary
+{
+private:
+    GLint last_GL_DEPTH_FUNC,last_GL_DEPTH_TEST;
+    GLfloat last_GL_DEPTH_CLEAR_VALUE;
+
+private:
+    void update();
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    verso_here::v1::Camera camera;
+    char camera_transform;
+    verso_here::gl::Plane<GLdouble> plane;
+
+public:
+    Character();
     bool active();
     virtual void render();
     virtual void clean();
@@ -318,6 +342,7 @@ public:
     Triangles triangles;
     Shapes shapes;
     Design design;
+    Character character;
 
 private:
     void handle();

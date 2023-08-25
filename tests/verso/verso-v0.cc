@@ -1547,7 +1547,7 @@ void Design::render()
     //glMatrixMode (GL_PROJECTION);
     //glLoadIdentity ();
     //glFrustum (-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
-    camera.perspective(60,WINDOW(window,Develop)->aspect(),1,40);
+    camera.perspective(90,WINDOW(window,Develop)->aspect(),5,20);
     glMatrixMode (GL_MODELVIEW);
 
     plane.create();
@@ -1613,3 +1613,108 @@ void Design::key_callback(GLFWwindow* window, int key, int scancode, int action,
 
 }
 
+
+
+
+
+
+
+
+
+
+Character::Character() : camera_transform('T')
+{
+}
+bool Character::active()
+{
+    glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
+    glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
+    glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
+
+    //glDepthFunc(GL_LEQUAL);
+    glEnable(GL_DEPTH_TEST);
+    //glClearDepth(1.0);
+    glClearColor(0, 0, 0, 1);
+
+    glfwSetKeyCallback(window, Character::key_callback);
+    camera.lookAt(verso_here::numbers::vector<float,3>(0,5,10),verso_here::numbers::vector<float,3>(0,0,0));
+
+
+    return true;
+}
+void Character::render()
+{
+    // Color de fondo: negro
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    //glLoadIdentity();
+    //gluLookAt(0, 10.0, 10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    camera.lookAt();
+    //glMatrixMode (GL_PROJECTION);
+    //glLoadIdentity ();
+    //glFrustum (-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
+    camera.perspective(90,WINDOW(window,Develop)->aspect(),5,20);
+    glMatrixMode (GL_MODELVIEW);
+
+    plane.create();
+
+    glFlush();
+    // Forzamos el dibujado
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+}
+void Character::clean()
+{
+    glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glDisable(GL_DEPTH_TEST);
+    glEnable(last_GL_DEPTH_TEST);
+    glDepthFunc(last_GL_DEPTH_FUNC);
+    glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+}
+void Character::update()
+{
+
+}
+
+
+void Character::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
+    if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Closing JGCI_4...\n";
+        WINDOW(window,Develop)->change();
+    }
+    else if(glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+    {
+        WINDOW(window,Develop)->character.camera_transform = 'T';
+    }
+    else if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+    {
+        WINDOW(window,Develop)->character.camera_transform = 'R';
+    }
+    else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+    {
+        if(WINDOW(window,Develop)->character.camera_transform == 'T') WINDOW(window,Develop)->character.camera.walking_front(1.5);
+        else if(WINDOW(window,Develop)->character.camera_transform == 'R') WINDOW(window,Develop)->character.camera.walking_front(1.5);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+    {
+        if(WINDOW(window,Develop)->character.camera_transform == 'T') WINDOW(window,Develop)->character.camera.walking_back(1.5);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+    {
+        if(WINDOW(window,Develop)->character.camera_transform == 'T') WINDOW(window,Develop)->character.camera.walking_right(1.5);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+    {
+        if(WINDOW(window,Develop)->character.camera_transform == 'T') WINDOW(window,Develop)->character.camera.walking_left(1.5);
+    }
+    else if(glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
+    {
+        if(WINDOW(window,Develop)->character.camera_transform == 'T') WINDOW(window,Develop)->character.camera.walking_up(1.5);
+    }
+
+
+}

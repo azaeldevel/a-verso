@@ -7,15 +7,14 @@
 #include <vector>
 #include <numbers/0/vector.hh>
 
+#include "color.hh"
+
 #ifdef OCTETOS_AVERSO_TTD
     #include <iostream>
 #endif // OCTETOS_AVERSO_DEBUG
 
 namespace oct::verso::v0
 {
-    namespace core_here = oct::core::v3;
-    namespace nums_here = oct::nums::v0;
-    namespace numbers = oct::nums::v0;
     //template<class T> concept Dimension = std::is_base_of<U, T>::value;
     template<typename T> concept coordinate = std::same_as<T, int> || std::same_as<T, float>;
 
@@ -26,155 +25,10 @@ namespace oct::verso::v0
         z
     };
 
-    template<numbers::number T = float, size_t L = 4> class Color : public numbers::sequence<T,L>
-    {
-    private:
-        typedef numbers::sequence<T,L> BASE;
-    public:
-        Color() = default;
-        constexpr Color(const T& v) : BASE(v)
-        {
-        }
-        /*
-        constexpr vector(const T v[L]) : sequence<T,L>(v)
-        {
-        }
-        */
-        constexpr Color(const Color& v) : BASE(v)
-        {
-        }
-        constexpr Color(const std::initializer_list<T>& l) : BASE(l)
-        {
-        }
 
-        constexpr bool operator == (const Color& s)
-        {
-            for(size_t i = 0; i < L; i++) if(BASE::data[i] != s[i]) return false;
-
-            return true;
-        }
-
-
-        constexpr Color operator + (const Color& s)
-        {
-            Color res;
-            for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] + s[i];
-
-            return res;
-        }
-        constexpr Color operator - (const Color& s)
-        {
-            Color res;
-            for(size_t i = 0; i < L; i++) res[i] = BASE::data[i] - s[i];
-
-            return res;
-        }
-        constexpr Color operator * (const T& s)
-        {
-            Color res;
-            for(size_t i = 0; i < L; i++) BASE::data[i] *= s;
-
-            return res;
-        }
-
-
-        constexpr T& r()
-        {
-            return BASE::data[0];
-        }
-        constexpr const T& r() const
-        {
-            return BASE::data[0];
-        }
-        constexpr T& g()
-        {
-            return BASE::data[1];
-        }
-        constexpr const T& g() const
-        {
-            return BASE::data[1];
-        }
-        constexpr T& b()
-        {
-            return BASE::data[2];
-        }
-        constexpr const T& b() const
-        {
-            return BASE::data[2];
-        }
-
-        void active() const
-        {
-            glColor3f(BASE::data[0],BASE::data[1],BASE::data[2]);
-        }
-
-
-    };
 
     void active(const Color<float,3>&);
     void active(const Color<float,4>&);
-
-
-    template<numbers::number T> class RGB : public Color<T,3>
-    {
-    private:
-        typedef Color<T,3> BASE;
-    public:
-        RGB() = default;
-        constexpr RGB(const T& v) : BASE(v)
-        {
-        }
-        constexpr RGB(const RGB& v) : BASE(v)
-        {
-        }
-        constexpr RGB(const std::initializer_list<T>& l) : BASE(l)
-        {
-        }
-
-
-        void active() const
-        {
-            glColor3f(BASE::data[0],BASE::data[1],BASE::data[2]);
-        }
-    };
-
-    template<numbers::number T> class RGBA : public Color<T,4>
-    {
-    private:
-        typedef Color<T,4> BASE;
-    public:
-        RGBA() = default;
-        constexpr RGBA(const T& v) : BASE(v)
-        {
-        }
-        constexpr RGBA(const RGBA& v) : BASE(v)
-        {
-        }
-        constexpr RGBA(const std::initializer_list<T>& l) : BASE(l)
-        {
-        }
-
-
-        void active() const
-        {
-            glColor4f(BASE::data[0],BASE::data[1],BASE::data[2],BASE::data[3]);
-        }
-    };
-
-
-    namespace colors
-    {
-        static const Color<float> red{1.0f,0.0f,0.0f,1};
-        static const Color<float> green{0.0f,1.0f,0.0f,1};
-        static const Color<float> blue{0.0f,0.0f,1.0f,1};
-        static const Color<float> black{0.0f,0.0f,0.0f,1};
-        static const Color<float> white{1.0f,1.0f,1.0f,1};
-
-        //themes
-        //static const Color<int> rgba{255,255,255,1};
-        static const RGBA<float> coordenade{0.81f,0.8f,0.7f,0.2f};
-    }
-
 
 
     //typedef glm::vector<float,2,glm::packed_highp> vec2;

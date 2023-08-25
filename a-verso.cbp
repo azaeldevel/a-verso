@@ -136,6 +136,15 @@
 			<Option target="devel-verso" />
 			<Option target="verso-light" />
 		</Unit>
+		<Unit filename="0/architect.hh">
+			<Option target="devel-verso" />
+		</Unit>
+		<Unit filename="0/colors.hh">
+			<Option target="devel-verso" />
+		</Unit>
+		<Unit filename="0/common.hh">
+			<Option target="devel-verso" />
+		</Unit>
 		<Unit filename="0/draw.cc">
 			<Option target="devel-verso" />
 		</Unit>
