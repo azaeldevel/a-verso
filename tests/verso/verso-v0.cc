@@ -1516,7 +1516,7 @@ void Shapes::draw_sphere()
 
 
 
-Design::Design()
+Design::Design() : camera_transform('T')
 {
 }
 bool Design::active()
@@ -1581,25 +1581,34 @@ void Design::key_callback(GLFWwindow* window, int key, int scancode, int action,
         //std::cout << "Closing JGCI_4...\n";
         WINDOW(window,Develop)->change();
     }
+    else if(glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+    {
+        WINDOW(window,Develop)->design.camera_transform = 'T';
+    }
+    else if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+    {
+        WINDOW(window,Develop)->design.camera_transform = 'R';
+    }
     else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->design.camera.walking_front(1.5);
+        if(WINDOW(window,Develop)->design.camera_transform == 'T') WINDOW(window,Develop)->design.camera.walking_front(1.5);
+        else if(WINDOW(window,Develop)->design.camera_transform == 'R') WINDOW(window,Develop)->design.camera.walking_front(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->design.camera.walking_back(1.5);
+        if(WINDOW(window,Develop)->design.camera_transform == 'T') WINDOW(window,Develop)->design.camera.walking_back(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->design.camera.walking_right(1.5);
+        if(WINDOW(window,Develop)->design.camera_transform == 'T') WINDOW(window,Develop)->design.camera.walking_right(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->design.camera.walking_left(1.5);
+        if(WINDOW(window,Develop)->design.camera_transform == 'T') WINDOW(window,Develop)->design.camera.walking_left(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->design.camera.walking_up(1.5);
+        if(WINDOW(window,Develop)->design.camera_transform == 'T') WINDOW(window,Develop)->design.camera.walking_up(1.5);
     }
 
 

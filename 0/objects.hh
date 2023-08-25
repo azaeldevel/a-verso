@@ -100,6 +100,8 @@ namespace oct::verso::v0::gl
     private:
         N width,high;
         //size_t units;
+        Cilinder<GLdouble> O;
+
 
     public:
         Plane() : width(30),high(30)
@@ -111,18 +113,27 @@ namespace oct::verso::v0::gl
             N width_media = width / N(2);
             N high_media = high / N(2);
 
+            glLineWidth(1);
             glBegin(GL_LINES);
                 colors::coordenade.active();
-                for(int i = -high_media + 1; i < high_media; i++)
+                for(int i = -high_media; i < high_media; i++)
                 {
                     glVertex3f(-width_media,0,i);
                     glVertex3f(width_media,0,i);
                 }
-                for(int i = -width_media + 1; i < width_media; i++)
+                glVertex3f((int)-width_media,0,(int)width_media);
+                glVertex3f((int)width_media,0,(int)width_media);
+                for(int i = -width_media; i < width_media; i++)
                 {
                     glVertex3f(i,0,-width_media);
                     glVertex3f(i,0,width_media);
                 }
+                glVertex3f(width_media,0,-width_media);
+                glVertex3f(width_media,0,width_media);
+            glEnd();
+
+            glLineWidth(2.5);
+            glBegin(GL_LINES);
                 colors::red.active();
                 glVertex3f(-0.5,0,0);
                 glVertex3f(0.5,0,0);
@@ -130,6 +141,8 @@ namespace oct::verso::v0::gl
                 glVertex3f(0,0,-0.5);
                 glVertex3f(0,0,0.5);
             glEnd();
+
+            //O.create(0.1,0.1,0.2,10,10);
         }
 
     };

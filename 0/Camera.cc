@@ -54,6 +54,11 @@ namespace oct::verso::v0::v1
         position -= up * speed;
     }
 
+    void Camera::rotate_up(float speed)
+    {
+
+    }
+
     /*numbers::matrix<float,4,4,float>& Camera::lookAt()
     {
         numbers::matrix<float,4,4,float> pos(0),trans(0);

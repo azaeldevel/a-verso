@@ -29,13 +29,14 @@ namespace oct::verso::v0::v1
         void walking_right(float);
         void walking_up(float);
         void walking_down(float);
+        void rotate_up(float);
 
         //numbers::matrix<float,4,4,float>& lookAt();
         void lookAt();
 
     private:
         numbers::vector<float,3> position,target,direction,rigth,up,front;
-        numbers::matrix<float,4,4,float> view;
+        //numbers::matrix<float,4,4,float> view;
 
     };
 }
