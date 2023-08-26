@@ -136,6 +136,9 @@
 			<Option target="devel-verso" />
 			<Option target="verso-light" />
 		</Unit>
+		<Unit filename="0/architect.cc">
+			<Option target="devel-verso" />
+		</Unit>
 		<Unit filename="0/architect.hh">
 			<Option target="devel-verso" />
 		</Unit>
@@ -149,6 +152,9 @@
 			<Option target="devel-verso" />
 		</Unit>
 		<Unit filename="0/draw.hh">
+			<Option target="devel-verso" />
+		</Unit>
+		<Unit filename="0/objects.cc">
 			<Option target="devel-verso" />
 		</Unit>
 		<Unit filename="0/objects.hh">

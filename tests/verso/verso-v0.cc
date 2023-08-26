@@ -64,6 +64,11 @@ void Develop::key_callback(GLFWwindow* window, int key, int scancode, int action
         //std::cout << "Cambieando de escenario..\n";
         WINDOW(window,Develop)->change(&WINDOW(window,Develop)->design);
     }
+    else if(GLFW_KEY_9 == key && action == GLFW_PRESS)
+    {
+        //std::cout << "Cambieando de escenario..\n";
+        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->character);
+    }
 
 }
 
@@ -1637,7 +1642,7 @@ bool Character::active()
     glClearColor(0, 0, 0, 1);
 
     glfwSetKeyCallback(window, Character::key_callback);
-    camera.lookAt(verso_here::numbers::vector<float,3>(0,5,10),verso_here::numbers::vector<float,3>(0,0,0));
+    camera.lookAt(verso_here::numbers::vector<float,3>(0,1,3),verso_here::numbers::vector<float,3>(0,0,0));
 
 
     return true;
@@ -1653,10 +1658,12 @@ void Character::render()
     //glMatrixMode (GL_PROJECTION);
     //glLoadIdentity ();
     //glFrustum (-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
-    camera.perspective(90,WINDOW(window,Develop)->aspect(),5,20);
+    camera.perspective(90,WINDOW(window,Develop)->aspect(),0.3,20);
     glMatrixMode (GL_MODELVIEW);
 
     plane.create();
+
+    architect.create();
 
     glFlush();
     // Forzamos el dibujado

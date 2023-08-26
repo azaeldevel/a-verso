@@ -10,7 +10,7 @@ namespace oct::verso::v0::gl
     /**
     *\brief Cualquier ente que tenga un representacion visual
     */
-    class Object : public core::Entity
+    template<numbers::number C = float> class Object : public core::Entity
     {
 
     };
@@ -18,14 +18,102 @@ namespace oct::verso::v0::gl
     /**
     *\brief Homanoide
     */
-    class Humanoid : public Object
+    template<numbers::number C = float> class Animal : public Object<C>
     {
     private:
-        void pivoting();
+        typedef Object<C> BASE;
 
     protected:
         float tall;
-        float pivots[6];//pivotes corporales
+
+    public:
+        Animal() = default;
+
+        /**
+        *\brief Contructor
+        *\param t Altura del sujeto
+        */
+        Animal(float t) : tall(t)
+        {
+        }
+    };
+
+    /**
+    *\brief Homanoide
+    */
+    template<numbers::number C = float> class Biped : public Animal<C>
+    {
+    private:
+        typedef Animal<C> BASE;
+
+    protected:
+
+    public:
+        Biped() = default;
+        /**
+        *\brief Contructor
+        *\param tall Altura del sujeto
+        */
+        Biped(float tall) : BASE(tall)
+        {
+        }
+    };
+
+    /**
+    *\brief Homanoide
+    */
+    template<numbers::number C = float> class Quadruped : public Object<C>
+    {
+    private:
+
+    protected:
+        float tall;
+
+    public:
+        Quadruped() = default;
+        /**
+        *\brief Contructor
+        *\param tall Altura del sujeto
+        */
+        Quadruped(float tall);
+    };
+
+    /**
+    *\brief Homanoide
+    */
+    template<numbers::number C = float> class Humanoid : public Biped<C>
+    {
+    private:
+        typedef Biped<C> BASE;
+        void pivoting()
+        {
+            //
+            C unit = BASE::tall/9.0f;
+            C offset = 0;
+
+            //
+            cusp.x() = 0;
+            cusp.y() = BASE::tall;
+            cusp.z() = 0;
+
+            //
+            head = cusp;
+            head.y() -= unit/C(2.0);
+
+            //
+            //neck_top = cusp;
+            //neck_top.y() -= 2.2 * head_size;
+
+            //
+            //neck_base = neck_top;
+            //neck_base.y() -= BASE::tall - unit;
+
+            //
+        }
+
+    protected:
+        numbers::vector<C,3> cusp,head,neck_top,neck_base;
+        C head_size;
 
     public:
         Humanoid() = default;
@@ -33,13 +121,15 @@ namespace oct::verso::v0::gl
         *\brief Contructor
         *\param tall Altura del sujeto
         */
-        Humanoid(float tall);
+        Humanoid(float tall) : BASE(tall),head_size(0.20)
+        {
+        }
     };
 
     /**
     *\brief Manipulable en tiempo de ejecucion(clase abstracta)
     */
-    class Interactive : public Object
+    template<numbers::number C = float> class Interactive : public Object<C>
     {
 
     };
@@ -49,7 +139,7 @@ namespace oct::verso::v0::gl
 
 
     template<numbers::number N>
-    class Plane : public Object
+    class Plane : public Object<N>
     {
 
     private:
@@ -104,7 +194,7 @@ namespace oct::verso::v0::gl
             glEnd();
 
             colors::white.active();
-            O.create(1.0f/16.0f,10,10);
+            O.create(1.0f/64.0f,10,10);
         }
 
     };

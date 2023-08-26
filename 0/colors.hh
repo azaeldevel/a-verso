@@ -170,6 +170,7 @@ namespace oct::verso::v0
         static const RGBA<float> blue{0.0f,0.0f,1.0f,1};
         static const RGBA<float> black{0.0f,0.0f,0.0f,1};
         static const RGBA<float> white{1.0f,1.0f,1.0f,1};
+        static const RGBA<float> gray{0.75f,0.75.f,0.75f,1};
 
         //themes
         //static const Color<int> rgba{255,255,255,1};
