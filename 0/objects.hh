@@ -7,6 +7,11 @@
 namespace oct::verso::v0::gl
 {
 
+    void translate(const numbers::vector<float,3,float>&);
+    void translate(const numbers::vector<double,3,double>&);
+
+
+
     /**
     *\brief Cualquier ente que tenga un representacion visual
     */
@@ -98,27 +103,26 @@ namespace oct::verso::v0::gl
             C offset = 0;
 
             //
-            cusp.x() = 0;
+            cusp = 0;
             cusp.y() = BASE::tall;
-            cusp.z() = 0;
 
             //
-            head = cusp;
-            head.y() -= unit/C(2.0);
+            //head = cusp;
+            head = 0;
+            head.y() -= unit/C(2);
 
             //
-            neck_base = cusp;
+            //neck_base = cusp;
+            neck_base = 0;
             neck_base.y() -= 1.5 * unit;
 
             //
 
-
-
             //
             shoulder_left = neck_base;
-            shoulder_right = neck_base;
-            shoulder_left.x() -= 0.8 * unit;
-            shoulder_right.x() -= 0.8 * unit;
+            shoulder_right = 0;
+            shoulder_left.x() += 0.8 * unit;
+            shoulder_right.x() -= 0.8 * 2 * unit;
 
             //
             //neck_base = neck_top;
@@ -181,6 +185,7 @@ namespace oct::verso::v0::gl
                 colors::coordenade.active();
                 for(int i = -high_media; i < high_media; i++)
                 {
+                    if(i == 0) continue;
                     glVertex3f(-width_media,0,i);
                     glVertex3f(width_media,0,i);
                 }
@@ -188,6 +193,7 @@ namespace oct::verso::v0::gl
                 glVertex3f((int)width_media,0,(int)width_media);
                 for(int i = -width_media; i < width_media; i++)
                 {
+                    if(i == 0) continue;
                     glVertex3f(i,0,-width_media);
                     glVertex3f(i,0,width_media);
                 }
@@ -198,11 +204,11 @@ namespace oct::verso::v0::gl
             glLineWidth(2.5);
             glBegin(GL_LINES);
                 colors::red.active();
-                glVertex3f(-0.5,0,0);
-                glVertex3f(0.5,0,0);
+                glVertex3f(-width_media,0,0);
+                glVertex3f(width_media,0,0);
                 colors::green.active();
-                glVertex3f(0,0,-0.5);
-                glVertex3f(0,0,0.5);
+                glVertex3f(0,0,-width_media);
+                glVertex3f(0,0,width_media);
             glEnd();
 
             colors::white.active();

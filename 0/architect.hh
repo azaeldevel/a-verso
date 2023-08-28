@@ -19,7 +19,7 @@ namespace oct::verso::v0::architect
         *\brief Contructor
         *\param tall Altura del sujeto
         */
-        Architect(C tall)
+        Architect(C tall) : head(0),mark(0)
         {
 
         }
@@ -29,13 +29,13 @@ namespace oct::verso::v0::architect
         {
             BASE::pivoting(tall);
             colors::white.active();
-            //glColor4i(100,0,0,255);
-            //glLoadIdentity();
-            glTranslatef(0,BASE::cusp.y(),0);
+            gl::translate(BASE::cusp);
             head.create(0.20,30,30);
 
-            //glLoadIdentity();
-            glTranslatef(0.1,-0.5,0);
+            gl::translate(BASE::shoulder_left);
+            mark.create(0.1,10,10);
+
+            gl::translate(BASE::shoulder_right);
             mark.create(0.1,10,10);
         }
 
