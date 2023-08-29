@@ -37,6 +37,18 @@ namespace oct::verso::v0::architect
 
             gl::translate(BASE::shoulder_right);
             mark.create(0.1,10,10);
+
+            gl::translate(BASE::center);
+
+            gl::translate(BASE::pelvis);
+            mark.create(BASE::unit,10,10);
+
+            gl::translate(BASE::knee_left);
+            mark.create(0.1,10,10);
+
+            gl::translate(BASE::ankle_left);
+            mark.create(0.1,10,10);
+
         }
 
 

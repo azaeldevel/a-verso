@@ -1642,7 +1642,7 @@ bool Character::active()
     glClearColor(0, 0, 0, 1);
 
     glfwSetKeyCallback(window, Character::key_callback);
-    camera.lookAt(verso_here::numbers::vector<float,3>(0,2,3),verso_here::numbers::vector<float,3>(0,0,0));
+    camera.lookAt(verso_here::numbers::vector<float,3>(0,0.5,3),verso_here::numbers::vector<float,3>(0,0,0));
 
 
     return true;
@@ -1662,6 +1662,7 @@ void Character::render()
     glMatrixMode (GL_MODELVIEW);
 
     plane.create();
+    //glRotated(90,0,0,1);
 
     architect.create(1.80);
 

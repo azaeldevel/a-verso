@@ -2,39 +2,9 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="devel-verso" />
-	<File name="0/Shader.cc" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5481" topLine="204" />
-		</Cursor>
-	</File>
-	<File name="0/architect.hh" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="858" topLine="20" />
-		</Cursor>
-	</File>
-	<File name="0/Shader.hh" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="304" topLine="33" />
-		</Cursor>
-	</File>
-	<File name="0/objects.hh" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2125" topLine="107" />
-		</Cursor>
-	</File>
-	<File name="tests/v0.cc" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="241" topLine="18" />
-		</Cursor>
-	</File>
 	<File name="tests/develop-Verso-main.cc" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="399" topLine="1" />
-		</Cursor>
-	</File>
-	<File name="0/common.hh" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="98" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="0/verso.cc" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -42,9 +12,14 @@
 			<Cursor1 position="49" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="0/colors.hh" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="0/Shader.hh" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3510" topLine="125" />
+			<Cursor1 position="304" topLine="33" />
+		</Cursor>
+	</File>
+	<File name="0/Shader.cc" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5481" topLine="204" />
 		</Cursor>
 	</File>
 	<File name="tests/develop-2-Game.hh" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -52,89 +27,9 @@
 			<Cursor1 position="532" topLine="1" />
 		</Cursor>
 	</File>
-	<File name="0/architect.cc" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="0/shapes.hh" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="67" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="tests/verso/verso-v0.cc" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="45064" topLine="1632" />
-		</Cursor>
-	</File>
-	<File name="0/draw.cc" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4400" topLine="81" />
-		</Cursor>
-	</File>
-	<File name="tests/ligth/verso.hh" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="431" topLine="21" />
-		</Cursor>
-	</File>
-	<File name="tests/develop-3-Game.cc" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="11264" topLine="303" />
-		</Cursor>
-	</File>
-	<File name="0/objects.cc" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="57" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="tests/verso/main.cc" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="407" topLine="5" />
-		</Cursor>
-	</File>
-	<File name="0/draw.hh" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="964" topLine="9" />
-		</Cursor>
-	</File>
-	<File name="tests/develop-Verso.cc" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5704" topLine="182" />
-		</Cursor>
-	</File>
-	<File name="0/verso-gl.hh" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="138" topLine="15" />
-		</Cursor>
-	</File>
-	<File name="0/shapes.cc" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="296" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="tests/verso/verso-v0.hh" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6863" topLine="310" />
-		</Cursor>
-	</File>
-	<File name="tests/develop-3-main.cc" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="282" topLine="1" />
-		</Cursor>
-	</File>
-	<File name="0/Camera.cc" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2125" topLine="49" />
-		</Cursor>
-	</File>
-	<File name="tests/ligth/main.cc" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="257" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="tests/develop-2-Game.cc" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1491" topLine="48" />
-		</Cursor>
-	</File>
-	<File name="0/quadric.cc" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="55" topLine="0" />
+			<Cursor1 position="191" topLine="388" />
 		</Cursor>
 	</File>
 	<File name="tests/main.cc" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -142,34 +37,9 @@
 			<Cursor1 position="824" topLine="27" />
 		</Cursor>
 	</File>
-	<File name="tests/ligth/verso.cc" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="0/common.hh" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4342" topLine="123" />
-		</Cursor>
-	</File>
-	<File name="0/verso.hh" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="362" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="0/Camera.hh" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1001" topLine="24" />
-		</Cursor>
-	</File>
-	<File name="tests/v0.hh" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="318" topLine="1" />
-		</Cursor>
-	</File>
-	<File name="tests/develop-2-main.cc" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="266" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="tests/develop-Verso.hh" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1376" topLine="40" />
+			<Cursor1 position="98" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="0/verso-gl.cc" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -177,9 +47,24 @@
 			<Cursor1 position="3604" topLine="137" />
 		</Cursor>
 	</File>
-	<File name="0/shapes.hh" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="tests/develop-3-Game.cc" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="191" topLine="388" />
+			<Cursor1 position="11264" topLine="303" />
+		</Cursor>
+	</File>
+	<File name="0/Camera.cc" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2125" topLine="49" />
+		</Cursor>
+	</File>
+	<File name="0/colors.hh" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3510" topLine="125" />
+		</Cursor>
+	</File>
+	<File name="tests/ligth/verso.cc" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4342" topLine="123" />
 		</Cursor>
 	</File>
 	<File name="0/quadric.hh" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -187,9 +72,124 @@
 			<Cursor1 position="2061" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="0/draw.cc" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4400" topLine="81" />
+		</Cursor>
+	</File>
+	<File name="0/objects.hh" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4461" topLine="193" />
+		</Cursor>
+	</File>
+	<File name="tests/develop-Verso.cc" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5704" topLine="182" />
+		</Cursor>
+	</File>
+	<File name="tests/verso/main.cc" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="407" topLine="5" />
+		</Cursor>
+	</File>
+	<File name="tests/develop-3-main.cc" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="282" topLine="1" />
+		</Cursor>
+	</File>
+	<File name="tests/ligth/main.cc" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="257" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="0/architect.hh" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="865" topLine="17" />
+		</Cursor>
+	</File>
+	<File name="0/Camera.hh" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1001" topLine="24" />
+		</Cursor>
+	</File>
+	<File name="0/objects.cc" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="298" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="tests/develop-2-Game.cc" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1491" topLine="48" />
+		</Cursor>
+	</File>
+	<File name="tests/ligth/verso.hh" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="431" topLine="21" />
+		</Cursor>
+	</File>
+	<File name="tests/verso/verso-v0.cc" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="45064" topLine="1632" />
+		</Cursor>
+	</File>
+	<File name="tests/v0.hh" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="318" topLine="1" />
+		</Cursor>
+	</File>
+	<File name="0/draw.hh" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="964" topLine="9" />
+		</Cursor>
+	</File>
+	<File name="tests/v0.cc" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="241" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="0/verso.hh" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="362" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="tests/develop-2-main.cc" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="266" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="0/shapes.cc" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="296" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="tests/develop-Verso.hh" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1376" topLine="40" />
+		</Cursor>
+	</File>
+	<File name="0/quadric.cc" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="55" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="tests/verso/verso-v0.hh" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6863" topLine="298" />
+		</Cursor>
+	</File>
+	<File name="0/verso-gl.hh" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="138" topLine="15" />
+		</Cursor>
+	</File>
 	<File name="tests/develop-3-Game.hh" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2450" topLine="54" />
+		</Cursor>
+	</File>
+	<File name="0/architect.cc" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="67" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

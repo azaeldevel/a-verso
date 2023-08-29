@@ -92,14 +92,15 @@ namespace oct::verso::v0::gl
         typedef Biped<C> BASE;
 
     protected:
-        numbers::vector<C,3> cusp,head,neck_top,neck_base,shoulder_left,shoulder_right;
+        numbers::vector<C,3> cusp,center,head,neck_top,neck_base,shoulder_left,shoulder_right,pelvis,knee_left,knee_right,ankle_left,ankle_right;
         C head_size;
+        C unit;
 
         void pivoting(C tall)
         {
             BASE::tall = tall;
             //
-            C unit = BASE::tall/9.0f;
+            unit = BASE::tall/9.0f;
             C offset = 0;
 
             //
@@ -112,23 +113,28 @@ namespace oct::verso::v0::gl
             head.y() -= unit/C(2);
 
             //
-            //neck_base = cusp;
             neck_base = 0;
             neck_base.y() -= 1.5 * unit;
-
-            //
 
             //
             shoulder_left = neck_base;
             shoulder_right = 0;
             shoulder_left.x() += 0.8 * unit;
             shoulder_right.x() -= 0.8 * 2 * unit;
+            center = 0;
+            center.x() = C(0.8) * unit;
 
             //
-            //neck_base = neck_top;
-            //neck_base.y() -= BASE::tall - unit;
+            pelvis = 0;
+            pelvis.y() -= unit * C(2.5);
 
             //
+            knee_left = 0;
+            knee_left.y() -= unit * C(2);
+            knee_left.x() -= unit * C(0.8);
+
+            ankle_left = 0;
+            ankle_left.y() -= unit * C(2);
         }
 
     public:
