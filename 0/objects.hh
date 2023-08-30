@@ -95,22 +95,27 @@ namespace oct::verso::v0::gl
         numbers::vector<C,3> cusp,center,head,neck_top,neck_base,shoulder_left,shoulder_right,pelvis,knee_left,knee_right,ankle_left,ankle_right;
         C head_size;
         C unit;
+        //numbers::vector<C,3> pivot_shoulder,pivot_pelvis;
+        enum class Pivots
+        {
+            cusp,
+
+        };
 
         void pivoting(C tall)
         {
             BASE::tall = tall;
             //
             unit = BASE::tall/9.0f;
-            C offset = 0;
+            //C offset = 0;
 
             //
             cusp = 0;
             cusp.y() = BASE::tall;
 
             //
-            //head = cusp;
             head = 0;
-            head.y() -= unit/C(2);
+            head.y() -= unit;
 
             //
             neck_base = 0;
@@ -135,6 +140,15 @@ namespace oct::verso::v0::gl
 
             ankle_left = 0;
             ankle_left.y() -= unit * C(2);
+
+            /*center = 0;
+            center.x() = C(0.8) * unit;
+            center.y() = C(-4) * unit;*/
+
+
+            /*knee_right = 0;
+            knee_right.y() -= unit * C(2);
+            knee_right.x() += unit * C(0.8);*/
         }
 
     public:

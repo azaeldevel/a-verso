@@ -30,24 +30,29 @@ namespace oct::verso::v0::architect
             BASE::pivoting(tall);
             colors::white.active();
             gl::translate(BASE::cusp);
-            head.create(0.20,30,30);
+            head.create(BASE::unit,30,30);
 
             gl::translate(BASE::shoulder_left);
-            mark.create(0.1,10,10);
+            mark.create(0.01,10,10);
 
             gl::translate(BASE::shoulder_right);
-            mark.create(0.1,10,10);
+            mark.create(0.01,10,10);
 
             gl::translate(BASE::center);
 
             gl::translate(BASE::pelvis);
-            mark.create(BASE::unit,10,10);
+            mark.create(BASE::unit * 1.5,10,10);
 
             gl::translate(BASE::knee_left);
-            mark.create(0.1,10,10);
+            mark.create(0.01,10,10);
 
             gl::translate(BASE::ankle_left);
-            mark.create(0.1,10,10);
+            mark.create(0.01,10,10);
+
+            gl::translate(BASE::center);
+
+            //gl::translate(BASE::knee_right);
+            //mark.create(0.01,10,10);
 
         }
 
