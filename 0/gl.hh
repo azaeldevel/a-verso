@@ -17,6 +17,10 @@ namespace oct::verso::v0::gl
     void active(const Color<unsigned char,4>&);
 
 
+    void clear(const Color<unsigned char,3>&);
+    void clear(const Color<unsigned char,4>&);
+
+
 }
 
 #endif // OCTETOS_AVERSO_SHAPES_HH

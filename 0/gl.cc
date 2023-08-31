@@ -20,9 +20,18 @@ namespace oct::verso::v0::gl
     }
     void active(const Color<unsigned char,4>& color)
     {
-        glColor4b(color[0],color[1],color[2],color[4]);
+        glColor4b(color[0],color[1],color[2],color[3]);
     }
 
+
+    void clear(const Color<unsigned char,3>& color)
+    {
+        glClearColor(color[0],color[1],color[2],1);
+    }
+    void clear(const Color<unsigned char,4>& color)
+    {
+        glClearColor(color[0],color[1],color[2],color[3]);
+    }
 }
 
 

@@ -1214,21 +1214,22 @@ bool Triangles::active()
     //glClearDepth(1.0);
 
     glfwSetKeyCallback(window, Triangles::key_callback);
-    camera.lookAt(verso_here::Point<float,3>(3,0,0),verso_here::Point<float,3>(0,0,0));
+    //camera.lookAt(verso_here::Point<float,3>(3,0,0),verso_here::Point<float,3>(0,0,0));
 
     // Boramos la pantalla
-    glMatrixMode(GL_PROJECTION);
-    glRotated(0.001,1.0,0.0,1.0);
-    glLoadIdentity();
+    //glMatrixMode(GL_PROJECTION);
+    //glRotated(0.001,1.0,0.0,1.0);
+    //glLoadIdentity();
 
-    gluPerspective(0.0,1.0,1.0,100.0);//glOrtho(-1.0,1.0,-1.0,1.0,-1.0,1.0);
-    glMatrixMode(GL_MODELVIEW);
+    //gluPerspective(0.0,1.0,1.0,100.0);//glOrtho(-1.0,1.0,-1.0,1.0,-1.0,1.0);
+    //glMatrixMode(GL_MODELVIEW);
     //glTranslatef(0.1,0,0);
     //glRotatef(10,1,0,0);
     //gluLookAt(3,3,3,0,0,0,0,1,0);
     //camera.lookAt();
 
-    verso_here::gl::active(verso_here::colors::white);
+    verso_here::gl::clear(verso_here::colors::white);
+    verso_here::gl::active(verso_here::colors::black);
 
     return true;
 }
