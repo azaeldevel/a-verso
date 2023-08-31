@@ -87,7 +87,7 @@
 					<Add directory="/home/azael/develop" />
 				</Compiler>
 				<Linker>
-					<Add option="`pkg-config freetype2 --libs` `pkg-config glew --libs` `pkg-config glfw3 --libs`" />
+					<Add option="`pkg-config freetype2 --libs` `pkg-config glew --libs` `pkg-config glfw3 --libs` `pkg-config stb --libs`" />
 				</Linker>
 			</Target>
 			<Target title="verso-light">

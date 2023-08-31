@@ -1,6 +1,7 @@
 #include <fstream>
 #include <chrono>
 #include <thread>
+#include <filesystem>
 
 #if defined(_WIN32) || defined(_WIN64)
     #include <Windows.h>
@@ -10,6 +11,9 @@
 
 #include "verso-v0.hh"
 #include <a-verso/0/draw.hh>
+
+#include "stb/stb_image.h"
+
 
 
 
@@ -1545,14 +1549,41 @@ bool Design::active()
     //glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
     //glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
     //glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
+    action_draw = NULL;
 
     //glDepthFunc(GL_LEQUAL);
     glEnable(GL_DEPTH_TEST);
     //glClearDepth(1.0);
     glClearColor(0, 0, 0, 1);
+    glEnable(GL_TEXTURE_2D);
 
     glfwSetKeyCallback(window, Design::key_callback);
-    camera.lookAt(verso_here::numbers::vector<float,3>(0,5,10),verso_here::numbers::vector<float,3>(0,0,0));
+    camera.lookAt(verso_here::numbers::vector<float,3>(0,1,1),verso_here::numbers::vector<float,3>(0,0,0));
+    triangle = verso_here::numbers::Scalene<float>(verso_here::numbers::vector<float,3>(0,0,0),1.5,0.8);
+
+    glGenTextures(1, &triangle_texture);
+    glBindTexture(GL_TEXTURE_2D, triangle_texture);
+     // set the texture wrapping parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // set texture filtering parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // load image, create texture and generate mipmaps
+    int width, height, nrChannels;
+    stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
+    // The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
+    unsigned char *data = stbi_load("tests/verso/resources/textures/brickwall.jpg", &width, &height, &nrChannels, 0);
+    if (data)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    else
+    {
+        std::cout << "Failed to load texture" << std::endl;
+    }
+    stbi_image_free(data);
 
 
     return true;
@@ -1568,10 +1599,12 @@ void Design::render()
     //glMatrixMode (GL_PROJECTION);
     //glLoadIdentity ();
     //glFrustum (-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
-    camera.perspective(90,WINDOW(window,Develop)->aspect(),5,20);
+    camera.perspective(90,WINDOW(window,Develop)->aspect(),0.5,30);
     glMatrixMode (GL_MODELVIEW);
 
     plane.create();
+
+    if(action_draw)(this->*action_draw)();
 
     glFlush();
     // Forzamos el dibujado
@@ -1631,11 +1664,19 @@ void Design::key_callback(GLFWwindow* window, int key, int scancode, int action,
     {
         if(WINDOW(window,Develop)->design.camera_transform == 'T') WINDOW(window,Develop)->design.camera.walking_up(1.5);
     }
+    else if(GLFW_KEY_3 == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Cambiado tirnago : Isoceles\n";
+        WINDOW(window,Develop)->design.action_draw = &Design::draw_triangle;
+    }
 
 
 }
 
-
+ void Design::draw_triangle()
+ {
+    verso_here::polygon(triangle,triangle_texture);
+ }
 
 
 

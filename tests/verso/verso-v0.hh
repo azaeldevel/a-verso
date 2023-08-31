@@ -292,12 +292,18 @@ private:
     verso_here::v1::Camera camera;
     char camera_transform;
     verso_here::gl::Plane<GLdouble> plane;
+    verso_here::numbers::Triangle<float> triangle;
+
+    GLuint triangle_texture;
 
 public:
     Design();
     bool active();
     virtual void render();
     virtual void clean();
+
+    void (Design::*action_draw)();
+    void draw_triangle();
 
 };
 

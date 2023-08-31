@@ -63,6 +63,7 @@ namespace oct::verso::v0
 
     void polygon(const numbers::Triangle<float,2,float>& triangle);
     void polygon(const numbers::Triangle<float,3,float>& triangle);
+    void polygon(const numbers::Triangle<float,3,float>& triangle,GLuint);
     void polygon_triangle(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const RGBA<unsigned char>& c);
     void polygon_triangle(const numbers::Line<float,3,float>& base, const numbers::vector<float,3,float>& cusp, const RGBA<unsigned char>& c);
 

@@ -174,6 +174,27 @@ namespace oct::verso::v0
             // Coordenadas del tercer vértice
         glEnd();
     }
+    void polygon(const numbers::Triangle<float,3,float>& triangle,GLuint texture)
+    {
+        glBegin(GL_TRIANGLES);
+            // Dibujamos un triángulo
+            //glColor3f(1.0,0.0,0.0);
+            // Color del primer vértice: rojo
+            glTexCoord2d(triangle[0].x(),triangle[0].y());
+            glVertex3f(triangle[0].x(),triangle[0].y(),triangle[0].z());
+            // Coordenadas del primer vértice
+            //glColor3f(0.0,1.0,0.0);
+            // Color del segundo vértice: verde
+            glTexCoord2d(triangle[1].x(),triangle[1].y());
+            glVertex3f(triangle[1].x(),triangle[1].y(),triangle[1].z());
+            // Coordenadas del segundo vértice
+            //glColor3f(0.0,0.0,1.0);
+            // Color del tercer vértice: azúl
+            glTexCoord2d(triangle[2].x(),triangle[2].y());
+            glVertex3f(triangle[2].x(),triangle[2].y(),triangle[2].z());
+            // Coordenadas del tercer vértice
+        glEnd();
+    }
     void polygon(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2)
     {
         glBegin(GL_TRIANGLES);
