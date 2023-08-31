@@ -90,15 +90,10 @@ namespace oct::verso::v0::gl
         typedef Biped<C> BASE;
 
     protected:
-        numbers::vector<C,3> cusp,center,head,neck_top,neck_base,shoulder_left,shoulder_right,pelvis,knee_left,knee_right,ankle_left,ankle_right;
+        numbers::vector<C,3> cusp,center,head,neck_top,neck_base,shoulder_left,shoulder_right,pelvis,knee_left,knee_right,ankle_left,ankle_right,back_pelvis;
         C head_size;
         C unit;
-        //numbers::vector<C,3> pivot_shoulder,pivot_pelvis;
-        enum class Pivots
-        {
-            cusp,
-
-        };
+        C mark_size = 0.03;
 
         void pivoting(C tall)
         {
@@ -139,14 +134,17 @@ namespace oct::verso::v0::gl
             ankle_left = 0;
             ankle_left.y() -= unit * C(2);
 
-            /*center = 0;
-            center.x() = C(0.8) * unit;
-            center.y() = C(-4) * unit;*/
+            back_pelvis = 0;
+            back_pelvis.x() = C(0.8) * unit;
+            back_pelvis.y() = C(4) * unit;
 
 
-            /*knee_right = 0;
+            knee_right = 0;
             knee_right.y() -= unit * C(2);
-            knee_right.x() += unit * C(0.8);*/
+            knee_right.x() += unit * C(0.8);
+
+            ankle_right = 0;
+            ankle_right.y() -= unit * C(2);
         }
 
     public:

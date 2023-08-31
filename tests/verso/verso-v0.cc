@@ -1643,10 +1643,10 @@ bool Character::active()
     glEnable(GL_DEPTH_TEST);
     //glClearDepth(1.0);
     verso_here::gl::color(verso_here::colors::white);
-    verso_here::gl::clear(verso_here::colors::black);
+    verso_here::gl::clear(verso_here::colors::empty);
 
     glfwSetKeyCallback(window, Character::key_callback);
-    camera.lookAt(verso_here::numbers::vector<float,3>(1,1,3),verso_here::numbers::vector<float,3>(0,0,0));
+    camera.lookAt(verso_here::numbers::vector<float,3>(0,1,3),verso_here::numbers::vector<float,3>(0,0,0));
 
     return true;
 }

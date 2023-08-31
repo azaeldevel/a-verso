@@ -33,10 +33,10 @@ namespace oct::verso::v0::architect
             head.create(BASE::unit,30,30);
 
             gl::translate(BASE::shoulder_left);
-            mark.create(0.01,10,10);
+            mark.create(BASE::mark_size,10,10);
 
             gl::translate(BASE::shoulder_right);
-            mark.create(0.01,10,10);
+            mark.create(BASE::mark_size,10,10);
 
             gl::translate(BASE::center);
 
@@ -44,15 +44,18 @@ namespace oct::verso::v0::architect
             mark.create(BASE::unit * 1.5,10,10);
 
             gl::translate(BASE::knee_left);
-            mark.create(0.01,10,10);
+            mark.create(BASE::mark_size,10,10);
 
             gl::translate(BASE::ankle_left);
-            mark.create(0.01,10,10);
+            mark.create(BASE::mark_size,10,10);
 
-            gl::translate(BASE::center);
+            gl::translate(BASE::back_pelvis);
 
-            //gl::translate(BASE::knee_right);
-            //mark.create(0.01,10,10);
+            gl::translate(BASE::knee_right);
+            mark.create(BASE::mark_size,10,10);
+
+            gl::translate(BASE::ankle_right);
+            mark.create(BASE::mark_size,10,10);
 
         }
 
