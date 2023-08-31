@@ -51,7 +51,7 @@ namespace oct::verso::v0
     template<size_t P>void outline(const numbers::Circle<float,3,P>& circle,const RGBA<unsigned char>& color)
     {
         glBegin(GL_LINE_LOOP);
-            gl::active(color);
+            gl::color(color);
             for(size_t i = 1; i < circle.size(); i++)
             {
                 //glVertex3f(circle[i-1].x(),circle[i-1].y(),circle[i-1].z());

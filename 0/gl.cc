@@ -14,13 +14,15 @@ namespace oct::verso::v0::gl
     {
         glTranslatef(vec.x(),vec.y(),vec.z());
     }
-    void active(const Color<unsigned char,3>& color)
+
+
+    void color(const Color<unsigned char,3>& color)
     {
-        glColor3b(color[0],color[1],color[2]);
+        glColor3ub(color[0],color[1],color[2]);
     }
-    void active(const Color<unsigned char,4>& color)
+    void color(const Color<unsigned char,4>& color)
     {
-        glColor4b(color[0],color[1],color[2],color[3]);
+        glColor4ub(color[0],color[1],color[2],color[3]);
     }
 
 

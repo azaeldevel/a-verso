@@ -178,6 +178,7 @@ namespace oct::verso::v0
         //themes
         //static const Color<int> rgba{255,255,255,1};
         static const RGBA<unsigned char> coordenade {200,200,180,50};
+        static const RGBA<unsigned char> empty {10,20,18,255};
     }
 
 }

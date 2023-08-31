@@ -1229,7 +1229,7 @@ bool Triangles::active()
     //camera.lookAt();
 
     verso_here::gl::clear(verso_here::colors::white);
-    verso_here::gl::active(verso_here::colors::black);
+    verso_here::gl::color(verso_here::colors::black);
 
     return true;
 }
@@ -1642,11 +1642,11 @@ bool Character::active()
     //glDepthFunc(GL_LEQUAL);
     glEnable(GL_DEPTH_TEST);
     //glClearDepth(1.0);
-    glClearColor(0, 0, 0, 1);
+    verso_here::gl::color(verso_here::colors::white);
+    verso_here::gl::clear(verso_here::colors::black);
 
     glfwSetKeyCallback(window, Character::key_callback);
-    camera.lookAt(verso_here::numbers::vector<float,3>(0,0,3),verso_here::numbers::vector<float,3>(0,0,0));
-
+    camera.lookAt(verso_here::numbers::vector<float,3>(1,1,3),verso_here::numbers::vector<float,3>(0,0,0));
 
     return true;
 }
@@ -1665,7 +1665,6 @@ void Character::render()
     glMatrixMode (GL_MODELVIEW);
 
     plane.create();
-    //glRotated(90,0,0,1);
 
     architect.create(1.80);
 

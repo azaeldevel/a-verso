@@ -200,7 +200,7 @@ namespace oct::verso::v0::gl
 
             glLineWidth(1);
             glBegin(GL_LINES);
-                gl::active(colors::coordenade);
+                gl::color(colors::coordenade);
                 for(int i = -high_media; i < high_media; i++)
                 {
                     if(i == 0) continue;
@@ -221,15 +221,15 @@ namespace oct::verso::v0::gl
 
             glLineWidth(2.5);
             glBegin(GL_LINES);
-                gl::active(colors::red);
+                gl::color(colors::red);
                 glVertex3f(-width_media,0,0);
                 glVertex3f(width_media,0,0);
-                gl::active(colors::green);
+                gl::color(colors::green);
                 glVertex3f(0,0,-width_media);
                 glVertex3f(0,0,width_media);
             glEnd();
 
-            gl::active(colors::white);
+            gl::color(colors::white);
             O.create(1.0f/64.0f,10,10);
         }
 

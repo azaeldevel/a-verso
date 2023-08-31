@@ -11,10 +11,10 @@ namespace oct::verso::v0::gl
     void translate(const numbers::vector<float,3,float>&);
     void translate(const numbers::vector<double,3,double>&);
 
-    void active(const Color<float,3>&);
-    void active(const Color<float,4>&);
-    void active(const Color<unsigned char,3>&);
-    void active(const Color<unsigned char,4>&);
+    void color(const Color<float,3>&);
+    void color(const Color<float,4>&);
+    void color(const Color<unsigned char,3>&);
+    void color(const Color<unsigned char,4>&);
 
 
     void clear(const Color<unsigned char,3>&);
