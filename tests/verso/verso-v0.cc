@@ -758,6 +758,7 @@ void Light::handleEvents()
 
 bool JGCI_1::active()
 {
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
     glfwSetKeyCallback(window, JGCI_1::key_callback);
 
     return true;
@@ -800,6 +801,7 @@ void JGCI_1::clean()
 {
     glMatrixMode(GL_PROJECTION);
     glMatrixMode(GL_MODELVIEW);
+    glPopAttrib();
 }
 
 void JGCI_1::update()
@@ -821,7 +823,7 @@ void JGCI_1::key_callback(GLFWwindow* window, int key, int scancode, int action,
 bool JGCI_2::active()
 {
     glfwSetKeyCallback(window, JGCI_2::key_callback);
-
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
 
     return true;
 }
@@ -861,6 +863,7 @@ void JGCI_2::clean()
 {
     glMatrixMode(GL_PROJECTION);
     glMatrixMode(GL_MODELVIEW);
+    glPopAttrib();
 }
 
 void JGCI_2::update()
@@ -881,9 +884,10 @@ void JGCI_2::key_callback(GLFWwindow* window, int key, int scancode, int action,
 
 bool JGCI_3::active()
 {
-    glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
-    glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
-    glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+    //glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
+    //glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
+    //glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
 
     glDepthFunc(GL_LEQUAL);
     glEnable(GL_DEPTH_TEST);
@@ -945,9 +949,10 @@ void JGCI_3::clean()
     glMatrixMode(GL_PROJECTION);
     glMatrixMode(GL_MODELVIEW);
     glDisable(GL_DEPTH_TEST);
-    glEnable(last_GL_DEPTH_TEST);
-    glDepthFunc(last_GL_DEPTH_FUNC);
-    glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+    //glEnable(last_GL_DEPTH_TEST);
+    //glDepthFunc(last_GL_DEPTH_FUNC);
+    //glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+    glPopAttrib();
 }
 
 void JGCI_3::update()
@@ -977,9 +982,10 @@ JGCI_4::JGCI_4() : rotate_x(0),rotate_y(0)
 }
 bool JGCI_4::active()
 {
-    glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
-    glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
-    glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+    //glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
+    //glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
+    //glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
 
     //glDepthFunc(GL_LEQUAL);
     glEnable(GL_DEPTH_TEST);
@@ -1075,16 +1081,16 @@ void JGCI_4::clean()
     //std::cout << "cleaning Cubo..\n";
     glMatrixMode(GL_PROJECTION);
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glDisable(GL_DEPTH_TEST);
-    glEnable(last_GL_DEPTH_TEST);
-    glDepthFunc(last_GL_DEPTH_FUNC);
-    glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+    //glLoadIdentity();
+    //glDisable(GL_DEPTH_TEST);
+    //glEnable(last_GL_DEPTH_TEST);
+    //glDepthFunc(last_GL_DEPTH_FUNC);
+    //glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
 }
 
 void JGCI_4::update()
 {
-
+    glPopAttrib();
 }
 
 
@@ -1127,12 +1133,13 @@ JGCI_5::JGCI_5() : tri1(verso_here::numbers::vector<float>(0,0,0), 1.0)
 }
 bool JGCI_5::active()
 {
-    glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
-    glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
-    glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+    //glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
+    //glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
+    //glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
 
     //glDepthFunc(GL_LEQUAL);
-    glEnable(GL_DEPTH_TEST);
+    //glEnable(GL_DEPTH_TEST);
     //glClearDepth(1.0);
 
 
@@ -1168,11 +1175,12 @@ void JGCI_5::clean()
     //std::cout << "cleaning Cubo..\n";
     glMatrixMode(GL_PROJECTION);
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glDisable(GL_DEPTH_TEST);
-    glEnable(last_GL_DEPTH_TEST);
-    glDepthFunc(last_GL_DEPTH_FUNC);
-    glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+    //glLoadIdentity();
+    //glDisable(GL_DEPTH_TEST);
+    //glEnable(last_GL_DEPTH_TEST);
+    //glDepthFunc(last_GL_DEPTH_FUNC);
+    //glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+    glPopAttrib();
 }
 
 void JGCI_5::update()
@@ -1205,9 +1213,10 @@ Triangles::Triangles() : equilateral(verso_here::numbers::vector<float>(0,0,0), 
 }
 bool Triangles::active()
 {
-    glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
-    glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
-    glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+    //glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
+    //glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
+    //glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
 
     //glDepthFunc(GL_LEQUAL);
     glEnable(GL_DEPTH_TEST);
@@ -1253,11 +1262,12 @@ void Triangles::clean()
 {
     glMatrixMode(GL_PROJECTION);
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glDisable(GL_DEPTH_TEST);
-    glEnable(last_GL_DEPTH_TEST);
-    glDepthFunc(last_GL_DEPTH_FUNC);
-    glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+    //glLoadIdentity();
+    //glDisable(GL_DEPTH_TEST);
+    //glEnable(last_GL_DEPTH_TEST);
+    //glDepthFunc(last_GL_DEPTH_FUNC);
+    //glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+    glPopAttrib();
 }
 void Triangles::update()
 {
@@ -1342,9 +1352,10 @@ Shapes::Shapes() : equilateral(verso_here::numbers::vector<float>(0,0,0), 1.0),r
 }
 bool Shapes::active()
 {
-    glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
-    glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
-    glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+    //glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
+    //glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
+    //glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
 
     //glDepthFunc(GL_LEQUAL);
     glEnable(GL_DEPTH_TEST);
@@ -1392,11 +1403,12 @@ void Shapes::clean()
 {
     glMatrixMode(GL_PROJECTION);
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glDisable(GL_DEPTH_TEST);
-    glEnable(last_GL_DEPTH_TEST);
-    glDepthFunc(last_GL_DEPTH_FUNC);
-    glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+    //glLoadIdentity();
+    //glDisable(GL_DEPTH_TEST);
+    //glEnable(last_GL_DEPTH_TEST);
+    //glDepthFunc(last_GL_DEPTH_FUNC);
+    //glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+    glPopAttrib();
 }
 void Shapes::update()
 {
@@ -1529,9 +1541,10 @@ Design::Design() : camera_transform('T')
 }
 bool Design::active()
 {
-    glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
-    glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
-    glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+    //glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
+    //glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
+    //glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
 
     //glDepthFunc(GL_LEQUAL);
     glEnable(GL_DEPTH_TEST);
@@ -1568,11 +1581,12 @@ void Design::clean()
 {
     glMatrixMode(GL_PROJECTION);
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glDisable(GL_DEPTH_TEST);
-    glEnable(last_GL_DEPTH_TEST);
-    glDepthFunc(last_GL_DEPTH_FUNC);
-    glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+    //glLoadIdentity();
+    //glDisable(GL_DEPTH_TEST);
+    //glEnable(last_GL_DEPTH_TEST);
+    //glDepthFunc(last_GL_DEPTH_FUNC);
+    //glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+    glPopAttrib();
 }
 void Design::update()
 {
@@ -1635,9 +1649,10 @@ Character::Character() : camera_transform('T')
 }
 bool Character::active()
 {
-    glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
-    glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
-    glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
+    //glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
+    //glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
+    //glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
 
     //glDepthFunc(GL_LEQUAL);
     glEnable(GL_DEPTH_TEST);
@@ -1676,15 +1691,15 @@ void Character::clean()
 {
     glMatrixMode(GL_PROJECTION);
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glDisable(GL_DEPTH_TEST);
-    glEnable(last_GL_DEPTH_TEST);
-    glDepthFunc(last_GL_DEPTH_FUNC);
-    glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+    //glLoadIdentity();
+    //glDisable(GL_DEPTH_TEST);
+    //glEnable(last_GL_DEPTH_TEST);
+    //glDepthFunc(last_GL_DEPTH_FUNC);
+    //glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+    glPopAttrib();
 }
 void Character::update()
 {
-
 }
 
 
