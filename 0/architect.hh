@@ -28,7 +28,7 @@ namespace oct::verso::v0::architect
         void create(C tall)
         {
             BASE::pivoting(tall);
-            colors::white.active();
+            gl::active(colors::white);
             gl::translate(BASE::cusp);
             head.create(BASE::unit,30,30);
 

@@ -66,7 +66,7 @@ namespace oct::verso::v0
             // Coordenadas del tercer vértice
         glEnd();
     }
-    void outline_triangle(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const Color<float>& color)
+    void outline_triangle(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const RGBA<unsigned char>& color)
     {
         glBegin(GL_LINE_LOOP);
             // Dibujamos un triángulo
@@ -84,7 +84,7 @@ namespace oct::verso::v0
             // Coordenadas del tercer vértice
         glEnd();
     }
-    void outline_triangle(const numbers::Line<float,3,float>& base, const numbers::vector<float,3,float>& cusp, const Color<float>& color)
+    void outline_triangle(const numbers::Line<float,3,float>& base, const numbers::vector<float,3,float>& cusp, const RGBA<unsigned char>& color)
     {
         glBegin(GL_LINE_LOOP);
             // Dibujamos un triángulo
@@ -103,7 +103,7 @@ namespace oct::verso::v0
         glEnd();
     }
 
-    void outline(const numbers::Triangle<float,3,float>& triangle,const numbers::core::array<Color<float>,3>& colors)
+    void outline(const numbers::Triangle<float,3,float>& triangle,const numbers::core::array<RGBA<unsigned char>,3>& colors)
     {
         glBegin(GL_LINE_LOOP);
             // Dibujamos un triángulo
@@ -192,7 +192,7 @@ namespace oct::verso::v0
             // Coordenadas del tercer vértice
         glEnd();
     }
-    void polygon_triangle(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const Color<float>& color)
+    void polygon_triangle(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1, const numbers::vector<float,3,float>& p2, const RGBA<unsigned char>& color)
     {
         glBegin(GL_TRIANGLES);
             // Dibujamos un triángulo
@@ -210,7 +210,7 @@ namespace oct::verso::v0
             // Coordenadas del tercer vértice
         glEnd();
     }
-    void polygon_triangle(const numbers::Line<float,3,float>& base, const numbers::vector<float,3,float>& cusp, const Color<float>& color)
+    void polygon_triangle(const numbers::Line<float,3,float>& base, const numbers::vector<float,3,float>& cusp, const RGBA<unsigned char>& color)
     {
         glBegin(GL_TRIANGLES);
             // Dibujamos un triángulo

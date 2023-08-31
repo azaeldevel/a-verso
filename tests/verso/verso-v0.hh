@@ -1,15 +1,15 @@
 
 #include <numbers/0/shapes.hh>
 
-#include <verso-gl.hh>
-#include <draw.hh>
-#include <quadric.hh>
-#include <objects.hh>
-#include <architect.hh>
+#include <a-verso/0/verso-gl.hh>
+#include <a-verso/0/draw.hh>
+#include <a-verso/0/quadric.hh>
+#include <a-verso/0/objects.hh>
+#include <a-verso/0/architect.hh>
 
 
 
-namespace numbers_here = oct::nums::v0;
+
 namespace verso_here = oct::verso::v0;
 
 
@@ -187,7 +187,7 @@ private:
 private:
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-    numbers_here::Triangle<float> tri1;
+    verso_here::numbers::Triangle<float> tri1;
 
 public:
     JGCI_5();
@@ -211,10 +211,10 @@ private:
 private:
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-    numbers_here::Triangle<float> equilateral;
-    numbers_here::Scalene<float> rectangular;
-    numbers_here::Isosceles<float> isosceles;
-    numbers_here::Pyramid<float,3,3> pyramid;
+    verso_here::numbers::Triangle<float> equilateral;
+    verso_here::numbers::Scalene<float> rectangular;
+    verso_here::numbers::Isosceles<float> isosceles;
+    verso_here::numbers::Pyramid<float,3,3> pyramid;
     verso_here::v1::Camera camera;
 
     void (Triangles::*action_draw)();
@@ -245,12 +245,12 @@ private:
 private:
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-    numbers_here::Triangle<float> equilateral;
-    numbers_here::Scalene<float> rectangular;
-    numbers_here::Isosceles<float> isosceles;
-    numbers_here::Pyramid<float,3,3> pyramid;
-    numbers_here::Rectangle<float> rectangle;
-    numbers_here::Circle<float,3,1000> circle;
+    verso_here::numbers::Triangle<float> equilateral;
+    verso_here::numbers::Scalene<float> rectangular;
+    verso_here::numbers::Isosceles<float> isosceles;
+    verso_here::numbers::Pyramid<float,3,3> pyramid;
+    verso_here::numbers::Rectangle<float> rectangle;
+    verso_here::numbers::Circle<float,3,1000> circle;
     verso_here::gl::Disk<GLdouble> disk;
     verso_here::gl::Cilinder<GLdouble> cilinder;
     verso_here::gl::Sphere<GLdouble> sphere;

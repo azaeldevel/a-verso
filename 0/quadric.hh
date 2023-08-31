@@ -5,9 +5,9 @@
 #include <GL/glu.h>
 #include <GL/gl.h>
 
-#include "shapes.hh"
+#include "common.hh"
 
-#ifdef OCTETOS_AVERSO_TTD
+#ifdef OCTETOS_AVERSO_V0_TTD
     #include <iostream>
 #endif // OCTETOS_AVERSO_DEBUG
 

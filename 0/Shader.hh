@@ -12,6 +12,7 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <numbers/0/vector.hh>
 
 #ifdef OCTETOS_AVERSO_TTD
     #include <iostream>

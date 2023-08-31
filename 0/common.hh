@@ -1,9 +1,9 @@
 
-#ifndef OCTETOS_AVERSO_COMMON_HH
-#define OCTETOS_AVERSO_COMMON_HH
+#ifndef OCTETOS_AVERSO_V0_COMMON_HH
+#define OCTETOS_AVERSO_V0_COMMON_HH
 
 #include <numbers/0/vector.hh>
-#include <core/3/Exception.hh>
+//#include <core/3/Exception.hh>
 
 
 namespace oct::verso::v0

@@ -9,7 +9,7 @@
 #endif
 
 #include "verso-v0.hh"
-#include <draw.hh>
+#include <a-verso/0/draw.hh>
 
 
 
@@ -1121,7 +1121,7 @@ void JGCI_4::key_callback(GLFWwindow* window, int key, int scancode, int action,
 
 
 
-JGCI_5::JGCI_5() : tri1(numbers_here::vector<float>(0,0,0), 1.0)
+JGCI_5::JGCI_5() : tri1(verso_here::numbers::vector<float>(0,0,0), 1.0)
 {
 
 }
@@ -1200,7 +1200,7 @@ void JGCI_5::key_callback(GLFWwindow* window, int key, int scancode, int action,
 
 
 
-Triangles::Triangles() : equilateral(numbers_here::vector<float>(0,0,0), 1.0),rectangular(numbers_here::vector<float>(0,0,0), 1.0,1.0),isosceles(numbers_here::vector<float>(0,0,0), 1.0,1.0),pyramid(rectangular,numbers_here::vector<float>(0,0,1.0)),action_draw(&Triangles::draw_rectangeluar)
+Triangles::Triangles() : equilateral(verso_here::numbers::vector<float>(0,0,0), 1.0),rectangular(verso_here::numbers::vector<float>(0,0,0), 1.0,1.0),isosceles(verso_here::numbers::vector<float>(0,0,0), 1.0,1.0),pyramid(rectangular,verso_here::numbers::vector<float>(0,0,1.0)),action_draw(&Triangles::draw_rectangeluar)
 {
 }
 bool Triangles::active()
@@ -1227,6 +1227,8 @@ bool Triangles::active()
     //glRotatef(10,1,0,0);
     //gluLookAt(3,3,3,0,0,0,0,1,0);
     //camera.lookAt();
+
+    verso_here::gl::active(verso_here::colors::white);
 
     return true;
 }
@@ -1334,7 +1336,7 @@ void Triangles::draw_pyramid()
 
 
 
-Shapes::Shapes() : equilateral(numbers_here::vector<float>(0,0,0), 1.0),rectangular(numbers_here::vector<float>(0,0,0), 1.0,1.0),isosceles(numbers_here::vector<float>(0,0,0), 1.0,1.0),pyramid(rectangular,numbers_here::vector<float>(0,0,1.0)),action_draw(&Shapes::draw_rectangeluar)
+Shapes::Shapes() : equilateral(verso_here::numbers::vector<float>(0,0,0), 1.0),rectangular(verso_here::numbers::vector<float>(0,0,0), 1.0,1.0),isosceles(verso_here::numbers::vector<float>(0,0,0), 1.0,1.0),pyramid(rectangular,verso_here::numbers::vector<float>(0,0,1.0)),action_draw(&Shapes::draw_rectangeluar)
 {
 }
 bool Shapes::active()
@@ -1362,7 +1364,7 @@ bool Shapes::active()
     //gluLookAt(3,3,3,0,0,0,0,1,0);
     //camera.lookAt();
 
-    numbers_here::vector<float> vecO(0,0,0);
+    verso_here::numbers::vector<float> vecO(0,0,0);
     rectangle.create(vecO, 1.0);
     circle.create(vecO, 1.0);
 
@@ -1472,12 +1474,12 @@ void Shapes::key_callback(GLFWwindow* window, int key, int scancode, int action,
 
 void Shapes::draw_rectangeluar()
 {
-    verso_here::numbers::core::array<verso_here::Color<float>,3> colors;
-    colors[0] = verso_here::colors::red;
-    colors[1] = verso_here::colors::green;
-    colors[2] = verso_here::colors::blue;
-    glColor3f(1.0,1.0,1.0);
-    verso_here::outline(rectangular,colors);
+    verso_here::core::array<verso_here::RGBA<unsigned char>,3> colors_list;
+    colors_list[0] = verso_here::colors::red;
+    colors_list[1] = verso_here::colors::green;
+    colors_list[2] = verso_here::colors::blue;
+    //glColor3f(1.0,1.0,1.0);
+    verso_here::outline(rectangular,colors_list);
 }
 void Shapes::draw_isosceles()
 {

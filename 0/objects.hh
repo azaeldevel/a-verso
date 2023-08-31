@@ -3,13 +3,11 @@
 #define OCTETOS_AVERSO_OBJECTS_HH
 
 #include "quadric.hh"
+#include "gl.hh"
+#include "colors.hh"
 
 namespace oct::verso::v0::gl
 {
-
-    void translate(const numbers::vector<float,3,float>&);
-    void translate(const numbers::vector<double,3,double>&);
-
 
 
     /**
@@ -202,7 +200,7 @@ namespace oct::verso::v0::gl
 
             glLineWidth(1);
             glBegin(GL_LINES);
-                colors::coordenade.active();
+                gl::active(colors::coordenade);
                 for(int i = -high_media; i < high_media; i++)
                 {
                     if(i == 0) continue;
@@ -223,15 +221,15 @@ namespace oct::verso::v0::gl
 
             glLineWidth(2.5);
             glBegin(GL_LINES);
-                colors::red.active();
+                gl::active(colors::red);
                 glVertex3f(-width_media,0,0);
                 glVertex3f(width_media,0,0);
-                colors::green.active();
+                gl::active(colors::green);
                 glVertex3f(0,0,-width_media);
                 glVertex3f(0,0,width_media);
             glEnd();
 
-            colors::white.active();
+            gl::active(colors::white);
             O.create(1.0f/64.0f,10,10);
         }
 
@@ -239,4 +237,4 @@ namespace oct::verso::v0::gl
 
 }
 
-#endif // OCTETOS_AVERSO_SHAPES_HH
+#endif

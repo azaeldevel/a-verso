@@ -7,7 +7,7 @@
 #include <vector>
 #include <numbers/0/vector.hh>
 
-#include "color.hh"
+#include "colors.hh"
 
 #ifdef OCTETOS_AVERSO_TTD
     #include <iostream>
@@ -26,9 +26,6 @@ namespace oct::verso::v0
     };
 
 
-
-    void active(const Color<float,3>&);
-    void active(const Color<float,4>&);
 
 
     //typedef glm::vector<float,2,glm::packed_highp> vec2;

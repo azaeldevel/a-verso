@@ -8,7 +8,7 @@
     #include <iostream>
 #endif
 
-
+#include "common.hh"
 #include <core/3/Exception.hh>
 #include "shapes.hh"
 #include <numbers/0/matrix.hh>

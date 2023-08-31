@@ -84,7 +84,7 @@
 					<Add option="-g `pkg-config freetype2 --cflags`" />
 					<Add option="-DOCTETOS_AVERSO_V0_TTD" />
 					<Add option="-DOCTETOS_NUMBERS_V0_TTD" />
-					<Add directory="0" />
+					<Add directory="/home/azael/develop" />
 				</Compiler>
 				<Linker>
 					<Add option="`pkg-config freetype2 --libs` `pkg-config glew --libs` `pkg-config glfw3 --libs`" />
@@ -110,7 +110,7 @@
 			<Add option="-Wall -pedantic --std=c++20" />
 			<Add option="-DOCTETOS_VERSO_OPENGL_MAJOR=2" />
 			<Add option="-DOCTETOS_VERSO_OPENGL_MINOR=0" />
-			<Add directory="/home/azael/develop/octetos" />
+			<Add directory="../../octetos" />
 		</Compiler>
 		<Unit filename="0/Camera.cc">
 			<Option target="verso-light" />
@@ -154,6 +154,12 @@
 		<Unit filename="0/draw.hh">
 			<Option target="devel-verso" />
 		</Unit>
+		<Unit filename="0/gl.cc">
+			<Option target="devel-verso" />
+		</Unit>
+		<Unit filename="0/gl.hh">
+			<Option target="devel-verso" />
+		</Unit>
 		<Unit filename="0/objects.cc">
 			<Option target="devel-verso" />
 		</Unit>
@@ -166,8 +172,6 @@
 		<Unit filename="0/quadric.hh">
 			<Option target="devel-verso" />
 		</Unit>
-		<Unit filename="0/shapes.cc" />
-		<Unit filename="0/shapes.hh" />
 		<Unit filename="0/verso-gl.cc">
 			<Option target="devel-verso" />
 		</Unit>
@@ -179,45 +183,6 @@
 		</Unit>
 		<Unit filename="0/verso.hh">
 			<Option target="devel-verso" />
-		</Unit>
-		<Unit filename="tests/develop-2-Game.cc">
-			<Option target="tutorial-sdl-dbg" />
-		</Unit>
-		<Unit filename="tests/develop-2-Game.hh">
-			<Option target="tutorial-sdl-dbg" />
-		</Unit>
-		<Unit filename="tests/develop-2-main.cc">
-			<Option target="tutorial-sdl-dbg" />
-		</Unit>
-		<Unit filename="tests/develop-3-Game.cc">
-			<Option target="tutorial-opengl-dbg" />
-		</Unit>
-		<Unit filename="tests/develop-3-Game.hh">
-			<Option target="tutorial-opengl-dbg" />
-		</Unit>
-		<Unit filename="tests/develop-3-main.cc">
-			<Option target="tutorial-opengl-dbg" />
-		</Unit>
-		<Unit filename="tests/develop-Verso-main.cc">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="tests/develop-Verso.cc">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="tests/develop-Verso.hh">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="tests/ligth/main.cc">
-			<Option target="verso-light" />
-		</Unit>
-		<Unit filename="tests/ligth/verso.cc">
-			<Option target="verso-light" />
-		</Unit>
-		<Unit filename="tests/ligth/verso.hh">
-			<Option target="verso-light" />
-		</Unit>
-		<Unit filename="tests/main.cc">
-			<Option target="testing-dbg-v0" />
 		</Unit>
 		<Unit filename="tests/v0.cc">
 			<Option target="testing-dbg-v0" />
@@ -232,9 +197,6 @@
 			<Option target="devel-verso" />
 		</Unit>
 		<Unit filename="tests/verso/verso-v0.hh">
-			<Option target="devel-verso" />
-		</Unit>
-		<Unit filename="tests/verso/verso-v0hh">
 			<Option target="devel-verso" />
 		</Unit>
 		<Extensions>

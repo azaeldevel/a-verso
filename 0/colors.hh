@@ -6,10 +6,10 @@
 
 namespace oct::verso::v0
 {
-    template<numbers::number T = float, size_t L = 4> class Color : public numbers::sequence<T,L>
+    template<numbers::number T = float, size_t L = 4> class Color : public core::array<T,L>
     {
     private:
-        typedef numbers::sequence<T,L> BASE;
+        typedef core::array<T,L> BASE;
     public:
         Color() = default;
         constexpr Color(const T& v) : BASE(v)
@@ -102,11 +102,12 @@ namespace oct::verso::v0
         {
         }
 
-
+        /*
         void active() const
         {
             glColor3f(BASE::data[0],BASE::data[1],BASE::data[2]);
         }
+        */
     };
 
     template<numbers::number T> class RGBA : public Color<T,4>
@@ -126,10 +127,12 @@ namespace oct::verso::v0
         }
 
 
+        /*
         void active() const
         {
             glColor4f(BASE::data[0],BASE::data[1],BASE::data[2],BASE::data[3]);
         }
+        */
 
 
         constexpr T& r()
@@ -165,18 +168,18 @@ namespace oct::verso::v0
 
     namespace colors
     {
-        static const RGBA<float> red{1.0f,0.0f,0.0f,1};
-        static const RGBA<float> green{0.0f,1.0f,0.0f,1};
-        static const RGBA<float> blue{0.0f,0.0f,1.0f,1};
-        static const RGBA<float> black{0.0f,0.0f,0.0f,1};
-        static const RGBA<float> white{1.0f,1.0f,1.0f,1};
-        static const RGBA<float> gray{0.75f,0.75.f,0.75f,1};
+        static const RGBA<unsigned char> red    {255,0,0,255};
+        static const RGBA<unsigned char> green  {0,255,0,255};
+        static const RGBA<unsigned char> blue   {0,0,255,255};
+        static const RGBA<unsigned char> black  {0,0,0,255};
+        static const RGBA<unsigned char> white  {255,255,255,255};
+        static const RGBA<unsigned char> gray   {200,200,200,255};
 
         //themes
         //static const Color<int> rgba{255,255,255,1};
-        static const RGBA<float> coordenade{0.81f,0.8f,0.7f,0.2f};
+        static const RGBA<unsigned char> coordenade {200,200,180,50};
     }
 
 }
 
-#endif // OCTETOS_AVERSO_AVERSO_HH
+#endif

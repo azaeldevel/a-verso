@@ -12,9 +12,9 @@
 //#include FT_FREETYPE_H
 //#include <map>
 
-#include <shapes.hh>
-#include <Shader.hh>
-#include <Camera.hh>
+//#include <shapes.hh>
+#include <a-verso/0/Shader.hh>
+#include <a-verso/0/Camera.hh>
 
 #include "verso.hh"
 #include "Camera.hh"
