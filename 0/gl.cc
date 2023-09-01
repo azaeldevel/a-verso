@@ -1,6 +1,6 @@
 
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
 
 #include "gl.hh"
 
@@ -34,6 +34,24 @@ namespace oct::verso::v0::gl
     {
         glClearColor(color[0],color[1],color[2],color[3]);
     }
+
+    GLint get_attrib(GLuint program, const char *name)
+    {
+        GLint attribute = glGetAttribLocation(program, name);
+        if(attribute == -1)
+            fprintf(stderr, "Could not bind attribute %s\n", name);
+        return attribute;
+    }
+
+    GLint get_uniform(GLuint program, const char *name)
+    {
+        GLint uniform = glGetUniformLocation(program, name);
+        if(uniform == -1)
+            fprintf(stderr, "Could not bind uniform %s\n", name);
+        return uniform;
+    }
+
+
 }
 
 

@@ -21,6 +21,8 @@ namespace oct::verso::v0::gl
     void clear(const Color<unsigned char,4>&);
 
 
+    GLint get_attrib(GLuint program, const char *name);
+    GLint get_uniform(GLuint program, const char *name);
 }
 
 #endif // OCTETOS_AVERSO_SHAPES_HH

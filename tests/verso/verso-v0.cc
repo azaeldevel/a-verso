@@ -2,6 +2,8 @@
 #include <chrono>
 #include <thread>
 #include <filesystem>
+#include <map>
+
 
 #if defined(_WIN32) || defined(_WIN64)
     #include <Windows.h>
@@ -11,10 +13,11 @@
 
 #include "verso-v0.hh"
 #include <a-verso/0/draw.hh>
-
+#include <a-verso/0/gl.hh>
 #include "stb/stb_image.h"
 
-
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 
 
@@ -1538,6 +1541,90 @@ void Shapes::draw_sphere()
 
 
 
+struct point {
+	GLfloat x;
+	GLfloat y;
+	GLfloat s;
+	GLfloat t;
+};
+
+GLint attribute_coord;
+GLint uniform_tex;
+GLint uniform_color;
+GLuint vbo;
+FT_Face face;
+FT_Library ft;
+const char *fontfilename;
+
+
+/**
+ * Render text using the currently loaded font and currently set font size.
+ * Rendering starts at coordinates (x, y), z is always 0.
+ * The pixel coordinates that the FreeType2 library uses are scaled by (sx, sy).
+ */
+void render_text(const char *text, float x, float y, float sx, float sy) {
+	const char *p;
+	FT_GlyphSlot g = face->glyph;
+
+	/* Create a texture that will be used to hold one "glyph" */
+	GLuint tex;
+
+	glActiveTexture(GL_TEXTURE0);
+	glGenTextures(1, &tex);
+	glBindTexture(GL_TEXTURE_2D, tex);
+	glUniform1i(uniform_tex, 0);
+
+	/* We require 1 byte alignment when uploading texture data */
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+	/* Clamping to edges is important to prevent artifacts when scaling */
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+	/* Linear filtering usually looks best for text */
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	/* Set up the VBO for our vertex data */
+	glEnableVertexAttribArray(attribute_coord);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glVertexAttribPointer(attribute_coord, 4, GL_FLOAT, GL_FALSE, 0, 0);
+
+	/* Loop through all characters */
+	for (p = text; *p; p++) {
+		/* Try to load and render the character */
+		if (FT_Load_Char(face, *p, FT_LOAD_RENDER))
+			continue;
+
+		/* Upload the "bitmap", which contains an 8-bit grayscale image, as an alpha texture */
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, g->bitmap.width, g->bitmap.rows, 0, GL_ALPHA, GL_UNSIGNED_BYTE, g->bitmap.buffer);
+
+		/* Calculate the vertex and texture coordinates */
+		float x2 = x + g->bitmap_left * sx;
+		float y2 = -y - g->bitmap_top * sy;
+		float w = g->bitmap.width * sx;
+		float h = g->bitmap.rows * sy;
+
+		point box[4] = {
+			{x2, -y2, 0, 0},
+			{x2 + w, -y2, 1, 0},
+			{x2, -y2 - h, 0, 1},
+			{x2 + w, -y2 - h, 1, 1},
+		};
+
+		/* Draw the character on the screen */
+		glBufferData(GL_ARRAY_BUFFER, sizeof box, box, GL_DYNAMIC_DRAW);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+		/* Advance the cursor to the start of the next character */
+		x += (g->advance.x >> 6) * sx;
+		y += (g->advance.y >> 6) * sy;
+	}
+
+	glDisableVertexAttribArray(attribute_coord);
+	glDeleteTextures(1, &tex);
+}
+
 
 
 Design::Design() : camera_transform('T')
@@ -1556,10 +1643,14 @@ bool Design::active()
     //glClearDepth(1.0);
     glClearColor(0, 0, 0, 1);
     glEnable(GL_TEXTURE_2D);
+    //glEnable(GL_CULL_FACE);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glfwSetKeyCallback(window, Design::key_callback);
     camera.lookAt(verso_here::numbers::vector<float,3>(0,1,1),verso_here::numbers::vector<float,3>(0,0,0));
-    triangle = verso_here::numbers::Scalene<float>(verso_here::numbers::vector<float,3>(0,0,0),1.5,0.8);
+    triangle = verso_here::numbers::Scalene<float>(verso_here::numbers::vector<float,3>(0,0,0),1,1.5);
+    //projection = camera.projection();
 
     glGenTextures(1, &triangle_texture);
     glBindTexture(GL_TEXTURE_2D, triangle_texture);
@@ -1585,6 +1676,30 @@ bool Design::active()
     }
     stbi_image_free(data);
 
+    //
+    /* Initialize the FreeType2 library */
+	if (FT_Init_FreeType(&ft)) {
+		fprintf(stderr, "Could not init freetype library\n");
+		return 0;
+	}
+
+	/* Load a font */
+	fontfilename = "tests/verso/resources/fonts/Antonio-Regular.ttf";
+	if (FT_New_Face(ft, fontfilename, 0, &face)) {
+		fprintf(stderr, "Could not open font %s\n", fontfilename);
+		return 0;
+	}
+
+    shader_text.build(std::filesystem::path("tests/verso/resources/shaders/text.v.glsl"),std::filesystem::path("tests/verso/resources/shaders/text.f.glsl"));
+    attribute_coord = verso_here::gl::get_attrib(shader_text, "coord");
+	uniform_tex = verso_here::gl::get_uniform(shader_text, "tex");
+	uniform_color = verso_here::gl::get_uniform(shader_text, "color");
+
+	if(attribute_coord == -1 || uniform_tex == -1 || uniform_color == -1)
+		return 0;
+
+	// Create the vertex buffer object
+	glGenBuffers(1, &vbo);
 
     return true;
 }
@@ -1600,6 +1715,7 @@ void Design::render()
     //glLoadIdentity ();
     //glFrustum (-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
     camera.perspective(90,WINDOW(window,Develop)->aspect(),0.5,30);
+    //camera.orthogonal(0.0f, 0.0f, 0.0f, 0.0f, 0.5f, 20.0f);
     glMatrixMode (GL_MODELVIEW);
 
     plane.create();
@@ -1669,6 +1785,11 @@ void Design::key_callback(GLFWwindow* window, int key, int scancode, int action,
         //std::cout << "Cambiado tirnago : Isoceles\n";
         WINDOW(window,Develop)->design.action_draw = &Design::draw_triangle;
     }
+    else if(GLFW_KEY_1 == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Cambiado tirnago : Isoceles\n";
+        WINDOW(window,Develop)->design.action_draw = &Design::draw_text;
+    }
 
 
 }
@@ -1677,7 +1798,25 @@ void Design::key_callback(GLFWwindow* window, int key, int scancode, int action,
  {
     verso_here::polygon(triangle,triangle_texture);
  }
+ void Design::draw_text()
+ {
+	shader_text.use();
 
+    /* Enable blending, necessary for our alpha texture */
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	GLfloat black[4] = { 0, 0, 0, 1 };
+	GLfloat red[4] = { 1, 0, 0, 1 };
+	GLfloat transparent_green[4] = { 0, 1, 0, 0.5 };
+
+	/* Set font size to 48 pixels, color to black */
+	FT_Set_Pixel_Sizes(face, 0, 48);
+	glUniform4fv(uniform_color, 1, red);
+
+
+    render_text("Azael R - Developer...", 0, 0, 100, 100);
+ }
 
 
 

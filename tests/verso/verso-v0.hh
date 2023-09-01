@@ -293,6 +293,8 @@ private:
     char camera_transform;
     verso_here::gl::Plane<GLdouble> plane;
     verso_here::numbers::Triangle<float> triangle;
+    verso_here::numbers::matrix<float,4,4,float> projection;
+    verso_here::Shader shader_text;
 
     GLuint triangle_texture;
 
@@ -304,6 +306,7 @@ public:
 
     void (Design::*action_draw)();
     void draw_triangle();
+    void draw_text();
 
 };
 

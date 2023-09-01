@@ -19,6 +19,11 @@ namespace oct::verso::v0::v1
     {
     }
 
+    void Camera::lookAt()
+    {
+        glLoadIdentity();
+        gluLookAt((double)position.x(),(double)position.y(),(double)position.z(),(double)target.x(),(double)target.y(),(double)target.z(),(double)up.x(),(double)up.y(),(double)up.z());
+    }
     void Camera::lookAt(const numbers::vector<float,3>& p,const numbers::vector<float,3>& t)
     {
         position = p;
@@ -30,11 +35,27 @@ namespace oct::verso::v0::v1
         glLoadIdentity();
         gluLookAt((double)position.x(),(double)position.y(),(double)position.z(),(double)target.x(),(double)target.y(),(double)target.z(),(double)up.x(),(double)up.y(),(double)up.z());
     }
-    void Camera::lookAt()
+    /*numbers::matrix<float,4,4,float> Camera::projection()
     {
-        glLoadIdentity();
-        gluLookAt((double)position.x(),(double)position.y(),(double)position.z(),(double)target.x(),(double)target.y(),(double)target.z(),(double)up.x(),(double)up.y(),(double)up.z());
-    }
+        numbers::vector<float,3, float> const f(numbers::normalize(target - position));
+		numbers::vector<float,3, float> const s(numbers::normalize(up * f));
+		numbers::vector<float,3, float> const u(f * s);
+
+		numbers::matrix<float,4,4,float> Result(1);
+		Result[0][0] = s.x();
+		Result[1][0] = s.y();
+		Result[2][0] = s.z();
+		Result[0][1] = u.x();
+		Result[1][1] = u.y();
+		Result[2][1] = u.z();
+		Result[0][2] = f.x();
+		Result[1][2] = f.y();
+		Result[2][2] = f.z();
+		Result[3][0] = -numbers::scalar(s, position);
+		Result[3][1] = -numbers::scalar(u, position);
+		Result[3][2] = -numbers::scalar(f, position);
+		return Result;
+    }*/
 
     void Camera::walking_front(float speed)
     {
@@ -72,39 +93,13 @@ namespace oct::verso::v0::v1
         glLoadIdentity ();
         gluPerspective(fov,aspect,near,far);
     }
-
-    /*numbers::matrix<float,4,4,float>& Camera::lookAt()
+    void Camera::orthogonal(double left,double right,double bottom,double top,double nearVal,double farVal)
     {
-        numbers::matrix<float,4,4,float> pos(0),trans(0);
-        //vector rigth
-        trans[0][0] = rigth[0];
-        trans[0][1] = rigth[1];
-        trans[0][2] = rigth[2];
-        //vector up
-        trans[1][0] = up[0];
-        trans[1][1] = up[1];
-        trans[1][2] = up[2];
-        //vector up
-        trans[2][0] = direction[0];
-        trans[2][1] = direction[1];
-        trans[2][2] = direction[2];
+        glMatrixMode (GL_PROJECTION);
+        glLoadIdentity ();
+        glOrtho(left,right,bottom,top,nearVal,farVal);
+    }
 
-        trans[3][3] = 1;
-
-        //position matrix
-        pos[0][0] = 1;
-        pos[1][1] = 1;
-        pos[2][2] = 1;
-        pos[3][3] = 1;
-        //
-        pos[0][3] = -position[0];
-        pos[1][3] = -position[1];
-        pos[2][3] = -position[2];
-
-        view = trans * pos;
-
-        return view;
-    }*/
 
 }
 namespace oct::verso::v0::v2

@@ -83,6 +83,12 @@ namespace oct::verso::v0
             return BASE::data[2];
         }
 
+        operator Color<float,L>()
+        {
+            Color<float,L> newcolor;
+            for(size_t i = 0; i < L; i++) newcolor[i] = float(BASE::data[i]) / float(255);
+            return newcolor;
+        }
     };
 
 
@@ -163,6 +169,13 @@ namespace oct::verso::v0
         {
             return BASE::data[3];
         }
+
+        operator RGBA<float>()
+        {
+            RGBA<float> newcolor;
+            for(size_t i = 0; i < 4; i++) newcolor[i] = float(BASE::data[i]) / float(255);
+            return newcolor;
+        }
     };
 
 
@@ -177,7 +190,7 @@ namespace oct::verso::v0
 
         //themes
         //static const Color<int> rgba{255,255,255,1};
-        static const RGBA<unsigned char> coordenade {200,200,180,50};
+        static const RGBA<unsigned char> coordenade {200,200,180,150};
         static const RGBA<unsigned char> empty {0,0,0,255};
     }
 
