@@ -8,6 +8,33 @@
 #include "Camera.hh"
 namespace oct::verso::v0::v1
 {
+    GLM_FUNC_DECL glm::mat4 lookAt (glm::vec3 const &eye, glm::vec3 const &center, glm::vec3 const &up)
+    {
+        return glm::lookAt(eye,center,up);
+    }
+
+    /*numbers::matrix<float,4,4,float> Camera::projection()
+    {
+        numbers::vector<float,3, float> const f(numbers::normalize(target - position));
+		numbers::vector<float,3, float> const s(numbers::normalize(up * f));
+		numbers::vector<float,3, float> const u(f * s);
+
+		numbers::matrix<float,4,4,float> Result(1);
+		Result[0][0] = s.x();
+		Result[1][0] = s.y();
+		Result[2][0] = s.z();
+		Result[0][1] = u.x();
+		Result[1][1] = u.y();
+		Result[2][1] = u.z();
+		Result[0][2] = f.x();
+		Result[1][2] = f.y();
+		Result[2][2] = f.z();
+		Result[3][0] = -numbers::scalar(s, position);
+		Result[3][1] = -numbers::scalar(u, position);
+		Result[3][2] = -numbers::scalar(f, position);
+		return Result;
+    }*/
+
     Camera::Camera(const numbers::vector<float,3>& p,const numbers::vector<float,3>& t)
         :
         position(p),
@@ -35,27 +62,6 @@ namespace oct::verso::v0::v1
         glLoadIdentity();
         gluLookAt((double)position.x(),(double)position.y(),(double)position.z(),(double)target.x(),(double)target.y(),(double)target.z(),(double)up.x(),(double)up.y(),(double)up.z());
     }
-    /*numbers::matrix<float,4,4,float> Camera::projection()
-    {
-        numbers::vector<float,3, float> const f(numbers::normalize(target - position));
-		numbers::vector<float,3, float> const s(numbers::normalize(up * f));
-		numbers::vector<float,3, float> const u(f * s);
-
-		numbers::matrix<float,4,4,float> Result(1);
-		Result[0][0] = s.x();
-		Result[1][0] = s.y();
-		Result[2][0] = s.z();
-		Result[0][1] = u.x();
-		Result[1][1] = u.y();
-		Result[2][1] = u.z();
-		Result[0][2] = f.x();
-		Result[1][2] = f.y();
-		Result[2][2] = f.z();
-		Result[3][0] = -numbers::scalar(s, position);
-		Result[3][1] = -numbers::scalar(u, position);
-		Result[3][2] = -numbers::scalar(f, position);
-		return Result;
-    }*/
 
     void Camera::walking_front(float speed)
     {

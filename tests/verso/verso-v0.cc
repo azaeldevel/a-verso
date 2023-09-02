@@ -64,17 +64,17 @@ void Develop::key_callback(GLFWwindow* window, int key, int scancode, int action
     else if(GLFW_KEY_7 == key && action == GLFW_PRESS)
     {
         //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->shapes);
+        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->shaders);
     }
     else if(GLFW_KEY_8 == key && action == GLFW_PRESS)
     {
         //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->design);
+        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->shaders);
     }
     else if(GLFW_KEY_9 == key && action == GLFW_PRESS)
     {
         //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->character);
+        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->shaders);
     }
 
 }
@@ -1690,7 +1690,10 @@ bool Design::active()
 		return 0;
 	}
 
-    shader_text.build(std::filesystem::path("tests/verso/resources/shaders/text.v.glsl"),std::filesystem::path("tests/verso/resources/shaders/text.f.glsl"));
+    //shader_text.build(std::filesystem::path("tests/verso/resources/shaders/mpv.vs"),std::filesystem::path("tests/verso/resources/shaders/mpv.fs"));
+    perspective.build(std::filesystem::path("tests/verso/resources/shaders/perspective.vs"),std::filesystem::path("tests/verso/resources/shaders/perspective.fs"));
+    shader_text.build(std::filesystem::path("tests/verso/resources/shaders/text.vs"),std::filesystem::path("tests/verso/resources/shaders/text.fs"));
+
     attribute_coord = verso_here::gl::get_attrib(shader_text, "coord");
 	uniform_tex = verso_here::gl::get_uniform(shader_text, "tex");
 	uniform_color = verso_here::gl::get_uniform(shader_text, "color");
@@ -1701,10 +1704,30 @@ bool Design::active()
 	// Create the vertex buffer object
 	glGenBuffers(1, &vbo);
 
+
+	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
+	Projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
+	// Or, for an ortho camera :
+	//glm::mat4 Projection = glm::ortho(-10.0f,10.0f,-10.0f,10.0f,0.0f,100.0f); // In world coordinates
+
+	// Camera matrix
+	View       = glm::lookAt(
+								glm::vec3(4,3,3), // Camera is at (4,3,3), in World Space
+								glm::vec3(0,0,0), // and looks at the origin
+								glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
+						   );
+	// Model matrix : an identity matrix (model will be at the origin)
+	Model      = glm::mat4(1.0f);
+	// Our ModelViewProjection : multiplication of our 3 matrices
+	//MVP        = Projection * View * Model;
+
+	MatrixID = glGetUniformLocation(shader_text, "MVP");
+
     return true;
 }
 void Design::render()
 {
+    MVP        = Projection * View * Model;
     // Color de fondo: negro
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -1801,21 +1824,8 @@ void Design::key_callback(GLFWwindow* window, int key, int scancode, int action,
  void Design::draw_text()
  {
 	shader_text.use();
-
-    /* Enable blending, necessary for our alpha texture */
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	GLfloat black[4] = { 0, 0, 0, 1 };
-	GLfloat red[4] = { 1, 0, 0, 1 };
-	GLfloat transparent_green[4] = { 0, 1, 0, 0.5 };
-
-	/* Set font size to 48 pixels, color to black */
-	FT_Set_Pixel_Sizes(face, 0, 48);
-	glUniform4fv(uniform_color, 1, red);
-
-
-    render_text("Azael R - Developer...", 0, 0, 100, 100);
+	glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+	//verso_here::polygon(triangle,triangle_texture);
  }
 
 
@@ -1824,66 +1834,96 @@ void Design::key_callback(GLFWwindow* window, int key, int scancode, int action,
 
 
 
-Character::Character() : camera_transform('T')
+Shaders::Shaders()
 {
 }
-bool Character::active()
+bool Shaders::active()
 {
-    //glGetIntegerv(GL_DEPTH_FUNC,&last_GL_DEPTH_FUNC);
-    //glGetIntegerv(GL_DEPTH_TEST,&last_GL_DEPTH_TEST);
-    //glGetFloatv(GL_DEPTH_CLEAR_VALUE,&last_GL_DEPTH_CLEAR_VALUE);
     glPushAttrib(GL_ALL_ATTRIB_BITS);
 
-    //glDepthFunc(GL_LEQUAL);
+    glDepthFunc(GL_LEQUAL);
     glEnable(GL_DEPTH_TEST);
-    //glClearDepth(1.0);
+    glClearDepth(1.0);
     verso_here::gl::color(verso_here::colors::white);
     verso_here::gl::clear(verso_here::colors::empty);
 
-    glfwSetKeyCallback(window, Character::key_callback);
-    camera.lookAt(verso_here::numbers::vector<float,3>(0,1,3),verso_here::numbers::vector<float,3>(0,0,0));
+    glfwSetKeyCallback(window, Shaders::key_callback);
+
+    perspective.build(std::filesystem::path("tests/verso/resources/shaders/perspective.vs"),std::filesystem::path("tests/verso/resources/shaders/perspective.fs"));
+	MatrixID    = glGetUniformLocation(perspective, "MVP");
+
+    // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
+	Projection  = verso_here::v1::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
+	// Or, for an ortho camera :
+	//glm::mat4 Projection = glm::ortho(-10.0f,10.0f,-10.0f,10.0f,0.0f,100.0f); // In world coordinates
+
+	// Camera matrix
+	View       = verso_here::v1::lookAt(
+								glm::vec3(4,3,3), // Camera is at (4,3,3), in World Space
+								glm::vec3(0,0,0), // and looks at the origin
+								glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
+						   );
+	// Model matrix : an identity matrix (model will be at the origin)
+	Model      = glm::mat4(1.0f);
+	// Our ModelViewProjection : multiplication of our 3 matrices
+	//MVP        = Projection * View * Model;
+
+	glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    glBindVertexArray(VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+
+    lineColor = {1,1,1};
+    vertices[0] = 0;
+    vertices[1] = 0;
+    vertices[2] = 0;
+    vertices[3] = 0;
+    vertices[4] = 0;
+    vertices[5] = 50;
+
 
     return true;
 }
-void Character::render()
+void Shaders::render()
 {
-    // Color de fondo: negro
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    //glLoadIdentity();
-    //gluLookAt(0, 10.0, 10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-    camera.lookAt();
-    //glMatrixMode (GL_PROJECTION);
-    //glLoadIdentity ();
-    //glFrustum (-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
-    camera.perspective(90,WINDOW(window,Develop)->aspect(),0.3,20);
-    glMatrixMode (GL_MODELVIEW);
+    perspective.use();
+    MVP        = Projection * View * Model;
+    // Send our transformation to the currently bound shader, in the "MVP" uniform
+    // This is done in the main loop since each model will have a different MVP matrix (At least for the M part)
+    glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
-    plane.create();
 
-    architect.create(1.80);
+    glUniformMatrix4fv(glGetUniformLocation(perspective, "MVP"), 1, GL_FALSE, &MVP[0][0]);
+    glUniform3fv(glGetUniformLocation(perspective, "color"), 1, &lineColor[0]);
 
-    glFlush();
+    glBindVertexArray(VAO);
+    glDrawArrays(GL_LINES, 0, 2);
+
+    //glFlush();
     // Forzamos el dibujado
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }
-void Character::clean()
+void Shaders::clean()
 {
-    glMatrixMode(GL_PROJECTION);
-    glMatrixMode(GL_MODELVIEW);
-    //glLoadIdentity();
-    //glDisable(GL_DEPTH_TEST);
-    //glEnable(last_GL_DEPTH_TEST);
-    //glDepthFunc(last_GL_DEPTH_FUNC);
-    //glClearDepth(last_GL_DEPTH_CLEAR_VALUE);
+
     glPopAttrib();
 }
-void Character::update()
+void Shaders::update()
 {
 }
 
 
-void Character::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void Shaders::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
     if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
@@ -1891,35 +1931,5 @@ void Character::key_callback(GLFWwindow* window, int key, int scancode, int acti
         //std::cout << "Closing JGCI_4...\n";
         WINDOW(window,Develop)->change();
     }
-    else if(glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
-    {
-        WINDOW(window,Develop)->character.camera_transform = 'T';
-    }
-    else if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
-    {
-        WINDOW(window,Develop)->character.camera_transform = 'R';
-    }
-    else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-    {
-        if(WINDOW(window,Develop)->character.camera_transform == 'T') WINDOW(window,Develop)->character.camera.walking_front(1.5);
-        else if(WINDOW(window,Develop)->character.camera_transform == 'R') WINDOW(window,Develop)->character.camera.walking_front(1.5);
-    }
-    else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-    {
-        if(WINDOW(window,Develop)->character.camera_transform == 'T') WINDOW(window,Develop)->character.camera.walking_back(1.5);
-    }
-    else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-    {
-        if(WINDOW(window,Develop)->character.camera_transform == 'T') WINDOW(window,Develop)->character.camera.walking_right(1.5);
-    }
-    else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-    {
-        if(WINDOW(window,Develop)->character.camera_transform == 'T') WINDOW(window,Develop)->character.camera.walking_left(1.5);
-    }
-    else if(glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
-    {
-        if(WINDOW(window,Develop)->character.camera_transform == 'T') WINDOW(window,Develop)->character.camera.walking_up(1.5);
-    }
-
 
 }

@@ -294,7 +294,9 @@ private:
     verso_here::gl::Plane<GLdouble> plane;
     verso_here::numbers::Triangle<float> triangle;
     verso_here::numbers::matrix<float,4,4,float> projection;
-    verso_here::Shader shader_text;
+    verso_here::Shader shader_text,perspective;
+    glm::mat4 Projection,View,Model,MVP;
+    GLuint MatrixID;
 
     GLuint triangle_texture;
 
@@ -315,7 +317,7 @@ public:
 *\brief Dibuja un cubo y puede rotarlo
 *
 **/
-class Character : public verso_here::gl::Scenary
+class Shaders : public verso_here::gl::Scenary
 {
 private:
     GLint last_GL_DEPTH_FUNC,last_GL_DEPTH_TEST;
@@ -324,13 +326,16 @@ private:
 private:
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-    verso_here::v1::Camera camera;
-    char camera_transform;
     verso_here::gl::Plane<double> plane;
-    verso_here::architect::Architect<float> architect;
+    glm::mat4 Projection,View,Model,MVP;
+    verso_here::Shader perspective;
+    GLuint MatrixID;
+    GLuint VBO, VAO;
+    float vertices[6];
+    glm::vec3 lineColor;
 
 public:
-    Character();
+    Shaders();
     bool active();
     virtual void render();
     virtual void clean();
@@ -353,7 +358,7 @@ public:
     Triangles triangles;
     Shapes shapes;
     Design design;
-    Character character;
+    Shaders shaders;
 
 private:
     void handle();
