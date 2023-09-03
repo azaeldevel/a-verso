@@ -340,7 +340,7 @@ bool Cube1::initialize()
 								glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
 						   );
     */
-    camera.set(verso_here::Point<float,3>(4,3,-3),verso_here::Point<float,3>(0,0,0));
+    camera.lookAt(verso_here::Point<float,3>(4,3,-3),verso_here::Point<float,3>(0,0,0));
 	// Model matrix : an identity matrix (model will be at the origin)
 	Model      = glm::mat4(1.0f);
 	// Our ModelViewProjection : multiplication of our 3 matrices
@@ -1759,7 +1759,6 @@ bool Lighting::active()
     glPushAttrib(GL_ALL_ATTRIB_BITS);
     glfwSetKeyCallback(window, Lighting::key_callback);
 
-
     // configure global opengl state
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
@@ -1798,7 +1797,8 @@ bool Lighting::active()
     deltaTime = 0.0f;
     lastFrame = 0.0f;
     //verso_here::gl::color(verso_here::colors::white);
-    verso_here::gl::clear(verso_here::colors::red);
+    //verso_here::gl::clear(verso_here::colors::red);
+    //camera.lookAt(verso_here::numbers::vector<float,3>(0,1,3),verso_here::numbers::vector<float,3>(0,0,0));
 
     return true;
 }
@@ -1840,7 +1840,7 @@ void Lighting::render()
 
         // view/projection transformations
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), WINDOW(window,Develop)->aspect(), 0.1f, 100.0f);
-        glm::mat4 view = camera;
+        glm::mat4 view = glm::lookAt(glm::vec3(0,1,3),glm::vec3(0,0,0),glm::vec3(0,1,0));
         lightingShader.set("projection", projection);
         lightingShader.set("view", view);
 

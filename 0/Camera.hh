@@ -63,7 +63,7 @@ namespace oct::verso::v0::v2
         Camera() = default;
         Camera(const numbers::vector<float,3>& position,const numbers::vector<float,3>& target);
 
-        void set(const numbers::vector<float,3>& position,const numbers::vector<float,3>& target);
+        glm::mat4 lookAt(const numbers::vector<float,3>& position,const numbers::vector<float,3>& target);
 
         operator glm::mat4&();
 

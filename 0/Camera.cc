@@ -122,7 +122,7 @@ namespace oct::verso::v0::v2
     {
     }
 
-    void Camera::set(const numbers::vector<float,3>& p,const numbers::vector<float,3>& t)
+    glm::mat4 Camera::lookAt(const numbers::vector<float,3>& p,const numbers::vector<float,3>& t)
     {
         position = p;
         target = t;
@@ -130,7 +130,7 @@ namespace oct::verso::v0::v2
         rigth = nums_here::normalize(Point<float,3>(0.0f, 1.0f, 0.0f) * direction);
         up = nums_here::normalize(direction * rigth);
         front = nums_here::normalize(Point<float,3>(0.0f, 0.0f, -1.0f));
-        //view = lookAt();
+        return lookAt();
     }
 
 
