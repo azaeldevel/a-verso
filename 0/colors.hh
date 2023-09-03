@@ -89,6 +89,12 @@ namespace oct::verso::v0
             for(size_t i = 0; i < L; i++) newcolor[i] = float(BASE::data[i]) / float(255);
             return newcolor;
         }
+        operator Color<float,L>() const
+        {
+            Color<float,L> newcolor;
+            for(size_t i = 0; i < L; i++) newcolor[i] = float(BASE::data[i]) / float(255);
+            return newcolor;
+        }
     };
 
 
@@ -114,6 +120,19 @@ namespace oct::verso::v0
             glColor3f(BASE::data[0],BASE::data[1],BASE::data[2]);
         }
         */
+
+        operator RGB<float>()
+        {
+            RGB<float> newcolor;
+            for(size_t i = 0; i < 3; i++) newcolor[i] = float(BASE::data[i]) / float(255);
+            return newcolor;
+        }
+        operator RGB<float>()const
+        {
+            RGB<float> newcolor;
+            for(size_t i = 0; i < 3; i++) newcolor[i] = float(BASE::data[i]) / float(255);
+            return newcolor;
+        }
     };
 
     template<numbers::number T> class RGBA : public Color<T,4>
@@ -171,6 +190,12 @@ namespace oct::verso::v0
         }
 
         operator RGBA<float>()
+        {
+            RGBA<float> newcolor;
+            for(size_t i = 0; i < 4; i++) newcolor[i] = float(BASE::data[i]) / float(255);
+            return newcolor;
+        }
+        operator RGBA<float>()const
         {
             RGBA<float> newcolor;
             for(size_t i = 0; i < 4; i++) newcolor[i] = float(BASE::data[i]) / float(255);

@@ -89,6 +89,7 @@ GLuint shader::compile(const GLchar* source_str,GLenum type)
         // Use the infoLog as you see fit.
 
         // In this simple program, we'll just leave
+        std::cout << "Error en compilacion de Shader\n";
         return 0;
     }
 

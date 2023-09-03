@@ -1798,7 +1798,7 @@ bool Lighting::active()
     deltaTime = 0.0f;
     lastFrame = 0.0f;
     //verso_here::gl::color(verso_here::colors::white);
-    //verso_here::gl::clear(verso_here::colors::gray);
+    verso_here::gl::clear(verso_here::colors::red);
 
     return true;
 }
