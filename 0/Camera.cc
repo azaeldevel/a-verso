@@ -110,7 +110,7 @@ namespace oct::verso::v0::v1
 }
 namespace oct::verso::v0::v2
 {
-    Camera::Camera(const Point<float,3>& p,const Point<float,3>& t)
+    Camera::Camera(const numbers::vector<float,3>& p,const numbers::vector<float,3>& t)
         :
         position(p),
         target(t),
@@ -118,12 +118,11 @@ namespace oct::verso::v0::v2
         rigth(nums_here::normalize(Point<float,3>(0.0f, 1.0f, 0.0f) * direction)),
         up(nums_here::normalize(direction * rigth)),
         front(nums_here::normalize(Point<float,3>(0.0f, 0.0f, -1.0f))),
-        view(lookAt()),
-        _zoom(45.0f)
+        view(lookAt())
     {
     }
 
-    void Camera::set(const Point<float,3>& p,const Point<float,3>& t)
+    void Camera::set(const numbers::vector<float,3>& p,const numbers::vector<float,3>& t)
     {
         position = p;
         target = t;
@@ -131,18 +130,9 @@ namespace oct::verso::v0::v2
         rigth = nums_here::normalize(Point<float,3>(0.0f, 1.0f, 0.0f) * direction);
         up = nums_here::normalize(direction * rigth);
         front = nums_here::normalize(Point<float,3>(0.0f, 0.0f, -1.0f));
-        view = lookAt();
-        _zoom = 45.0f;
+        //view = lookAt();
     }
 
-    float& Camera::zoom()
-    {
-        return _zoom;
-    }
-    const float& Camera::zoom() const
-    {
-        return _zoom;
-    }
 
     Camera::operator glm::mat4&()
     {
@@ -175,18 +165,19 @@ namespace oct::verso::v0::v2
     }
     void Camera::walking_up(float speed)
     {
-        position += up * speed * sensitivy;
+        position += up * speed;
         view = lookAt();
     }
     void Camera::walking_down(float speed)
     {
-        position -= up * speed * sensitivy;
+        position -= up * speed;
         view = lookAt();
     }
 
-    glm::mat4 Camera::lookAt()
+    glm::mat4& Camera::lookAt()
     {
-        return glm::lookAt(reinterpret_cast<glm::vec3&>(position),reinterpret_cast<glm::vec3&>(target),reinterpret_cast<glm::vec3&>(up));
+        view = glm::lookAt(reinterpret_cast<glm::vec3&>(position),reinterpret_cast<glm::vec3&>(target),reinterpret_cast<glm::vec3&>(up));
+        return view;
     }
 
 

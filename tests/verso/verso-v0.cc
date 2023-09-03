@@ -59,22 +59,17 @@ void Develop::key_callback(GLFWwindow* window, int key, int scancode, int action
     else if(GLFW_KEY_6 == key && action == GLFW_PRESS)
     {
         //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->triangles);
+        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->shapes);
     }
     else if(GLFW_KEY_7 == key && action == GLFW_PRESS)
     {
         //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->shaders);
+        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->design);
     }
     else if(GLFW_KEY_8 == key && action == GLFW_PRESS)
     {
         //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->shaders);
-    }
-    else if(GLFW_KEY_9 == key && action == GLFW_PRESS)
-    {
-        //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->shaders);
+        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->lighting);
     }
 
 }
@@ -586,170 +581,6 @@ void Triangle2::handle()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-bool Light::initialize()
-{
-    shader_lighting.build(std::filesystem::path("tests/light/1.colors.vs"), std::filesystem::path("tests/light/1.colors.fs"));
-    shader_light_cube.build(std::filesystem::path("tests/light/1.light_cube.vs"), std::filesystem::path("tests/light/1.light_cube.fs"));
-
-    float vertices[] = {
-        -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-
-        -0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
-
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-
-        -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f, -0.5f,
-
-        -0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
-    };
-    // first, configure the cube's VAO (and VBO)
-    glGenVertexArrays(1, &vao_cube);
-    glGenBuffers(1, &vbo_cube);
-
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_cube);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glBindVertexArray(vao_cube);
-
-    // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
-    // second, configure the light's VAO (VBO stays the same; the vertices are the same for the light object which is also a 3D cube)
-    glGenVertexArrays(1, &vao_cube_light);
-    glBindVertexArray(vao_cube_light);
-
-    // we only need to bind to the VBO (to link it with glVertexAttribPointer), no need to fill it; the VBO's data already contains all we need (it's already bound, but we do it again for educational purposes)
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_cube);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
-    light_position = glm::vec3(1.2f, 1.0f, 2.0f);
-    camera.set(verso_here::Point<float,3>(4,3,3),verso_here::Point<float,3>(0,0,0));
-    aspect = 4/3;
-
-    return true;
-}
-void Light::render()
-{
-    shader_lighting.use();
-    shader_lighting.set("objectColor", 1.0f, 0.5f, 0.31f);
-    shader_lighting.set("lightColor",  1.0f, 1.0f, 1.0f);
-
-    // view/projection transformations
-    projection = glm::perspective(glm::radians(camera.zoom()), aspect, 0.1f, 100.0f);
-    view = camera;
-    shader_lighting.set("projection", projection);
-    shader_lighting.set("view", view);
-
-    // world transformation
-    glm::mat4 model = glm::mat4(1.0f);
-    shader_lighting.set("model", model);
-
-    // render the cube
-    glBindVertexArray(vao_cube);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-
-
-    // also draw the lamp object
-    shader_light_cube.use();
-    shader_light_cube.set("projection", projection);
-    shader_light_cube.set("view", view);
-    model = glm::mat4(1.0f);
-    model = glm::translate(model, light_position);
-    model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
-    shader_light_cube.set("model", model);
-
-    glBindVertexArray(vao_cube_light);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-}
-void Light::clean()
-{
-
-    // Close OpenGL window and terminate GLFW
-	glfwTerminate();
-}
-
-void Light::update()
-{
-    float current_frame = static_cast<float>(glfwGetTime());
-    delta_time = current_frame - last_frame;
-    last_frame = current_frame;
-}
-void Light::handleEvents()
-{
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS or glfwWindowShouldClose(window) != 0 )
-    {
-        //running = false;
-    }
-    /*else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-    {
-        camera.walking_front(delta_time);
-    }
-    else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-    {
-        camera.walking_back(delta_time);
-    }
-    else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-    {
-        camera.walking_right(delta_time);
-    }
-    else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-    {
-        camera.walking_left(delta_time);
-    }
-    else
-    {
-
-    }*/
-
-
-}
 
 
 
@@ -1840,89 +1671,16 @@ Shaders::Shaders()
 bool Shaders::active()
 {
     glPushAttrib(GL_ALL_ATTRIB_BITS);
-
-    glDepthFunc(GL_LEQUAL);
-    glEnable(GL_DEPTH_TEST);
-    glClearDepth(1.0);
-    verso_here::gl::color(verso_here::colors::white);
-    verso_here::gl::clear(verso_here::colors::empty);
-
     glfwSetKeyCallback(window, Shaders::key_callback);
-
-    perspective.build(std::filesystem::path("tests/verso/resources/shaders/perspective.vs"),std::filesystem::path("tests/verso/resources/shaders/perspective.fs"));
-	MatrixID    = glGetUniformLocation(perspective, "MVP");
-
-    // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-	Projection  = verso_here::v1::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
-	// Or, for an ortho camera :
-	//glm::mat4 Projection = glm::ortho(-10.0f,10.0f,-10.0f,10.0f,0.0f,100.0f); // In world coordinates
-
-	// Camera matrix
-	View       = verso_here::v1::lookAt(
-								glm::vec3(4,3,3), // Camera is at (4,3,3), in World Space
-								glm::vec3(0,0,0), // and looks at the origin
-								glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
-						   );
-	// Model matrix : an identity matrix (model will be at the origin)
-	Model      = glm::mat4(1.0f);
-	// Our ModelViewProjection : multiplication of our 3 matrices
-	//MVP        = Projection * View * Model;
-
-	glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glBindVertexArray(VAO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
-
-    lineColor = {1,1,1};
-    vertices[0] = 0;
-    vertices[1] = 0;
-    vertices[2] = 0;
-    vertices[3] = 0;
-    vertices[4] = 0;
-    vertices[5] = 50;
 
 
     return true;
-}
-void Shaders::render()
-{
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    perspective.use();
-    MVP        = Projection * View * Model;
-    // Send our transformation to the currently bound shader, in the "MVP" uniform
-    // This is done in the main loop since each model will have a different MVP matrix (At least for the M part)
-    glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
-
-
-    glUniformMatrix4fv(glGetUniformLocation(perspective, "MVP"), 1, GL_FALSE, &MVP[0][0]);
-    glUniform3fv(glGetUniformLocation(perspective, "color"), 1, &lineColor[0]);
-
-    glBindVertexArray(VAO);
-    glDrawArrays(GL_LINES, 0, 2);
-
-    //glFlush();
-    // Forzamos el dibujado
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }
 void Shaders::clean()
 {
 
     glPopAttrib();
 }
-void Shaders::update()
-{
-}
-
-
 void Shaders::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
@@ -1932,4 +1690,180 @@ void Shaders::key_callback(GLFWwindow* window, int key, int scancode, int action
         WINDOW(window,Develop)->change();
     }
 
+}
+void Shaders::update()
+{
+}
+void Shaders::render()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+}
+
+
+
+
+
+
+
+float Lighting::vertices[] = {
+        -0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f,  0.5f, -0.5f,
+         0.5f,  0.5f, -0.5f,
+        -0.5f,  0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+
+        -0.5f, -0.5f,  0.5f,
+         0.5f, -0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+        -0.5f, -0.5f,  0.5f,
+
+        -0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+
+         0.5f,  0.5f,  0.5f,
+         0.5f,  0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+
+        -0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f,  0.5f,
+         0.5f, -0.5f,  0.5f,
+        -0.5f, -0.5f,  0.5f,
+        -0.5f, -0.5f, -0.5f,
+
+        -0.5f,  0.5f, -0.5f,
+         0.5f,  0.5f, -0.5f,
+         0.5f,  0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f, -0.5f,
+    };
+Lighting::Lighting() : lightPos(1.2f, 1.0f, 2.0f)
+{
+}
+bool Lighting::active()
+{
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+    glfwSetKeyCallback(window, Lighting::key_callback);
+
+
+    // configure global opengl state
+    // -----------------------------
+    glEnable(GL_DEPTH_TEST);
+
+    // build and compile our shader zprogram
+    // ------------------------------------
+    lightingShader.build(std::filesystem::path("tests/verso/resources/shaders/lighting/colors.fs"), std::filesystem::path("tests/verso/resources/shaders/lighting/colors.fs"));
+    lightCubeShader.build(std::filesystem::path("tests/verso/resources/shaders/lighting/light_cube.vs"), std::filesystem::path("tests/verso/resources/shaders/lighting/light_cube.fs"));
+
+    // set up vertex data (and buffer(s)) and configure vertex attributes
+    // ------------------------------------------------------------------
+
+    // first, configure the cube's VAO (and VBO)
+    glGenVertexArrays(1, &cubeVAO);
+    glGenBuffers(1, &VBO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glBindVertexArray(cubeVAO);
+
+    // position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    // second, configure the light's VAO (VBO stays the same; the vertices are the same for the light object which is also a 3D cube)
+    glGenVertexArrays(1, &lightCubeVAO);
+    glBindVertexArray(lightCubeVAO);
+
+    // we only need to bind to the VBO (to link it with glVertexAttribPointer), no need to fill it; the VBO's data already contains all we need (it's already bound, but we do it again for educational purposes)
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    deltaTime = 0.0f;
+    lastFrame = 0.0f;
+    //verso_here::gl::color(verso_here::colors::white);
+    //verso_here::gl::clear(verso_here::colors::gray);
+
+    return true;
+}
+void Lighting::clean()
+{
+
+    glPopAttrib();
+}
+void Lighting::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
+    if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Closing JGCI_4...\n";
+        WINDOW(window,Develop)->change();
+    }
+
+}
+void Lighting::update()
+{
+}
+void Lighting::render()
+{
+    // per-frame time logic
+    // --------------------
+    float currentFrame = static_cast<float>(glfwGetTime());
+    deltaTime = currentFrame - lastFrame;
+    lastFrame = currentFrame;
+
+    // render
+        // ------
+        //glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // be sure to activate shader when setting uniforms/drawing objects
+        lightingShader.use();
+        lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
+        lightingShader.setVec3("lightColor",  1.0f, 1.0f, 1.0f);
+
+        // view/projection transformations
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f), WINDOW(window,Develop)->aspect(), 0.1f, 100.0f);
+        glm::mat4 view = camera;
+        lightingShader.set("projection", projection);
+        lightingShader.set("view", view);
+
+        // world transformation
+        glm::mat4 model = glm::mat4(1.0f);
+        lightingShader.set("model", model);
+
+        // render the cube
+        glBindVertexArray(cubeVAO);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+
+
+        // also draw the lamp object
+        lightCubeShader.use();
+        lightCubeShader.set("projection", projection);
+        lightCubeShader.set("view", view);
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, lightPos);
+        model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
+        lightCubeShader.set("model", model);
+
+        glBindVertexArray(lightCubeVAO);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }

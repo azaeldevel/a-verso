@@ -186,7 +186,7 @@ namespace oct::verso::v0
         static const RGBA<unsigned char> blue   {0,0,255,255};
         static const RGBA<unsigned char> black  {0,0,0,255};
         static const RGBA<unsigned char> white  {255,255,255,255};
-        static const RGBA<unsigned char> gray   {200,200,200,255};
+        static const RGBA<unsigned char> gray   {20,20,20,255};
 
         //themes
         //static const Color<int> rgba{255,255,255,1};

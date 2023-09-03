@@ -75,28 +75,6 @@ private:
     verso_here::nums_here::axis axis;
 };
 
-class Light : public verso_here::gl::Scenary
-{
-private:
-    verso_here::Shader shader_lighting,shader_light_cube;
-    GLuint vao_cube,vao_cube_light;
-    GLuint vbo_cube;
-    verso_here::v2::Camera camera;
-    glm::mat4 projection,view,model,mvp;
-    glm::vec3 light_position;
-    float delta_time, last_frame;
-    float aspect;
-
-private:
-    void handleEvents();
-    void update();
-
-public:
-    bool initialize();
-    virtual void render();
-    virtual void clean();
-
-};
 
 class JGCI_1 : public verso_here::gl::Scenary
 {
@@ -326,16 +304,40 @@ private:
 private:
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-    verso_here::gl::Plane<double> plane;
-    glm::mat4 Projection,View,Model,MVP;
-    verso_here::Shader perspective;
-    GLuint MatrixID;
-    GLuint VBO, VAO;
-    float vertices[6];
-    glm::vec3 lineColor;
+
 
 public:
     Shaders();
+    bool active();
+    virtual void render();
+    virtual void clean();
+
+};
+
+
+/**
+*\brief LOGO : Ejemplo mde luces
+*
+**/
+class Lighting : public verso_here::gl::Scenary
+{
+private:
+    GLint last_GL_DEPTH_FUNC,last_GL_DEPTH_TEST;
+    GLfloat last_GL_DEPTH_CLEAR_VALUE;
+
+private:
+    void update();
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    verso_here::v2::Camera camera;
+    verso_here::Shader lightingShader,lightCubeShader;
+    float deltaTime = 0.0f;
+    float lastFrame = 0.0f;
+    glm::vec3 lightPos;
+    GLuint VBO, cubeVAO,lightCubeVAO;
+    static float vertices[];
+
+public:
+    Lighting();
     bool active();
     virtual void render();
     virtual void clean();
@@ -358,7 +360,7 @@ public:
     Triangles triangles;
     Shapes shapes;
     Design design;
-    Shaders shaders;
+    Lighting lighting;
 
 private:
     void handle();

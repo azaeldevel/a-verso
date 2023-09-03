@@ -61,12 +61,9 @@ namespace oct::verso::v0::v2
     {
     public:
         Camera() = default;
-        Camera(const Point<float,3>& position,const Point<float,3>& target);
+        Camera(const numbers::vector<float,3>& position,const numbers::vector<float,3>& target);
 
-        void set(const Point<float,3>& position,const Point<float,3>& target);
-
-        float& zoom();
-        const float& zoom() const;
+        void set(const numbers::vector<float,3>& position,const numbers::vector<float,3>& target);
 
         operator glm::mat4&();
 
@@ -78,15 +75,12 @@ namespace oct::verso::v0::v2
         void walking_down(float);
 
     private:
-        Point<float,3> position,target,direction,rigth,up;
-        Point<float,3> front;
+        numbers::vector<float,3> position,target,direction,rigth,up,front;
         glm::mat4 view;
-        float _zoom; //field of view , zoom
 
-        const float sensitivy =  1.1f;
 
     private:
-        glm::mat4 lookAt();
+        glm::mat4& lookAt();
     };
 }
 namespace oct::verso::v0
