@@ -8,10 +8,6 @@
 #include "Camera.hh"
 namespace oct::verso::v0::v1
 {
-    GLM_FUNC_DECL glm::mat4 lookAt (glm::vec3 const &eye, glm::vec3 const &center, glm::vec3 const &up)
-    {
-        return glm::lookAt(eye,center,up);
-    }
 
     /*numbers::matrix<float,4,4,float> Camera::projection()
     {
@@ -110,6 +106,13 @@ namespace oct::verso::v0::v1
 }
 namespace oct::verso::v0::v2
 {
+    GLM_FUNC_DECL glm::mat4 lookAt (glm::vec3 const &eye, glm::vec3 const &center, glm::vec3 const &up)
+    {
+        return glm::lookAt(eye,center,up);
+    }
+
+
+
     Camera::Camera(const numbers::vector<float,3>& p,const numbers::vector<float,3>& t)
         :
         position(p),

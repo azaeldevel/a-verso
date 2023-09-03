@@ -16,12 +16,6 @@
 namespace oct::verso::v0::v1
 {
 
-    GLM_FUNC_DECL glm::mat4 lookAt (glm::vec3 const &eye, glm::vec3 const &center, glm::vec3 const &up);
-    template<class T> GLM_FUNC_DECL glm::mat4	perspective (T const &fovy, T const &aspect, T const &near, T const &far)
-    {
-        return glm::perspective(fovy,aspect,near,far);
-    }
-
 
     class Camera
     {
@@ -55,7 +49,12 @@ namespace oct::verso::v0::v1
 }
 namespace oct::verso::v0::v2
 {
-    //namespace core_here = oct::core::v3;
+
+    GLM_FUNC_DECL glm::mat4 lookAt (glm::vec3 const &eye, glm::vec3 const &center, glm::vec3 const &up);
+    template<class T> GLM_FUNC_DECL glm::mat4	perspective (T const &fovy, T const &aspect, T const &near, T const &far)
+    {
+        return glm::perspective(fovy,aspect,near,far);
+    }
 
     class Camera
     {
