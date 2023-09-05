@@ -36,9 +36,9 @@ namespace oct::verso::v0::v1
         position(p),
         target(t),
         direction(nums_here::normalize(position - target)),
-        rigth(nums_here::normalize(Point<float,3>(0.0f, 1.0f, 0.0f) * direction)),
+        rigth(nums_here::normalize(numbers::vector<float,3>(0.0f, 1.0f, 0.0f) * direction)),
         up(nums_here::normalize(direction * rigth)),
-        front(nums_here::normalize(Point<float,3>(0.0f, 0.0f, -1.0f)))
+        front(nums_here::normalize(numbers::vector<float,3>(0.0f, 0.0f, -1.0f)))
     {
     }
 
@@ -52,9 +52,9 @@ namespace oct::verso::v0::v1
         position = p;
         target = t;
         direction = nums_here::normalize(position - target);
-        rigth = nums_here::normalize(Point<float,3>(0.0f, 1.0f, 0.0f) * direction);
+        rigth = nums_here::normalize(numbers::vector<float,3>(0.0f, 1.0f, 0.0f) * direction);
         up = nums_here::normalize(direction * rigth);
-        front = nums_here::normalize(Point<float,3>(0.0f, 0.0f, -1.0f));
+        front = nums_here::normalize(numbers::vector<float,3>(0.0f, 0.0f, -1.0f));
         glLoadIdentity();
         gluLookAt((double)position.x(),(double)position.y(),(double)position.z(),(double)target.x(),(double)target.y(),(double)target.z(),(double)up.x(),(double)up.y(),(double)up.z());
     }
@@ -118,24 +118,39 @@ namespace oct::verso::v0::v2
         position(p),
         target(t),
         direction(nums_here::normalize(position - target)),
-        rigth(nums_here::normalize(Point<float,3>(0.0f, 1.0f, 0.0f) * direction)),
+        rigth(nums_here::normalize(numbers::vector<float,3>(0.0f, 1.0f, 0.0f) * direction)),
         up(nums_here::normalize(direction * rigth)),
-        front(nums_here::normalize(Point<float,3>(0.0f, 0.0f, -1.0f))),
+        front(nums_here::normalize(numbers::vector<float,3>(0.0f, 0.0f, -1.0f))),
         view(lookAt())
     {
     }
 
-    glm::mat4 Camera::lookAt(const numbers::vector<float,3>& p,const numbers::vector<float,3>& t)
+
+    glm::mat4& Camera::lookAt()
+    {
+        view = glm::lookAt(reinterpret_cast<glm::vec3&>(position),reinterpret_cast<glm::vec3&>(target),reinterpret_cast<glm::vec3&>(up));
+        return view;
+    }
+    glm::mat4& Camera::lookAt(const numbers::vector<float,3>& p,const numbers::vector<float,3>& t)
     {
         position = p;
         target = t;
         direction = nums_here::normalize(position - target);
-        rigth = nums_here::normalize(Point<float,3>(0.0f, 1.0f, 0.0f) * direction);
+        rigth = nums_here::normalize(numbers::vector<float,3>(0.0f, 1.0f, 0.0f) * direction);
         up = nums_here::normalize(direction * rigth);
-        front = nums_here::normalize(Point<float,3>(0.0f, 0.0f, -1.0f));
+        front = nums_here::normalize(numbers::vector<float,3>(0.0f, 0.0f, -1.0f));
         return lookAt();
     }
-
+    glm::mat4& Camera::lookAt(const numbers::vector<float,3>& p,const numbers::vector<float,3>& t,const numbers::vector<float,3>& u)
+    {
+        position = p;
+        target = t;
+        direction = nums_here::normalize(position - target);
+        rigth = nums_here::normalize(numbers::vector<float,3>(0.0f, 1.0f, 0.0f) * direction);
+        up = u;
+        front = nums_here::normalize(numbers::vector<float,3>(0.0f, 0.0f, -1.0f));
+        return lookAt();
+    }
 
     Camera::operator glm::mat4&()
     {
@@ -144,44 +159,39 @@ namespace oct::verso::v0::v2
 
     void Camera::walking_front(float speed)
     {
-        //position.printLn(std::cout);
+        position.printLn(std::cout);
         position += front * speed;
 
-        view = lookAt();
-        //position.printLn(std::cout);
+        //view = lookAt();
+        position.printLn(std::cout);
         //std::cout << std::endl;
     }
     void Camera::walking_back(float speed)
     {
         position -= front * speed;
-        view = lookAt();
+        //view = lookAt();
     }
     void Camera::walking_left(float speed)
     {
         position += nums_here::normalize(front * up) * speed;
-        view = lookAt();
+        //view = lookAt();
     }
     void Camera::walking_right(float speed)
     {
         position -= nums_here::normalize(front * up) * speed;
-        view = lookAt();
+        //view = lookAt();
     }
     void Camera::walking_up(float speed)
     {
         position += up * speed;
-        view = lookAt();
+        //view = lookAt();
     }
     void Camera::walking_down(float speed)
     {
         position -= up * speed;
-        view = lookAt();
+        //view = lookAt();
     }
 
-    glm::mat4& Camera::lookAt()
-    {
-        view = glm::lookAt(reinterpret_cast<glm::vec3&>(position),reinterpret_cast<glm::vec3&>(target),reinterpret_cast<glm::vec3&>(up));
-        return view;
-    }
 
 
 }

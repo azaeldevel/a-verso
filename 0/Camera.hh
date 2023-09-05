@@ -10,7 +10,7 @@
 
 #include "common.hh"
 #include <core/3/Exception.hh>
-#include "shapes.hh"
+//#include "shapes.hh"
 #include <numbers/0/matrix.hh>
 
 namespace oct::verso::v0::v1
@@ -62,7 +62,9 @@ namespace oct::verso::v0::v2
         Camera() = default;
         Camera(const numbers::vector<float,3>& position,const numbers::vector<float,3>& target);
 
-        glm::mat4 lookAt(const numbers::vector<float,3>& position,const numbers::vector<float,3>& target);
+        glm::mat4& lookAt();
+        glm::mat4& lookAt(const numbers::vector<float,3>& position,const numbers::vector<float,3>& target);
+        glm::mat4& lookAt(const numbers::vector<float,3>& position,const numbers::vector<float,3>& target,const numbers::vector<float,3>& up);
 
         operator glm::mat4&();
 
@@ -79,7 +81,6 @@ namespace oct::verso::v0::v2
 
 
     private:
-        glm::mat4& lookAt();
     };
 }
 namespace oct::verso::v0

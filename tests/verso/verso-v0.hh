@@ -71,7 +71,7 @@ private:
     verso_here::Shader shader_triangle;
     GLuint VBO, VAO;
     static float vertices[];
-    verso_here::Triangle<float,3,float> triangle;
+    verso_here::numbers::Triangle<float,3,float> triangle;
     verso_here::nums_here::axis axis;
 };
 
@@ -335,6 +335,7 @@ private:
     glm::vec3 lightPos;
     GLuint VBO, cubeVAO,lightCubeVAO;
     static float vertices[];
+    glm::mat4 projection, view;
 
 public:
     Lighting();

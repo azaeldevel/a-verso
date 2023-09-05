@@ -89,7 +89,7 @@ GLuint shader::compile(const GLchar* source_str,GLenum type)
         // Use the infoLog as you see fit.
 
         // In this simple program, we'll just leave
-        std::cout << "Error en compilacion de Shader\n";
+        std::cout << (const char*)&infoLog[0] << "\n";
         return 0;
     }
 
@@ -179,7 +179,7 @@ GLuint Shader::compile(const std::filesystem::path& path,GLenum type)
 		/*std::vector<char> VertexShaderErrorMessage(InfoLogLength+1);
 		glGetShaderInfoLog(shader_id, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
 		printf("%s\n", &VertexShaderErrorMessage[0]);*/
-		std::cout << "Error en compilacion de shader\n";
+		std::cout << "Error en compilacion de shader1\n";
 	}
 
 	return shader_id;
