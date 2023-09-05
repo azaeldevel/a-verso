@@ -1449,7 +1449,8 @@ bool Lighting::active()
     //verso_here::gl::color(verso_here::colors::white);
     //verso_here::gl::clear(verso_here::colors::red);
     projection = verso_here::v2::perspective(glm::radians(45.0f), WINDOW(window,Develop)->aspect(), 0.1f, 100.0f);
-    view = camera.lookAt(verso_here::numbers::vector<float,3>(0,0,5),verso_here::numbers::vector<float,3>(0,0,0));
+    view = camera.lookAt(verso_here::numbers::vector<float,3>(0,0,-3),verso_here::numbers::vector<float,3>(0,0,0));
+    model = glm::mat4(1.0f);
 
     return true;
 }
@@ -1505,11 +1506,11 @@ void Lighting::render()
         lightingShader.setVec3("lightColor",  1.0f, 1.0f, 1.0f);
 
         // view/projection transformations
+        view = camera.lookAt();
         lightingShader.set("projection", projection);
         lightingShader.set("view", view);
 
         // world transformation
-        glm::mat4 model = glm::mat4(1.0f);
         lightingShader.set("model", model);
 
         // render the cube

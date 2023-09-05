@@ -335,7 +335,7 @@ private:
     glm::vec3 lightPos;
     GLuint VBO, cubeVAO,lightCubeVAO;
     static float vertices[];
-    glm::mat4 projection, view;
+    glm::mat4 projection, view,model;
 
 public:
     Lighting();
