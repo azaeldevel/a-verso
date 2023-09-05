@@ -1839,7 +1839,7 @@ void Lighting::render()
         lightingShader.setVec3("lightColor",  1.0f, 1.0f, 1.0f);
 
         // view/projection transformations
-        glm::mat4 projection = verso_here::v2::perspective(glm::radians(90.0f), WINDOW(window,Develop)->aspect(), 0.5f, 10.0f);
+        glm::mat4 projection = verso_here::v2::perspective(glm::radians(45.0f), WINDOW(window,Develop)->aspect(), 0.1f, 100.0f);
         glm::mat4 view = verso_here::v2::lookAt(glm::vec3(0,0,4),glm::vec3(0,0,0),glm::vec3(0,1,0));
         lightingShader.set("projection", projection);
         lightingShader.set("view", view);
