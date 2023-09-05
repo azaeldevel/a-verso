@@ -330,8 +330,8 @@ private:
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
     verso_here::v2::Camera camera;
     verso_here::Shader lightingShader,lightCubeShader;
-    float deltaTime = 0.0f;
-    float lastFrame = 0.0f;
+    float deltaTime;
+    float lastFrame;
     glm::vec3 lightPos;
     GLuint VBO, cubeVAO,lightCubeVAO;
     static float vertices[];
