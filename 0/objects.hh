@@ -13,7 +13,7 @@ namespace oct::verso::v0::gl
     /**
     *\brief Cualquier ente que tenga un representacion visual
     */
-    template<numbers::number C = float> class Object : public core::Entity
+    template<numbers::core::number C = float> class Object : public core::Entity
     {
 
     };
@@ -21,7 +21,7 @@ namespace oct::verso::v0::gl
     /**
     *\brief Homanoide
     */
-    template<numbers::number C = float> class Animal : public Object<C>
+    template<numbers::core::number C = float> class Animal : public Object<C>
     {
     private:
         typedef Object<C> BASE;
@@ -44,7 +44,7 @@ namespace oct::verso::v0::gl
     /**
     *\brief Homanoide
     */
-    template<numbers::number C = float> class Biped : public Animal<C>
+    template<numbers::core::number C = float> class Biped : public Animal<C>
     {
     private:
         typedef Animal<C> BASE;
@@ -65,7 +65,7 @@ namespace oct::verso::v0::gl
     /**
     *\brief Homanoide
     */
-    template<numbers::number C = float> class Quadruped : public Object<C>
+    template<numbers::core::number C = float> class Quadruped : public Object<C>
     {
     private:
 
@@ -84,7 +84,7 @@ namespace oct::verso::v0::gl
     /**
     *\brief Homanoide
     */
-    template<numbers::number C = float> class Humanoid : public Biped<C>
+    template<numbers::core::number C = float> class Humanoid : public Biped<C>
     {
     private:
         typedef Biped<C> BASE;
@@ -161,7 +161,7 @@ namespace oct::verso::v0::gl
     /**
     *\brief Manipulable en tiempo de ejecucion(clase abstracta)
     */
-    template<numbers::number C = float> class Interactive : public Object<C>
+    template<numbers::core::number C = float> class Interactive : public Object<C>
     {
 
     };
@@ -170,7 +170,7 @@ namespace oct::verso::v0::gl
 
 
 
-    template<numbers::number N>
+    template<numbers::core::number N>
     class Plane : public Object<N>
     {
 

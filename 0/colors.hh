@@ -6,7 +6,7 @@
 
 namespace oct::verso::v0
 {
-    template<numbers::number T = float, size_t L = 4> class Color : public core::array<T,L>
+    template<numbers::core::number T = float, size_t L = 4> class Color : public core::array<T,L>
     {
     private:
         typedef core::array<T,L> BASE;
@@ -98,7 +98,7 @@ namespace oct::verso::v0
     };
 
 
-    template<numbers::number T> class RGB : public Color<T,3>
+    template<numbers::core::number T> class RGB : public Color<T,3>
     {
     private:
         typedef Color<T,3> BASE;
@@ -135,7 +135,7 @@ namespace oct::verso::v0
         }
     };
 
-    template<numbers::number T> class RGBA : public Color<T,4>
+    template<numbers::core::number T> class RGBA : public Color<T,4>
     {
     private:
         typedef Color<T,4> BASE;

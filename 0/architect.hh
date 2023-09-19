@@ -7,7 +7,7 @@
 namespace oct::verso::v0::architect
 {
 
-    template<numbers::number C = float> class Architect : public gl::Humanoid<C>
+    template<numbers::core::number C = float> class Architect : public gl::Humanoid<C>
     {
     private:
         typedef gl::Humanoid<C> BASE;

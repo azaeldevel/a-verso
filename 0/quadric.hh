@@ -17,7 +17,7 @@ namespace oct::verso::v0::gl
     /**
     *\brief Clase base para objetos Quadric
     */
-    template<numbers::number C>
+    template<numbers::core::number C>
     class Quadric
     {
     private:
@@ -48,7 +48,7 @@ namespace oct::verso::v0::gl
     /**
     *\brief Crea un Disk OpenGL
     */
-    template<numbers::number C = GLdouble>
+    template<numbers::core::number C = GLdouble>
     class Disk : public Quadric<C>
     {
     private:
@@ -82,7 +82,7 @@ namespace oct::verso::v0::gl
     /**
     *\brief Crea un Cilindro OpenGL
     */
-    template<numbers::number C = GLdouble>
+    template<numbers::core::number C = GLdouble>
     class Cilinder : public Quadric<C>
     {
     private:
@@ -114,7 +114,7 @@ namespace oct::verso::v0::gl
     /**
     *\brief Crea un Cilindro OpenGL
     */
-    template<numbers::number C = GLdouble>
+    template<numbers::core::number C = GLdouble>
     class Sphere : public Quadric<C>
     {
     private:
@@ -144,7 +144,7 @@ namespace oct::verso::v0::gl
     /**
     *\brief Crea un Cilindro OpenGL
     */
-    template<numbers::number C = GLdouble>
+    template<numbers::core::number C = GLdouble>
     class Circle : public Disk<C>
     {
     private:
