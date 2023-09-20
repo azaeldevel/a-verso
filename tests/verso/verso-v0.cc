@@ -1633,20 +1633,26 @@ bool Shapes3::active()
     glfwSetKeyCallback(window, Shapes3::key_callback);
     verso::gl::clear(verso::colors::black);
     verso::numbers::vector<float,3> O(0);
-    triangle = verso::numbers::Scalene<float>(O,1.0,0.5);
+    triangle = verso::numbers::Scalene<float>(O,1.5,1.5);
+    rectangle.rectangle(O,0.75,0.5);
+    //rectangle.printLn(std::cout);
     std::filesystem::path shader_dir = "tests/verso/Shaders";
     shader_triangle.build(shader_dir/"shapes.vs",shader_dir/"shapes.fs");
+    shader_shape.build(shader_dir/"shapes.vs",shader_dir/"shapes.fs");
 
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo_triangle);
+    glGenBuffers(1, &vbo_rectangle);
     // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
     glBindVertexArray(vao);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
     glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
-
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_rectangle);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(rectangle), rectangle, GL_STATIC_DRAW);
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
     // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -1684,18 +1690,34 @@ void Shapes3::key_callback(GLFWwindow* window, int key, int scancode, int action
         //std::cout << "Closing JGCI_4...\n";
         WINDOW(window,Develop3)->change();
     }
-    else if(GLFW_KEY_1 == key && action == GLFW_RELEASE)
+    else if(GLFW_KEY_1 == key && action == GLFW_PRESS)
     {
+        //std::cout << "Activando trinagulo\n";
         WINDOW(window,Develop3)->shaders.action_draw = &Shapes3::draw_triangle;
+    }
+    else if(GLFW_KEY_2 == key && action == GLFW_PRESS)
+    {
+        //std::cout << "Activando plano\n";
+        WINDOW(window,Develop3)->shaders.action_draw = &Shapes3::draw_plane;
     }
 }
 void Shapes3::draw_triangle()
 {
+    glEnableVertexAttribArray(0);
     // draw our first triangle
     shader_triangle.use();
     glBindVertexArray(vao); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
     glDrawArrays(GL_TRIANGLES, 0, 3);
-    // glBindVertexArray(0); // no need to unbind it every time
+    glDisableVertexAttribArray(0);
+}
+void Shapes3::draw_plane()
+{
+    glEnableVertexAttribArray(0);
+    // draw our first triangle
+    shader_shape.use();
+    glBindVertexArray(vao); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDisableVertexAttribArray(0);
 }
 
 

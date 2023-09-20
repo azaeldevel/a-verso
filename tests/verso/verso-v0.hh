@@ -425,11 +425,13 @@ private:
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
     verso::numbers::Triangle<float> triangle;
-    verso::numbers::Plane<float> plane;
-    GLuint vbo_triangle, vao;
+    verso::numbers::Plane<float> rectangle;
+    GLuint vao, vbo_triangle, vbo_rectangle;
     verso::Shader shader_triangle;
+    verso::Shader shader_shape;
 
     void draw_triangle();
+    void draw_plane();
 
 public:
     Shapes3();
