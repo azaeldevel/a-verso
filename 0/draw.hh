@@ -26,7 +26,7 @@ namespace oct::verso::v0
 
     void outline(const numbers::vector<float,3,float>& p0, const numbers::vector<float,3,float>& p1);
 
-    template<size_t B> void outline(const numbers::Pyramid<float,3,B,float>& pyramid)
+    template<core::index auto B> void outline(const numbers::Pyramid<float,3,B,float>& pyramid)
     {
         //std::cout << "Drawing pyramid : base " << B << "\n";
         RGBA<unsigned char> color(0);
@@ -48,7 +48,7 @@ namespace oct::verso::v0
     void outline(const numbers::Rectangle<float,3,float>&);
 
 
-    template<size_t P>void outline(const numbers::Circle<float,3,P>& circle,const RGBA<unsigned char>& color)
+    template<core::index auto P>void outline(const numbers::Circle<float,3,P>& circle,const RGBA<unsigned char>& color)
     {
         glBegin(GL_LINE_LOOP);
             gl::color(color);
