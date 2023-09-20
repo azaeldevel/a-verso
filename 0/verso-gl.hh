@@ -26,6 +26,16 @@ namespace oct::verso::v0::gl
 {
     class Verso;
 
+    struct Version
+    {
+        unsigned int major;
+        unsigned int minor;
+        bool accepted;
+
+        Version() = default;
+        Version(int major, int minor);
+    };
+
     template<class V> V* WND(GLFWwindow* w)
     {
         return reinterpret_cast<V*>(glfwGetWindowUserPointer(w));
@@ -53,14 +63,16 @@ namespace oct::verso::v0::gl
         static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
     protected:
-        int width,height;
+        int _width,_height;
         Scenary* scenary;
         bool running;
+        Version version;
 
         bool is_scenary()const;
 
     public:
         Verso();
+        Verso(int major, int minor);
 
 
         /**
@@ -84,6 +96,14 @@ namespace oct::verso::v0::gl
         //void runnig(bool);
 
         float aspect()const;
+        int width() const
+        {
+            return _width;
+        }
+        int height() const
+        {
+            return _height;
+        }
 
     };
 

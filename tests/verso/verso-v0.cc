@@ -4,11 +4,20 @@
 #include <filesystem>
 #include <map>
 
+#ifdef __linux__
+    #ifdef LINUX_ARCH
+        #define STB_IMAGE_IMPLEMENTATION
+    #elif defined LINUX_DEBIAN
 
-#if defined(_WIN32) || defined(_WIN64)
+    #elif defined LINUX_GENTOO
+
+    #else
+        #error "Sistema operativo desconocido."
+    #endif
+#elif defined(_WIN32) || defined(_WIN64)
     #include <Windows.h>
 #else
-    #include <unistd.h>
+    #error "Sistema operativo desconocido."
 #endif
 
 #include "verso-v0.hh"
@@ -70,6 +79,11 @@ void Develop::key_callback(GLFWwindow* window, int key, int scancode, int action
     {
         //std::cout << "Cambieando de escenario..\n";
         WINDOW(window,Develop)->change(&WINDOW(window,Develop)->lighting);
+    }
+    else if(GLFW_KEY_9 == key && action == GLFW_PRESS)
+    {
+        //std::cout << "Cambieando de escenario..\n";
+        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->shaders);
     }
 
 }
@@ -1321,8 +1335,11 @@ Shaders::Shaders()
 bool Shaders::active()
 {
     glPushAttrib(GL_ALL_ATTRIB_BITS);
-    glfwSetKeyCallback(window, Shaders::key_callback);
 
+    glfwSetKeyCallback(window, Shaders::key_callback);
+    verso::gl::clear(verso::colors::white);
+    std::filesystem::path shaders_dir = "tests/verso/Shaders";
+    fs_develop.build(shaders_dir/"developing.vs",shaders_dir/"developing.fs");
 
     return true;
 }
@@ -1348,6 +1365,9 @@ void Shaders::render()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    fs_develop.setVec2("resolution",WINDOW(window,Develop)->width(),WINDOW(window,Develop)->height());
+    fs_develop.setVec2("resolution",WINDOW(window,Develop)->width(),WINDOW(window,Develop)->height());
+    fs_develop.use();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }

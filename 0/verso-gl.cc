@@ -8,6 +8,9 @@
 namespace oct::verso::v0::gl
 {
 
+Version::Version(int major, int minor) : accepted(false)
+{
+}
 
 void Scenary::set(GLFWwindow* w)
 {
@@ -37,8 +40,6 @@ bool Scenary::is_error(std::ostream& out,const std::source_location location)
 
 
 
-
-
 void Verso::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     // make sure the viewport matches the new window dimensions; note that width and
@@ -61,14 +62,16 @@ void Scenary::error_callback(int error, const char* description)
 }
 
 
-Verso::Verso() : is_runnig(running)
+Verso::Verso() : version(3,3),is_runnig(running)
 {
-
+}
+Verso::Verso(int M, int m) : version(M,m),is_runnig(running)
+{
 }
 bool Verso::create(const char* title, int w, int h)
 {
-    width = w;
-    height = h;
+    _width = w;
+    _height = h;
 
     // Initialise GLFW
 	if( !glfwInit() )
@@ -94,7 +97,7 @@ bool Verso::create(const char* title, int w, int h)
 #endif
 
 	// Open a window and create its OpenGL context
-	window = glfwCreateWindow( width, height, title, NULL, NULL);
+	window = glfwCreateWindow(_width, _height, title, NULL, NULL);
 	if( window == NULL ) return false;
 
 	glfwSetErrorCallback(error_callback);
@@ -160,7 +163,7 @@ void Verso::run()
 }
 float Verso::aspect()const
 {
-    return float(width)/float(height);
+    return float(_width)/float(_height);
 }
 
 

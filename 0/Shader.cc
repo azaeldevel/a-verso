@@ -41,6 +41,10 @@ GLuint shader::compile(const std::filesystem::path& path)
     {
         return compile(path,GL_FRAGMENT_SHADER);
     }
+    else
+    {
+        std::cerr << "Se deconoce el tipo de shader:" << path << "\n";
+    }
 
     return 0;
 }
@@ -58,6 +62,7 @@ GLuint shader::compile(const std::filesystem::path& path,GLenum type)
 	}
 	else
     {
+        std::cerr << "Fallo la apertura del archivo:" << path << "\n";
         return 0;
     }
 }
@@ -101,12 +106,20 @@ bool shader::is_vextex_file(const std::filesystem::path& path)const
     {
         return true;
     }
+    else if(path.extension().string().compare("vertex") == 0)
+    {
+        return true;
+    }
 
     return false;
 }
 bool shader::is_fragment_file(const std::filesystem::path& path)const
 {
     if(path.extension().string().compare("fs") == 0)
+    {
+        return true;
+    }
+    else if(path.extension().string().compare("fragment") == 0)
     {
         return true;
     }
@@ -179,7 +192,7 @@ GLuint Shader::compile(const std::filesystem::path& path,GLenum type)
 		/*std::vector<char> VertexShaderErrorMessage(InfoLogLength+1);
 		glGetShaderInfoLog(shader_id, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
 		printf("%s\n", &VertexShaderErrorMessage[0]);*/
-		std::cout << "Error en compilacion de shader1\n";
+		std::cout << "Error en compilacion de\n";
 	}
 
 	return shader_id;
@@ -229,6 +242,7 @@ bool Shader::link(GLuint vertex,GLuint fragment)
         // Use the infoLog as you see fit.
 
         // In this simple program, we'll just leave
+        std::cout << "Error en enlazado\n";
         return false;
     }
     glDetachShader(program, vertex);

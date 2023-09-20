@@ -11,6 +11,7 @@
 
 
 namespace verso_here = oct::verso::v0;
+namespace verso = oct::verso::v0;
 
 
 class P1L5 : public verso_here::gl::Scenary
@@ -304,6 +305,7 @@ private:
 private:
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    verso::Shader fs_develop;
 
 
 public:
@@ -362,6 +364,7 @@ public:
     Shapes shapes;
     Design design;
     Lighting lighting;
+    Shaders shaders;
 
 private:
     void handle();
