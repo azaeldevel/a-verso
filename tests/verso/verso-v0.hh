@@ -419,15 +419,17 @@ private:
 class Shapes3 : public verso_here::gl::Scenary
 {
 private:
-    void (Shapes::*action_draw)();
+    void (Shapes3::*action_draw)();
 
 private:
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-    verso_here::numbers::Triangle<float> triangle;
-    GLuint VBO, VAO;
+    verso::numbers::Triangle<float> triangle;
+    verso::numbers::Plane<float> triangle;
+    GLuint vbo_triangle, vao;
     verso::Shader shader_triangle;
 
+    void draw_triangle();
 
 public:
     Shapes3();

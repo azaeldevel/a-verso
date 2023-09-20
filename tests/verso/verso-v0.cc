@@ -1637,12 +1637,12 @@ bool Shapes3::active()
     std::filesystem::path shader_dir = "tests/verso/Shaders";
     shader_triangle.build(shader_dir/"shapes.vs",shader_dir/"shapes.fs");
 
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
+    glGenVertexArrays(1, &vao);
+    glGenBuffers(1, &vbo_triangle);
     // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-    glBindVertexArray(VAO);
+    glBindVertexArray(vao);
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
     glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
@@ -1655,6 +1655,8 @@ bool Shapes3::active()
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     glBindVertexArray(0);
 
+    action_draw = NULL;
+
     return true;
 }
 void Shapes3::render()
@@ -1662,11 +1664,7 @@ void Shapes3::render()
     // Color de fondo: negro
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // draw our first triangle
-    shader_triangle.use();
-    glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-    // glBindVertexArray(0); // no need to unbind it every time
+    if(action_draw)(this->*action_draw)();
 
     // Forzamos el dibujado
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -1688,8 +1686,16 @@ void Shapes3::key_callback(GLFWwindow* window, int key, int scancode, int action
     }
     else if(GLFW_KEY_1 == key && action == GLFW_RELEASE)
     {
-
+        WINDOW(window,Develop3)->shaders.action_draw = &Shapes3::draw_triangle;
     }
+}
+void Shapes3::draw_triangle()
+{
+    // draw our first triangle
+    shader_triangle.use();
+    glBindVertexArray(vao); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    // glBindVertexArray(0); // no need to unbind it every time
 }
 
 
