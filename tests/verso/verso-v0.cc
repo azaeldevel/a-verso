@@ -30,76 +30,73 @@
 
 
 
-
-void Develop::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+Develop2::Develop2() : verso_here::gl::Verso(2,0)
 {
-    //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
+}
+void Develop2::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    //std::cout << "void Develop2::key_callback(GLFWwindow*,int, int,int,int)()\n";
     if(GLFW_KEY_ESCAPE == key && action == GLFW_PRESS)
     {
         //std::cout << "Closing...\n";
-        WINDOW(window,Develop)->stop();
+        WINDOW(window,Develop2)->stop();
     }
     else if(GLFW_KEY_1 == key && action == GLFW_PRESS)
     {
         //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->jgci_1);
+        WINDOW(window,Develop2)->change(&WINDOW(window,Develop2)->jgci_1);
     }
     else if(GLFW_KEY_2 == key && action == GLFW_PRESS)
     {
         //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->jgci_2);
+        WINDOW(window,Develop2)->change(&WINDOW(window,Develop2)->jgci_2);
     }
     else if(GLFW_KEY_3 == key && action == GLFW_PRESS)
     {
         //std::cout << "\nCambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->jgci_3);
+        WINDOW(window,Develop2)->change(&WINDOW(window,Develop2)->jgci_3);
         //std::cout << "Cambiado el escenario..\n";
     }
     else if(GLFW_KEY_4 == key && action == GLFW_PRESS)
     {
         //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->jgci_4);
+        WINDOW(window,Develop2)->change(&WINDOW(window,Develop2)->jgci_4);
     }
     else if(GLFW_KEY_5 == key && action == GLFW_PRESS)
     {
         //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->jgci_5);
+        WINDOW(window,Develop2)->change(&WINDOW(window,Develop2)->jgci_5);
     }
     else if(GLFW_KEY_6 == key && action == GLFW_PRESS)
     {
         //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->shapes);
+        WINDOW(window,Develop2)->change(&WINDOW(window,Develop2)->shapes);
     }
     else if(GLFW_KEY_7 == key && action == GLFW_PRESS)
     {
         //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->design);
+        WINDOW(window,Develop2)->change(&WINDOW(window,Develop2)->design);
     }
     else if(GLFW_KEY_8 == key && action == GLFW_PRESS)
     {
         //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->lighting);
-    }
-    else if(GLFW_KEY_9 == key && action == GLFW_PRESS)
-    {
-        //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->shaders);
+        WINDOW(window,Develop2)->change(&WINDOW(window,Develop2)->lighting);
     }
 
 }
 
 
-bool Develop::active()
+bool Develop2::active()
 {
-    //std::cout << "bool Develop::active()\n";
-    glfwSetKeyCallback(window, Develop::key_callback);
+    //std::cout << "bool Develop2::active()\n";
+    glfwSetKeyCallback(window, Develop2::key_callback);
 
     return true;
 }
 
 
 
-void Develop::render()
+void Develop2::render()
 {
     if(scenary)
     {
@@ -116,7 +113,7 @@ void Develop::render()
     glfwPollEvents();
 
 }
-void Develop::clean()
+void Develop2::clean()
 {
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
@@ -313,11 +310,11 @@ void JGCI_1::update()
 
 void JGCI_1::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
+    //std::cout << "void Develop2::key_callback(GLFWwindow*,int, int,int,int)()\n";
     if(GLFW_KEY_ESCAPE == key)
     {
         //std::cout << "Closing...\n";
-        WINDOW(window,Develop)->change();
+        WINDOW(window,Develop2)->change();
     }
 }
 
@@ -375,11 +372,11 @@ void JGCI_2::update()
 
 void JGCI_2::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
+    //std::cout << "void Develop2::key_callback(GLFWwindow*,int, int,int,int)()\n";
     if(GLFW_KEY_ESCAPE == key)
     {
         //std::cout << "Closing...\n";
-        WINDOW(window,Develop)->change();
+        WINDOW(window,Develop2)->change();
     }
 }
 
@@ -464,11 +461,11 @@ void JGCI_3::update()
 
 void JGCI_3::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
+    //std::cout << "void Develop2::key_callback(GLFWwindow*,int, int,int,int)()\n";
     if(GLFW_KEY_ESCAPE == key)
     {
         //std::cout << "Closing...\n";
-        WINDOW(window,Develop)->change();
+        WINDOW(window,Develop2)->change();
     }
 }
 
@@ -598,28 +595,28 @@ void JGCI_4::update()
 
 void JGCI_4::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
+    //std::cout << "void Develop2::key_callback(GLFWwindow*,int, int,int,int)()\n";
     if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
     {
         //std::cout << "Closing JGCI_4...\n";
-        WINDOW(window,Develop)->change();
+        WINDOW(window,Develop2)->change();
     }
     else if(GLFW_KEY_UP == key && action == GLFW_PRESS)
     {
         //std::cout << "rotate_x : " << rotate_x << "\n";
-        WINDOW(window,Develop)->jgci_4.rotate_x += 5;
+        WINDOW(window,Develop2)->jgci_4.rotate_x += 5;
     }
     else if(GLFW_KEY_DOWN == key && action == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->jgci_4.rotate_x -= 5;
+        WINDOW(window,Develop2)->jgci_4.rotate_x -= 5;
     }
     else if(GLFW_KEY_RIGHT == key && action == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->jgci_4.rotate_y += 5;
+        WINDOW(window,Develop2)->jgci_4.rotate_y += 5;
     }
     else if(GLFW_KEY_LEFT == key && action == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->jgci_4.rotate_y -= 5;
+        WINDOW(window,Develop2)->jgci_4.rotate_y -= 5;
     }
 }
 
@@ -693,11 +690,11 @@ void JGCI_5::update()
 
 void JGCI_5::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
+    //std::cout << "void Develop2::key_callback(GLFWwindow*,int, int,int,int)()\n";
     if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
     {
         //std::cout << "Closing JGCI_4...\n";
-        WINDOW(window,Develop)->change();
+        WINDOW(window,Develop2)->change();
     }
 }
 
@@ -779,47 +776,47 @@ void Triangles::update()
 
 void Triangles::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
+    //std::cout << "void Develop2::key_callback(GLFWwindow*,int, int,int,int)()\n";
     if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
     {
         //std::cout << "Closing JGCI_4...\n";
-        WINDOW(window,Develop)->change();
+        WINDOW(window,Develop2)->change();
     }
     else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->triangles.camera.walking_front(1.5);
+        WINDOW(window,Develop2)->triangles.camera.walking_front(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->triangles.camera.walking_back(1.5);
+        WINDOW(window,Develop2)->triangles.camera.walking_back(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->triangles.camera.walking_right(1.5);
+        WINDOW(window,Develop2)->triangles.camera.walking_right(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->triangles.camera.walking_left(1.5);
+        WINDOW(window,Develop2)->triangles.camera.walking_left(1.5);
     }
     else if(GLFW_KEY_R == key && action == GLFW_RELEASE)
     {
         //std::cout << "Cambiado tirnago : Escaleno\n";
-        WINDOW(window,Develop)->triangles.action_draw = &Triangles::draw_rectangeluar;
+        WINDOW(window,Develop2)->triangles.action_draw = &Triangles::draw_rectangeluar;
     }
     else if(GLFW_KEY_E == key && action == GLFW_RELEASE)
     {
         //std::cout << "Cambiado tirnago : Equlatero\n";
-        WINDOW(window,Develop)->triangles.action_draw = &Triangles::draw_equilateral;
+        WINDOW(window,Develop2)->triangles.action_draw = &Triangles::draw_equilateral;
     }
     else if(GLFW_KEY_I == key && action == GLFW_RELEASE)
     {
         //std::cout << "Cambiado tirnago : Isoceles\n";
-        WINDOW(window,Develop)->triangles.action_draw = &Triangles::draw_isosceles;
+        WINDOW(window,Develop2)->triangles.action_draw = &Triangles::draw_isosceles;
     }
     else if(GLFW_KEY_P == key && action == GLFW_RELEASE)
     {
         //std::cout << "Cambiado tirnago : Isoceles\n";
-        WINDOW(window,Develop)->triangles.action_draw = &Triangles::draw_pyramid;
+        WINDOW(window,Develop2)->triangles.action_draw = &Triangles::draw_pyramid;
     }
 }
 
@@ -922,68 +919,68 @@ void Shapes::key_callback(GLFWwindow* window, int key, int scancode, int action,
     if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
     {
         //std::cout << "Closing JGCI_4...\n";
-        WINDOW(window,Develop)->change();
+        WINDOW(window,Develop2)->change();
     }
     else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->shapes.camera.walking_front(1.5);
+        WINDOW(window,Develop2)->shapes.camera.walking_front(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->shapes.camera.walking_back(1.5);
+        WINDOW(window,Develop2)->shapes.camera.walking_back(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->shapes.camera.walking_right(1.5);
+        WINDOW(window,Develop2)->shapes.camera.walking_right(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->shapes.camera.walking_left(1.5);
+        WINDOW(window,Develop2)->shapes.camera.walking_left(1.5);
     }
     else if(GLFW_KEY_R == key && action == GLFW_RELEASE)
     {
         //std::cout << "Cambiado tirnago : Escaleno\n";
-        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_rectangeluar;
+        WINDOW(window,Develop2)->shapes.action_draw = &Shapes::draw_rectangeluar;
     }
     else if(GLFW_KEY_E == key && action == GLFW_RELEASE)
     {
         //std::cout << "Cambiado tirnago : Equlatero\n";
-        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_equilateral;
+        WINDOW(window,Develop2)->shapes.action_draw = &Shapes::draw_equilateral;
     }
     else if(GLFW_KEY_I == key && action == GLFW_RELEASE)
     {
         //std::cout << "Cambiado tirnago : Isoceles\n";
-        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_isosceles;
+        WINDOW(window,Develop2)->shapes.action_draw = &Shapes::draw_isosceles;
     }
     else if(GLFW_KEY_P == key && action == GLFW_RELEASE)
     {
         //std::cout << "Cambiado tirnago : Isoceles\n";
-        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_pyramid;
+        WINDOW(window,Develop2)->shapes.action_draw = &Shapes::draw_pyramid;
     }
     else if(GLFW_KEY_S == key && action == GLFW_RELEASE)
     {
         //std::cout << "Cambiado tirnago : Isoceles\n";
-        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_rectangle;
+        WINDOW(window,Develop2)->shapes.action_draw = &Shapes::draw_rectangle;
     }
     else if(GLFW_KEY_C == key && action == GLFW_RELEASE)
     {
         //std::cout << "Cambiado tirnago : Isoceles\n";
-        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_circle;
+        WINDOW(window,Develop2)->shapes.action_draw = &Shapes::draw_circle;
     }
     else if(GLFW_KEY_D == key && action == GLFW_RELEASE)
     {
         //std::cout << "Cambiado tirnago : Isoceles\n";
-        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_disk;
+        WINDOW(window,Develop2)->shapes.action_draw = &Shapes::draw_disk;
     }
     else if(GLFW_KEY_T == key && action == GLFW_RELEASE)
     {
         //std::cout << "Cambiado tirnago : Isoceles\n";
-        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_cilinder;
+        WINDOW(window,Develop2)->shapes.action_draw = &Shapes::draw_cilinder;
     }
     else if(GLFW_KEY_H == key && action == GLFW_RELEASE)
     {
         //std::cout << "Cambiado tirnago : Isoceles\n";
-        WINDOW(window,Develop)->shapes.action_draw = &Shapes::draw_sphere;
+        WINDOW(window,Develop2)->shapes.action_draw = &Shapes::draw_sphere;
     }
 }
 
@@ -1232,7 +1229,7 @@ void Design::render()
     //glMatrixMode (GL_PROJECTION);
     //glLoadIdentity ();
     //glFrustum (-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
-    camera.perspective(90,WINDOW(window,Develop)->aspect(),0.5,30);
+    camera.perspective(90,WINDOW(window,Develop2)->aspect(),0.5,30);
     //camera.orthogonal(0.0f, 0.0f, 0.0f, 0.0f, 0.5f, 20.0f);
     glMatrixMode (GL_MODELVIEW);
 
@@ -1263,50 +1260,50 @@ void Design::update()
 
 void Design::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
+    //std::cout << "void Develop2::key_callback(GLFWwindow*,int, int,int,int)()\n";
     if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
     {
         //std::cout << "Closing JGCI_4...\n";
-        WINDOW(window,Develop)->change();
+        WINDOW(window,Develop2)->change();
     }
     else if(glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->design.camera_transform = 'T';
+        WINDOW(window,Develop2)->design.camera_transform = 'T';
     }
     else if(glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
     {
-        WINDOW(window,Develop)->design.camera_transform = 'R';
+        WINDOW(window,Develop2)->design.camera_transform = 'R';
     }
     else if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
     {
-        if(WINDOW(window,Develop)->design.camera_transform == 'T') WINDOW(window,Develop)->design.camera.walking_front(1.5);
-        else if(WINDOW(window,Develop)->design.camera_transform == 'R') WINDOW(window,Develop)->design.camera.walking_front(1.5);
+        if(WINDOW(window,Develop2)->design.camera_transform == 'T') WINDOW(window,Develop2)->design.camera.walking_front(1.5);
+        else if(WINDOW(window,Develop2)->design.camera_transform == 'R') WINDOW(window,Develop2)->design.camera.walking_front(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
     {
-        if(WINDOW(window,Develop)->design.camera_transform == 'T') WINDOW(window,Develop)->design.camera.walking_back(1.5);
+        if(WINDOW(window,Develop2)->design.camera_transform == 'T') WINDOW(window,Develop2)->design.camera.walking_back(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
     {
-        if(WINDOW(window,Develop)->design.camera_transform == 'T') WINDOW(window,Develop)->design.camera.walking_right(1.5);
+        if(WINDOW(window,Develop2)->design.camera_transform == 'T') WINDOW(window,Develop2)->design.camera.walking_right(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
     {
-        if(WINDOW(window,Develop)->design.camera_transform == 'T') WINDOW(window,Develop)->design.camera.walking_left(1.5);
+        if(WINDOW(window,Develop2)->design.camera_transform == 'T') WINDOW(window,Develop2)->design.camera.walking_left(1.5);
     }
     else if(glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
     {
-        if(WINDOW(window,Develop)->design.camera_transform == 'T') WINDOW(window,Develop)->design.camera.walking_up(1.5);
+        if(WINDOW(window,Develop2)->design.camera_transform == 'T') WINDOW(window,Develop2)->design.camera.walking_up(1.5);
     }
     else if(GLFW_KEY_3 == key && action == GLFW_RELEASE)
     {
         //std::cout << "Cambiado tirnago : Isoceles\n";
-        WINDOW(window,Develop)->design.action_draw = &Design::draw_triangle;
+        WINDOW(window,Develop2)->design.action_draw = &Design::draw_triangle;
     }
     else if(GLFW_KEY_1 == key && action == GLFW_RELEASE)
     {
         //std::cout << "Cambiado tirnago : Isoceles\n";
-        WINDOW(window,Develop)->design.action_draw = &Design::draw_text;
+        WINDOW(window,Develop2)->design.action_draw = &Design::draw_text;
     }
 
 
@@ -1339,7 +1336,7 @@ bool Shaders::active()
     glfwSetKeyCallback(window, Shaders::key_callback);
     verso::gl::clear(verso::colors::white);
     std::filesystem::path shaders_dir = "tests/verso/Shaders";
-    fs_develop.build(shaders_dir/"developing.vs",shaders_dir/"developing.fs");
+    shader_develop.build(shaders_dir/"Develop2ing.vs",shaders_dir/"Develop2ing.fs");
 
     return true;
 }
@@ -1350,11 +1347,11 @@ void Shaders::clean()
 }
 void Shaders::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
+    //std::cout << "void Develop2::key_callback(GLFWwindow*,int, int,int,int)()\n";
     if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
     {
         //std::cout << "Closing JGCI_4...\n";
-        WINDOW(window,Develop)->change();
+        WINDOW(window,Develop2)->change();
     }
 
 }
@@ -1365,9 +1362,9 @@ void Shaders::render()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    fs_develop.setVec2("resolution",WINDOW(window,Develop)->width(),WINDOW(window,Develop)->height());
-    fs_develop.setVec2("resolution",WINDOW(window,Develop)->width(),WINDOW(window,Develop)->height());
-    fs_develop.use();
+    shader_develop.setVec2("resolution",WINDOW(window,Develop2)->width(),WINDOW(window,Develop2)->height());
+    shader_develop.setVec2("resolution",WINDOW(window,Develop2)->width(),WINDOW(window,Develop2)->height());
+    shader_develop.use();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }
@@ -1468,7 +1465,7 @@ bool Lighting::active()
     lastFrame = 0.0f;
     //verso_here::gl::color(verso_here::colors::white);
     //verso_here::gl::clear(verso_here::colors::red);
-    projection = verso_here::v2::perspective(glm::radians(45.0f), WINDOW(window,Develop)->aspect(), 0.1f, 100.0f);
+    projection = verso_here::v2::perspective(glm::radians(45.0f), WINDOW(window,Develop2)->aspect(), 0.1f, 100.0f);
     view = camera.lookAt(verso_here::numbers::vector<float,3>(0,0, 5),verso_here::numbers::vector<float,3>(0,0,0));
     model = glm::mat4(1.0f);
 
@@ -1481,26 +1478,26 @@ void Lighting::clean()
 }
 void Lighting::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    //std::cout << "void Develop::key_callback(GLFWwindow*,int, int,int,int)()\n";
+    //std::cout << "void Develop2::key_callback(GLFWwindow*,int, int,int,int)()\n";
     if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
     {
-        WINDOW(window,Develop)->change();
+        WINDOW(window,Develop2)->change();
     }
     else if(GLFW_KEY_UP == key && action == GLFW_RELEASE)
     {
-        WINDOW(window,Develop)->lighting.camera.walking_front(1);
+        WINDOW(window,Develop2)->lighting.camera.walking_front(1);
     }
     else if(GLFW_KEY_DOWN == key && action == GLFW_RELEASE)
     {
-        WINDOW(window,Develop)->lighting.camera.walking_back(1);
+        WINDOW(window,Develop2)->lighting.camera.walking_back(1);
     }
     else if(GLFW_KEY_RIGHT == key && action == GLFW_RELEASE)
     {
-        WINDOW(window,Develop)->lighting.camera.walking_right(1);
+        WINDOW(window,Develop2)->lighting.camera.walking_right(1);
     }
     else if(GLFW_KEY_LEFT == key && action == GLFW_RELEASE)
     {
-        WINDOW(window,Develop)->lighting.camera.walking_left(1);
+        WINDOW(window,Develop2)->lighting.camera.walking_left(1);
     }
 
 }
@@ -1552,3 +1549,147 @@ void Lighting::render()
 
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Develop3::Develop3() : verso_here::gl::Verso(3,3)
+{
+}
+void Develop3::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    //std::cout << "void Develop2::key_callback(GLFWwindow*,int, int,int,int)()\n";
+    if(GLFW_KEY_ESCAPE == key && action == GLFW_PRESS)
+    {
+        //std::cout << "Closing...\n";
+        WINDOW(window,Develop3)->stop();
+    }
+    else if(GLFW_KEY_1 == key && action == GLFW_PRESS)
+    {
+        //std::cout << "Cambieando de escenario..\n";
+        WINDOW(window,Develop3)->change(&WINDOW(window,Develop3)->shaders);
+    }
+
+}
+bool Develop3::active()
+{
+    //std::cout << "bool Develop2::active()\n";
+    glfwSetKeyCallback(window, Develop3::key_callback);
+
+    return true;
+}
+void Develop3::render()
+{
+    if(scenary)
+    {
+        scenary->render();
+    }
+    else
+    {
+        glClear(GL_COLOR_BUFFER_BIT);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+
+}
+void Develop3::clean()
+{
+	// Close OpenGL window and terminate GLFW
+	glfwTerminate();
+}
+
+
+
+
+
+
+
+
+
+Shapes3::Shapes3()
+{
+}
+bool Shapes3::active()
+{
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+
+    //glDepthFunc(GL_LEQUAL);
+    glEnable(GL_DEPTH_TEST);
+    //glClearDepth(1.0);
+
+    glfwSetKeyCallback(window, Shapes3::key_callback);
+    verso::gl::clear(verso::colors::black);
+    verso::numbers::vector<float,3> O(0);
+    triangle = verso::numbers::Scalene<float>(O,1.0,0.5);
+    std::filesystem::path shader_dir = "tests/verso/Shaders";
+    shader_triangle.build(shader_dir/"shapes.vs",shader_dir/"shapes.fs");
+
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+    glBindVertexArray(VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
+    // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
+    glBindVertexArray(0);
+
+    return true;
+}
+void Shapes3::render()
+{
+    // Color de fondo: negro
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    // draw our first triangle
+    shader_triangle.use();
+    glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    // glBindVertexArray(0); // no need to unbind it every time
+
+    // Forzamos el dibujado
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+}
+void Shapes3::clean()
+{
+
+    glPopAttrib();
+}
+void Shapes3::update()
+{
+}
+void Shapes3::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Closing JGCI_4...\n";
+        WINDOW(window,Develop3)->change();
+    }
+    else if(GLFW_KEY_1 == key && action == GLFW_RELEASE)
+    {
+
+    }
+}
+
+

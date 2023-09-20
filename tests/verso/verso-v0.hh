@@ -305,7 +305,8 @@ private:
 private:
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-    verso::Shader fs_develop;
+    verso::Shader shader_develop;
+    verso::numbers::Triangle<float> triangle;
 
 
 public:
@@ -347,10 +348,10 @@ public:
 
 };
 
-class Develop : public verso_here::gl::Verso
+class Develop2 : public verso_here::gl::Verso
 {
 public:
-    //Game(const std::filesystem::path&);
+    Develop2();
     virtual void render();
     virtual void clean();
 
@@ -364,7 +365,6 @@ public:
     Shapes shapes;
     Design design;
     Lighting lighting;
-    Shaders shaders;
 
 private:
     void handle();
@@ -376,5 +376,85 @@ private:
 
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+*\brief Dibuja un cubo y puede rotarlo
+*
+**/
+class Shapes3 : public verso_here::gl::Scenary
+{
+private:
+    void (Shapes::*action_draw)();
+
+private:
+    void update();
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    verso_here::numbers::Triangle<float> triangle;
+    GLuint VBO, VAO;
+    verso::Shader shader_triangle;
+
+
+public:
+    Shapes3();
+    bool active();
+    virtual void render();
+    virtual void clean();
+
+};
+
+
+class Develop3 : public verso_here::gl::Verso
+{
+public:
+    Develop3();
+    virtual void render();
+    virtual void clean();
+
+public:
+    Shapes3 shaders;
+
+private:
+    void handle();
+    virtual bool active();
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
+private:
+
+};
 
 
