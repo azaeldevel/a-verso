@@ -74,7 +74,7 @@ bool Verso::create(const char* title, int w, int h)
     _height = h;
 
     // Initialise GLFW
-	if( !glfwInit() )
+	if(!glfwInit())
 	{
 		fprintf( stderr, "Failed to initialize GLFW\n" );
 		getchar();
@@ -91,7 +91,6 @@ bool Verso::create(const char* title, int w, int h)
     }
     else if(version.major == 3)
     {
-        //
         if(version.minor <= 0)
         {
             glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
@@ -102,11 +101,10 @@ bool Verso::create(const char* title, int w, int h)
         }
         if(version.minor <= 3)
         {
-
         }
         version.accepted = true;
     }
-    else
+    else if(version.major == 4)
     {
         std::cerr << "Se desconoce la version requerida.\n";
     }
