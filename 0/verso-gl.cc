@@ -8,7 +8,7 @@
 namespace oct::verso::v0::gl
 {
 
-Version::Version(int major, int minor) : accepted(false)
+Version::Version(int M, int m) : major(M),minor(m),accepted(false)
 {
 }
 
@@ -82,20 +82,34 @@ bool Verso::create(const char* title, int w, int h)
 	}
 
 	glfwWindowHint(GLFW_SAMPLES, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, OCTETOS_VERSO_OPENGL_MAJOR);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, OCTETOS_VERSO_OPENGL_MINOR);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, version.major);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, version.minor);
 	//glfwWindowHint(GLFW_CONTEXT_NO_ERROR, GL_FALSE);
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
-#if OCTETOS_VERSO_OPENGL_MAJOR == 3 && OCTETOS_VERSO_OPENGL_MINOR >= 0
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
-#endif
-#if OCTETOS_VERSO_OPENGL_MAJOR == 3 && OCTETOS_VERSO_OPENGL_MINOR >= 2
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // To make MacOS happy; should not be needed
-#endif
-#if OCTETOS_VERSO_OPENGL_MAJOR == 3 && OCTETOS_VERSO_OPENGL_MINOR >= 3
+    if(version.major == 2)
+    {
+    }
+    else if(version.major == 3)
+    {
+        //
+        if(version.minor <= 0)
+        {
+            glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
+        }
+        if(version.minor <= 2)
+        {
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // To make MacOS happy; should not be needed
+        }
+        if(version.minor <= 3)
+        {
 
-#endif
-
+        }
+        version.accepted = true;
+    }
+    else
+    {
+        std::cerr << "Se desconoce la version requerida.\n";
+    }
 	// Open a window and create its OpenGL context
 	window = glfwCreateWindow(_width, _height, title, NULL, NULL);
 	if( window == NULL ) return false;

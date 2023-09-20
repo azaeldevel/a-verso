@@ -28,8 +28,8 @@ namespace oct::verso::v0::gl
 
     struct Version
     {
-        unsigned int major;
-        unsigned int minor;
+        int major;
+        int minor;
         bool accepted;
 
         Version() = default;
