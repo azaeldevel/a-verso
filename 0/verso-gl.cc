@@ -91,15 +91,15 @@ bool Verso::create(const char* title, int w, int h)
     }
     else if(version.major == 3)
     {
-        if(version.minor <= 0)
+        if(version.minor >= 0)
         {
             glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
         }
-        if(version.minor <= 2)
+        if(version.minor >= 2)
         {
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // To make MacOS happy; should not be needed
         }
-        if(version.minor <= 3)
+        if(version.minor >= 3)
         {
         }
         version.accepted = true;
