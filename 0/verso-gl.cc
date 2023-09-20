@@ -110,6 +110,7 @@ bool Verso::create(const char* title, int w, int h)
     {
         std::cerr << "Se desconoce la version requerida.\n";
     }
+
 	// Open a window and create its OpenGL context
 	window = glfwCreateWindow(_width, _height, title, NULL, NULL);
 	if( window == NULL ) return false;
