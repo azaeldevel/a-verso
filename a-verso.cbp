@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/a-verso" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/debug-verso" prefix_auto="1" extension_auto="1" />
 				<Option object_output="bin/obj/Debug/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
@@ -27,59 +27,15 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-O2" />
+					<Add option="-O2 `pkg-config freetype2 --cflags`" />
+					<Add option="-DOCTETOS_AVERSO_V0_TTD" />
 				</Compiler>
 				<Linker>
-					<Add option="-s" />
+					<Add option="`pkg-config freetype2 --libs` `pkg-config glew --libs` `pkg-config glfw3 --libs` `pkg-config stb --libs`" />
 				</Linker>
 			</Target>
-			<Target title="testing-dbg-v0">
-				<Option output="bin/Debug/a-verso" prefix_auto="1" extension_auto="1" />
-				<Option object_output="bin/obj/Debug/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-g `pkg-config cunit --cflags`" />
-					<Add option="-DOCTETOS_AVERSO_V0_TESTING" />
-					<Add option="-DOCTETOS_AVERSO_TTD" />
-					<Add directory="../a-verso" />
-				</Compiler>
-				<Linker>
-					<Add library="cunit" />
-				</Linker>
-			</Target>
-			<Target title="tutorial-opengl-dbg">
-				<Option output="bin/Debug/tutorial-opngl" prefix_auto="1" extension_auto="1" />
-				<Option object_output="bin/obj/Debug/" />
-				<Option type="0" />
-				<Option compiler="gcc" />
-				<Option projectLinkerOptionsRelation="2" />
-				<Compiler>
-					<Add option="-g `pkg-config freetype2 --cflags`" />
-					<Add option="-DOCTETOS_AVERSO_TTD" />
-					<Add directory="0" />
-				</Compiler>
-				<Linker>
-					<Add option="`pkg-config freetype2 --libs` `pkg-config glew --libs` `pkg-config glfw3 --libs`" />
-				</Linker>
-			</Target>
-			<Target title="tutorial-sdl-dbg">
-				<Option output="bin/Debug/tutorial-sdl" prefix_auto="1" extension_auto="1" />
-				<Option object_output="bin/obj/Debug/" />
-				<Option type="0" />
-				<Option compiler="gcc" />
-				<Option projectLinkerOptionsRelation="2" />
-				<Compiler>
-					<Add option="-g `pkg-config sdl2 --cflags`" />
-					<Add option="-DOCTETOS_AVERSO_TTD" />
-					<Add directory="0" />
-				</Compiler>
-				<Linker>
-					<Add option="`pkg-config sdl2 --libs` `pkg-config SDL2_ttf --libs`" />
-				</Linker>
-			</Target>
-			<Target title="devel-verso">
-				<Option output="bin/Debug/devel-verso" prefix_auto="1" extension_auto="1" />
+			<Target title="debug-verso-2">
+				<Option output="bin/Debug/debug-verso-2" prefix_auto="1" extension_auto="1" />
 				<Option object_output="bin/obj/Debug/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
@@ -92,19 +48,19 @@
 					<Add option="`pkg-config freetype2 --libs` `pkg-config glew --libs` `pkg-config glfw3 --libs` `pkg-config stb --libs`" />
 				</Linker>
 			</Target>
-			<Target title="verso-light">
-				<Option output="bin/Debug/verso-light" prefix_auto="1" extension_auto="1" />
+			<Target title="debug-verso-1">
+				<Option output="bin/Debug/debug-verso-1" prefix_auto="1" extension_auto="1" />
 				<Option object_output="bin/obj/Debug/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
+				<Option projectCompilerOptionsRelation="2" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-g `pkg-config freetype2 --cflags`" />
-					<Add option="-DOCTETOS_AVERSO_TTD" />
-					<Add directory="0" />
+					<Add option="-DOCTETOS_AVERSO_V0_TTD" />
 				</Compiler>
 				<Linker>
-					<Add option="`pkg-config freetype2 --libs` `pkg-config glew --libs` `pkg-config glfw3 --libs`" />
+					<Add option="`pkg-config freetype2 --libs` `pkg-config glew --libs` `pkg-config glfw3 --libs` `pkg-config stb --libs`" />
 				</Linker>
 			</Target>
 		</Build>
@@ -113,131 +69,47 @@
 			<Add option="-DLINUX_ARCH" />
 			<Add directory="../../octetos" />
 		</Compiler>
-		<Unit filename="0/Camera.cc">
-			<Option target="verso-light" />
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/Camera.hh">
-			<Option target="verso-light" />
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/Shader.cc">
-			<Option target="Debug" />
-			<Option target="Release" />
-			<Option target="tutorial-opengl-dbg" />
-			<Option target="tutorial-sdl-dbg" />
-			<Option target="devel-verso" />
-			<Option target="verso-light" />
-		</Unit>
-		<Unit filename="0/Shader.hh">
-			<Option target="Debug" />
-			<Option target="Release" />
-			<Option target="tutorial-opengl-dbg" />
-			<Option target="tutorial-sdl-dbg" />
-			<Option target="devel-verso" />
-			<Option target="verso-light" />
-		</Unit>
-		<Unit filename="0/architect.cc">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/architect.hh">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/colors.hh">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/common.hh">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/draw.cc">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/draw.hh">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/gl.cc">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/gl.hh">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/objects.cc">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/objects.hh">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/quadric.cc">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/quadric.hh">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
+		<Unit filename="0/Camera.cc" />
+		<Unit filename="0/Camera.hh" />
+		<Unit filename="0/Shader.cc" />
+		<Unit filename="0/Shader.hh" />
+		<Unit filename="0/architect.cc" />
+		<Unit filename="0/architect.hh" />
+		<Unit filename="0/colors.hh" />
+		<Unit filename="0/common.hh" />
+		<Unit filename="0/draw.cc" />
+		<Unit filename="0/draw.hh" />
+		<Unit filename="0/gl.cc" />
+		<Unit filename="0/gl.hh" />
+		<Unit filename="0/objects.cc" />
+		<Unit filename="0/objects.hh" />
+		<Unit filename="0/quadric.cc" />
+		<Unit filename="0/quadric.hh" />
 		<Unit filename="0/shapes.hh">
-			<Option target="devel-verso" />
+			<Option target="debug-verso-2" />
+			<Option target="Release" />
 		</Unit>
-		<Unit filename="0/verso-gl.cc">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/verso-gl.hh">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/verso.cc">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="0/verso.hh">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
+		<Unit filename="0/verso-gl.cc" />
+		<Unit filename="0/verso-gl.hh" />
+		<Unit filename="0/verso.cc" />
+		<Unit filename="0/verso.hh" />
 		<Unit filename="tests/v0.cc">
-			<Option target="testing-dbg-v0" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="tests/v0.hh">
-			<Option target="testing-dbg-v0" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="tests/verso/Shaders/developing.fs">
-			<Option target="devel-verso" />
+			<Option target="debug-verso-2" />
 		</Unit>
 		<Unit filename="tests/verso/Shaders/developing.vs">
-			<Option target="devel-verso" />
+			<Option target="debug-verso-2" />
 		</Unit>
-		<Unit filename="tests/verso/Shaders/shapes.fs">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="tests/verso/Shaders/shapes.vs">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="tests/verso/main.cc">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="tests/verso/verso-v0.cc">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
-		<Unit filename="tests/verso/verso-v0.hh">
-			<Option target="devel-verso" />
-			<Option target="Debug" />
-		</Unit>
+		<Unit filename="tests/verso/Shaders/shapes.fs" />
+		<Unit filename="tests/verso/Shaders/shapes.vs" />
+		<Unit filename="tests/verso/main.cc" />
+		<Unit filename="tests/verso/verso-2-v0.cc" />
+		<Unit filename="tests/verso/verso-2-v0.hh" />
 		<Extensions>
 			<lib_finder>
 				<lib name="glfw3" />
