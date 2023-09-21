@@ -12,7 +12,7 @@
     #elif defined LINUX_GENTOO
 
     #else
-        #error "Sistema operativo desconocido."
+        //#error "Sistema operativo desconocido."
     #endif
 #elif defined(_WIN32) || defined(_WIN64)
     #include <Windows.h>
@@ -1637,7 +1637,7 @@ bool Shapes3::active()
     verso::gl::clear(verso::colors::black);
     verso::numbers::vector<float,3> O(0);
     triangle = verso::numbers::Scalene<float>(O,1.5,1.5);
-    rectangle.rectangle(O,0.75,0.5);
+    rectangle.create(O,0.75,0.5);
     //rectangle.printLn(std::cout);
     std::filesystem::path shader_dir = "tests/verso/Shaders";
     shader_triangle.build(shader_dir/"shapes.vs",shader_dir/"shapes.fs");

@@ -425,7 +425,7 @@ private:
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
     verso::numbers::Triangle<float> triangle;
-    verso::numbers::Plane<float> rectangle;
+    verso::numbers::Rectangle<float> rectangle;
     GLuint vao, vbo_triangle, vbo_rectangle;
     verso::Shader shader_triangle;
     verso::Shader shader_shape;
