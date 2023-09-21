@@ -1465,7 +1465,10 @@ bool Lighting::active()
     lastFrame = 0.0f;
     //verso_here::gl::color(verso_here::colors::white);
     //verso_here::gl::clear(verso_here::colors::red);
+#ifdef __linux__
     projection = verso_here::v2::perspective(glm::radians(45.0f), WINDOW(window,Develop2)->aspect(), 0.1f, 100.0f);
+#endif
+
     view = camera.lookAt(verso_here::numbers::vector<float,3>(0,0, 5),verso_here::numbers::vector<float,3>(0,0,0));
     model = glm::mat4(1.0f);
 

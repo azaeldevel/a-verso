@@ -108,16 +108,18 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall -pedantic --std=c++20" />
-			<Add option="-DLINUX_ARCH" />
+			<Add option="-DLINUX_MSYS2" />
 			<Add directory="../../octetos" />
 		</Compiler>
 		<Unit filename="0/Camera.cc">
 			<Option target="verso-light" />
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/Camera.hh">
 			<Option target="verso-light" />
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/Shader.cc">
 			<Option target="Debug" />
@@ -137,51 +139,67 @@
 		</Unit>
 		<Unit filename="0/architect.cc">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/architect.hh">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/colors.hh">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/common.hh">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/draw.cc">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/draw.hh">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/gl.cc">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/gl.hh">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/objects.cc">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/objects.hh">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/quadric.cc">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/quadric.hh">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/verso-gl.cc">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/verso-gl.hh">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/verso.cc">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="0/verso.hh">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="tests/v0.cc">
 			<Option target="testing-dbg-v0" />
@@ -197,18 +215,23 @@
 		</Unit>
 		<Unit filename="tests/verso/Shaders/shapes.fs">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="tests/verso/Shaders/shapes.vs">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="tests/verso/main.cc">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="tests/verso/verso-v0.cc">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Unit filename="tests/verso/verso-v0.hh">
 			<Option target="devel-verso" />
+			<Option target="Debug" />
 		</Unit>
 		<Extensions>
 			<lib_finder>

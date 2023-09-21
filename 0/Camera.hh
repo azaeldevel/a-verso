@@ -51,10 +51,12 @@ namespace oct::verso::v0::v2
 {
 
     GLM_FUNC_DECL glm::mat4 lookAt (glm::vec3 const &eye, glm::vec3 const &center, glm::vec3 const &up);
+#ifdef __linux__
     template<class T> GLM_FUNC_DECL glm::mat4	perspective (T const &fovy, T const &aspect, T const &near, T const &far)
     {
         return glm::perspective(fovy,aspect,near,far);
     }
+#endif
 
     class Camera
     {

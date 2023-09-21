@@ -3,13 +3,15 @@
 #define OCTETOS_AVERSO_COLORS_HH
 
 #include "common.hh"
+//#include <core/3/numbers.hh>
 
 namespace oct::verso::v0
 {
-    template<numbers::core::number T = float, size_t L = 4> class Color : public core::array<T,L>
+    template<numbers::core::number T = float, numbers::core::index auto L = 4> class Color : public core::array<T,L>
     {
     private:
         typedef core::array<T,L> BASE;
+
     public:
         Color() = default;
         constexpr Color(const T& v) : BASE(v)
@@ -98,19 +100,19 @@ namespace oct::verso::v0
     };
 
 
-    template<numbers::core::number T> class RGB : public Color<T,3>
+    template<numbers::core::number T> class rgb : public Color<T,3>
     {
     private:
         typedef Color<T,3> BASE;
     public:
-        RGB() = default;
-        constexpr RGB(const T& v) : BASE(v)
+        rgb() = default;
+        constexpr rgb(const T& v) : BASE(v)
         {
         }
-        constexpr RGB(const RGB& v) : BASE(v)
+        constexpr rgb(const rgb& v) : BASE(v)
         {
         }
-        constexpr RGB(const std::initializer_list<T>& l) : BASE(l)
+        constexpr rgb(const std::initializer_list<T>& l) : BASE(l)
         {
         }
 
@@ -121,15 +123,15 @@ namespace oct::verso::v0
         }
         */
 
-        operator RGB<float>()
+        operator rgb<float>()
         {
-            RGB<float> newcolor;
+            rgb<float> newcolor;
             for(size_t i = 0; i < 3; i++) newcolor[i] = float(BASE::data[i]) / float(255);
             return newcolor;
         }
-        operator RGB<float>()const
+        operator rgb<float>()const
         {
-            RGB<float> newcolor;
+            rgb<float> newcolor;
             for(size_t i = 0; i < 3; i++) newcolor[i] = float(BASE::data[i]) / float(255);
             return newcolor;
         }
@@ -192,13 +194,19 @@ namespace oct::verso::v0
         operator RGBA<float>()
         {
             RGBA<float> newcolor;
-            for(size_t i = 0; i < 4; i++) newcolor[i] = float(BASE::data[i]) / float(255);
+            for(size_t i = 0; i < 4; i++)
+            {
+                newcolor[i] = float(BASE::data[i]) / 255.0f;
+            }
             return newcolor;
         }
         operator RGBA<float>()const
         {
             RGBA<float> newcolor;
-            for(size_t i = 0; i < 4; i++) newcolor[i] = float(BASE::data[i]) / float(255);
+            for(size_t i = 0; i < 4; i++)
+            {
+                newcolor[i] = float(BASE::data[i]) / 255.0f;
+            }
             return newcolor;
         }
     };

@@ -93,7 +93,9 @@ namespace oct::verso::v0::v1
     {
         glMatrixMode (GL_PROJECTION);
         glLoadIdentity ();
+#ifdef __linux__
         gluPerspective(fov,aspect,near,far);
+#endif
     }
     void Camera::orthogonal(double left,double right,double bottom,double top,double nearVal,double farVal)
     {
