@@ -1,5 +1,5 @@
 
-#include <numbers/0/shapes.hh>
+#include <a-verso/0/shapes.hh>
 
 #include <a-verso/0/verso-gl.hh>
 #include <a-verso/0/draw.hh>
@@ -14,22 +14,20 @@ namespace verso_here = oct::verso::v0;
 namespace verso = oct::verso::v0;
 
 
-
-
 /**
 *\brief Dibuja un cubo y puede rotarlo
 *
 **/
-class Shapes3 : public verso_here::gl::Scenary
+class Shapes : public verso_here::gl::Scenary
 {
 private:
-    void (Shapes3::*action_draw)();
+    void (Shapes::*action_draw)();
 
 private:
     void update();
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
     verso::numbers::Triangle<float> triangle;
-    verso::numbers::Rectangle<float> rectangle;
+    verso::Rectangle<float> rectangle;
     GLuint vao, vbo_triangle, vbo_rectangle;
     verso::Shader shader_triangle;
     verso::Shader shader_shape;
@@ -38,7 +36,7 @@ private:
     void draw_plane();
 
 public:
-    Shapes3();
+    Shapes();
     bool active();
     virtual void render();
     virtual void clean();
@@ -46,15 +44,15 @@ public:
 };
 
 
-class Develop3 : public verso_here::gl::Verso
+class Develop : public verso_here::gl::Verso
 {
 public:
-    Develop3();
+    Develop();
     virtual void render();
     virtual void clean();
 
 public:
-    Shapes3 shaders;
+    Shapes shaders;
 
 private:
     void handle();

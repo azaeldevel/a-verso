@@ -35,32 +35,32 @@
 
 
 
-Develop3::Develop3() : verso_here::gl::Verso(3,3)
+Develop::Develop() : verso_here::gl::Verso(3,3)
 {
 }
-void Develop3::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void Develop::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     //std::cout << "void Develop2::key_callback(GLFWwindow*,int, int,int,int)()\n";
     if(GLFW_KEY_ESCAPE == key && action == GLFW_PRESS)
     {
         //std::cout << "Closing...\n";
-        WINDOW(window,Develop3)->stop();
+        WINDOW(window,Develop)->stop();
     }
     else if(GLFW_KEY_1 == key && action == GLFW_PRESS)
     {
         //std::cout << "Cambieando de escenario..\n";
-        WINDOW(window,Develop3)->change(&WINDOW(window,Develop3)->shaders);
+        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->shaders);
     }
 
 }
-bool Develop3::active()
+bool Develop::active()
 {
     //std::cout << "bool Develop2::active()\n";
-    glfwSetKeyCallback(window, Develop3::key_callback);
+    glfwSetKeyCallback(window, Develop::key_callback);
 
     return true;
 }
-void Develop3::render()
+void Develop::render()
 {
     if(scenary)
     {
@@ -76,7 +76,7 @@ void Develop3::render()
     glfwPollEvents();
 
 }
-void Develop3::clean()
+void Develop::clean()
 {
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
@@ -90,10 +90,10 @@ void Develop3::clean()
 
 
 
-Shapes3::Shapes3()
+Shapes::Shapes()
 {
 }
-bool Shapes3::active()
+bool Shapes::active()
 {
     glPushAttrib(GL_ALL_ATTRIB_BITS);
 
@@ -101,12 +101,14 @@ bool Shapes3::active()
     glEnable(GL_DEPTH_TEST);
     //glClearDepth(1.0);
 
-    glfwSetKeyCallback(window, Shapes3::key_callback);
+    glfwSetKeyCallback(window, Shapes::key_callback);
     verso::gl::clear(verso::colors::black);
     verso::numbers::vector<float,3> O(0);
     triangle = verso::numbers::Scalene<float>(O,1.5,1.5);
-    rectangle.create(O,0.75,0.5);
-    //rectangle.printLn(std::cout);
+    rectangle.create(O,1.0f,1.0f);
+    rectangle.printLn(std::cout);
+    std::cout << "\n";
+    triangle.printLn(std::cout);
     std::filesystem::path shader_dir = "tests/verso/Shaders";
     shader_triangle.build(shader_dir/"shapes.vs",shader_dir/"shapes.fs");
     shader_shape.build(shader_dir/"shapes.vs",shader_dir/"shapes.fs");
@@ -119,11 +121,11 @@ bool Shapes3::active()
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
     glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo_rectangle);
     glBufferData(GL_ARRAY_BUFFER, sizeof(rectangle), rectangle, GL_STATIC_DRAW);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
     // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -136,7 +138,7 @@ bool Shapes3::active()
 
     return true;
 }
-void Shapes3::render()
+void Shapes::render()
 {
     // Color de fondo: negro
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -146,33 +148,33 @@ void Shapes3::render()
     // Forzamos el dibujado
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
 }
-void Shapes3::clean()
+void Shapes::clean()
 {
 
     glPopAttrib();
 }
-void Shapes3::update()
+void Shapes::update()
 {
 }
-void Shapes3::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void Shapes::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
     {
         //std::cout << "Closing JGCI_4...\n";
-        WINDOW(window,Develop3)->change();
+        WINDOW(window,Develop)->change();
     }
     else if(GLFW_KEY_1 == key && action == GLFW_PRESS)
     {
         //std::cout << "Activando trinagulo\n";
-        WINDOW(window,Develop3)->shaders.action_draw = &Shapes3::draw_triangle;
+        WINDOW(window,Develop)->shaders.action_draw = &Shapes::draw_triangle;
     }
     else if(GLFW_KEY_2 == key && action == GLFW_PRESS)
     {
         //std::cout << "Activando plano\n";
-        WINDOW(window,Develop3)->shaders.action_draw = &Shapes3::draw_plane;
+        WINDOW(window,Develop)->shaders.action_draw = &Shapes::draw_plane;
     }
 }
-void Shapes3::draw_triangle()
+void Shapes::draw_triangle()
 {
     glEnableVertexAttribArray(0);
     // draw our first triangle
@@ -181,14 +183,16 @@ void Shapes3::draw_triangle()
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glDisableVertexAttribArray(0);
 }
-void Shapes3::draw_plane()
+void Shapes::draw_plane()
 {
-    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
     // draw our first triangle
     shader_triangle.use();
     glBindVertexArray(vao); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-    glDrawArrays(GL_TRIANGLES, 1, 3);
-    glDisableVertexAttribArray(0);
+    glDrawArrays(GL_TRIANGLES, 1, 6);
+    glDisableVertexAttribArray(1);
 }
 
 
