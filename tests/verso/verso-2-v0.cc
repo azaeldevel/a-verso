@@ -104,8 +104,8 @@ bool Shapes::active()
     glfwSetKeyCallback(window, Shapes::key_callback);
     verso::gl::clear(verso::colors::black);
     verso::numbers::vector<float,3> O(0);
-    triangle = verso::numbers::Scalene<float>(O,1.5,1.5);
-    rectangle.create(O,1.0f,1.0f);
+    triangle = verso::numbers::Scalene<float>(O,0.5f,0.5f);
+    rectangle.create(O,0.75f,0.75f);
     rectangle.printLn(std::cout);
     std::cout << "\n";
     triangle.printLn(std::cout);
@@ -114,18 +114,20 @@ bool Shapes::active()
     shader_shape.build(shader_dir/"shapes.vs",shader_dir/"shapes.fs");
 
     glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
     glGenBuffers(1, &vbo_triangle);
     glGenBuffers(1, &vbo_rectangle);
     // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-    glBindVertexArray(vao);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
     glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    glEnableVertexAttribArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo_rectangle);
     glBufferData(GL_ARRAY_BUFFER, sizeof(rectangle), rectangle, GL_STATIC_DRAW);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    glEnableVertexAttribArray(1);
 
     // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -186,12 +188,10 @@ void Shapes::draw_triangle()
 void Shapes::draw_plane()
 {
     glEnableVertexAttribArray(1);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
     // draw our first triangle
     shader_triangle.use();
     glBindVertexArray(vao); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-    glDrawArrays(GL_TRIANGLES, 1, 6);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
     glDisableVertexAttribArray(1);
 }
 
