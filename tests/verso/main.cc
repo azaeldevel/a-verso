@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
     //std::cout << "running..\n";
     Develop g_game;
     //std::cout << "creating..\n";
-    g_game.create("Developing / Tutorial - Learning OpenGL...",1024, 768);
+    g_game.create("Developing / Tutorial - Learning OpenGL...",800, 600);
     //std::cout << "created..\n";
     while(g_game.is_runnig)
     {
