@@ -121,7 +121,7 @@ bool Shapes::active()
     glBindBuffer(GL_ARRAY_BUFFER, vbo_rectangle);
     glBufferData(GL_ARRAY_BUFFER, sizeof(rectangle), rectangle, GL_STATIC_DRAW);
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
     // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
     //glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -183,7 +183,7 @@ void Shapes::draw_plane()
     glEnableVertexAttribArray(1);
     // draw our first triangle
     shader_triangle.use();
-    glDrawArrays(GL_TRIANGLES, 1, 6);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
     glDisableVertexAttribArray(1);
 }
 
