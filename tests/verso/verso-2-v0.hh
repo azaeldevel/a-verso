@@ -28,7 +28,7 @@ private:
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
     verso::numbers::Triangle<float> triangle;
     verso::Rectangle<float> rectangle;
-    GLuint vao, vbo_triangle, vbo_rectangle;
+    GLuint vao_triangle, vbo_triangle , vao_rectangle, vbo_rectangle;
     verso::Shader shader_triangle;
     verso::Shader shader_shape;
 
