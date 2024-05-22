@@ -42,8 +42,13 @@ void Develop::key_callback(GLFWwindow* window, int key, int scancode, int action
     }
     else if(GLFW_KEY_1 == key && action == GLFW_PRESS)
     {
-        //std::cout << "Cambieando de escenario..\n";
+        std::cout << "Cambieando de escenario 1..\n";
         WINDOW(window,Develop)->change(&WINDOW(window,Develop)->shaders);
+    }
+    else if(GLFW_KEY_2 == key && action == GLFW_PRESS)
+    {
+        std::cout << "Cambieando de escenario 2..\n";
+        WINDOW(window,Develop)->change(&WINDOW(window,Develop)->triangles);
     }
 
 }
@@ -100,17 +105,15 @@ bool Shapes::active()
     verso::numbers::vector<float,3> O(0);
     triangle = verso::numbers::Equilateral<float>(O,0.5f);
     rectangle.create(O,0.75f,0.75f);
-    rectangle.printLn(std::cout);
-    std::cout << "\n";
-    triangle.printLn(std::cout);
+    //rectangle.printLn(std::cout);
+    //std::cout << "\n";
+    //triangle.printLn(std::cout);
     std::filesystem::path shader_dir = "tests/verso/Shaders";
     shader_triangle.build(shader_dir/"shapes.vs",shader_dir/"shapes.fs");
     shader_shape.build(shader_dir/"shapes.vs",shader_dir/"shapes.fs");
 
     glGenVertexArrays(1, &vao_triangle);
     glBindVertexArray(vao_triangle);
-    // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-
     glGenBuffers(1, &vbo_triangle);
     glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
     glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
@@ -185,3 +188,80 @@ void Shapes::draw_plane()
 }
 
 
+
+
+
+
+Triangles::Triangles()
+{
+}
+bool Triangles::active()
+{
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
+
+    //glDepthFunc(GL_LEQUAL);
+    glEnable(GL_DEPTH_TEST);
+    //glClearDepth(1.0);
+
+    glfwSetKeyCallback(window, Triangles::key_callback);
+    verso::gl::clear(verso::colors::black);
+    verso::numbers::vector<float,3> O(0);
+    triangle = verso::numbers::Equilateral<float>(O,0.5f);
+    //rectangle.create(O,0.75f,0.75f);
+    //rectangle.printLn(std::cout);
+    //std::cout << "\n";
+    //triangle.printLn(std::cout);
+    std::filesystem::path shader_dir = "tests/verso/Shaders";
+    shader_triangle.build(shader_dir/"shapes.vs",shader_dir/"shapes.fs");
+
+    glGenVertexArrays(1, &vao_triangle);
+    glBindVertexArray(vao_triangle);
+    glGenBuffers(1, &vbo_triangle);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
+    //glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+    action_draw = NULL;
+
+    return true;
+}
+void Triangles::render()
+{
+    // Color de fondo: negro
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    if(action_draw)(this->*action_draw)();
+
+    // Forzamos el dibujado
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+}
+void Triangles::clean()
+{
+    glPopAttrib();
+}
+void Triangles::update()
+{
+}
+void Triangles::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if(GLFW_KEY_ESCAPE == key && action == GLFW_RELEASE)
+    {
+        //std::cout << "Closing JGCI_4...\n";
+        WINDOW(window,Develop)->change();
+    }
+    else if(GLFW_KEY_1 == key && action == GLFW_PRESS)
+    {
+        //std::cout << "Activando trinagulo\n";
+        WINDOW(window,Develop)->triangles.action_draw = &Triangles::draw_triangle;
+    }
+}
+void Triangles::draw_triangle()
+{
+    glEnableVertexAttribArray(0);
+    // draw our first triangle
+    glBindVertexArray(vao_triangle);
+    shader_triangle.use();
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDisableVertexAttribArray(0);
+}

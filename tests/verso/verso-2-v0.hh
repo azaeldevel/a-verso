@@ -34,6 +34,7 @@ private:
 
     void draw_triangle();
     void draw_plane();
+    void draw_both();
 
 public:
     Shapes();
@@ -42,6 +43,36 @@ public:
     virtual void clean();
 
 };
+
+
+/**
+*\brief Dibuja un cubo y puede rotarlo
+*
+**/
+class Triangles : public verso_here::gl::Scenary
+{
+private:
+    void (Triangles::*action_draw)();
+
+private:
+    void update();
+    static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    verso::numbers::Triangle<float> triangle;
+    GLuint vao_triangle, vbo_triangle;
+    verso::Shader shader_triangle;
+
+    void draw_triangle();
+
+public:
+    Triangles();
+    bool active();
+    virtual void render();
+    virtual void clean();
+
+};
+
+
+
 
 
 class Develop : public verso_here::gl::Verso
@@ -53,6 +84,7 @@ public:
 
 public:
     Shapes shaders;
+    Triangles triangles;
 
 private:
     void handle();
@@ -62,5 +94,3 @@ private:
 private:
 
 };
-
-
