@@ -23,7 +23,7 @@
 #include "verso-2-v0.hh"
 #include <a-verso/0/draw.hh>
 #include <a-verso/0/gl.hh>
-#include "stb/stb_image.h"
+//#include "stb/stb_image.h"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
