@@ -255,6 +255,11 @@ void Triangles::key_callback(GLFWwindow* window, int key, int scancode, int acti
         //std::cout << "Activando trinagulo\n";
         WINDOW(window,Develop)->triangles.action_draw = &Triangles::draw_triangle;
     }
+    else if(GLFW_KEY_2 == key && action == GLFW_PRESS)
+    {
+        //std::cout << "Activando trinagulo\n";
+        WINDOW(window,Develop)->triangles.action_draw = &Triangles::draw_running;
+    }
 }
 void Triangles::draw_triangle()
 {
@@ -265,3 +270,13 @@ void Triangles::draw_triangle()
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glDisableVertexAttribArray(0);
 }
+void Triangles::draw_running()
+{
+    glEnableVertexAttribArray(0);
+    // draw our first triangle
+    glBindVertexArray(vao_triangle);
+    shader_triangle.use();
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDisableVertexAttribArray(0);
+}
+
