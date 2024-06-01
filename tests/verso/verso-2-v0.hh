@@ -62,6 +62,7 @@ private:
     verso::Shader shader_triangle;
 
     void draw_triangle();
+    void draw_running();
 
 public:
     Triangles();
