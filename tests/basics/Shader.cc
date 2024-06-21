@@ -5,10 +5,6 @@
 namespace oct::verso::v1
 {
 
-#ifdef OCTETOS_AVERSO_TTD
-
-#endif // OCTETOS_AVERSO_TTD
-
 shader::shader(const std::filesystem::path& path)
 {
     compile(path);
