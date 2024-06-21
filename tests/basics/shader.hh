@@ -4,19 +4,10 @@
 
 #include <string>
 #include <vector>
-
-
-
-#include <fstream>
-#include <sstream>
-#include <iostream>
-#include <filesystem>
-//#include <core/3/Exception.hh>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-//#include <numbers/0/vector.hh>
+#include <filesystem>
+
 
 #ifdef OCTETOS_AVERSO_TTD
     #include <iostream>
