@@ -21,9 +21,9 @@
 #endif
 
 #include "verso-2-v0.hh"
-#include <a-verso/0/draw.hh>
-#include <a-verso/0/gl.hh>
-#include "stb/stb_image.h"
+#include "../../0/draw.hh"
+#include "../../0/gl.hh"
+//#include "stb/stb_image.h"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -210,7 +210,7 @@ bool Triangles::active()
     //rectangle.create(O,0.75f,0.75f);
     //rectangle.printLn(std::cout);
     //std::cout << "\n";
-    //triangle.printLn(std::cout);
+    triangle.printLn(std::cout);
     std::filesystem::path shader_dir = "tests/verso/Shaders";
     shader_triangle.build(shader_dir/"shapes.vs",shader_dir/"shapes.fs");
 
@@ -218,7 +218,7 @@ bool Triangles::active()
     glBindVertexArray(vao_triangle);
     glGenBuffers(1, &vbo_triangle);
     glBindBuffer(GL_ARRAY_BUFFER, vbo_triangle);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STREAM_DRAW);
     //glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
@@ -272,6 +272,10 @@ void Triangles::draw_triangle()
 }
 void Triangles::draw_running()
 {
+    triangle.translate(0.01);
+    triangle.printLn(std::cout);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STREAM_DRAW);
+
     glEnableVertexAttribArray(0);
     // draw our first triangle
     glBindVertexArray(vao_triangle);

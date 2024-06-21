@@ -1,11 +1,11 @@
 
-#include <a-verso/0/shapes.hh>
+#include "../../0/shapes.hh"
 
-#include <a-verso/0/verso-gl.hh>
-#include <a-verso/0/draw.hh>
-#include <a-verso/0/quadric.hh>
-#include <a-verso/0/objects.hh>
-#include <a-verso/0/architect.hh>
+#include "../../0/verso-gl.hh"
+#include "../../0/draw.hh"
+#include "../../0/quadric.hh"
+#include "../../0/objects.hh"
+#include "../../0/architect.hh"
 
 
 

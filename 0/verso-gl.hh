@@ -13,8 +13,8 @@
 //#include <map>
 
 //#include <shapes.hh>
-#include <a-verso/0/Shader.hh>
-#include <a-verso/0/Camera.hh>
+#include "Shader.hh"
+#include "Camera.hh"
 
 #include "verso.hh"
 #include "Camera.hh"
