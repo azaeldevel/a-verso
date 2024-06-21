@@ -1,3 +1,4 @@
 bin/
 ing/
 *.depend
+obj/
