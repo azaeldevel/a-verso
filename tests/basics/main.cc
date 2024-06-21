@@ -69,7 +69,7 @@ int main( void )
 	std::filesystem::path shader_directory("tests/basics/shaders");
     if(not shader.build(shader_directory/"SimpleVertexShader.vertex",shader_directory/"SimpleFragmentShader.fragment"))
     {
-        std::cout << "Fail shadres compilation\n";
+        std::cout << "Fail shaders compilation\n";
     }
     else
     {
