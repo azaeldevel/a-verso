@@ -273,7 +273,7 @@ void Triangles::draw_triangle()
 void Triangles::draw_running()
 {
     triangle.translate(0.01);
-    triangle.printLn(std::cout);
+    //triangle.printLn(std::cout);
     glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STREAM_DRAW);
 
     glEnableVertexAttribArray(0);
