@@ -1,6 +1,6 @@
 
 #include <vector>
-#include "Shader.hh"
+#include "shader.hh"
 
 namespace oct::verso::v1
 {

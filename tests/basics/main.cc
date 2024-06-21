@@ -13,7 +13,7 @@ GLFWwindow* window;
 #include <glm/glm.hpp>
 using namespace glm;
 
-#include "Shader.hh"
+#include "shader.hh"
 
 namespace verso = oct::verso::v1;
 
