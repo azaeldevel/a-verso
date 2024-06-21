@@ -2,7 +2,7 @@
 #include <cstring>
 #include <string>
 
-#include "verso-2-v0.hh"
+#include "game-v0.hh"
 
 int main(int argc, char* argv[])
 {

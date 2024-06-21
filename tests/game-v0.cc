@@ -20,9 +20,9 @@
     #error "Sistema operativo desconocido."
 #endif
 
-#include "verso-2-v0.hh"
-#include "../../0/draw.hh"
-#include "../../0/gl.hh"
+#include "game-v0.hh"
+#include "../0/draw.hh"
+#include "../0/gl.hh"
 //#include "stb/stb_image.h"
 
 #include <ft2build.h>
@@ -108,7 +108,7 @@ bool Shapes::active()
     //rectangle.printLn(std::cout);
     //std::cout << "\n";
     //triangle.printLn(std::cout);
-    std::filesystem::path shader_dir = "tests/verso/Shaders";
+    std::filesystem::path shader_dir = "tests/shaders";
     shader_triangle.build(shader_dir/"shapes.vs",shader_dir/"shapes.fs");
     shader_shape.build(shader_dir/"shapes.vs",shader_dir/"shapes.fs");
 
@@ -211,7 +211,7 @@ bool Triangles::active()
     //rectangle.printLn(std::cout);
     //std::cout << "\n";
     triangle.printLn(std::cout);
-    std::filesystem::path shader_dir = "tests/verso/Shaders";
+    std::filesystem::path shader_dir = "tests/shaders";
     shader_triangle.build(shader_dir/"shapes.vs",shader_dir/"shapes.fs");
 
     glGenVertexArrays(1, &vao_triangle);

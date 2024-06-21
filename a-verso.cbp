@@ -61,15 +61,15 @@
 		<Unit filename="0/verso-gl.hh" />
 		<Unit filename="0/verso.cc" />
 		<Unit filename="0/verso.hh" />
+		<Unit filename="tests/game-v0.cc" />
+		<Unit filename="tests/game-v0.hh" />
+		<Unit filename="tests/game.cc" />
 		<Unit filename="tests/v0.cc">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="tests/v0.hh">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="tests/verso/main.cc" />
-		<Unit filename="tests/verso/verso-2-v0.cc" />
-		<Unit filename="tests/verso/verso-2-v0.hh" />
 		<Extensions>
 			<lib_finder>
 				<lib name="glfw3" />
