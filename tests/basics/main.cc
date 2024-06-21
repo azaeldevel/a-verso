@@ -16,6 +16,7 @@ GLFWwindow* window;
 using namespace glm;
 
 #include "shader.hh"
+#include "shapes.hh"
 
 namespace verso = oct::verso::v1;
 
@@ -97,18 +98,20 @@ int main( void )
 	// Our ModelViewProjection : multiplication of our 3 matrices
 	glm::mat4 MVP        = Projection * View * Model; // Remember, matrix multiplication is the other way around
 
-	static const GLfloat g_vertex_buffer_data[] = {
-		-1.0f, -1.0f, 0.0f,
-		 1.0f, -1.0f, 0.0f,
-		 0.0f,  1.0f, 0.0f,
-	};
+	verso::numbers::Triangle<float> g_vertex_buffer_data;
+	constexpr verso::numbers::vector<float,3> O(0);
+	g_vertex_buffer_data = verso::numbers::Equilateral<float>(O,1.0f);
 
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STREAM_DRAW);
 
 	do{
+
+        g_vertex_buffer_data.translate(0.01);
+        //triangle.printLn(std::cout);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STREAM_DRAW);
 
 		// Clear the screen
 		glClear( GL_COLOR_BUFFER_BIT );

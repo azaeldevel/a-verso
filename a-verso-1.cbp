@@ -34,6 +34,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="/home/azael/develop/octetos" />
 				</Compiler>
 				<Linker>
 					<Add option="`pkg-config glew --libs` `pkg-config glfw3 --libs`" />
@@ -42,7 +43,14 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="--std=c++20 -Wall -pedantic" />
 		</Compiler>
+		<Unit filename="tests/basics/colors.hh">
+			<Option target="basics" />
+		</Unit>
+		<Unit filename="tests/basics/common.hh">
+			<Option target="basics" />
+		</Unit>
 		<Unit filename="tests/basics/context.hh">
 			<Option target="basics" />
 		</Unit>
@@ -53,6 +61,12 @@
 			<Option target="basics" />
 		</Unit>
 		<Unit filename="tests/basics/shader.hh">
+			<Option target="basics" />
+		</Unit>
+		<Unit filename="tests/basics/shapes.cc">
+			<Option target="basics" />
+		</Unit>
+		<Unit filename="tests/basics/shapes.hh">
 			<Option target="basics" />
 		</Unit>
 		<Extensions />
