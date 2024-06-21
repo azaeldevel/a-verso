@@ -56,57 +56,6 @@ namespace oct::verso::v1
         GLuint compile(const GLchar*,GLenum);
         bool link(GLuint,GLuint);
     };
-
-    class Shader
-    {
-    public:
-        Shader() = default;
-        // constructor reads and builds the shader
-        Shader(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
-        Shader(const std::string& vertexPath, const std::string& fragmentPath);
-        ~Shader();
-
-        operator GLuint()const;
-
-        // use/activate the shader
-        void use();
-        // utility uniform functions
-        void setBool(const std::string &name, bool value) const;
-        void setInt(const std::string &name, int value) const;
-        void setFloat(const std::string &name, float value) const;
-        template<typename T> void set(const std::string &name, T v1, T v2, T v3) const
-        {
-            glUniform3f(glGetUniformLocation(program, name.c_str()), v1,v2,v3);
-        }
-        void set(const std::string &name,  const glm::mat4& ) const;
-
-    // ------------------------------------------------------------------------
-    void setVec2(const std::string &name, const glm::vec2 &value) const;
-    void setVec2(const std::string &name, float x, float y) const;
-    // ------------------------------------------------------------------------
-    void setVec3(const std::string &name, const glm::vec3 &value) const;
-    void setVec3(const std::string &name, float x, float y, float z) const;
-    // ------------------------------------------------------------------------
-    void setVec4(const std::string &name, const glm::vec4 &value) const;
-    void setVec4(const std::string &name, float x, float y, float z, float w);
-
-        bool build(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
-        bool build(const std::string& vertexCode, const std::string& fragmentCode);
-        bool build(const std::vector<shader>&);
-
-        void clean();
-
-    private:
-        // the program ID
-        unsigned int program;
-
-    private:
-        GLuint compile(const std::filesystem::path&,GLenum);
-        bool link(GLuint,GLuint);
-
-    };
-
-
 }
 
 #endif // OCTETOS_AVERSO_SHADER_HH
