@@ -30,7 +30,7 @@
 			<Target title="basics">
 				<Option output="bin/Debug/a-verso-1" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
@@ -70,6 +70,19 @@
 					<Add library="GLU" />
 				</Linker>
 			</Target>
+			<Target title="glfw">
+				<Option output="bin/Debug/glfw" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="/home/azael/develop/octetos" />
+				</Compiler>
+				<Linker>
+					<Add option="`pkg-config glew --libs` `pkg-config glfw3 --libs`" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -79,13 +92,19 @@
 		<Unit filename="devel/1/colors.hh">
 			<Option target="glut" />
 			<Option target="verso" />
+			<Option target="glfw" />
 		</Unit>
 		<Unit filename="devel/1/common.hh">
 			<Option target="glut" />
 			<Option target="verso" />
+			<Option target="glfw" />
 		</Unit>
 		<Unit filename="devel/1/context.hh">
 			<Option target="glut" />
+			<Option target="glfw" />
+		</Unit>
+		<Unit filename="devel/1/glfw.cc">
+			<Option target="glfw" />
 		</Unit>
 		<Unit filename="devel/1/glut.cc">
 			<Option target="glut" />
@@ -96,38 +115,22 @@
 		<Unit filename="devel/1/scenary.hh">
 			<Option target="verso" />
 		</Unit>
+		<Unit filename="devel/1/shader.cc">
+			<Option target="glfw" />
+		</Unit>
+		<Unit filename="devel/1/shader.hh">
+			<Option target="glfw" />
+		</Unit>
 		<Unit filename="devel/1/shapes.cc">
 			<Option target="glut" />
+			<Option target="glfw" />
 		</Unit>
 		<Unit filename="devel/1/shapes.hh">
 			<Option target="glut" />
+			<Option target="glfw" />
 		</Unit>
 		<Unit filename="devel/1/verso.cc">
 			<Option target="verso" />
-		</Unit>
-		<Unit filename="tests/basics/colors.hh">
-			<Option target="basics" />
-		</Unit>
-		<Unit filename="tests/basics/common.hh">
-			<Option target="basics" />
-		</Unit>
-		<Unit filename="tests/basics/context.hh">
-			<Option target="basics" />
-		</Unit>
-		<Unit filename="tests/basics/main.cc">
-			<Option target="basics" />
-		</Unit>
-		<Unit filename="tests/basics/shader.cc">
-			<Option target="basics" />
-		</Unit>
-		<Unit filename="tests/basics/shader.hh">
-			<Option target="basics" />
-		</Unit>
-		<Unit filename="tests/basics/shapes.cc">
-			<Option target="basics" />
-		</Unit>
-		<Unit filename="tests/basics/shapes.hh">
-			<Option target="basics" />
 		</Unit>
 		<Extensions />
 	</Project>
