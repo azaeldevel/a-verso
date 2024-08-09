@@ -13,11 +13,9 @@
 //#include <map>
 
 //#include <shapes.hh>
-#include <a-verso/0/Shader.hh>
-#include <a-verso/0/Camera.hh>
+#include "Shader.hh"
 
 #include "verso.hh"
-#include "Camera.hh"
 
 #define WINDOW(W,C) reinterpret_cast<C*>(glfwGetWindowUserPointer(W))
 
