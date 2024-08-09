@@ -60,7 +60,28 @@
 			<Add option="-Wall" />
 			<Add option="--std=c++20 -Wall -pedantic" />
 		</Compiler>
+		<Unit filename="devel/1/colors.hh">
+			<Option target="glut" />
+		</Unit>
+		<Unit filename="devel/1/common.hh">
+			<Option target="glut" />
+		</Unit>
+		<Unit filename="devel/1/context.hh">
+			<Option target="glut" />
+		</Unit>
 		<Unit filename="devel/1/glut.cc">
+			<Option target="glut" />
+		</Unit>
+		<Unit filename="devel/1/shader.cc">
+			<Option target="glut" />
+		</Unit>
+		<Unit filename="devel/1/shader.hh">
+			<Option target="glut" />
+		</Unit>
+		<Unit filename="devel/1/shapes.cc">
+			<Option target="glut" />
+		</Unit>
+		<Unit filename="devel/1/shapes.hh">
 			<Option target="glut" />
 		</Unit>
 		<Unit filename="tests/basics/colors.hh">
