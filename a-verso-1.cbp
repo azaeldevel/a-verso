@@ -81,7 +81,7 @@
 					<Add directory="/home/azael/develop/octetos" />
 				</Compiler>
 				<Linker>
-					<Add option="`pkg-config glew --libs` `pkg-config glfw3 --libs`" />
+					<Add option="`pkg-config glew --libs` `pkg-config glfw3 --libs` `pkg-config glut --libs`" />
 				</Linker>
 			</Target>
 		</Build>

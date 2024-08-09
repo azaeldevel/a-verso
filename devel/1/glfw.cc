@@ -119,17 +119,29 @@ int main( void )
 	g_vertex_buffer_data = verso::numbers::Equilateral<float>(O,1.0f);
 	verso::numbers::Plane<float,3,4> plane;
 
-	/*GLuint vertexbuffer;
+	/*
+	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);*/
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	//glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
+	*/
 	verso::BO vertexbuffer;
 	vertexbuffer.generate(1);
 	vertexbuffer.bind(GL_ARRAY_BUFFER);
 
-	verso::BO bo_plane;
+	verso::BO bo_plane{
+        0.5f, 0.5f, 0.0f, // top right
+        0.5f, -0.5f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f, // bottom left
+        -0.5f, 0.5f, 0.0f // top left
+    };
 	vertexbuffer.generate(1);
 	vertexbuffer.bind(GL_ELEMENT_ARRAY_BUFFER);
+	unsigned int plane_indices[] = { // note that we start from 0!
+        0, 1, 3, // first triangle
+        1, 2, 3 // second triangle
+    };
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(plane_indices), plane_indices,GL_STATIC_DRAW);
 
 	do
     {
