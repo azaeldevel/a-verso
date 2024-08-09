@@ -97,6 +97,7 @@ namespace oct::verso::v1
             for(size_t i = 0; i < L; i++) newcolor[i] = float(BASE::data[i]) / float(255);
             return newcolor;
         }
+
     };
 
 

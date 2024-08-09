@@ -68,7 +68,7 @@ int main( void )
 	// Create and compile our GLSL program from the shaders
 	//GLuint programID = LoadShaders( "SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader" );
 	verso::shader shader;
-	GLuint programID = 0;
+	//GLuint programID = 0;
 	std::filesystem::path shader_directory("tests/basics/shaders");
     if(not shader.build(shader_directory/"SimpleTransform.vertex",shader_directory/"SingleColor.fragment"))
     {
@@ -76,11 +76,11 @@ int main( void )
     }
     else
     {
-        programID = shader;
+        //programID = shader;
     }
 
 	// Get a handle for our "MVP" uniform
-	GLuint MatrixID = glGetUniformLocation(programID, "MVP");
+	GLuint MatrixID = glGetUniformLocation(shader, "MVP");
 
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
 	glm::mat4 Projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
@@ -117,7 +117,7 @@ int main( void )
 		glClear( GL_COLOR_BUFFER_BIT );
 
 		// Use our shader
-		glUseProgram(programID);
+		glUseProgram(shader);
 
 		// Send our transformation to the currently bound shader,
 		// in the "MVP" uniform
@@ -150,7 +150,7 @@ int main( void )
 
 	// Cleanup VBO and shader
 	glDeleteBuffers(1, &vertexbuffer);
-	glDeleteProgram(programID);
+	glDeleteProgram(shader);
 	glDeleteVertexArrays(1, &VertexArrayID);
 
 	// Close OpenGL window and terminate GLFW
