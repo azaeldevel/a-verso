@@ -49,7 +49,7 @@ int main( void )
 	}
 	*/
 	verso::Scenary scenary;
-	scenary.create("A develop Verso",1024, 768);
+	scenary.screen("A develop Verso",1024, 768);
 	if(not scenary)
     {
         fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );

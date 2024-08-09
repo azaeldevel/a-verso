@@ -45,7 +45,7 @@ namespace oct::verso::v1
         Scenary();
         Scenary(int major, int minor);
 
-        virtual bool create(const char* title, int width, int height);
+        bool screen(const char* title, int width, int height);
 
         Version version;
         bool running;

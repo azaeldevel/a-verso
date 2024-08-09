@@ -42,10 +42,9 @@ void reshape(int width, int height) {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 }
 
-// Draws three textured triangles.  Each triangle uses the same texture,
-// but the mappings of texture coordinates to vertex coordinates is
-// different in each triangle.
-void display() {
+
+void display()
+{
   glClear(GL_COLOR_BUFFER_BIT);
   glBegin(GL_TRIANGLES);
     glTexCoord2f(0.5, 1.0);    glVertex2f(-3, 3);

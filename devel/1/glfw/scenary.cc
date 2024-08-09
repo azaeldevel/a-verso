@@ -24,7 +24,7 @@ Scenary::Scenary(int M, int m) : version(M,m),running(false),window(NULL)
 }
 
 
-bool Scenary::create(const char* title, int w, int h)
+bool Scenary::screen(const char* title, int w, int h)
 {
     width = w;
     height = h;
