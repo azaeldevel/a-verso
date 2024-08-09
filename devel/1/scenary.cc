@@ -3,12 +3,18 @@
 
 namespace oct::verso::v1
 {
+    Scenary* actual;
 
-    Scenary::Scenary() : scenary(0),display(NULL),reshape(NULL)
+    Scenary::Scenary() : display(NULL),reshape(NULL)
     {
     }
-    Scenary::Scenary(void (*ini)(),void (*d)(),void (*r)(GLint, GLint)) : initialize(ini),display(d),reshape(r)
+    Scenary::Scenary(DISPLAY d,RESHAPE r) : display(d),reshape(r)
     {
+    }
+
+    void Scenary::active()
+    {
+        actual = this;
     }
 
 
@@ -61,7 +67,13 @@ namespace oct::verso::v1
       }
     }
 
-    void solar_initialize()
+
+
+    Solar::Solar() : Scenary(solar_display,solar_reshape)
+    {
+    }
+
+    void Solar::initialize()
     {
       GLfloat black[] = { 0.0, 0.0, 0.0, 1.0 };
       GLfloat yellow[] = { 1.0, 1.0, 0.0, 1.0 };
@@ -81,14 +93,9 @@ namespace oct::verso::v1
       glEnable(GL_LIGHTING);                // so the renderer considers light
       glEnable(GL_LIGHT0);                  // turn LIGHT0 on
       glEnable(GL_DEPTH_TEST);              // so the renderer considers depth
+      active();
     }
 
-
-
-
-    Solar::Solar() : Scenary(solar_initialize,solar_display,solar_reshape)
-    {
-    }
 
 
 }

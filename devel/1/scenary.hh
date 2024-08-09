@@ -15,19 +15,21 @@ namespace oct::verso::v1
 {
 
     typedef int HSCENARY;
+    typedef void (*DISPLAY)();
+    typedef void (*RESHAPE)(GLint, GLint);
 
     struct Scenary
     {
-        HSCENARY scenary;
-        void (*initialize)();
-        void (*display)();
-        void (*reshape)(GLint w, GLint h);
-
-        HSCENARY insert(Scenary&);
-
         Scenary();
-        Scenary(void (*initialize)(),void (*display)(),void (*reshape)(GLint w, GLint h));
+        Scenary(DISPLAY,RESHAPE);
+
+        DISPLAY display;
+        RESHAPE reshape;
+
+        void active();
     };
+
+    extern Scenary* actual;
 
     typedef Scenary Sun;
     typedef Scenary Earth;
@@ -40,6 +42,7 @@ namespace oct::verso::v1
         Moon moon;
 
         Solar();
+        void initialize();
     };
 
     struct ViaLactea : public Scenary
