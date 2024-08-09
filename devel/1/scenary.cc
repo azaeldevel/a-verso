@@ -48,7 +48,7 @@ namespace oct::verso::v1
 
       //Moon
       glPushMatrix();
-      glTranslatef(2, 0.0, -1.0);
+      glTranslatef(solar.moon.position[0], solar.moon.position[1], solar.moon.position[2]);
       glutSolidSphere(0.1, 30, 30);
       glPopMatrix();
 
@@ -82,7 +82,7 @@ namespace oct::verso::v1
     {
     }
 
-    Moon::Moon() : position{0, 0.5, 0.0}
+    Moon::Moon() : position{2, 0.0, -1.0}
     {
     }
 
