@@ -38,11 +38,11 @@ namespace oct::verso::v1
         int size;
     };
 
-    class VBO
+    class BO
     {
     public:
-        VBO();
-        ~VBO();
+        BO();
+        ~BO();
 
         void generate(GLsizei);
         void bind(GLenum);

@@ -30,26 +30,26 @@ namespace oct::verso::v1
 
 
 
-    VBO::VBO() : id(0),size(0)
+    BO::BO() : id(0),size(0)
     {
     }
-    VBO::~VBO()
+    BO::~BO()
     {
         glDeleteBuffers(size, &id);
     }
 
-    void VBO::generate(int n)
+    void BO::generate(int n)
     {
         if(size) glDeleteBuffers(size, &id);
         size = n;
         glGenBuffers(size, &id);
     }
-    void VBO::bind(GLenum target)
+    void BO::bind(GLenum target)
     {
         glBindBuffer(target,id);
     }
 
-    VBO::operator GLuint()
+    BO::operator GLuint()
     {
         return id;
     }
