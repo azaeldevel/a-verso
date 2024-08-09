@@ -73,8 +73,7 @@ GLuint Shader::compile(const std::filesystem::path& path,GLenum type)
 }
 GLuint Shader::compile(const std::string& shader_code,GLenum type)
 {
-    const GLchar *source_str = shader_code.c_str();
-    return compile(source_str,type);
+    return compile(shader_code.c_str(),type);
 }
 GLuint Shader::compile(const GLchar* source_str,GLenum type)
 {
