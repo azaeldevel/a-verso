@@ -12,7 +12,6 @@ namespace oct::verso::v1
     namespace core = oct::core::v3;
     namespace nums_here = oct::nums::v0;
     namespace numbers = oct::nums::v0;
-
 }
 
 #endif // OCTETOS_AVERSO_AVERSO_HH

@@ -8,7 +8,7 @@
 
 // Include GLFW
 #include <GLFW/glfw3.h>
-GLFWwindow* window;
+//GLFWwindow* window;
 
 // Include GLM
 #include <glm/glm.hpp>
@@ -17,6 +17,7 @@ using namespace glm;
 
 #include "shader.hh"
 #include "shapes.hh"
+#include "glfw/scenary.hh"
 
 namespace verso = oct::verso::v1;
 
@@ -37,6 +38,7 @@ int main( void )
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); //We don't want the old OpenGL
 
 	// Open a window and create its OpenGL context
+	/*
 	window = glfwCreateWindow( 1024, 768, "A develop Verso", NULL, NULL);
 	if( window == NULL )
     {
@@ -45,7 +47,17 @@ int main( void )
 		glfwTerminate();
 		return -1;
 	}
-	glfwMakeContextCurrent(window);
+	*/
+	verso::Scenary scenary;
+	scenary.create("A develop Verso",1024, 768);
+	if(not scenary)
+    {
+        fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
+		getchar();
+		glfwTerminate();
+		return -1;
+	}
+	glfwMakeContextCurrent(scenary);
 
 	// Initialize GLEW
 	glewExperimental = true; // Needed for core profile
@@ -57,7 +69,7 @@ int main( void )
 	}
 
 	// Ensure we can capture the escape key being pressed below
-	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+	glfwSetInputMode(scenary, GLFW_STICKY_KEYS, GL_TRUE);
 
 	// Dark blue background
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -142,11 +154,11 @@ int main( void )
 		glDisableVertexAttribArray(0);
 
 		// Swap buffers
-		glfwSwapBuffers(window);
+		glfwSwapBuffers(scenary);
 		glfwPollEvents();
 
 	} // Check if the ESC key was pressed or the window was closed
-	while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(window) == 0 );
+	while( glfwGetKey(scenary, GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(scenary) == 0 );
 
 	// Cleanup VBO and shader
 	glDeleteBuffers(1, &vertexbuffer);

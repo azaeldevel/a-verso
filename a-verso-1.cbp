@@ -70,10 +70,10 @@
 					<Add library="GLU" />
 				</Linker>
 			</Target>
-			<Target title="glfw">
+			<Target title="glfw-dbg">
 				<Option output="bin/Debug/glfw" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
@@ -92,19 +92,25 @@
 		<Unit filename="devel/1/colors.hh">
 			<Option target="glut" />
 			<Option target="verso" />
-			<Option target="glfw" />
+			<Option target="glfw-dbg" />
 		</Unit>
 		<Unit filename="devel/1/common.hh">
 			<Option target="glut" />
 			<Option target="verso" />
-			<Option target="glfw" />
+			<Option target="glfw-dbg" />
 		</Unit>
 		<Unit filename="devel/1/context.hh">
 			<Option target="glut" />
-			<Option target="glfw" />
+			<Option target="glfw-dbg" />
 		</Unit>
 		<Unit filename="devel/1/glfw.cc">
-			<Option target="glfw" />
+			<Option target="glfw-dbg" />
+		</Unit>
+		<Unit filename="devel/1/glfw/scenary.cc">
+			<Option target="glfw-dbg" />
+		</Unit>
+		<Unit filename="devel/1/glfw/scenary.hh">
+			<Option target="glfw-dbg" />
 		</Unit>
 		<Unit filename="devel/1/glut.cc">
 			<Option target="glut" />
@@ -116,18 +122,18 @@
 			<Option target="verso" />
 		</Unit>
 		<Unit filename="devel/1/shader.cc">
-			<Option target="glfw" />
+			<Option target="glfw-dbg" />
 		</Unit>
 		<Unit filename="devel/1/shader.hh">
-			<Option target="glfw" />
+			<Option target="glfw-dbg" />
 		</Unit>
 		<Unit filename="devel/1/shapes.cc">
 			<Option target="glut" />
-			<Option target="glfw" />
+			<Option target="glfw-dbg" />
 		</Unit>
 		<Unit filename="devel/1/shapes.hh">
 			<Option target="glut" />
-			<Option target="glfw" />
+			<Option target="glfw-dbg" />
 		</Unit>
 		<Unit filename="devel/1/verso.cc">
 			<Option target="verso" />
