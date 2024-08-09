@@ -42,9 +42,15 @@ namespace oct::verso::v1
     };
     struct Earth : public Scenary
     {
+        GLfloat position[3];
+
+        Earth();
     };
     struct Moon : public Scenary
     {
+        GLfloat position[3];
+
+        Moon();
     };
 
     struct Solar : public Scenary

@@ -30,17 +30,18 @@ namespace oct::verso::v1
       // Rotate the scene so we can see the tops of the shapes.
       glRotatef(-20.0, 1.0, 0.0, 0.0);
 
+      Solar& solar = *static_cast<Solar*>(actual);
 
       //Sol
       glPushMatrix();
-      glTranslatef(reinterpret_cast<Solar*>(actual)->sun.position[0], reinterpret_cast<Solar*>(actual)->sun.position[1], reinterpret_cast<Solar*>(actual)->sun.position[2]);
+      glTranslatef(solar.sun.position[0], solar.sun.position[1], solar.sun.position[2]);
       glRotatef(90.0, 1.0, 0.0, 0.0);
       glutSolidSphere(1.0, 30, 30);
       glPopMatrix();
 
       //Earth
       glPushMatrix();
-      glTranslatef(-2, -0.5, 0.0);
+      glTranslatef(solar.earth.position[0], solar.earth.position[1], solar.earth.position[2]);
       glRotatef(270.0, 1.0, 0.0, 0.0);
       glutSolidSphere(0.3, 30, 30);
       glPopMatrix();
@@ -76,6 +77,14 @@ namespace oct::verso::v1
     {
     }
 
+
+    Earth::Earth() : position{-2, -0.5, 0.0}
+    {
+    }
+
+    Moon::Moon() : position{0, 0.5, 0.0}
+    {
+    }
 
 
 
