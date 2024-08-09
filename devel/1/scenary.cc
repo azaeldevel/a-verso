@@ -36,20 +36,20 @@ namespace oct::verso::v1
         glPushMatrix();
         glTranslatef(solar.sun.position[0], solar.sun.position[1], solar.sun.position[2]);
         glRotatef(90.0, 1.0, 0.0, 0.0);
-        glutSolidSphere(1.0, 30, 30);
+        glutSolidSphere(1.0, 60, 30);
         glPopMatrix();
 
         //Earth
         glPushMatrix();
         glTranslatef(solar.earth.position[0], solar.earth.position[1], solar.earth.position[2]);
         glRotatef(270.0, 1.0, 0.0, 0.0);
-        glutSolidSphere(0.3, 30, 30);
+        glutSolidSphere(0.3, 60, 30);
         glPopMatrix();
 
         //Moon
         glPushMatrix();
         glTranslatef(solar.moon.position[0], solar.moon.position[1], solar.moon.position[2]);
-        glutSolidSphere(0.1, 30, 30);
+        glutSolidSphere(0.1, 60, 30);
         glPopMatrix();
 
         glPopMatrix();
