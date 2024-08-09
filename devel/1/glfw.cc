@@ -155,33 +155,25 @@ int main( void )
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
 		// 1rst attribute buffer : vertices
-		glEnableVertexAttribArray(0);
-            g_vertex_buffer_data.translate(0.01);
-            glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
-            //triangle.printLn(std::cout);
-            vertexbuffer.bind(GL_ARRAY_BUFFER);
-            glVertexAttribPointer(
+        glVertexAttribPointer(
                 0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
                 3,                  // size
                 GL_FLOAT,           // type
                 GL_FALSE,           // normalized?
                 0,                  // stride
                 (void*)0            // array buffer offset
-            );
+        );
+		glEnableVertexAttribArray(0);
+            g_vertex_buffer_data.translate(0.01);
+            glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
+            //triangle.printLn(std::cout);
+            vertexbuffer.bind(GL_ARRAY_BUFFER);
             // Draw the triangle !
             glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
         glDisableVertexAttribArray(0);
 
         glEnableVertexAttribArray(1);
             vertexbuffer.bind(GL_ELEMENT_ARRAY_BUFFER);
-            glVertexAttribPointer(
-                0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
-                3,                  // size
-                GL_FLOAT,           // type
-                GL_FALSE,           // normalized?
-                0,                  // stride
-                (void*)0            // array buffer offset
-            );
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         glDisableVertexAttribArray(1);
 
