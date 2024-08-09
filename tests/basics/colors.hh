@@ -228,6 +228,8 @@ namespace oct::verso::v1
         static const RGBA<unsigned char> empty {0,0,0,255};
     }
 
+
+
 }
 
 #endif

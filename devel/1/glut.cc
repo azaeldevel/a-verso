@@ -3,9 +3,10 @@
 #else
 #include <GL/glut.h>
 #endif
+//https://cs.lmu.edu/~ray/notes/openglexamples/
 
-void renderScene(void) 
-{
+void renderScene(void) {
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glBegin(GL_TRIANGLES);
@@ -14,7 +15,7 @@ void renderScene(void)
 		glVertex3f(0.0,0.5,0.0);
 	glEnd();
 
-  	glutSwapBuffers();
+        glutSwapBuffers();
 }
 
 int main(int argc, char **argv) {
