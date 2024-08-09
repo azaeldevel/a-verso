@@ -118,10 +118,13 @@ int main( void )
 	constexpr verso::numbers::vector<float,3> O(0);
 	g_vertex_buffer_data = verso::numbers::Equilateral<float>(O,1.0f);
 
-	GLuint vertexbuffer;
+	/*GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);*/
 	//glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
+	verso::VBO vertexbuffer;
+	vertexbuffer.generate(1);
+	vertexbuffer.bind(GL_ARRAY_BUFFER);
 
 	do
     {
@@ -164,7 +167,7 @@ int main( void )
 	while( glfwGetKey(scenary, GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(scenary) == 0 );
 
 	// Cleanup VBO and shader
-	glDeleteBuffers(1, &vertexbuffer);
+	//glDeleteBuffers(1, &vertexbuffer);
 	//glDeleteProgram(shader);
 	//glDeleteVertexArrays(1, &VertexArrayID);
 
