@@ -77,7 +77,6 @@ namespace oct::verso::v1
     {
     }
 
-
     Earth::Earth() : position{-2, -0.5, 0.0}
     {
     }
