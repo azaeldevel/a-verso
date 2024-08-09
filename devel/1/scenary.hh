@@ -26,23 +26,36 @@ namespace oct::verso::v1
         DISPLAY display;
         RESHAPE reshape;
 
-        void active();
+        /**
+        *\brief Activar nueva escena
+        */
+        virtual void active();
     };
 
     extern Scenary* actual;
 
-    typedef Scenary Sun;
-    typedef Scenary Earth;
-    typedef Scenary Moon;
+    struct Sun : public Scenary
+    {
+        GLfloat position[3];
+
+        Sun();
+    };
+    struct Earth : public Scenary
+    {
+    };
+    struct Moon : public Scenary
+    {
+    };
 
     struct Solar : public Scenary
     {
         Sun sun;
         Earth earth;
         Moon moon;
-
         Solar();
+
         void initialize();
+        virtual void active();
     };
 
     struct ViaLactea : public Scenary

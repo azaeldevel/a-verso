@@ -13,8 +13,7 @@ int main(int argc, char** argv)
   glutInitWindowPosition(80, 80);
   glutInitWindowSize(800, 600);
   glutCreateWindow("A verso from GLUT");
-  glutReshapeFunc(solar.reshape);
-  glutDisplayFunc(solar.display);
   solar.initialize();
+  solar.active();
   glutMainLoop();
 }

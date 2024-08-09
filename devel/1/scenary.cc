@@ -30,22 +30,25 @@ namespace oct::verso::v1
       // Rotate the scene so we can see the tops of the shapes.
       glRotatef(-20.0, 1.0, 0.0, 0.0);
 
+
       //Sol
       glPushMatrix();
-      glTranslatef(0, 0.5, 0.0);
+      glTranslatef(reinterpret_cast<Solar*>(actual)->sun.position[0], reinterpret_cast<Solar*>(actual)->sun.position[1], reinterpret_cast<Solar*>(actual)->sun.position[2]);
       glRotatef(90.0, 1.0, 0.0, 0.0);
       glutSolidSphere(1.0, 30, 30);
       glPopMatrix();
 
+      //Earth
       glPushMatrix();
       glTranslatef(-2, -0.5, 0.0);
       glRotatef(270.0, 1.0, 0.0, 0.0);
-      glutSolidSphere(0.1, 30, 30);
+      glutSolidSphere(0.3, 30, 30);
       glPopMatrix();
 
+      //Moon
       glPushMatrix();
       glTranslatef(2, 0.0, -1.0);
-      glutSolidSphere(0.2, 30, 30);
+      glutSolidSphere(0.1, 30, 30);
       glPopMatrix();
 
       glPopMatrix();
@@ -66,6 +69,16 @@ namespace oct::verso::v1
         glOrtho(-2.5*aspect, 2.5*aspect, -2.5, 2.5, -10.0, 10.0);
       }
     }
+
+
+
+    Sun::Sun() : position{0, 0.5, 0.0}
+    {
+    }
+
+
+
+
 
 
 
@@ -93,9 +106,14 @@ namespace oct::verso::v1
       glEnable(GL_LIGHTING);                // so the renderer considers light
       glEnable(GL_LIGHT0);                  // turn LIGHT0 on
       glEnable(GL_DEPTH_TEST);              // so the renderer considers depth
-      active();
     }
 
+    void Solar::active()
+    {
+        glutReshapeFunc(reshape);
+        glutDisplayFunc(display);
+        actual = this;
+    }
 
 
 }
