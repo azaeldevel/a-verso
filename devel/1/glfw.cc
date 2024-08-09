@@ -117,8 +117,6 @@ int main( void )
 	verso::numbers::Triangle<float> g_vertex_buffer_data;
 	constexpr verso::numbers::vector<float,3> O(0);
 	g_vertex_buffer_data = verso::numbers::Equilateral<float>(O,1.0f);
-	verso::numbers::Plane<float,3,4> plane;
-
 	/*
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
@@ -129,12 +127,17 @@ int main( void )
 	vertexbuffer.generate(1);
 	vertexbuffer.bind(GL_ARRAY_BUFFER);
 
-	verso::BO bo_plane{
+	verso::numbers::Plane<float,3,4> plane{
         0.5f, 0.5f, 0.0f, // top right
         0.5f, -0.5f, 0.0f, // bottom right
         -0.5f, -0.5f, 0.0f, // bottom left
         -0.5f, 0.5f, 0.0f // top left
     };
+	verso::BO VBO;
+	VBO.generate(1);
+	VBO.bind(GL_ARRAY_BUFFER);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(plane), plane, GL_DYNAMIC_DRAW);
+	verso::BO bo_plane;
 	vertexbuffer.generate(1);
 	vertexbuffer.bind(GL_ELEMENT_ARRAY_BUFFER);
 	unsigned int plane_indices[] = { // note that we start from 0!
@@ -145,36 +148,42 @@ int main( void )
 
 	do
     {
-        glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
-        g_vertex_buffer_data.translate(0.01);
-        //triangle.printLn(std::cout);
-
-		// Clear the screen
 		glClear( GL_COLOR_BUFFER_BIT );
-
-		// Use our shader
 		glUseProgram(shader);
 
-		// Send our transformation to the currently bound shader,
-		// in the "MVP" uniform
+
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
 		// 1rst attribute buffer : vertices
 		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-		glVertexAttribPointer(
-			0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
-			3,                  // size
-			GL_FLOAT,           // type
-			GL_FALSE,           // normalized?
-			0,                  // stride
-			(void*)0            // array buffer offset
-		);
+            g_vertex_buffer_data.translate(0.01);
+            glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
+            //triangle.printLn(std::cout);
+            vertexbuffer.bind(GL_ARRAY_BUFFER);
+            glVertexAttribPointer(
+                0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
+                3,                  // size
+                GL_FLOAT,           // type
+                GL_FALSE,           // normalized?
+                0,                  // stride
+                (void*)0            // array buffer offset
+            );
+            // Draw the triangle !
+            glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
+        glDisableVertexAttribArray(0);
 
-		// Draw the triangle !
-		glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
-
-		glDisableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
+            vertexbuffer.bind(GL_ELEMENT_ARRAY_BUFFER);
+            glVertexAttribPointer(
+                0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
+                3,                  // size
+                GL_FLOAT,           // type
+                GL_FALSE,           // normalized?
+                0,                  // stride
+                (void*)0            // array buffer offset
+            );
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glDisableVertexAttribArray(1);
 
 		// Swap buffers
 		glfwSwapBuffers(scenary);
