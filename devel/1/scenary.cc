@@ -81,7 +81,7 @@ namespace oct::verso::v1
     {
     }
 
-    Moon::Moon() : position{2, 0.0, -1.0}
+    Moon::Moon() : position{-2.5, 0.0, -1.0}
     {
     }
 
