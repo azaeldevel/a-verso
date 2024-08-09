@@ -23,37 +23,37 @@ namespace oct::verso::v1
 
     void solar_display()
     {
-      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-      glMatrixMode(GL_MODELVIEW);
-      glPushMatrix();
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
 
-      // Rotate the scene so we can see the tops of the shapes.
-      glRotatef(-20.0, 1.0, 0.0, 0.0);
+        // Rotate the scene so we can see the tops of the shapes.
+        glRotatef(-20.0, 1.0, 0.0, 0.0);
 
-      Solar& solar = *static_cast<Solar*>(actual);
+        Solar& solar = *static_cast<Solar*>(actual);
 
-      //Sol
-      glPushMatrix();
-      glTranslatef(solar.sun.position[0], solar.sun.position[1], solar.sun.position[2]);
-      glRotatef(90.0, 1.0, 0.0, 0.0);
-      glutSolidSphere(1.0, 30, 30);
-      glPopMatrix();
+        //Sol
+        glPushMatrix();
+        glTranslatef(solar.sun.position[0], solar.sun.position[1], solar.sun.position[2]);
+        glRotatef(90.0, 1.0, 0.0, 0.0);
+        glutSolidSphere(1.0, 30, 30);
+        glPopMatrix();
 
-      //Earth
-      glPushMatrix();
-      glTranslatef(solar.earth.position[0], solar.earth.position[1], solar.earth.position[2]);
-      glRotatef(270.0, 1.0, 0.0, 0.0);
-      glutSolidSphere(0.3, 30, 30);
-      glPopMatrix();
+        //Earth
+        glPushMatrix();
+        glTranslatef(solar.earth.position[0], solar.earth.position[1], solar.earth.position[2]);
+        glRotatef(270.0, 1.0, 0.0, 0.0);
+        glutSolidSphere(0.3, 30, 30);
+        glPopMatrix();
 
-      //Moon
-      glPushMatrix();
-      glTranslatef(solar.moon.position[0], solar.moon.position[1], solar.moon.position[2]);
-      glutSolidSphere(0.1, 30, 30);
-      glPopMatrix();
+        //Moon
+        glPushMatrix();
+        glTranslatef(solar.moon.position[0], solar.moon.position[1], solar.moon.position[2]);
+        glutSolidSphere(0.1, 30, 30);
+        glPopMatrix();
 
-      glPopMatrix();
-      glFlush();
+        glPopMatrix();
+        glFlush();
     }
 
     void solar_reshape(GLint w, GLint h)
@@ -96,11 +96,13 @@ namespace oct::verso::v1
 
     void Solar::initialize()
     {
-      GLfloat black[] = { 0.0, 0.0, 0.0, 1.0 };
-      GLfloat yellow[] = { 1.0, 1.0, 0.0, 1.0 };
-      GLfloat cyan[] = { 0.0, 1.0, 1.0, 1.0 };
-      GLfloat white[] = { 1.0, 1.0, 1.0, 1.0 };
-      GLfloat direction[] = { 1.0, 1.0, 1.0, 0.0 };
+        glClearColor(0.0, 0.0, 0.0, 0.0);
+        glClearDepth(1.0);
+        GLfloat black[] = { 0.0, 0.0, 0.0, 1.0 };
+        GLfloat yellow[] = { 1.0, 1.0, 0.0, 1.0 };
+        GLfloat cyan[] = { 0.0, 1.0, 1.0, 1.0 };
+        GLfloat white[] = { 1.0, 1.0, 1.0, 1.0 };
+        GLfloat direction[] = { 1.0, 1.0, 1.0, 0.0 };
 
       glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cyan);
       glMaterialfv(GL_FRONT, GL_SPECULAR, white);
