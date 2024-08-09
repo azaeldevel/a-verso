@@ -20,6 +20,7 @@
     #error "Sistema operativo desconocido."
 #endif
 
+
 #include "game-v0.hh"
 #include "../0/draw.hh"
 #include "../0/gl.hh"
