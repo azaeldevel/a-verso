@@ -15,29 +15,28 @@
 namespace oct::verso::v1
 {
 
-shader::shader(const std::filesystem::path& path)
+Shader::Shader(const std::filesystem::path& path)
 {
     compile(path);
 }
-shader::shader(const std::filesystem::path& path,GLenum type)
+Shader::Shader(const std::filesystem::path& path,GLenum type)
 {
     compile(path,type);
 }
-shader::shader(const std::string& code,GLenum type)
+Shader::Shader(const std::string& code,GLenum type)
 {
     compile(code,type);
 }
-shader::~shader()
+Shader::~Shader()
 {
-
 }
-shader::operator GLuint()const
+Shader::operator GLuint()const
 {
     return program;
 }
 
 
-GLuint shader::compile(const std::filesystem::path& path)
+GLuint Shader::compile(const std::filesystem::path& path)
 {
     if(is_vextex_file(path))
     {
@@ -54,7 +53,7 @@ GLuint shader::compile(const std::filesystem::path& path)
 
     return 0;
 }
-GLuint shader::compile(const std::filesystem::path& path,GLenum type)
+GLuint Shader::compile(const std::filesystem::path& path,GLenum type)
 {
     std::string shader_code;
 	std::ifstream shader_stream(path, std::ios::in);
@@ -72,12 +71,12 @@ GLuint shader::compile(const std::filesystem::path& path,GLenum type)
         return 0;
     }
 }
-GLuint shader::compile(const std::string& shader_code,GLenum type)
+GLuint Shader::compile(const std::string& shader_code,GLenum type)
 {
     const GLchar *source_str = shader_code.c_str();
     return compile(source_str,type);
 }
-GLuint shader::compile(const GLchar* source_str,GLenum type)
+GLuint Shader::compile(const GLchar* source_str,GLenum type)
 {
     program = glCreateShader(type);
 	glShaderSource(program, 1, &source_str , NULL);
@@ -106,7 +105,7 @@ GLuint shader::compile(const GLchar* source_str,GLenum type)
 
     return program;
 }
-bool shader::is_vextex_file(const std::filesystem::path& path)const
+bool Shader::is_vextex_file(const std::filesystem::path& path)const
 {
     if(path.extension().string().compare("vs") == 0)
     {
@@ -119,7 +118,7 @@ bool shader::is_vextex_file(const std::filesystem::path& path)const
 
     return false;
 }
-bool shader::is_fragment_file(const std::filesystem::path& path)const
+bool Shader::is_fragment_file(const std::filesystem::path& path)const
 {
     if(path.extension().string().compare("fs") == 0)
     {
@@ -134,7 +133,7 @@ bool shader::is_fragment_file(const std::filesystem::path& path)const
 }
 
 
-bool shader::link(GLuint vertex,GLuint fragment)
+bool Shader::link(GLuint vertex,GLuint fragment)
 {
     program = glCreateProgram();
     //glAttachShader(program, compile(vertexPath,GL_VERTEX_SHADER));
@@ -171,9 +170,9 @@ bool shader::link(GLuint vertex,GLuint fragment)
 	return true;
 }
 
-bool shader::build(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath)
+bool Shader::build(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath)
 {
-    shader vertex(vertexPath,GL_VERTEX_SHADER),fragment(fragmentPath,GL_FRAGMENT_SHADER);
+    Shader vertex(vertexPath,GL_VERTEX_SHADER),fragment(fragmentPath,GL_FRAGMENT_SHADER);
 
 	return link(vertex,fragment);
 }

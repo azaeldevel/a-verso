@@ -17,16 +17,23 @@ namespace oct::verso::v1
 {
     //namespace core_here = oct::core::v3;
 
-    class shader
+    /**
+    *\brief Represeanta un Shader
+    */
+    class Shader
     {
     public:
-        shader() = default;
-        shader(const std::filesystem::path& path);
-        shader(const std::filesystem::path& path,GLenum);
-        shader(const std::string& code,GLenum);
-        ~shader();
+        Shader() = default;
+        Shader(const std::filesystem::path& path);
+        Shader(const std::filesystem::path& path,GLenum);
+        Shader(const std::string& code,GLenum);
+        ~Shader();
 
         operator GLuint()const;
+
+        /**
+        *\brief Crea dos shasder a partir de los archivos indicados y los construlle
+        */
         bool build(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
 
     private:
@@ -36,6 +43,10 @@ namespace oct::verso::v1
         GLuint compile(const std::filesystem::path&,GLenum);
         GLuint compile(const std::string&,GLenum);
         GLuint compile(const GLchar*,GLenum);
+
+        /**
+        *\brief Enlaza los dos shader indicado para crea el actual
+        */
         bool link(GLuint,GLuint);
 
     private:

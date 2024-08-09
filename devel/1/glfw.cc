@@ -50,7 +50,7 @@ int main( void )
 	*/
 	verso::Scenary scenary;
 	scenary.screen("A develop Verso",1024, 768);
-	if(not scenary)
+	if(not scenary.window)
     {
         fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		getchar();
@@ -80,7 +80,7 @@ int main( void )
 
 	// Create and compile our GLSL program from the shaders
 	//GLuint programID = LoadShaders( "SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader" );
-	verso::shader shader;
+	verso::Shader shader;
 	//GLuint programID = 0;
 	std::filesystem::path shader_directory("tests/basics/shaders");
     if(not shader.build(shader_directory/"SimpleTransform.vertex",shader_directory/"SingleColor.fragment"))
