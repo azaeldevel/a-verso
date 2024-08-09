@@ -28,7 +28,7 @@ namespace oct::verso::v1
         VAO();
         ~VAO();
 
-        void generate(int);
+        void generate(GLsizei);
         void bind();
 
         operator GLuint();
@@ -44,7 +44,7 @@ namespace oct::verso::v1
         VBO();
         ~VBO();
 
-        void generate(int);
+        void generate(GLsizei);
         void bind(GLenum);
 
         operator GLuint();

@@ -12,7 +12,7 @@ namespace oct::verso::v1
         glDeleteVertexArrays(size, &id);
     }
 
-    void VAO::generate(int n)
+    void VAO::generate(GLsizei n)
     {
         if(size) glDeleteVertexArrays(size, &id);
         size = n;
