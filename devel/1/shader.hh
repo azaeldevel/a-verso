@@ -2,10 +2,10 @@
 #ifndef OCTETOS_AVERSO_SHADER_HH
 #define OCTETOS_AVERSO_SHADER_HH
 
+#include "common.hh"
+
 #include <string>
 #include <vector>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <filesystem>
 
 

@@ -29,6 +29,7 @@ Shader::Shader(const std::string& code,GLenum type)
 }
 Shader::~Shader()
 {
+    glDeleteShader(program);
 }
 Shader::operator GLuint()const
 {
@@ -163,8 +164,8 @@ bool Shader::link(GLuint vertex,GLuint fragment)
         std::cout << "Error en enlazado\n";
         return false;
     }
-    glDetachShader(program, vertex);
-    glDetachShader(program, fragment);
+    //glDetachShader(program, vertex);
+    //glDetachShader(program, fragment);
 
 	return true;
 }

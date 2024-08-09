@@ -74,15 +74,18 @@ int main( void )
 	// Dark blue background
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
-	GLuint VertexArrayID;
+	/*GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
+	glBindVertexArray(VertexArrayID);*/
+	verso::VAO VertexArrayID;
+	VertexArrayID.generate(1);
+	VertexArrayID.bind();
 
 	// Create and compile our GLSL program from the shaders
 	//GLuint programID = LoadShaders( "SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader" );
 	verso::Shader shader;
 	//GLuint programID = 0;
-	std::filesystem::path shader_directory("tests/basics/shaders");
+	std::filesystem::path shader_directory("devel/1/shaders");
     if(not shader.build(shader_directory/"SimpleTransform.vertex",shader_directory/"SingleColor.fragment"))
     {
         std::cout << "Fail shaders compilation\n";
@@ -118,13 +121,13 @@ int main( void )
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
 
 	do
     {
+        glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
         g_vertex_buffer_data.translate(0.01);
         //triangle.printLn(std::cout);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
 
 		// Clear the screen
 		glClear( GL_COLOR_BUFFER_BIT );
@@ -162,8 +165,8 @@ int main( void )
 
 	// Cleanup VBO and shader
 	glDeleteBuffers(1, &vertexbuffer);
-	glDeleteProgram(shader);
-	glDeleteVertexArrays(1, &VertexArrayID);
+	//glDeleteProgram(shader);
+	//glDeleteVertexArrays(1, &VertexArrayID);
 
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();

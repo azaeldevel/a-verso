@@ -94,6 +94,9 @@
 			<Option target="verso" />
 			<Option target="glfw-dbg" />
 		</Unit>
+		<Unit filename="devel/1/common.cc">
+			<Option target="glfw-dbg" />
+		</Unit>
 		<Unit filename="devel/1/common.hh">
 			<Option target="glut-dbg" />
 			<Option target="verso" />
