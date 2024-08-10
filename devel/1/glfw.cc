@@ -90,10 +90,6 @@ int main( void )
     {
         std::cout << "Fail shaders compilation\n";
     }
-    else
-    {
-        //programID = shader;
-    }
 
 	// Get a handle for our "MVP" uniform
 	GLuint MatrixID = glGetUniformLocation(shader, "MVP");
@@ -133,13 +129,14 @@ int main( void )
         -0.5f, -0.5f, 0.0f, // bottom left
         -0.5f, 0.5f, 0.0f // top left
     };
+    //plane.print(std::cout);
 	verso::BO VBO;
 	VBO.generate(1);
 	VBO.bind(GL_ARRAY_BUFFER);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(plane), plane, GL_DYNAMIC_DRAW);
 	verso::BO bo_plane;
-	vertexbuffer.generate(1);
-	vertexbuffer.bind(GL_ELEMENT_ARRAY_BUFFER);
+	bo_plane.generate(1);
+	bo_plane.bind(GL_ELEMENT_ARRAY_BUFFER);
 	unsigned int plane_indices[] = { // note that we start from 0!
         0, 1, 3, // first triangle
         1, 2, 3 // second triangle
@@ -150,7 +147,6 @@ int main( void )
     {
 		glClear( GL_COLOR_BUFFER_BIT );
 		glUseProgram(shader);
-
 
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
@@ -172,10 +168,10 @@ int main( void )
             glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
         glDisableVertexAttribArray(0);
 
-        glEnableVertexAttribArray(1);
-            vertexbuffer.bind(GL_ELEMENT_ARRAY_BUFFER);
+        glEnableVertexAttribArray(2);
+            bo_plane.bind(GL_ELEMENT_ARRAY_BUFFER);
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        glDisableVertexAttribArray(1);
+        glDisableVertexAttribArray(2);
 
 		// Swap buffers
 		glfwSwapBuffers(scenary);
