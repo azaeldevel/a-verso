@@ -119,9 +119,9 @@ int main( void )
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	//glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
 	*/
-	verso::BO vertexbuffer;
-	vertexbuffer.generate(1);
-	vertexbuffer.bind(GL_ARRAY_BUFFER);
+	verso::BO vertex_triangle;
+	vertex_triangle.generate(1);
+	vertex_triangle.bind(GL_ARRAY_BUFFER);
 
 	verso::numbers::Plane<float,3,4> plane{
         0.5f, 0.5f, 0.0f, // top right
@@ -154,7 +154,7 @@ int main( void )
             g_vertex_buffer_data.translate(0.01);
             glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
             //triangle.printLn(std::cout);
-            vertexbuffer.bind(GL_ARRAY_BUFFER);
+            vertex_triangle.bind(GL_ARRAY_BUFFER);
             glVertexAttribPointer(
                 0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
                 3,                  // size
