@@ -3,3 +3,4 @@ ing/
 *.depend
 obj/
 *.layout
+build/
