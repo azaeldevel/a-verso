@@ -130,13 +130,13 @@ int main( void )
         -0.5f, 0.5f, 0.0f // top left
     };
     //plane.print(std::cout);
-	verso::BO VBO;
-	VBO.generate(1);
-	VBO.bind(GL_ARRAY_BUFFER);
+	verso::BO vbo_plane;
+	vbo_plane.generate(1);
+	vbo_plane.bind(GL_ARRAY_BUFFER);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(plane), plane, GL_DYNAMIC_DRAW);
-	verso::BO bo_plane;
-	bo_plane.generate(1);
-	bo_plane.bind(GL_ELEMENT_ARRAY_BUFFER);
+	verso::BO bo_plane_index;
+	bo_plane_index.generate(1);
+	bo_plane_index.bind(GL_ELEMENT_ARRAY_BUFFER);
 	unsigned int plane_indices[] = { // note that we start from 0!
         0, 1, 3, // first triangle
         1, 2, 3 // second triangle
@@ -168,14 +168,14 @@ int main( void )
         glDisableVertexAttribArray(0);
 
         glEnableVertexAttribArray(2);
-            bo_plane.bind(GL_ELEMENT_ARRAY_BUFFER);
+            bo_plane_index.bind(GL_ELEMENT_ARRAY_BUFFER);
             glVertexAttribPointer(
-                0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
-                3,                  // size
-                GL_FLOAT,           // type
-                GL_FALSE,           // normalized?
-                0,                  // stride
-                (void*)0            // array buffer offset
+                0,
+                3,
+                GL_FLOAT,
+                GL_FALSE,
+                0,
+                (void*)0
             );
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         glDisableVertexAttribArray(2);
