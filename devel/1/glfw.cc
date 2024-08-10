@@ -110,9 +110,9 @@ int main( void )
 	// Our ModelViewProjection : multiplication of our 3 matrices
 	glm::mat4 MVP        = Projection * View * Model; // Remember, matrix multiplication is the other way around
 
-	verso::numbers::Triangle<float> g_vertex_buffer_data;
+	verso::numbers::Triangle<float> triangle;
 	constexpr verso::numbers::vector<float,3> O(0);
-	g_vertex_buffer_data = verso::numbers::Equilateral<float>(O,1.0f);
+	triangle = verso::numbers::Equilateral<float>(O,1.0f);
 	/*
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
@@ -151,8 +151,8 @@ int main( void )
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
 		glEnableVertexAttribArray(0);
-            g_vertex_buffer_data.translate(0.01);
-            glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_DYNAMIC_DRAW);
+            triangle.translate(0.01);
+            glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_DYNAMIC_DRAW);
             //triangle.printLn(std::cout);
             vertex_triangle.bind(GL_ARRAY_BUFFER);
             glVertexAttribPointer(
