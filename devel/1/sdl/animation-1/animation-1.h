@@ -3,20 +3,27 @@
 
 namespace oct::verso::v1
 {
-
+	enum class Status
+	{
+		stop,//igual a false
+		started,
+	};
 	struct IScenary
 	{
-		bool running;
-		SDL_Window* window; // window
-		SDL_Renderer* renderer; // renderer
+		Status status;
 
+		IScenary();
+		IScenary(Status);
 		virtual void initialize() = 0;
-
-		bool create_window(const char* title, int width, int height);
 	};
 
+}
+namespace oct::verso::v1::SDL
+{
 	struct Scenary : public IScenary
 	{
+		SDL_Window* window; // window
+		SDL_Renderer* renderer; // renderer
 		//bool isRunning; // check if the game is running
 		SDL_Texture* playertex; // player sprite 
 		SDL_Texture* enemytex; // enemy sprite
@@ -26,6 +33,7 @@ namespace oct::verso::v1
 		int counter;
 
 		virtual void initialize();
+		bool create_window(const char* title, int width, int height);
 		void update();
 		void render();
 		void clean();

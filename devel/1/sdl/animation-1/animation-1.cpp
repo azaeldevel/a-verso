@@ -10,7 +10,7 @@ namespace verso = oct::verso::v1;
 
 const int ScreenWidth = 800;
 const int ScreenHeight = 600;
-verso::Scenary scenary;
+verso::SDL::Scenary scenary;
 
 // texture manager
 static SDL_Texture* LoadTexture(const char* fileName, SDL_Renderer* ren);
@@ -31,7 +31,7 @@ int main(int argc, char* args[])
 	bool flag = true; // winning condition
 
 	// game loop
-	while (scenary.running)
+	while ((int)scenary.status)
 	{
 		frameStart = SDL_GetTicks();
 
@@ -82,11 +82,19 @@ static SDL_Texture* LoadTexture(const char* fileName, SDL_Renderer* ren) {
 }
 
 
-
 namespace oct::verso::v1
 {
+	IScenary::IScenary() : status(Status::stop)
+	{
+	}
+	IScenary::IScenary(Status r) : status(r)
+	{
+	}
+}
+namespace oct::verso::v1::SDL
+{
 
-	bool IScenary::create_window(const char* title, int width, int height)
+	bool Scenary::create_window(const char* title, int width, int height)
 	{
 		if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 		{
@@ -102,12 +110,12 @@ namespace oct::verso::v1
 				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 				printf("Renderer created!\n");
 			}
-			running = true;
+			status = Status::started;
 		}
 		else
 		{
 			printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
-			running = false;
+			status = Status::stop;
 		}
 
 		return true;
@@ -128,7 +136,7 @@ namespace oct::verso::v1
 		SDL_PollEvent(&event);
 		switch (event.type) {
 		case SDL_QUIT:
-			running = false;
+			status = Status::stop;
 			break;
 		default:
 			break;
@@ -161,7 +169,7 @@ namespace oct::verso::v1
 		if (AABB(p_destR, e_destR)) {
 			printf("\n\t*Collision Detected!*\n");
 			printf("\t*Game Over!*\n\n");
-			running = false;
+			status = Status::stop;
 		}
 
 	}
