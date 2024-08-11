@@ -3,13 +3,13 @@
 
 namespace oct::verso::v1
 {
-	enum class Status
-	{
-		stop,//igual a false
-		started,
-	};
 	struct IScenary
 	{
+		enum Status
+		{
+			stop,//igual a false
+			started,
+		};
 		Status status;
 
 		IScenary();
@@ -18,13 +18,14 @@ namespace oct::verso::v1
 	};
 
 }
+
+
 namespace oct::verso::v1::SDL
 {
 	struct Scenary : public IScenary
 	{
 		SDL_Window* window; // window
 		SDL_Renderer* renderer; // renderer
-		//bool isRunning; // check if the game is running
 		SDL_Texture* playertex; // player sprite 
 		SDL_Texture* enemytex; // enemy sprite
 		SDL_Rect p_srcR, p_destR; // player source and destination rectangles

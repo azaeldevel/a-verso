@@ -31,7 +31,7 @@ int main(int argc, char* args[])
 	bool flag = true; // winning condition
 
 	// game loop
-	while ((int)scenary.status)
+	while (scenary.status != verso::IScenary::Status::stop)
 	{
 		frameStart = SDL_GetTicks();
 
