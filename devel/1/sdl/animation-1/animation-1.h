@@ -31,6 +31,7 @@ namespace oct::verso::v1::SDL
 		bool create_window(const char* title, int width, int height);
 		void handleEvents();
 		void clean();
+		virtual void render() = 0;
 	};
 
 	struct Game : public Scenary
@@ -43,7 +44,7 @@ namespace oct::verso::v1::SDL
 
 		virtual void initialize();
 		void update();
-		void render();
+		virtual void render();
 		bool AABB(SDL_Rect recA, SDL_Rect recB);
 	};
 }

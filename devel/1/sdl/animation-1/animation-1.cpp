@@ -93,7 +93,6 @@ namespace oct::verso::v1
 }
 namespace oct::verso::v1::SDL
 {
-
 	bool Scenary::create_window(const char* title, int width, int height)
 	{
 		if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
@@ -132,7 +131,9 @@ namespace oct::verso::v1::SDL
 			break;
 		}
 	}
-	void Scenary::clean() {
+
+	void Scenary::clean() 
+	{
 		SDL_DestroyWindow(window);
 		SDL_DestroyRenderer(renderer);
 		SDL_Quit();
@@ -144,12 +145,9 @@ namespace oct::verso::v1::SDL
 
 	void Game::initialize()
 	{
-		// car position
 		p_destR.w = 100;
 		p_destR.h = 100;
-		p_destR.y = ScreenHeight / 2;
-
-		
+		p_destR.y = ScreenHeight / 2;		
 	}
 
 
