@@ -90,7 +90,13 @@ int main(int argc, char* args[])
 
 // define functions
 
-void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) {
+void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) 
+{
+	// car position
+	p_destR.w = 100;
+	p_destR.h = 100;
+	p_destR.y = ScreenHeight / 2;
+
 	int flags = 0;
 	if (fullscreen) {
 		flags = SDL_WINDOW_FULLSCREEN;
@@ -128,12 +134,8 @@ void handleEvents() {
 	}
 }
 
-void update() {
-	// car position
-	p_destR.w = 100;
-	p_destR.h = 100;
-	p_destR.y = ScreenHeight / 2;
-
+void update() 
+{	
 	// on key press
 	if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
 		switch (event.key.keysym.sym) {
@@ -141,26 +143,12 @@ void update() {
 			p_destR.x += 5;
 			break;
 		case SDLK_UP:
-			p_destR.y -= 150;
-			p_destR.x += 3;
+			p_destR.y -= 5;
 			break;
 		default:
 			break;
 		}
 	}
-
-	// on key release
-	else if (event.type == SDL_KEYUP && event.key.repeat == 0) {
-		switch (event.key.keysym.sym) {
-		case SDLK_UP:
-			p_destR.y = ScreenHeight / 2;
-			break;
-		default:
-			break;
-		}
-	}
-
-	else {}
 
 	// enemy position
 	e_destR.w = 45;
