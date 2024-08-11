@@ -27,6 +27,7 @@ int main(int argc, char* args[])
 	scenary.create_window("Game", ScreenWidth, ScreenHeight);
 	scenary.playertex = LoadTexture("../../../assets/player.bmp", scenary.renderer);
 	scenary.enemytex = LoadTexture("../../../assets/enemy.bmp", scenary.renderer);
+	scenary.status = verso::IScenary::Status::started;
 
 	bool flag = true; // winning condition
 
@@ -60,7 +61,7 @@ int main(int argc, char* args[])
 
 	scenary.clean();
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 
@@ -93,6 +94,10 @@ namespace oct::verso::v1
 }
 namespace oct::verso::v1::SDL
 {
+	Scenary::Scenary() : window(NULL), renderer(NULL), event{0}
+	{
+	}
+
 	bool Scenary::create_window(const char* title, int width, int height)
 	{
 		if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
@@ -109,13 +114,13 @@ namespace oct::verso::v1::SDL
 				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 				printf("Renderer created!\n");
 			}
-			status = Status::started;
 		}
 		else
 		{
 			printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
-			status = Status::stop;
+			
 		}
+		status = Status::stop;
 
 		return true;
 	}

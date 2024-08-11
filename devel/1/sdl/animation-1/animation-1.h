@@ -28,6 +28,7 @@ namespace oct::verso::v1::SDL
 		SDL_Renderer* renderer; // renderer
 		SDL_Event event; // event
 
+		Scenary();
 		bool create_window(const char* title, int width, int height);
 		void handleEvents();
 		void clean();
