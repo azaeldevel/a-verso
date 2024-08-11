@@ -10,7 +10,7 @@ namespace verso = oct::verso::v1;
 
 const int ScreenWidth = 800;
 const int ScreenHeight = 600;
-verso::SDL::Scenary scenary;
+verso::SDL::Game scenary;
 
 // texture manager
 static SDL_Texture* LoadTexture(const char* fileName, SDL_Renderer* ren);
@@ -121,18 +121,8 @@ namespace oct::verso::v1::SDL
 		return true;
 	}
 
-
-	void Scenary::initialize()
+	void Scenary::handleEvents() 
 	{
-		// car position
-		p_destR.w = 100;
-		p_destR.h = 100;
-		p_destR.y = ScreenHeight / 2;
-
-		
-	}
-
-	void Scenary::handleEvents() {
 		SDL_PollEvent(&event);
 		switch (event.type) {
 		case SDL_QUIT:
@@ -142,8 +132,28 @@ namespace oct::verso::v1::SDL
 			break;
 		}
 	}
+	void Scenary::clean() {
+		SDL_DestroyWindow(window);
+		SDL_DestroyRenderer(renderer);
+		SDL_Quit();
+		printf("Game cleaned!\n");
+	}
 
-	void Scenary::update()
+
+
+
+	void Game::initialize()
+	{
+		// car position
+		p_destR.w = 100;
+		p_destR.h = 100;
+		p_destR.y = ScreenHeight / 2;
+
+		
+	}
+
+
+	void Game::update()
 	{
 		// on key press
 		if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
@@ -174,7 +184,7 @@ namespace oct::verso::v1::SDL
 
 	}
 
-	void Scenary::render() {
+	void Game::render() {
 		// this is where we add stuff (textutes) to render
 		SDL_RenderClear(renderer);
 		SDL_RenderCopy(renderer, playertex, NULL, &p_destR);
@@ -182,15 +192,9 @@ namespace oct::verso::v1::SDL
 		SDL_RenderPresent(renderer);
 	}
 
-	void Scenary::clean() {
-		SDL_DestroyWindow(window);
-		SDL_DestroyRenderer(renderer);
-		SDL_Quit();
-		printf("Game cleaned!\n");
-	}
 
 
-	bool Scenary::AABB(SDL_Rect recA, SDL_Rect recB) {
+	bool Game::AABB(SDL_Rect recA, SDL_Rect recB) {
 		if (
 			recA.x + recA.w >= recB.x &&
 			recB.x + recB.w >= recA.x &&
