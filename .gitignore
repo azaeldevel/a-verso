@@ -4,3 +4,5 @@ ing/
 obj/
 *.layout
 build/
+*.vsidx
+*.opendb
