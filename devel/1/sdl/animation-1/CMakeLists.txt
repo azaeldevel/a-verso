@@ -27,3 +27,6 @@ $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
 
 find_package(SDL2_image CONFIG REQUIRED)
 target_link_libraries(animation-1 PRIVATE $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>)
+
+find_package(GLEW CONFIG REQUIRED)
+target_link_libraries(animation-1 PRIVATE GLEW::GLEW)
