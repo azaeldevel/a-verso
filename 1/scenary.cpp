@@ -11,6 +11,7 @@ namespace oct::verso::v1
 
 	void IScenary::run()
 	{
+		initialize();
 		loop();
 	}
 }
