@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\animation-1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\animation-1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\scenary.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:scenary.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\scenary.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:scenary.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\animation-1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\animation-1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\animation-1.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -34,50 +30,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "scenary.hpp",
-              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\scenary.hpp",
-              "RelativeDocumentMoniker": "scenary.hpp",
-              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\scenary.hpp",
-              "RelativeToolTip": "scenary.hpp",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABAAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-13T00:10:37.685Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "scenary.cpp",
               "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\scenary.cpp",
               "RelativeDocumentMoniker": "scenary.cpp",
               "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\scenary.cpp",
               "RelativeToolTip": "scenary.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAATAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAArwA4AAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-08-13T00:04:58.232Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "animation-1.cpp",
               "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\animation-1.cpp",
               "RelativeDocumentMoniker": "tests\\animation-1.cpp",
               "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\animation-1.cpp",
               "RelativeToolTip": "tests\\animation-1.cpp",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABQAAAACAAAA",
+              "ViewState": "AQIAAJkAAAAAAAAAAAAAABQAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-08-12T23:41:18.847Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "animation-1.h",
               "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\animation-1.h",
               "RelativeDocumentMoniker": "tests\\animation-1.h",
@@ -90,7 +73,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "CMakeLists.txt",
               "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\CMakeLists.txt",
               "RelativeDocumentMoniker": "tests\\CMakeLists.txt",
@@ -103,7 +86,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "CMakeLists.txt",
               "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\CMakeLists.txt",
               "RelativeDocumentMoniker": "CMakeLists.txt",

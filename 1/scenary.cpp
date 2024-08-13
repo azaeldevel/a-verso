@@ -9,10 +9,22 @@ namespace oct::verso::v1
 	{
 	}
 
+
+	bool IScenary::initialize()
+	{
+		return true;
+	}
+
 	void IScenary::run()
 	{
 		status = running;
 		initialize();
 		loop();
+	}
+	void IScenary::on_active()
+	{
+	}
+	void IScenary::on_deactive()
+	{
 	}
 }

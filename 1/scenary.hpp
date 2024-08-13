@@ -14,13 +14,19 @@ namespace oct::verso::v1
 			star,
 			running,
 		};
-		Status status;
 
 		IScenary();
 		IScenary(Status);
-		virtual bool initialize() = 0;
+
+		virtual bool initialize();
 		virtual void run();
 		virtual void loop() = 0;
+
+		virtual void on_active();
+		virtual void on_deactive();
+
+		Status status;
+
 	};
 
 }
