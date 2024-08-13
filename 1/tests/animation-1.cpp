@@ -13,7 +13,7 @@ verso::devel::Game scenary;
 verso::devel::OpenGL sc_opengl;
 
 
-int cmd = 1;
+int cmd = 2;
 
 int main(int argc, char* args[])
 {
@@ -103,10 +103,10 @@ namespace oct::verso::v1::devel
 		scenary.create_window("Game", ScreenWidth, ScreenHeight);
 		scenary.playertex = SDL::LoadTexture("../../../../tests/assets/player.bmp", scenary.renderer);
 		scenary.enemytex = SDL::LoadTexture("../../../../tests/assets/enemy.bmp", scenary.renderer);
-		scenary.status = Status::started;
+		scenary.status = Status::running;
 
 		// game loop
-		while (scenary.status != Status::stop)
+		while (scenary.status > Status::star)
 		{
 			frameStart = SDL_GetTicks();
 
@@ -143,7 +143,7 @@ namespace oct::verso::v1::devel
 		scenary.create_window("Game", ScreenWidth, ScreenHeight);
 		scenary.playertex = SDL::LoadTexture("../../../../tests/assets/player.bmp", scenary.renderer);
 		scenary.enemytex = SDL::LoadTexture("../../../../tests/assets/enemy.bmp", scenary.renderer);
-		scenary.status = Status::started;
+		scenary.status = Status::running;
 
 		loop();
 
@@ -152,7 +152,7 @@ namespace oct::verso::v1::devel
 
 	void Game::loop()
 	{
-		while (scenary.status != Status::stop)
+		while (scenary.status > Status::star)
 		{
 			frameStart = SDL_GetTicks();
 
@@ -190,6 +190,7 @@ namespace oct::verso::v1::devel
 	{
 		//Initialization flag
 		bool success = true;
+		status = Status::running;
 
 		//Initialize SDL
 		if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -506,7 +507,7 @@ namespace oct::verso::v1::devel
 			SDL_StartTextInput();
 
 			//While application is running
-			while (status != Status::stop)
+			while (status > Status::star)
 			{
 				//Handle events on queue
 				while (SDL_PollEvent(&event) != 0)
@@ -566,7 +567,7 @@ namespace oct::verso::v1::devel
 	}
 	void OpenGL::loop()
 	{
-			while (status != Status::stop)
+			while (status > Status::star)
 			{
 				//Handle events on queue
 				while (SDL_PollEvent(&event) != 0)

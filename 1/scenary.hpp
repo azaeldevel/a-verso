@@ -11,7 +11,8 @@ namespace oct::verso::v1
 		enum Status
 		{
 			stop,//igual a false
-			started,
+			star,
+			running,
 		};
 		Status status;
 
