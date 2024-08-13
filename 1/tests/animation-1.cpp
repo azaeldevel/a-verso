@@ -99,18 +99,11 @@ namespace oct::verso::v1::devel
 
 	int Game::main(int argc, char* args[])
 	{
-		const int FPS = 60;
-		const int frameDelay = 500 / FPS;
-		uint32_t frameStart;
-		int frameTime;
-
 		scenary.initialize();
 		scenary.create_window("Game", ScreenWidth, ScreenHeight);
 		scenary.playertex = SDL::LoadTexture("../../../../tests/assets/player.bmp", scenary.renderer);
 		scenary.enemytex = SDL::LoadTexture("../../../../tests/assets/enemy.bmp", scenary.renderer);
 		scenary.status = Status::started;
-
-		bool flag = true; // winning condition
 
 		// game loop
 		while (scenary.status != Status::stop)
@@ -144,7 +137,48 @@ namespace oct::verso::v1::devel
 
 		return EXIT_SUCCESS;
 	}
+	void Game::run()
+	{
+		scenary.initialize();
+		scenary.create_window("Game", ScreenWidth, ScreenHeight);
+		scenary.playertex = SDL::LoadTexture("../../../../tests/assets/player.bmp", scenary.renderer);
+		scenary.enemytex = SDL::LoadTexture("../../../../tests/assets/enemy.bmp", scenary.renderer);
+		scenary.status = Status::started;
 
+		loop();
+
+		scenary.clean();
+	}
+
+	void Game::loop()
+	{
+		while (scenary.status != Status::stop)
+		{
+			frameStart = SDL_GetTicks();
+
+			// handle user events
+			scenary.handleEvents();
+
+			// update the game
+			scenary.update();
+
+			// render to the screen
+			scenary.render();
+
+			frameTime = SDL_GetTicks() - frameStart;
+
+			if (frameDelay > frameTime)
+			{
+				SDL_Delay(frameDelay - frameTime);
+			}
+
+			if (scenary.p_destR.x >= ScreenWidth / 1.88 && flag)
+			{
+				printf("\n\t*No Collision Detected!*\n\t*You Won!*\n\n");
+				flag = false;
+			}
+		}
+	}
 
 
 
@@ -468,32 +502,26 @@ namespace oct::verso::v1::devel
 		}
 		else
 		{
-			//Main loop flag
-			bool quit = false;
-
-			//Event handler
-			SDL_Event e;
-
 			//Enable text input
 			SDL_StartTextInput();
 
 			//While application is running
-			while (!quit)
+			while (status != Status::stop)
 			{
 				//Handle events on queue
-				while (SDL_PollEvent(&e) != 0)
+				while (SDL_PollEvent(&event) != 0)
 				{
 					//User requests quit
-					if (e.type == SDL_QUIT)
+					if (event.type == SDL_QUIT)
 					{
-						quit = true;
+						status = Status::stop;
 					}
 					//Handle keypress with current mouse position
-					else if (e.type == SDL_TEXTINPUT)
+					else if (event.type == SDL_TEXTINPUT)
 					{
 						int x = 0, y = 0;
 						SDL_GetMouseState(&x, &y);
-						handleKeys(e.text.text[0], x, y);
+						handleKeys(event.text.text[0], x, y);
 					}
 				}
 
@@ -512,5 +540,56 @@ namespace oct::verso::v1::devel
 		close();
 
 		return 0;
+	}
+
+	void OpenGL::run()
+	{
+		//Start up SDL and create window
+		if (!initialize())
+		{
+			printf("Failed to initialize!\n");
+		}
+		else
+		{
+			//Enable text input
+			SDL_StartTextInput();
+
+			//While application is running
+			loop();			
+
+			//Disable text input
+			SDL_StopTextInput();
+		}
+
+		//Free resources and close SDL
+		close();
+	}
+	void OpenGL::loop()
+	{
+			while (status != Status::stop)
+			{
+				//Handle events on queue
+				while (SDL_PollEvent(&event) != 0)
+				{
+					//User requests quit
+					if (event.type == SDL_QUIT)
+					{
+						status = Status::stop;
+					}
+					//Handle keypress with current mouse position
+					else if (event.type == SDL_TEXTINPUT)
+					{
+						int x = 0, y = 0;
+						SDL_GetMouseState(&x, &y);
+						handleKeys(event.text.text[0], x, y);
+					}
+				}
+
+				//Render quad
+				render();
+
+				//Update screen
+				SDL_GL_SwapWindow(window);
+			}
 	}
 }

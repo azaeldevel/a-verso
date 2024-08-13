@@ -10,6 +10,11 @@ namespace oct::verso::v1::devel
 		SDL_Rect p_srcR, p_destR; // player source and destination rectangles
 		SDL_Rect e_srcR, e_destR; // enemy source and destination rectangles
 		int counter;
+		uint32_t frameStart;
+		int frameTime;
+		const int FPS = 60;
+		const int frameDelay = 500 / FPS;
+		bool flag = true; // winning condition
 
 		virtual bool initialize();
 		void update();
@@ -17,6 +22,8 @@ namespace oct::verso::v1::devel
 		bool AABB(SDL_Rect recA, SDL_Rect recB);
 
 		int main(int argc, char* args[]);
+		virtual void run();
+		virtual void loop();
 	};
 
 	struct OpenGL : public SDL::OpenGL
@@ -48,5 +55,8 @@ namespace oct::verso::v1::devel
 		void printShaderLog(GLuint shader);
 
 		int main(int argc, char* args[]);
+
+		virtual void run();
+		virtual void loop();
 	};
 }

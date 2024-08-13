@@ -1,12 +1,6 @@
 ﻿
 #include "scenary.hpp"
 
-
-
-
-
-
-
 namespace oct::verso::v1::SDL
 {
 	SDL_Texture* LoadTexture(const char* fileName, SDL_Renderer* ren) {
