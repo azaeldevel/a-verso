@@ -18,7 +18,7 @@ namespace oct::verso::v1
 		IScenary();
 		IScenary(Status);
 		virtual bool initialize() = 0;
-		virtual void run() = 0;
+		virtual void run();
 		virtual void loop() = 0;
 	};
 
