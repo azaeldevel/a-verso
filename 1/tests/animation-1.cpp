@@ -13,18 +13,18 @@ verso::devel::Game scenary;
 verso::devel::OpenGL sc_opengl;
 
 
-int cmd = 2;
+int cmd = 1;
 
 int main(int argc, char* args[])
 {
 	switch (cmd)
 	{
 	case 1:
-		return scenary.main(argc, args);
-		break;
+		scenary.run();
+		return EXIT_SUCCESS;
 	case 2:
-		return sc_opengl.main(argc, args);
-		break;
+		sc_opengl.run();
+		return EXIT_SUCCESS;
 	}
 	return EXIT_SUCCESS;
 }
@@ -200,12 +200,10 @@ namespace oct::verso::v1::devel
 		}
 		else
 		{
-			//Use OpenGL 3.1 core
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-			//Create window
 			window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenWidth, ScreenHeight, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 			if (window == NULL)
 			{
