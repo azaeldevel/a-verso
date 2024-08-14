@@ -60,4 +60,15 @@ namespace oct::verso::v1::devel
 		virtual void run();
 		virtual void loop();
 	};
+
+
+	struct ScenaryII : public SDL::OpenGL
+	{
+		virtual bool initialize();
+		virtual void render();
+		virtual void loop();
+		virtual void clean();
+		virtual void run();
+
+	};
 }

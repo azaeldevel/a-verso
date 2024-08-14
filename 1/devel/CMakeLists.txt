@@ -11,7 +11,7 @@ endif()
 
 
 # Agregue un origen al ejecutable de este proyecto.
-add_executable (animation-1 "animations.cpp" "Space.cpp" "glew-examples.cpp")
+add_executable (animation-1 "animations.cpp" "Space.cpp" "glfw-examples.cpp" "glfw/scenary.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET animation-1 PROPERTY CXX_STANDARD 20)
@@ -22,6 +22,7 @@ find_package(SDL2_image CONFIG REQUIRED)
 find_package(sdl2-gfx CONFIG REQUIRED)
 find_package(GLEW CONFIG REQUIRED)
 find_package(GLUT REQUIRED)
+find_package(glfw3 CONFIG REQUIRED)
 target_link_libraries(animation-1
 PRIVATE
 $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>
@@ -30,5 +31,6 @@ $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::
 SDL2::SDL2_gfx
 GLEW::GLEW
 GLUT::GLUT
+glfw
 verso-sdl-1
 )

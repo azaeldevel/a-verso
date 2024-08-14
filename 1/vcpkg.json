@@ -1,9 +1,11 @@
 {
   "dependencies": [
+    "freeglut",
     "glew",
+    "glm",
     "sdl2",
     "sdl2-gfx",
     "sdl2-image",
-    "freeglut"
+    "glfw3"
   ]
 }
