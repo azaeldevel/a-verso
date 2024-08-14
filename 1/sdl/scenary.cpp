@@ -50,17 +50,6 @@ namespace oct::verso::v1::SDL
 		return true;
 	}
 
-	void Scenary::handleEvents() 
-	{
-		SDL_PollEvent(&event);
-		switch (event.type) {
-		case SDL_QUIT:
-			status = Status::stop;
-			break;
-		default:
-			break;
-		}
-	}
 
 	void Scenary::clean() 
 	{
@@ -68,6 +57,28 @@ namespace oct::verso::v1::SDL
 		SDL_DestroyRenderer(renderer);
 		SDL_Quit();
 		printf("Game cleaned!\n");
+	}
+
+	void Scenary::render()
+	{
+		//std::cout << "Rendring..\n";
+		SDL_PollEvent(&event);
+		switch (event.type)
+		{
+		case SDL_QUIT:
+			status = Status::stop;
+			break;
+		default:
+			break;
+		}
+
+	}
+	void Scenary::loop()
+	{
+		while (status > Status::star)
+		{
+			this->render();
+		}
 	}
 	
 }

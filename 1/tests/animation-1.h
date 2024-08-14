@@ -20,6 +20,7 @@ namespace oct::verso::v1::devel
 		void update();
 		virtual void render();
 		bool AABB(SDL_Rect recA, SDL_Rect recB);
+		void handleEvents();
 
 		int main(int argc, char* args[]);
 		virtual void run();

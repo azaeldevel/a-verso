@@ -1,6 +1,8 @@
 ﻿
 //Using SDL and standard IO
 #include "animation-1.h"
+#include "Space.h"
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -11,9 +13,10 @@ const int ScreenWidth = 800;
 const int ScreenHeight = 600;
 verso::devel::Game scenary;
 verso::devel::OpenGL sc_opengl;
+verso::devel::Space space;
 
 
-int cmd = 1;
+int cmd = 3;
 
 int main(int argc, char* args[])
 {
@@ -24,6 +27,9 @@ int main(int argc, char* args[])
 		return EXIT_SUCCESS;
 	case 2:
 		sc_opengl.run();
+		return EXIT_SUCCESS;
+	case 3:
+		space.run();
 		return EXIT_SUCCESS;
 	}
 	return EXIT_SUCCESS;
@@ -139,15 +145,28 @@ namespace oct::verso::v1::devel
 	}
 	void Game::run()
 	{
-		scenary.initialize();
-		scenary.create_window("Game", ScreenWidth, ScreenHeight);
-		scenary.playertex = SDL::LoadTexture("../../../../tests/assets/player.bmp", scenary.renderer);
-		scenary.enemytex = SDL::LoadTexture("../../../../tests/assets/enemy.bmp", scenary.renderer);
-		scenary.status = Status::running;
+		initialize();
+		create_window("Game", ScreenWidth, ScreenHeight);
+		playertex = SDL::LoadTexture("../../../../tests/assets/player.bmp", scenary.renderer);
+		enemytex = SDL::LoadTexture("../../../../tests/assets/enemy.bmp", scenary.renderer);
+		status = Status::running;
 
 		loop();
 
-		scenary.clean();
+		clean();
+	}
+
+	void Game::handleEvents()
+	{
+		SDL_PollEvent(&event);
+		switch (event.type)
+		{
+		case SDL_QUIT:
+			status = Status::stop;
+			break;
+		default:
+			break;
+		}
 	}
 
 	void Game::loop()

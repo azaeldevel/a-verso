@@ -19,8 +19,9 @@ namespace oct::verso::v1
 		IScenary(Status);
 
 		virtual bool initialize();
+
 		virtual void run();
-		virtual void loop() = 0;
+		virtual void loop();
 
 		virtual void on_active();
 		virtual void on_deactive();

@@ -23,9 +23,9 @@ namespace oct::verso::v1::SDL
 
 		Scenary();
 		bool create_window(const char* title, int width, int height);
-		void handleEvents();
-		void clean();
-		virtual void render() = 0;
+		virtual void clean();
+		virtual void render();
+		virtual void loop();
 	};
 
 	struct OpenGL : public Scenary

@@ -11,7 +11,7 @@ endif()
 
 
 # Agregue un origen al ejecutable de este proyecto.
-add_executable (animation-1 "animation-1.cpp" )
+add_executable (animation-1 "animation-1.cpp" "Space.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET animation-1 PROPERTY CXX_STANDARD 20)
