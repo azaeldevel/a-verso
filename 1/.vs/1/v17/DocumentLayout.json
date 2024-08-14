@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\animations.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\animations.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\sdl\\scenary.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:sdl\\scenary.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,27 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "animations.cpp",
-              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\animations.cpp",
-              "RelativeDocumentMoniker": "tests\\animations.cpp",
-              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\animations.cpp",
-              "RelativeToolTip": "tests\\animations.cpp",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-14T03:52:44.21Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "scenary.cpp",
-              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\sdl\\scenary.cpp",
-              "RelativeDocumentMoniker": "sdl\\scenary.cpp",
-              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\sdl\\scenary.cpp",
-              "RelativeToolTip": "sdl\\scenary.cpp",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAAAEwAAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-14T00:47:17.618Z",
+              "Title": "CMakeLists.txt",
+              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\CMakeLists.txt",
+              "RelativeDocumentMoniker": "CMakeLists.txt",
+              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\CMakeLists.txt",
+              "RelativeToolTip": "CMakeLists.txt",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-08-14T05:29:56.274Z",
               "EditorCaption": ""
             }
           ]

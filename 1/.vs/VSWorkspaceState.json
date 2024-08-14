@@ -12,8 +12,9 @@
     ]
   },
   "ExpandedNodes": [
-    ""
+    "",
+    "\\devel"
   ],
-  "SelectedNode": "\\scenary.cpp",
+  "SelectedNode": "\\CMakeLists.txt",
   "PreviewInSolutionExplorer": false
 }
