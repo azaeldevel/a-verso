@@ -7,4 +7,5 @@ build/
 *.vsidx
 *.opendb
 *.ipch
-*/.vs/slnx.sqlite
+*/*/.vs/slnx.sqlite
+1/.vs/slnx.sqlite

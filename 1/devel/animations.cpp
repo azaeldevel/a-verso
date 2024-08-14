@@ -1,7 +1,12 @@
 ﻿
+
+#include <gl/glew.h>
+#include <gl/glu.h>
+
 //Using SDL and standard IO
 #include "animations.h"
 #include "Space.h"
+#include "Sphere.h"
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -14,6 +19,7 @@ const int ScreenHeight = 600;
 verso::devel::Game scenary;
 verso::devel::OpenGL sc_opengl;
 verso::devel::Collisions collision;
+//verso::devel::sphere::Scenary sphere;
 
 
 int cmd = 3;
@@ -30,6 +36,9 @@ int main(int argc, char* args[])
 		return EXIT_SUCCESS;
 	case 3:
 		collision.run();
+		return EXIT_SUCCESS;
+	case 4:
+		//sphere.run();
 		return EXIT_SUCCESS;
 	}
 	return EXIT_SUCCESS;
@@ -117,8 +126,8 @@ namespace oct::verso::v1::devel
 	int Game::main(int argc, char* args[])
 	{
 		initialize();
-		playertex = SDL::LoadTexture("../../../../tests/assets/player.bmp", scenary.renderer);
-		enemytex = SDL::LoadTexture("../../../../tests/assets/enemy.bmp", scenary.renderer);
+		playertex = SDL::LoadTexture("../../../../devel/assets/player.bmp", scenary.renderer);
+		enemytex = SDL::LoadTexture("../../../../devel/assets/enemy.bmp", scenary.renderer);
 
 		// game loop
 		while (scenary.status > Status::star)
@@ -148,7 +157,7 @@ namespace oct::verso::v1::devel
 			}
 		}
 
-		scenary.clean();
+		clean();
 
 		return EXIT_SUCCESS;
 	}

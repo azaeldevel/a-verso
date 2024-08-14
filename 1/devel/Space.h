@@ -1,4 +1,8 @@
 ﻿
+#ifndef OCTETOS_VERSO_V3_SPACE_H
+#define OCTETOS_VERSO_V3_SPACE_H
+
+
 #include "../sdl/scenary.hpp"
 #include <string>
 #include <vector>
@@ -125,3 +129,5 @@ namespace oct::verso::v1::devel
 		bool loadMedia();
 	};
 }
+
+#endif

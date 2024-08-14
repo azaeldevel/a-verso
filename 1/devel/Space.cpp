@@ -137,7 +137,7 @@ namespace oct::verso::v1::devel
 	bool Collisions::loadMedia()
 	{
 		//Load dot texture
-		if (!gDotTexture.loadFromFile("../../../../tests/assets/dot.bmp", renderer))
+		if (!gDotTexture.loadFromFile("../../../../devel/assets/dot.bmp", renderer))
 		{
 			printf("Failed to load dot texture!\n");
 			return false;
