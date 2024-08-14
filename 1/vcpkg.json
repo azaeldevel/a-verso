@@ -2,7 +2,8 @@
   "dependencies": [
     "glew",
     "sdl2",
+    "sdl2-gfx",
     "sdl2-image",
-    "sdl2-gfx"
+    "freeglut"
   ]
 }

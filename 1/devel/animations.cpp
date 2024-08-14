@@ -6,7 +6,7 @@
 //Using SDL and standard IO
 #include "animations.h"
 #include "Space.h"
-#include "Sphere.h"
+#include "glew-examples.h"
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -19,10 +19,10 @@ const int ScreenHeight = 600;
 verso::devel::Game scenary;
 verso::devel::OpenGL sc_opengl;
 verso::devel::Collisions collision;
-//verso::devel::sphere::Scenary sphere;
+verso::devel::glew::Scenary first;
 
 
-int cmd = 3;
+int cmd = 4;
 
 int main(int argc, char* args[])
 {
@@ -38,7 +38,7 @@ int main(int argc, char* args[])
 		collision.run();
 		return EXIT_SUCCESS;
 	case 4:
-		//sphere.run();
+		first.run();
 		return EXIT_SUCCESS;
 	}
 	return EXIT_SUCCESS;
@@ -164,8 +164,8 @@ namespace oct::verso::v1::devel
 	void Game::run()
 	{
 		initialize();
-		playertex = SDL::LoadTexture("../../../../tests/assets/player.bmp", scenary.renderer);
-		enemytex = SDL::LoadTexture("../../../../tests/assets/enemy.bmp", scenary.renderer);
+		playertex = SDL::LoadTexture("../../../../devel/assets/player.bmp", scenary.renderer);
+		enemytex = SDL::LoadTexture("../../../../devel/assets/enemy.bmp", scenary.renderer);
 		status = Status::running;
 
 		loop();
@@ -249,8 +249,8 @@ namespace oct::verso::v1::devel
 			else
 			{
 				//Create context
-				gContext = SDL_GL_CreateContext(window);
-				if (gContext == NULL)
+				context = SDL_GL_CreateContext(window);
+				if (context == NULL)
 				{
 					printf("OpenGL context could not be created! SDL Error: %s\n", SDL_GetError());
 					success = false;

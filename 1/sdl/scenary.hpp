@@ -28,7 +28,7 @@ namespace oct::verso::v1::SDL
 
 	struct OpenGL : public Scenary
 	{
-		SDL_GLContext gContext;
+		SDL_GLContext context;
 	};
 
 	SDL_Texture* LoadTexture(const char* fileName, SDL_Renderer* ren);
