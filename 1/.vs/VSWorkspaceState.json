@@ -13,8 +13,9 @@
   },
   "ExpandedNodes": [
     "",
-    "\\devel"
+    "\\devel",
+    "\\devel\\glfw"
   ],
-  "SelectedNode": "\\CMakeLists.txt",
+  "SelectedNode": "\\devel\\glfw-examples.cpp",
   "PreviewInSolutionExplorer": false
 }
