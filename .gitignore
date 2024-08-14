@@ -6,3 +6,4 @@ obj/
 build/
 *.vsidx
 *.opendb
+*.ipch

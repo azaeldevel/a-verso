@@ -11,21 +11,23 @@ endif()
 
 
 # Agregue un origen al ejecutable de este proyecto.
-add_library (verso-sdl-1 STATIC "scenary.cpp" "sdl/scenary.cpp")
+ADD_LIBRARY(verso-sdl-1 STATIC "scenary.cpp" "sdl/scenary.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET verso-sdl-1 PROPERTY CXX_STANDARD 20)
+  SET_PROPERTY(TARGET verso-sdl-1 PROPERTY CXX_STANDARD 20)
 endif()
 
-find_package(SDL2 CONFIG REQUIRED)
-find_package(SDL2_image CONFIG REQUIRED)
-find_package(GLEW CONFIG REQUIRED)
-target_link_libraries(verso-sdl-1
+FIND_PACKAGE(SDL2 CONFIG REQUIRED)
+FIND_PACKAGE(SDL2_image CONFIG REQUIRED)
+FIND_PACKAGE(GLEW CONFIG REQUIRED)
+find_package(sdl2-gfx CONFIG REQUIRED)
+TARGET_LINK_LIBRARIES(verso-sdl-1
 PRIVATE
 $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>
 $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>
 $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>
 GLEW::GLEW
+SDL2::SDL2_gfx
 )
 
-add_subdirectory(tests)
+ADD_SUBDIRECTORY(tests)

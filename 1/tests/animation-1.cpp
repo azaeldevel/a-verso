@@ -16,7 +16,7 @@ verso::devel::OpenGL sc_opengl;
 verso::devel::Space space;
 
 
-int cmd = 3;
+int cmd = 2;
 
 int main(int argc, char* args[])
 {
@@ -44,7 +44,18 @@ namespace oct::verso::v1::devel
 		p_destR.w = 100;
 		p_destR.h = 100;
 		p_destR.y = ScreenHeight / 2;	
-
+		window = SDL_CreateWindow("Game", 0, 0, ScreenWidth, ScreenHeight, 0);
+		if (window)
+		{
+			printf("Window created!\n");
+		}
+		renderer = SDL_CreateRenderer(window, -1, 0);
+		if (renderer)
+		{
+			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+			printf("Renderer created!\n");
+		}
+		status = Status::star;
 		return false;
 	}
 
@@ -105,11 +116,9 @@ namespace oct::verso::v1::devel
 
 	int Game::main(int argc, char* args[])
 	{
-		scenary.initialize();
-		scenary.create_window("Game", ScreenWidth, ScreenHeight);
-		scenary.playertex = SDL::LoadTexture("../../../../tests/assets/player.bmp", scenary.renderer);
-		scenary.enemytex = SDL::LoadTexture("../../../../tests/assets/enemy.bmp", scenary.renderer);
-		scenary.status = Status::running;
+		initialize();
+		playertex = SDL::LoadTexture("../../../../tests/assets/player.bmp", scenary.renderer);
+		enemytex = SDL::LoadTexture("../../../../tests/assets/enemy.bmp", scenary.renderer);
 
 		// game loop
 		while (scenary.status > Status::star)
@@ -146,7 +155,6 @@ namespace oct::verso::v1::devel
 	void Game::run()
 	{
 		initialize();
-		create_window("Game", ScreenWidth, ScreenHeight);
 		playertex = SDL::LoadTexture("../../../../tests/assets/player.bmp", scenary.renderer);
 		enemytex = SDL::LoadTexture("../../../../tests/assets/enemy.bmp", scenary.renderer);
 		status = Status::running;

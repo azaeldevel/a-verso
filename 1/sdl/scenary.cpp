@@ -23,7 +23,7 @@ namespace oct::verso::v1::SDL
 	{
 	}
 
-	bool Scenary::create_window(const char* title, int width, int height)
+	/*bool Scenary::create_window(const char* title, int width, int height)
 	{
 		if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 		{
@@ -48,7 +48,7 @@ namespace oct::verso::v1::SDL
 		status = Status::stop;
 
 		return true;
-	}
+	}*/
 
 
 	void Scenary::clean() 

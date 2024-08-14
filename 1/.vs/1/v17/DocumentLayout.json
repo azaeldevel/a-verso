@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\Space.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\Space.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\animations.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\animations.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\sdl\\scenary.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:sdl\\scenary.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\Space.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\Space.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "animations.cpp",
+              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\animations.cpp",
+              "RelativeDocumentMoniker": "tests\\animations.cpp",
+              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\animations.cpp",
+              "RelativeToolTip": "tests\\animations.cpp",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-08-14T03:52:44.21Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -35,32 +44,6 @@
               "ViewState": "AQIAAD8AAAAAAAAAAAAAAEwAAAACAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-08-14T00:47:17.618Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Space.h",
-              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\Space.h",
-              "RelativeDocumentMoniker": "tests\\Space.h",
-              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\Space.h",
-              "RelativeToolTip": "tests\\Space.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-14T00:03:53.808Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Space.cpp",
-              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\Space.cpp",
-              "RelativeDocumentMoniker": "tests\\Space.cpp",
-              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\tests\\Space.cpp",
-              "RelativeToolTip": "tests\\Space.cpp",
-              "ViewState": "AQIAABcAAAAAAAAAAAAcwC8AAAADAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-14T00:01:35.458Z",
               "EditorCaption": ""
             }
           ]
