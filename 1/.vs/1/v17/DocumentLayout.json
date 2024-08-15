@@ -3,36 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\sdl-examples.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:devel\\sdl-examples.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\animations.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:devel\\animations.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\glew-examples.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:devel\\glew-examples.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\glfw-examples.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:devel\\glfw-examples.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\glfw-examples.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:devel\\glfw-examples.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\sdl-examples.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:devel\\sdl-examples.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:devel\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\glfw\\scenary.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:devel\\glfw\\scenary.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\glew-examples.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:devel\\glew-examples.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\animations.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:devel\\animations.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,84 +30,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "glfw-examples.cpp",
-              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\glfw-examples.cpp",
-              "RelativeDocumentMoniker": "devel\\glfw-examples.cpp",
-              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\glfw-examples.cpp",
-              "RelativeToolTip": "devel\\glfw-examples.cpp",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAkAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-14T09:09:08.711Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "glfw-examples.h",
-              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\glfw-examples.h",
-              "RelativeDocumentMoniker": "devel\\glfw-examples.h",
-              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\glfw-examples.h",
-              "RelativeToolTip": "devel\\glfw-examples.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAowAwAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-14T09:06:46.708Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "scenary.hpp",
-              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\glfw\\scenary.hpp",
-              "RelativeDocumentMoniker": "devel\\glfw\\scenary.hpp",
-              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\glfw\\scenary.hpp",
-              "RelativeToolTip": "devel\\glfw\\scenary.hpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC4AAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-14T09:05:17.06Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "glew-examples.cpp",
-              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\glew-examples.cpp",
-              "RelativeDocumentMoniker": "devel\\glew-examples.cpp",
-              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\glew-examples.cpp",
-              "RelativeToolTip": "devel\\glew-examples.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAKAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-14T09:05:05.635Z",
+              "Title": "CMakeLists.txt",
+              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\CMakeLists.txt",
+              "RelativeDocumentMoniker": "CMakeLists.txt",
+              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\CMakeLists.txt",
+              "RelativeToolTip": "CMakeLists.txt",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAwCAAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-08-15T04:40:26.791Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "glew-examples.h",
-              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\glew-examples.h",
-              "RelativeDocumentMoniker": "devel\\glew-examples.h",
-              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\glew-examples.h",
-              "RelativeToolTip": "devel\\glew-examples.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-14T09:04:44.048Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "animations.cpp",
               "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\animations.cpp",
               "RelativeDocumentMoniker": "devel\\animations.cpp",
               "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\animations.cpp",
               "RelativeToolTip": "devel\\animations.cpp",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAABUAAAAbAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABkAAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-08-14T08:58:23.459Z",
+              "WhenOpened": "2024-08-15T02:35:03.943Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "sdl-examples.cpp",
+              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\sdl-examples.cpp",
+              "RelativeDocumentMoniker": "devel\\sdl-examples.cpp",
+              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\sdl-examples.cpp",
+              "RelativeToolTip": "devel\\sdl-examples.cpp",
+              "ViewState": "AQIAAG4CAAAAAAAAAAAgwG8CAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-08-15T02:34:36.506Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "sdl-examples.h",
+              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\sdl-examples.h",
+              "RelativeDocumentMoniker": "devel\\sdl-examples.h",
+              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\sdl-examples.h",
+              "RelativeToolTip": "devel\\sdl-examples.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-08-15T02:34:26.182Z",
               "EditorCaption": ""
             },
             {
@@ -130,22 +92,9 @@
               "RelativeDocumentMoniker": "devel\\CMakeLists.txt",
               "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\CMakeLists.txt",
               "RelativeToolTip": "devel\\CMakeLists.txt",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA0AAABeAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABEAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-08-14T08:41:10.896Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "animations.h",
-              "DocumentMoniker": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\animations.h",
-              "RelativeDocumentMoniker": "devel\\animations.h",
-              "ToolTip": "C:\\Users\\Azael\\develop\\octetos\\a-verso\\1\\devel\\animations.h",
-              "RelativeToolTip": "devel\\animations.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-14T09:04:30.013Z",
+              "WhenOpened": "2024-08-15T02:34:11.378Z",
               "EditorCaption": ""
             }
           ]

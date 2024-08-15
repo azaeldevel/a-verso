@@ -5,7 +5,7 @@
 
 //Using SDL and standard IO
 #include "animations.h"
-#include "Space.h"
+#include "sdl-examples.h"
 #include "glfw-examples.h"
 
 #include <stdio.h>
@@ -20,9 +20,10 @@ verso::devel::Game scenary;
 verso::devel::OpenGL sc_opengl;
 verso::devel::Collisions collision;
 verso::devel::glfw::awindow first;
+verso::devel::SolarI solar1;
 
 
-int cmd = 4;
+int cmd = 5;
 
 int main(int argc, char* args[])
 {
@@ -39,6 +40,9 @@ int main(int argc, char* args[])
 		return EXIT_SUCCESS;
 	case 4:
 		first.run();
+		return EXIT_SUCCESS;
+	case 5:
+		solar1.run();
 		return EXIT_SUCCESS;
 	}
 	return EXIT_SUCCESS;
