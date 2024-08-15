@@ -3,7 +3,7 @@
 
 #include "scenary.hh"
 
-namespace oct::verso::v1
+namespace oct::verso::v1::glfw
 {
 
 Version::Version(int M, int m) : major(M),minor(m),accepted(false)

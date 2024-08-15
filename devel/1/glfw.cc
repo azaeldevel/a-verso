@@ -48,7 +48,7 @@ int main( void )
 		return -1;
 	}
 	*/
-	verso::Scenary scenary;
+	verso::glfw::Scenary scenary;
 	scenary.screen("A develop Verso",1024, 768);
 	if(not scenary.window)
     {

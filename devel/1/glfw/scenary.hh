@@ -1,6 +1,6 @@
 
-#ifndef OCTETOS_AVERSO_VERSO_GL_HH
-#define OCTETOS_AVERSO_VERSO_GL_HH
+#ifndef OCTETOS_AVERSO_VERSO_GLFW_HPP
+#define OCTETOS_AVERSO_VERSO_GLFW_HPP
 
 #include <filesystem>
 #include <GL/glew.h>
@@ -8,18 +8,14 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <source_location>
-//#include <ft2build.h>
-//#include FT_FREETYPE_H
-//#include <map>
-
-//#include <shapes.hh>
+#include "../scenary.hh"
 
 
 
 #define WINDOW(W,C) reinterpret_cast<C*>(glfwGetWindowUserPointer(W))
 
 
-namespace oct::verso::v1
+namespace oct::verso::v1::glfw
 {
     struct Version
     {
@@ -40,7 +36,7 @@ namespace oct::verso::v1
     *\brief Encapsula lo correcpondiente al escenario y GLFW
     *
     */
-    struct Scenary
+    struct Scenary : public IScenary
     {
         Scenary();
         Scenary(int major, int minor);
