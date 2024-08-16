@@ -9,6 +9,7 @@
 #include <map>
 #include <string>
 
+#include "../scenary.hh"
 
 
 namespace oct::verso::v1
@@ -18,10 +19,16 @@ namespace oct::verso::v1
     typedef void (*DISPLAY)();
     typedef void (*RESHAPE)(GLint, GLint);
 
-    struct Scenary
+    struct Scenary : public IScenary
     {
         Scenary();
         Scenary(DISPLAY,RESHAPE);
+        constexpr Scenary(const std::initializer_list<real>& l) : IScenary(l)
+        {
+        }
+        constexpr Scenary(const numbers::vector<real>& p) : IScenary(p)
+        {
+        }
 
         DISPLAY display;
         RESHAPE reshape;
@@ -34,23 +41,48 @@ namespace oct::verso::v1
 
     extern Scenary* actual;
 
-    struct Sun : public Scenary
+    struct Body : public Scenary
     {
-        GLfloat position[3];
+        Body() = default;
+        constexpr Body(const std::initializer_list<real>& l) : Scenary(l)
+        {
+        }
+        constexpr Body(const numbers::vector<real>& p) : Scenary(p)
+        {
+        }
 
+
+    };
+
+    struct Sun : public Body
+    {
         Sun();
+        constexpr Sun(const std::initializer_list<real>& l) : Body(l)
+        {
+        }
+        constexpr Sun(const numbers::vector<real>& p) : Body(p)
+        {
+        }
     };
-    struct Earth : public Scenary
+    struct Earth : public Body
     {
-        GLfloat position[3];
-
         Earth();
+        constexpr Earth(const std::initializer_list<real>& l) : Body(l)
+        {
+        }
+        constexpr Earth(const numbers::vector<real>& p) : Body(p)
+        {
+        }
     };
-    struct Moon : public Scenary
+    struct Moon : public Body
     {
-        GLfloat position[3];
-
         Moon();
+        constexpr Moon(const std::initializer_list<real>& l) : Body(l)
+        {
+        }
+        constexpr Moon(const numbers::vector<real>& p) : Body(p)
+        {
+        }
     };
 
     struct Solar : public Scenary
@@ -58,9 +90,19 @@ namespace oct::verso::v1
         Sun sun;
         Earth earth;
         Moon moon;
-        Solar();
+        static void display();
+        static void reshape(GLint w, GLint h);
+        constexpr Solar() : Scenary(Solar::display,Solar::reshape)
+        {
+        }
+        constexpr Solar(const std::initializer_list<real>& l) : Scenary(l)
+        {
+        }
+        constexpr Solar(const numbers::vector<real>& p) : Scenary(p)
+        {
+        }
 
-        void initialize();
+        virtual bool initialize();
         virtual void on_active();
         virtual void run();
     };

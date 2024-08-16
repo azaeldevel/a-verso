@@ -2,10 +2,10 @@
 
 namespace oct::verso::v1
 {
-	IScenary::IScenary() : status(Status::stop)
+	IScenary::IScenary() : status(Status::stop),position{0,0,0}
 	{
 	}
-	IScenary::IScenary(Status r) : status(r)
+	IScenary::IScenary(Status r) : status(r),position{0,0,0}
 	{
 	}
 
