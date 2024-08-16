@@ -9,7 +9,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <source_location>
 #include "../scenary.hh"
-
+#include "../shader.hh"
+#include "../shapes.hh"
 
 
 #define WINDOW(W,C) reinterpret_cast<C*>(glfwGetWindowUserPointer(W))
@@ -57,6 +58,11 @@ namespace oct::verso::v1::glfw
         operator GLFWwindow*();
     };
 
+    struct Triangle : public Scenary
+    {
+
+        virtual void run();
+    };
 
 }
 
