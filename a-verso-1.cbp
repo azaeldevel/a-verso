@@ -84,6 +84,20 @@
 					<Add option="`pkg-config glew --libs` `pkg-config glfw3 --libs` `pkg-config glut --libs`" />
 				</Linker>
 			</Target>
+			<Target title="scenaries-dbg">
+				<Option output="bin/Debug/glfw" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DOCTETOS_VERSO_GLFW" />
+					<Add directory="/home/azael/develop/octetos" />
+				</Compiler>
+				<Linker>
+					<Add option="`pkg-config glew --libs` `pkg-config glfw3 --libs` `pkg-config glut --libs`" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -94,27 +108,33 @@
 			<Option target="glut-dbg" />
 			<Option target="verso" />
 			<Option target="glfw-dbg" />
+			<Option target="scenaries-dbg" />
 		</Unit>
 		<Unit filename="devel/1/common.cc">
 			<Option target="glfw-dbg" />
+			<Option target="scenaries-dbg" />
 		</Unit>
 		<Unit filename="devel/1/common.hh">
 			<Option target="glut-dbg" />
 			<Option target="verso" />
 			<Option target="glfw-dbg" />
+			<Option target="scenaries-dbg" />
 		</Unit>
 		<Unit filename="devel/1/context.hh">
 			<Option target="glut-dbg" />
 			<Option target="glfw-dbg" />
+			<Option target="scenaries-dbg" />
 		</Unit>
 		<Unit filename="devel/1/glfw.cc">
 			<Option target="glfw-dbg" />
 		</Unit>
 		<Unit filename="devel/1/glfw/scenary.cc">
 			<Option target="glfw-dbg" />
+			<Option target="scenaries-dbg" />
 		</Unit>
 		<Unit filename="devel/1/glfw/scenary.hh">
 			<Option target="glfw-dbg" />
+			<Option target="scenaries-dbg" />
 		</Unit>
 		<Unit filename="devel/1/glut.cc">
 			<Option target="glut-dbg" />
@@ -125,19 +145,30 @@
 		<Unit filename="devel/1/glut/scenary.hh">
 			<Option target="glut-dbg" />
 		</Unit>
+		<Unit filename="devel/1/scenaries.cc">
+			<Option target="scenaries-dbg" />
+		</Unit>
+		<Unit filename="devel/1/scenary.cc">
+			<Option target="glfw-dbg" />
+			<Option target="scenaries-dbg" />
+		</Unit>
 		<Unit filename="devel/1/shader.cc">
 			<Option target="glfw-dbg" />
+			<Option target="scenaries-dbg" />
 		</Unit>
 		<Unit filename="devel/1/shader.hh">
 			<Option target="glfw-dbg" />
+			<Option target="scenaries-dbg" />
 		</Unit>
 		<Unit filename="devel/1/shapes.cc">
 			<Option target="glut-dbg" />
 			<Option target="glfw-dbg" />
+			<Option target="scenaries-dbg" />
 		</Unit>
 		<Unit filename="devel/1/shapes.hh">
 			<Option target="glut-dbg" />
 			<Option target="glfw-dbg" />
+			<Option target="scenaries-dbg" />
 		</Unit>
 		<Unit filename="devel/1/verso.cc">
 			<Option target="verso" />

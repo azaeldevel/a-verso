@@ -118,11 +118,21 @@ namespace oct::verso::v1
       glEnable(GL_DEPTH_TEST);              // so the renderer considers depth
     }
 
-    void Solar::active()
+    void Solar::on_active()
     {
         glutReshapeFunc(reshape);
         glutDisplayFunc(display);
         actual = this;
+    }
+    void Solar::run()
+    {
+        glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+        glutInitWindowPosition(80, 80);
+        glutInitWindowSize(800, 600);
+        glutCreateWindow("A verso from GLUT");
+        initialize();
+        on_active();
+        glutMainLoop();
     }
 
 

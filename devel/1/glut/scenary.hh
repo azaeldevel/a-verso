@@ -61,12 +61,14 @@ namespace oct::verso::v1
         Solar();
 
         void initialize();
-        virtual void active();
+        virtual void on_active();
+        virtual void run();
     };
 
     struct ViaLactea : public Scenary
     {
         Solar solar;
+
     };
 
 }
