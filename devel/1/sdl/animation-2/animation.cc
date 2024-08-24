@@ -6,6 +6,10 @@
 #include <stdint.h>
 #include "SDL2_gfxPrimitives.h"//https://www.ferzkopp.net/Software/SDL2_gfx/Docs/html/_s_d_l2__gfx_primitives_8h.html
 
+/*void (*glEnable) (int) ;
+void (*glLogicOp) (int) ;
+void (*glDisable) (int) ;*/
+
 namespace verso = oct::verso::v1;
 
 
@@ -261,6 +265,7 @@ namespace oct::verso::v1::SDL
 
 	bool Space::initialize()
 	{
+	    SDL_SetHint (SDL_HINT_RENDER_DRIVER, "opengl") ;
 		create_window("Game", ScreenWidth, ScreenHeight);
 		status = Status::running;
 
@@ -290,7 +295,7 @@ namespace oct::verso::v1::SDL
 
 	void Space::render()
 	{
-        SDL_SetRenderDrawColor( renderer, 255, 0, 0, 255 );
+        SDL_SetRenderDrawColor( renderer, 255, 50, 0, 10 );
 
 		SDL_RenderClear(renderer);
 
@@ -312,7 +317,7 @@ namespace oct::verso::v1::SDL
         //SDL_Surface* circle = SDL_CreateRGBSurface(0,width/2,height/2,32,0,0,0,0);
         //filledEllipseRGBA(renderer,200,200,500,500,50,79,188,5);
         //DrawCircle(renderer,100,100,50);
-        circleColor(renderer,200,200,200,105833);
+        filledCircleColor(renderer,200,300,100,0xF30000AF);
 
 		SDL_RenderPresent(renderer);
 	}
