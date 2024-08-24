@@ -43,7 +43,12 @@ namespace oct::verso::v1
 		virtual bool initialize();
 
 		virtual void run();
+
 		virtual void loop();
+
+		virtual void handler();
+		virtual void update();
+		virtual void render();
 
 		virtual void on_active();
 		virtual void on_deactive();

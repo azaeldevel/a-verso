@@ -6,43 +6,16 @@
 namespace oct::verso::v1::SDL
 {
 
-    bool Object::initialize()
+	bool Object::initialize()
 	{
-	    //SDL_SetHint (SDL_HINT_RENDER_DRIVER, "opengl") ;
-		create_window("Game", 800, 600);
-		status = Status::running;
-
-		return false;
+		return true;
 	}
-
-	void Object::update()
+	void Object::run()
 	{
-		// on key press
-		if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
-		{
-			switch (event.key.keysym.sym)
-			{
-			case SDLK_RIGHT:
-
-				break;
-			case SDLK_UP:
-
-				break;
-			default:
-				break;
-			}
-		}
+		status = running;
+		this->initialize();
+		this->loop();
 	}
-
-	void Object::render()
-	{
-        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
-		SDL_RenderClear(renderer);
-
-
-        SDL_RenderPresent(renderer);
-	}
-
 	void Object::loop()
 	{
         // game loop
@@ -61,48 +34,14 @@ namespace oct::verso::v1::SDL
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    bool Body::initialize()
+	void Object::handler()
 	{
-	    //SDL_SetHint (SDL_HINT_RENDER_DRIVER, "opengl") ;
-		create_window("Game", 800, 600);
-		status = Status::running;
-
-		return false;
+	}
+	void Object::update()
+	{
 	}
 
-	void Body::update()
-	{
-		// on key press
-		if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
-		{
-			switch (event.key.keysym.sym)
-			{
-			case SDLK_RIGHT:
-
-				break;
-			case SDLK_UP:
-
-				break;
-			default:
-				break;
-			}
-		}
-	}
-
-	void Body::render()
+	void Object::render()
 	{
         SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
 		SDL_RenderClear(renderer);
@@ -111,6 +50,36 @@ namespace oct::verso::v1::SDL
         SDL_RenderPresent(renderer);
 	}
 
+
+	void Object::on_active()
+	{
+	}
+	void Object::on_deactive()
+	{
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	bool Body::initialize()
+	{
+		return true;
+	}
+	void Body::run()
+	{
+		status = running;
+		this->initialize();
+		this->loop();
+	}
 	void Body::loop()
 	{
         // game loop
@@ -127,6 +96,30 @@ namespace oct::verso::v1::SDL
 
 			SDL_Delay(1);
 		}
+	}
+
+	void Body::handler()
+	{
+	}
+	void Body::update()
+	{
+	}
+
+	void Body::render()
+	{
+        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
+		SDL_RenderClear(renderer);
+
+
+        SDL_RenderPresent(renderer);
+	}
+
+
+	void Body::on_active()
+	{
+	}
+	void Body::on_deactive()
+	{
 	}
 
 
@@ -152,7 +145,41 @@ namespace oct::verso::v1::SDL
 		return false;
 	}
 
+	void Space::run()
+	{
+		status = running;
+		initialize();
+		loop();
+	}
 
+	void Space::loop()
+	{
+        // game loop
+		while (status != Status::stop)
+		{
+			// handle user events
+			handler();
+
+			// update the game
+			update();
+
+			// render to the screen
+			render();
+
+			SDL_Delay(1);
+		}
+	}
+	void Space::handler()
+	{
+		SDL_PollEvent(&event);
+		switch (event.type) {
+		case SDL_QUIT:
+			status = Status::stop;
+			break;
+		default:
+			break;
+		}
+	}
 	void Space::update()
 	{
 		// on key press
@@ -176,28 +203,9 @@ namespace oct::verso::v1::SDL
 	void Space::render()
 	{
         SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
-
 		SDL_RenderClear(renderer);
 
-	    //circleColor(renderer,width/2,height/2,2.5,100);
-        /*SDL_Rect r;
-        r.x = 50;
-        r.y = 50;
-        r.w = 50;
-        r.h = 50;
-
-        // Set render color to blue ( rect will be rendered in this color )
-        SDL_SetRenderDrawColor( renderer, 0, 0, 255, 255 );
-        //Render rect
-        SDL_RenderFillRect( renderer, &r );
-        r.x = 200;
-        SDL_RenderFillRect( renderer, &r );*/
-
-        //SDL_Surface* circle = SDL_CreateRGBSurface(0,width/2,height/2,32,0,0,0,0);
-        //filledEllipseRGBA(renderer,200,200,500,500,50,79,188,5);
-        //DrawCircle(renderer,100,100,50);
-        //filledCircleColor(renderer,200,300,100,0xF30000AF);
-
+		//
         int unit = width/12;
         int y = height/2;
         filledCircleRGBA(renderer,0,y,100,255,227,51,255);
@@ -243,22 +251,11 @@ namespace oct::verso::v1::SDL
 	}
 
 
-	void Space::loop()
+	void Space::on_active()
 	{
-        // game loop
-		while (status != Status::stop)
-		{
-			// handle user events
-			handler();
-
-			// update the game
-			update();
-
-			// render to the screen
-			render();
-
-			SDL_Delay(1);
-		}
+	}
+	void Space::on_deactive()
+	{
 	}
 
 

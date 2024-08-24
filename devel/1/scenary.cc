@@ -22,11 +22,28 @@ namespace oct::verso::v1
 	}
 	void IScenary::loop()
 	{
+	    while (status != Status::stop)
+        {
+            this->handler();
+            this->update();
+            this->render();
+        }
 	}
 	void IScenary::on_active()
 	{
 	}
 	void IScenary::on_deactive()
+	{
+	}
+
+
+	void IScenary::handler()
+	{
+	}
+	void IScenary::update()
+	{
+	}
+	void IScenary::render()
 	{
 	}
 }
