@@ -14,11 +14,15 @@ namespace oct::verso::v1
 	{
 		return true;
 	}
+	void IScenary::clean()
+	{
+	}
 	void IScenary::run()
 	{
 		status = running;
 		this->initialize();
 		this->loop();
+		this->clean();
 	}
 	void IScenary::loop()
 	{

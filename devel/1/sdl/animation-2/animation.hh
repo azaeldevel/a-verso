@@ -6,24 +6,10 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_opengl.h>
 
-#include "../../scenary.hh"
+#include "scenary.hh"
 
 namespace oct::verso::v1::SDL
 {
-	struct Scenary : public IScenary
-	{
-		SDL_Window* window; // window
-		SDL_Renderer* renderer; // renderer
-		SDL_Event event; // event
-        int width, height;
-		Scenary();
-		bool create_window(const char* title, int width, int height);
-		virtual void handler();
-		virtual void clean();
-		virtual void loop();
-		virtual void render() = 0;
-	};
-
 	struct Game : public Scenary
 	{
 		SDL_Texture* playertex; // player sprite

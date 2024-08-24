@@ -41,6 +41,7 @@ namespace oct::verso::v1
 
 
 		virtual bool initialize();
+		virtual void clean();
 
 		virtual void run();
 
