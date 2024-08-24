@@ -323,7 +323,16 @@ namespace oct::verso::v1::SDL
         filledCircleRGBA(renderer,0,y,100,255,227,51,255);
 
         circleRGBA(renderer,0,y,unit * 3,255,255,255,255);
-        filledCircleRGBA(renderer,unit * 3,y,10,175,255,51,255);
+        filledCircleRGBA(renderer,unit * 3,y,5,224,141,28,255);
+
+        circleRGBA(renderer,0,y,unit * 4,255,255,255,255);
+        filledCircleRGBA(renderer,unit * 4,y,10,175,255,51,255);
+
+        circleRGBA(renderer,0,y,unit * 5,255,255,255,255);
+        filledCircleRGBA(renderer,unit * 5,y,20,28,111,224,255);
+
+        circleRGBA(renderer,0,y,unit * 6,255,255,255,255);
+        filledCircleRGBA(renderer,unit * 6,y,15,236,66,19,255);
 
         //filledPieColor(renderer,0,height/2,100,0,45,0xF30000AF);
 
