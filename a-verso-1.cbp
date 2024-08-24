@@ -102,7 +102,7 @@
 			<Target title="SDL2-dbg">
 				<Option output="bin/Debug/a-verso-1" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
@@ -185,6 +185,18 @@
 			<Option target="SDL2-dbg" />
 		</Unit>
 		<Unit filename="devel/1/sdl/animation-2/animation.hh">
+			<Option target="SDL2-dbg" />
+		</Unit>
+		<Unit filename="devel/1/sdl/animation-2/scenary.cc">
+			<Option target="SDL2-dbg" />
+		</Unit>
+		<Unit filename="devel/1/sdl/animation-2/scenary.hh">
+			<Option target="SDL2-dbg" />
+		</Unit>
+		<Unit filename="devel/1/sdl/animation-2/space.cc">
+			<Option target="SDL2-dbg" />
+		</Unit>
+		<Unit filename="devel/1/sdl/animation-2/space.hh">
 			<Option target="SDL2-dbg" />
 		</Unit>
 		<Unit filename="devel/1/shader.cc">

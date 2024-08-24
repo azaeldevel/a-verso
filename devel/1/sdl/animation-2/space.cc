@@ -6,12 +6,17 @@
 namespace oct::verso::v1::SDL
 {
 
+    Object::Object() : activable(false)
+    {
+    }
+
 	bool Object::initialize()
 	{
 		return true;
 	}
 	void Object::run()
 	{
+	    std::cout << "void Object::run()\n";
 		status = running;
 		this->initialize();
 		this->loop();
@@ -34,6 +39,29 @@ namespace oct::verso::v1::SDL
 		}
 	}
 
+	char const *convert_button_number_to_string(int button)
+    {
+        char const *result = "NO_BUTTON";
+        switch (button)
+        {
+            case SDL_BUTTON_LEFT:
+            result = "left";
+            break;
+
+            case SDL_BUTTON_MIDDLE:
+            result = "middle";
+            break;
+
+            case SDL_BUTTON_RIGHT:
+            result = "right";
+            break;
+
+            default:
+            break;
+        }
+
+        return result;
+    }
 	void Object::handler()
 	{
 	}
@@ -58,9 +86,21 @@ namespace oct::verso::v1::SDL
 	{
 	}
 
-	bool Object::into(int x,int y)const
+	Object* Object::into(int x,int y)
 	{
-        return false;
+        return NULL;
+	}
+	void Object::add_activables(Object* obj)
+	{
+        if(obj->activable) activables.insert(std::pair(obj,obj));
+	}
+	void Object::add_activables(Object& obj)
+	{
+        if(obj.activable) activables.insert(std::pair(&obj,&obj));
+	}
+	void Object::render_selection(SDL_Renderer*)
+	{
+	    std::cout << "void Object::render_selection()\n";
 	}
 
 
@@ -74,6 +114,12 @@ namespace oct::verso::v1::SDL
 
 
 
+
+
+	Body::Body()
+	{
+	    activable = true;
+	}
 
 	bool Body::initialize()
 	{
@@ -81,9 +127,11 @@ namespace oct::verso::v1::SDL
 	}
 	void Body::run()
 	{
+	    //std::cout << "void Body::run()\n";
 		status = running;
 		this->initialize();
 		this->loop();
+		this->clean();
 	}
 	void Body::loop()
 	{
@@ -103,9 +151,9 @@ namespace oct::verso::v1::SDL
 		}
 	}
 
-	void Body::handler()
+	/*void Body::handler()
 	{
-	}
+	}*/
 	void Body::update()
 	{
 	}
@@ -144,8 +192,11 @@ namespace oct::verso::v1::SDL
 	bool Space::initialize()
 	{
 	    //SDL_SetHint (SDL_HINT_RENDER_DRIVER, "opengl") ;
-		create_window("Game", 800, 600);
+		create_window("A verso system", 800, 600);
 		status = Status::running;
+
+
+        //std::cout << "Space pinter : "<< (void*)this << "\n";
 
         unit = width/12;
         y = height/2;
@@ -154,11 +205,55 @@ namespace oct::verso::v1::SDL
         sun.position.x() = 0;
         sun.position.y() = y;
         sun.radius = 100;
+        add_activables(sun);
 
         //
         mercury.position.x() = unit * 2;
         mercury.position.y() = y;
         mercury.radius = 5;
+        add_activables(mercury);
+
+        //
+        venus.position.x() = unit * 3;
+        venus.position.y() = y;
+        venus.radius = 10;
+        add_activables(venus);
+
+        //
+        earth.position.x() = unit * 4;
+        earth.position.y() = y;
+        earth.radius = 20;
+        add_activables(earth);
+
+        //
+        mars.position.x() = unit * 5;
+        mars.position.y() = y;
+        mars.radius = 15;
+        add_activables(mars);
+
+        //
+        jupiter.position.x() = unit * 6.5;
+        jupiter.position.y() = y;
+        jupiter.radius = 40;
+        add_activables(jupiter);
+
+        //
+        saturn.position.x() = unit * 8;
+        saturn.position.y() = y;
+        saturn.radius = 25;
+        add_activables(saturn);
+
+        //
+        uranus.position.x() = unit * 9.5;
+        uranus.position.y() = y;
+        uranus.radius = 25;
+        add_activables(uranus);
+
+        //
+        neptune.position.x() = unit * 10.5;
+        neptune.position.y() = y;
+        neptune.radius = 20;
+        add_activables(neptune);
 
 
 		return false;
@@ -166,6 +261,7 @@ namespace oct::verso::v1::SDL
 
 	void Space::run()
 	{
+	    //std::cout << "void Space::run()\n";
 		status = running;
 		initialize();
 		loop();
@@ -189,19 +285,41 @@ namespace oct::verso::v1::SDL
 	}
 	void Space::handler()
 	{
+	    //std::cout << "void Object::handler()\n";
+	    //std::cout << "Object pinter : "<< (void*)this << "\n";
 		SDL_PollEvent(&event);
+		Object* obj = NULL;
+		selected = NULL;
 		switch (event.type)
 		{
 		case SDL_QUIT:
 			status = Status::stop;
 			break;
+        case SDL_MOUSEMOTION:
+            /*for(const auto& [k,v] : activables)
+            {
+                obj = k->into(event.motion.x,event.motion.y);
+                if(obj) selected = obj;
+            }*/
+            break;
+        case SDL_MOUSEBUTTONDOWN:
+        //case SDL_MOUSEBUTTONUP:
+            for(const auto& [k,v] : activables)
+            {
+                obj = k->into(event.motion.x,event.motion.y);
+                if(obj)
+                {
+                    selected = obj;
+                    std::cout << "Selected :" << (void*)selected << "\n";
+                }
+            }
+            break;
 		default:
 			break;
 		}
 	}
 	void Space::update()
 	{
-
 	}
 
 	void Space::render()
@@ -217,37 +335,43 @@ namespace oct::verso::v1::SDL
         filledCircleRGBA(renderer,mercury.position.x(),mercury.position.y(),5,224,141,28,255);
 
         //venus
-        circleRGBA(renderer,0,y,unit * 3,255,255,255,255);
-        filledCircleRGBA(renderer,unit * 3,y,10,175,255,51,255);
+        circleRGBA(renderer,0,venus.position.y(),venus.position.x(),255,255,255,255);
+        filledCircleRGBA(renderer,venus.position.x(),venus.position.y(),venus.radius,175,255,51,255);
 
         //tierra
-        circleRGBA(renderer,0,y,unit * 4,255,255,255,255);
-        filledCircleRGBA(renderer,unit * 4,y,20,28,111,224,255);
+        circleRGBA(renderer,0,earth.position.y(),earth.position.x(),255,255,255,255);
+        filledCircleRGBA(renderer,earth.position.x(),earth.position.y(),earth.radius,28,111,224,255);
 
         //martes
-        circleRGBA(renderer,0,y,unit * 5,255,255,255,255);
-        filledCircleRGBA(renderer,unit * 5,y,15,236,66,19,255);
+        circleRGBA(renderer,0,mars.position.y(),mars.position.x(),255,255,255,255);
+        filledCircleRGBA(renderer,mars.position.x(),mars.position.y(),mars.radius,236,66,19,255);
 
         //jupiter
-        circleRGBA(renderer,0,y,unit * 6.5,255,255,255,255);
-        filledCircleRGBA(renderer,unit * 6.5,y,40,120,91,12,255);
+        circleRGBA(renderer,0,jupiter.position.y(),jupiter.position.x(),255,255,255,255);
+        filledCircleRGBA(renderer,jupiter.position.x(),jupiter.position.y(),jupiter.radius,120,91,12,255);
 
         //saturno
-        circleRGBA(renderer,0,y,unit * 8,255,255,255,255);
-        circleRGBA(renderer,unit * 8,y,30,223,172,35,255);
-        circleRGBA(renderer,unit * 8,y,31,223,172,35,255);
-        circleRGBA(renderer,unit * 8,y,32,223,172,35,255);
-        circleRGBA(renderer,unit * 8,y,36,223,172,35,255);
-        circleRGBA(renderer,unit * 8,y,37,223,172,35,255);
-        filledCircleRGBA(renderer,unit * 8,y,25,223,172,35,255);
+        circleRGBA(renderer,0,saturn.position.y(),saturn.position.x(),255,255,255,255);
+        circleRGBA(renderer,saturn.position.x(),saturn.position.y(),saturn.radius + 5,223,172,35,255);
+        circleRGBA(renderer,saturn.position.x(),saturn.position.y(),saturn.radius + 6,223,172,35,255);
+        circleRGBA(renderer,saturn.position.x(),saturn.position.y(),saturn.radius + 7,223,172,35,255);
+        circleRGBA(renderer,saturn.position.x(),saturn.position.y(),saturn.radius + 11,223,172,35,255);
+        circleRGBA(renderer,saturn.position.x(),saturn.position.y(),saturn.radius + 12,223,172,35,255);
+        filledCircleRGBA(renderer,saturn.position.x(),saturn.position.y(),saturn.radius,223,172,35,255);
 
         //urano
-        circleRGBA(renderer,0,y,unit * 9.5,255,255,255,255);
-        filledCircleRGBA(renderer,unit * 9.5,y,25,27,137,58,255);
+        circleRGBA(renderer,0,uranus.position.y(),uranus.position.x(),255,255,255,255);
+        filledCircleRGBA(renderer,uranus.position.x(),uranus.position.y(),uranus.radius,27,137,58,255);
 
         //neptuno
-        circleRGBA(renderer,0,y,unit * 10.5,255,255,255,255);
-        filledCircleRGBA(renderer,unit * 10.5,y,20,70,123,185,255);
+        circleRGBA(renderer,0,neptune.position.y(),neptune.position.x(),255,255,255,255);
+        filledCircleRGBA(renderer,neptune.position.x(),neptune.position.y(),neptune.radius,70,123,185,255);
+
+        if(selected)
+        {
+            std::cout << "Render selection :" << (void*)selected << "\n";
+            selected->render_selection(renderer);
+        }
 
         SDL_RenderPresent(renderer);
 	}
@@ -259,6 +383,8 @@ namespace oct::verso::v1::SDL
 	void Space::on_deactive()
 	{
 	}
+
+
 
 
 
@@ -297,9 +423,9 @@ namespace oct::verso::v1::SDL
 		}
 	}
 
-	void Star::handler()
+	/*void Star::handler()
 	{
-	}
+	}*/
 	void Star::update()
 	{
 	}
@@ -321,10 +447,25 @@ namespace oct::verso::v1::SDL
 	{
 	}
 
-	bool Star::into(int x,int y)const
+	Object* Star::into(int x,int y)
 	{
-        return false;
+        //std::cout << "Star : " << x << "," << y << "\n";
+        auto d = position.distance(x,y);
+        if(d < radius)
+        {
+            //std::cout << "distance : " << d << "\n";
+            return this;
+        }
+        return NULL;
 	}
+	void Star::render_selection(SDL_Renderer* rend)
+	{
+	    std::cout << "void Star::render_selection()\n";
+	    std::cout << "(" << position.x() << "," << position.y() << ")\n";
+	    circleRGBA(rend,position.x(),position.y(),radius + 3,0,255,0,255);
+	    circleRGBA(rend,position.x(),position.y(),radius + 4,0,255,0,255);
+	}
+
 
 
 
@@ -370,9 +511,9 @@ namespace oct::verso::v1::SDL
 		}
 	}
 
-	void Planet::handler()
+	/*void Planet::handler()
 	{
-	}
+	}*/
 	void Planet::update()
 	{
 	}
@@ -394,11 +535,22 @@ namespace oct::verso::v1::SDL
 	{
 	}
 
-	bool Planet::into(int x,int y)const
+	Object* Planet::into(int x,int y)
 	{
-        return false;
+        //std::cout << "Planet : " << x << "," << y << "\n";
+        auto d = position.distance(x,y);
+        if(d < radius)
+        {
+            //std::cout << "distance : " << d << "\n";
+            return this;
+        }
+        return NULL;
 	}
-
-
-
+	void Planet::render_selection(SDL_Renderer* rend)
+	{
+	    std::cout << "void Planet::render_selection()\n";
+	    std::cout << "(" << position.x() << "," << position.y() << ")\n";
+	    circleRGBA(rend,position.x(),position.y(),radius + 3,0,255,0,255);
+	    circleRGBA(rend,position.x(),position.y(),radius + 4,0,255,0,255);
+	}
 }

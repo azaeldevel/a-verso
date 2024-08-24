@@ -7,6 +7,8 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_opengl.h>
 
+#include <map>
+
 #include "animation.hh"
 
 namespace oct::verso::v1::SDL
@@ -14,11 +16,17 @@ namespace oct::verso::v1::SDL
 
     struct Object : public Scenary
 	{
-	    Object() = default;
+	    Object();
 	    constexpr Object(const std::initializer_list<real>& l) : Scenary(l)
 	    {
 	    }
 	    constexpr Object(const numbers::vector<real>& p) : Scenary(p)
+	    {
+	    }
+	    constexpr Object(const std::initializer_list<real>& l,bool a) : Scenary(l),activable(a)
+	    {
+	    }
+	    constexpr Object(const numbers::vector<real>& p,bool a) : Scenary(p),activable(a)
 	    {
 	    }
 
@@ -35,16 +43,31 @@ namespace oct::verso::v1::SDL
 		virtual void on_active();
 		virtual void on_deactive();
 
-		virtual bool into(int,int)const;
+		virtual Object* into(int,int);
+
+		void add_activables(Object*);
+		void add_activables(Object&);
+
+		virtual void render_selection(SDL_Renderer*);
+
+		bool activable;
+		std::map<Object*,Object*> activables;
+		Object* selected;
 	};
 
     struct Body : public Object
 	{
-	    Body() = default;
+	    Body();
 	    constexpr Body(const std::initializer_list<real>& l) : Object(l)
 	    {
 	    }
 	    constexpr Body(const numbers::vector<real>& p) : Object(p)
+	    {
+	    }
+	    constexpr Body(const std::initializer_list<real>& l,bool a) : Object(l,a)
+	    {
+	    }
+	    constexpr Body(const numbers::vector<real>& p,bool a) : Object(p,a)
 	    {
 	    }
 
@@ -54,7 +77,7 @@ namespace oct::verso::v1::SDL
 
 		virtual void loop();
 
-		virtual void handler();
+		//virtual void handler();
 		virtual void update();
 		virtual void render();
 
@@ -67,10 +90,16 @@ namespace oct::verso::v1::SDL
     struct Star : public Body
 	{
 	    Star() = default;
-	    constexpr Star(const std::initializer_list<real>& l) : Body(l)
+	    constexpr Star(const std::initializer_list<real>& l) : Body(l,true)
 	    {
 	    }
-	    constexpr Star(const numbers::vector<real>& p) : Body(p)
+	    constexpr Star(const std::initializer_list<real>& l,bool a) : Body(l,a)
+	    {
+	    }
+	    constexpr Star(const numbers::vector<real>& p) : Body(p,true)
+	    {
+	    }
+	    constexpr Star(const numbers::vector<real>& p,bool a) : Body(p,a)
 	    {
 	    }
 
@@ -80,14 +109,15 @@ namespace oct::verso::v1::SDL
 
 		virtual void loop();
 
-		virtual void handler();
+		//virtual void handler();
 		virtual void update();
 		virtual void render();
 
 		virtual void on_active();
 		virtual void on_deactive();
+		virtual void render_selection(SDL_Renderer*);
 
-		virtual bool into(int,int)const;
+		virtual Object* into(int,int);
 
 		float radius;
 	};
@@ -95,10 +125,16 @@ namespace oct::verso::v1::SDL
     struct Planet : public Body
 	{
 	    Planet() = default;
-	    constexpr Planet(const std::initializer_list<real>& l) : Body(l)
+	    constexpr Planet(const std::initializer_list<real>& l) : Body(l,true)
 	    {
 	    }
-	    constexpr Planet(const numbers::vector<real>& p) : Body(p)
+	    constexpr Planet(const numbers::vector<real>& p) : Body(p,true)
+	    {
+	    }
+	    constexpr Planet(const std::initializer_list<real>& l,bool a) : Body(l,a)
+	    {
+	    }
+	    constexpr Planet(const numbers::vector<real>& p,bool a) : Body(p,a)
 	    {
 	    }
 
@@ -108,14 +144,15 @@ namespace oct::verso::v1::SDL
 
 		virtual void loop();
 
-		virtual void handler();
+		//virtual void handler();
 		virtual void update();
 		virtual void render();
 
 		virtual void on_active();
 		virtual void on_deactive();
 
-		virtual bool into(int,int)const;
+		virtual Object* into(int,int);
+		virtual void render_selection(SDL_Renderer*);
 
 		float radius;
 	};
@@ -130,6 +167,13 @@ namespace oct::verso::v1::SDL
 	    {
 	    }
 
+        constexpr Space(const std::initializer_list<real>& l,bool a) : Body(l,a)
+	    {
+	    }
+	    constexpr Space(const numbers::vector<real>& p,bool a) : Body(p,a)
+	    {
+	    }
+
 		virtual bool initialize();
 
 		virtual void run();
@@ -143,10 +187,11 @@ namespace oct::verso::v1::SDL
 		virtual void on_active();
 		virtual void on_deactive();
 
+
 		int unit,y;
 
 		Star sun;
-		Planet mercury;
+		Planet mercury,venus,earth,mars,jupiter,saturn,uranus,neptune;
 	};
 }
 
