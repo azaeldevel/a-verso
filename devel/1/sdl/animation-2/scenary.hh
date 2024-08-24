@@ -12,11 +12,18 @@ namespace oct::verso::v1::SDL
 {
 	struct Scenary : public IScenary
 	{
+	    Scenary();
+	    constexpr Scenary(const std::initializer_list<real>& l) : IScenary(l)
+	    {
+	    }
+	    constexpr Scenary(const numbers::vector<real>& p) : IScenary(p)
+	    {
+	    }
+
 		SDL_Window* window; // window
 		SDL_Renderer* renderer; // renderer
 		SDL_Event event; // event
         int width, height;
-		Scenary();
 		bool create_window(const char* title, int width, int height);
 
 

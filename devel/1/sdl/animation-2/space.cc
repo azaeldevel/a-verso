@@ -58,6 +58,11 @@ namespace oct::verso::v1::SDL
 	{
 	}
 
+	bool Object::into(int x,int y)const
+	{
+        return false;
+	}
+
 
 
 
@@ -142,6 +147,20 @@ namespace oct::verso::v1::SDL
 		create_window("Game", 800, 600);
 		status = Status::running;
 
+        unit = width/12;
+        y = height/2;
+
+        //
+        sun.position.x() = 0;
+        sun.position.y() = y;
+        sun.radius = 100;
+
+        //
+        mercury.position.x() = unit * 2;
+        mercury.position.y() = y;
+        mercury.radius = 5;
+
+
 		return false;
 	}
 
@@ -150,6 +169,7 @@ namespace oct::verso::v1::SDL
 		status = running;
 		initialize();
 		loop();
+		clean();
 	}
 
 	void Space::loop()
@@ -159,10 +179,8 @@ namespace oct::verso::v1::SDL
 		{
 			// handle user events
 			handler();
-
 			// update the game
 			update();
-
 			// render to the screen
 			render();
 
@@ -172,7 +190,8 @@ namespace oct::verso::v1::SDL
 	void Space::handler()
 	{
 		SDL_PollEvent(&event);
-		switch (event.type) {
+		switch (event.type)
+		{
 		case SDL_QUIT:
 			status = Status::stop;
 			break;
@@ -182,21 +201,6 @@ namespace oct::verso::v1::SDL
 	}
 	void Space::update()
 	{
-		// on key press
-		if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
-		{
-			switch (event.key.keysym.sym)
-			{
-			case SDLK_RIGHT:
-
-				break;
-			case SDLK_UP:
-
-				break;
-			default:
-				break;
-			}
-		}
 
 	}
 
@@ -205,14 +209,12 @@ namespace oct::verso::v1::SDL
         SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
 		SDL_RenderClear(renderer);
 
-		//
-        int unit = width/12;
-        int y = height/2;
-        filledCircleRGBA(renderer,0,y,100,255,227,51,255);
+		//sun
+        filledCircleRGBA(renderer,sun.position.x(),sun.position.y(),sun.radius,255,227,51,255);
 
         //mercury
-        circleRGBA(renderer,0,y,unit * 2,255,255,255,255);
-        filledCircleRGBA(renderer,unit * 2,y,5,224,141,28,255);
+        circleRGBA(renderer,0,mercury.position.y(),mercury.position.x(),255,255,255,255);
+        filledCircleRGBA(renderer,mercury.position.x(),mercury.position.y(),5,224,141,28,255);
 
         //venus
         circleRGBA(renderer,0,y,unit * 3,255,255,255,255);
@@ -265,6 +267,137 @@ namespace oct::verso::v1::SDL
 
 
 
+
+	bool Star::initialize()
+	{
+		return true;
+	}
+	void Star::run()
+	{
+		status = running;
+		this->initialize();
+		this->loop();
+		this->clean();
+	}
+	void Star::loop()
+	{
+        // game loop
+		while (status != Status::stop)
+		{
+			// handle user events
+			handler();
+
+			// update the game
+			update();
+
+			// render to the screen
+			render();
+
+			SDL_Delay(1);
+		}
+	}
+
+	void Star::handler()
+	{
+	}
+	void Star::update()
+	{
+	}
+
+	void Star::render()
+	{
+        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
+		SDL_RenderClear(renderer);
+
+
+        SDL_RenderPresent(renderer);
+	}
+
+
+	void Star::on_active()
+	{
+	}
+	void Star::on_deactive()
+	{
+	}
+
+	bool Star::into(int x,int y)const
+	{
+        return false;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	bool Planet::initialize()
+	{
+		return true;
+	}
+	void Planet::run()
+	{
+		status = running;
+		this->initialize();
+		this->loop();
+		this->clean();
+	}
+	void Planet::loop()
+	{
+        // game loop
+		while (status != Status::stop)
+		{
+			// handle user events
+			handler();
+
+			// update the game
+			update();
+
+			// render to the screen
+			render();
+
+			SDL_Delay(1);
+		}
+	}
+
+	void Planet::handler()
+	{
+	}
+	void Planet::update()
+	{
+	}
+
+	void Planet::render()
+	{
+        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
+		SDL_RenderClear(renderer);
+
+
+        SDL_RenderPresent(renderer);
+	}
+
+
+	void Planet::on_active()
+	{
+	}
+	void Planet::on_deactive()
+	{
+	}
+
+	bool Planet::into(int x,int y)const
+	{
+        return false;
+	}
 
 
 
