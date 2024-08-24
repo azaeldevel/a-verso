@@ -352,12 +352,12 @@ namespace oct::verso::v1::SDL
         filledCircleRGBA(renderer,unit * 8,y,25,223,172,35,255);
 
         //urano
-        circleRGBA(renderer,0,y,unit * 9,255,255,255,255);
-        filledCircleRGBA(renderer,unit * 9,y,25,27,137,58,255);
+        circleRGBA(renderer,0,y,unit * 9.5,255,255,255,255);
+        filledCircleRGBA(renderer,unit * 9.5,y,25,27,137,58,255);
 
         //neptuno
-        circleRGBA(renderer,0,y,unit * 9,255,255,255,255);
-        filledCircleRGBA(renderer,unit * 9,y,25,70,123,185,255);
+        circleRGBA(renderer,0,y,unit * 10.5,255,255,255,255);
+        filledCircleRGBA(renderer,unit * 10.5,y,20,70,123,185,255);
 
         //filledPieColor(renderer,0,height/2,100,0,45,0xF30000AF);
 
