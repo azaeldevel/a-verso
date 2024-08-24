@@ -24,6 +24,10 @@ namespace oct::verso::v1
     namespace nums_here = oct::nums::v0;
     namespace numbers = oct::nums::v0;
 
+#if defined(OCTETOS_VERSO_GLFW) || defined(OCTETOS_VERSO_GLUT)
+
+    typedef GLfloat real;
+
     class VAO
     {
     public:
@@ -55,6 +59,11 @@ namespace oct::verso::v1
         GLuint id;
         int size;
     };
+
+#else
+    typedef float real;
+
+#endif
 }
 
 #endif // OCTETOS_AVERSO_AVERSO_HH

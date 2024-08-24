@@ -9,7 +9,6 @@
 
 namespace oct::verso::v1
 {
-    typedef GLfloat real;
 
 	struct IScenary
 	{

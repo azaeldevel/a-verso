@@ -11,11 +11,12 @@ namespace oct::verso::v1::SDL
 		SDL_Window* window; // window
 		SDL_Renderer* renderer; // renderer
 		SDL_Event event; // event
-
+        int width, height;
 		Scenary();
 		bool create_window(const char* title, int width, int height);
-		void handleEvents();
-		void clean();
+		virtual void handleEvents();
+		virtual void clean();
+		virtual void loop();
 		virtual void render() = 0;
 	};
 
@@ -27,11 +28,24 @@ namespace oct::verso::v1::SDL
 		SDL_Rect e_srcR, e_destR; // enemy source and destination rectangles
 		int counter;
 
+		const int FPS = 60;
+		const int frameDelay = 500 / FPS;
+		uint32_t frameStart;
+		int frameTime;
+		bool flag;
+
 		virtual bool initialize();
 		void update();
 		virtual void render();
+		virtual void loop();
 		bool AABB(SDL_Rect recA, SDL_Rect recB);
+	};
 
-		int main(int argc, char* args[]);
+    struct Space : public Scenary
+	{
+		virtual bool initialize();
+		void update();
+		virtual void render();
+		virtual void loop();
 	};
 }

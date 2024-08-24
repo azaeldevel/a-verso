@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include "SDL2_gfxPrimitives.h"//https://www.ferzkopp.net/Software/SDL2_gfx/Docs/html/_s_d_l2__gfx_primitives_8h.html
 
 namespace verso = oct::verso::v1;
 
@@ -11,21 +12,22 @@ namespace verso = oct::verso::v1;
 const int ScreenWidth = 800;
 const int ScreenHeight = 600;
 verso::SDL::Game scenary;
+verso::SDL::Space space;
 
 // texture manager
 static SDL_Texture* LoadTexture(const char* fileName, SDL_Renderer* ren);
 
-int cmd = 1;
+int cmd = 2;
 
 int main(int argc, char* args[])
 {
 	switch (cmd)
 	{
 	case 1:
-		return scenary.main(argc, args);
+	    scenary.run();
 		break;
 	case 2:
-
+        space.run();
 		break;
 	}
 	return EXIT_SUCCESS;
@@ -49,6 +51,44 @@ static SDL_Texture* LoadTexture(const char* fileName, SDL_Renderer* ren) {
 	return newTexture;
 }
 
+void DrawCircle(SDL_Renderer* renderer, int32_t centreX, int32_t centreY, int32_t radius)
+{
+const int32_t diameter = (radius * 2);
+
+int32_t x = (radius - 1);
+int32_t y = 0;
+int32_t tx = 1;
+int32_t ty = 1;
+int32_t error = (tx - diameter);
+
+while (x >= y)
+{
+// Each of the following renders an octant of the circle
+SDL_RenderDrawPoint(renderer, centreX + x, centreY - y);
+SDL_RenderDrawPoint(renderer, centreX + x, centreY + y);
+SDL_RenderDrawPoint(renderer, centreX - x, centreY - y);
+SDL_RenderDrawPoint(renderer, centreX - x, centreY + y);
+SDL_RenderDrawPoint(renderer, centreX + y, centreY - x);
+SDL_RenderDrawPoint(renderer, centreX + y, centreY + x);
+SDL_RenderDrawPoint(renderer, centreX - y, centreY - x);
+SDL_RenderDrawPoint(renderer, centreX - y, centreY + x);
+
+  if (error <= 0)
+  {
+  	++y;
+  	error += ty;
+  	ty += 2;
+  }
+
+  if (error > 0)
+  {
+  	--x;
+  	tx += 2;
+  	error += (tx - diameter);
+  }
+}
+}
+
 
 
 namespace oct::verso::v1::SDL
@@ -57,8 +97,10 @@ namespace oct::verso::v1::SDL
 	{
 	}
 
-	bool Scenary::create_window(const char* title, int width, int height)
+	bool Scenary::create_window(const char* title, int w, int h)
 	{
+	    width = w;
+	    height = h;
 		if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 		{
 			printf("SDL initialized!\n");
@@ -79,7 +121,6 @@ namespace oct::verso::v1::SDL
 			printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
 
 		}
-		status = Status::stop;
 
 		return true;
 	}
@@ -103,7 +144,9 @@ namespace oct::verso::v1::SDL
 		SDL_Quit();
 		printf("Game cleaned!\n");
 	}
-
+	void Scenary::loop()
+	{
+	}
 
 
 
@@ -113,6 +156,12 @@ namespace oct::verso::v1::SDL
 		p_destR.w = 100;
 		p_destR.h = 100;
 		p_destR.y = ScreenHeight / 2;
+
+		create_window("Game", ScreenWidth, ScreenHeight);
+		playertex = LoadTexture("devel/1/sdl/animation-2/assets/player.bmp", renderer);
+		enemytex = LoadTexture("devel/1/sdl/animation-2/assets/enemy.bmp", renderer);
+		status = Status::running;
+		flag = true; // winning condition
 
 		return false;
 	}
@@ -173,34 +222,21 @@ namespace oct::verso::v1::SDL
 		return false;
 	}
 
-	int Game::main(int argc, char* args[])
+	void Game::loop()
 	{
-		const int FPS = 60;
-		const int frameDelay = 500 / FPS;
-		uint32_t frameStart;
-		int frameTime;
-
-		scenary.initialize();
-		scenary.create_window("Game", ScreenWidth, ScreenHeight);
-		scenary.playertex = LoadTexture("devel/1/sdl/animation-2/assets/player.bmp", scenary.renderer);
-		scenary.enemytex = LoadTexture("devel/1/sdl/animation-2/assets/enemy.bmp", scenary.renderer);
-		scenary.status = Status::running;
-
-		bool flag = true; // winning condition
-
-		// game loop
-		while (scenary.status != Status::stop)
+        // game loop
+		while (status != Status::stop)
 		{
 			frameStart = SDL_GetTicks();
 
 			// handle user events
-			scenary.handleEvents();
+			handleEvents();
 
 			// update the game
-			scenary.update();
+			update();
 
 			// render to the screen
-			scenary.render();
+			render();
 
 			frameTime = SDL_GetTicks() - frameStart;
 
@@ -209,17 +245,104 @@ namespace oct::verso::v1::SDL
 				SDL_Delay(frameDelay - frameTime);
 			}
 
-			if (scenary.p_destR.x >= ScreenWidth / 1.88 && flag)
+			if (p_destR.x >= ScreenWidth / 1.88 && flag)
 			{
 				printf("\n\t*No Collision Detected!*\n\t*You Won!*\n\n");
 				flag = false;
 			}
 		}
-
-		scenary.clean();
-
-		return EXIT_SUCCESS;
 	}
+
+
+
+
+
+
+
+	bool Space::initialize()
+	{
+		create_window("Game", ScreenWidth, ScreenHeight);
+		status = Status::running;
+
+		return false;
+	}
+
+
+	void Space::update()
+	{
+		// on key press
+		if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
+		{
+			switch (event.key.keysym.sym)
+			{
+			case SDLK_RIGHT:
+
+				break;
+			case SDLK_UP:
+
+				break;
+			default:
+				break;
+			}
+		}
+
+	}
+
+	void Space::render()
+	{
+        SDL_SetRenderDrawColor( renderer, 255, 0, 0, 255 );
+
+		SDL_RenderClear(renderer);
+
+	    //circleColor(renderer,width/2,height/2,2.5,100);
+        SDL_Rect r;
+        r.x = 50;
+        r.y = 50;
+        r.w = 50;
+        r.h = 50;
+
+        // Set render color to blue ( rect will be rendered in this color )
+        SDL_SetRenderDrawColor( renderer, 0, 0, 255, 255 );
+        //Render rect
+        SDL_RenderFillRect( renderer, &r );
+
+        r.x = 200;
+        SDL_RenderFillRect( renderer, &r );
+
+        //SDL_Surface* circle = SDL_CreateRGBSurface(0,width/2,height/2,32,0,0,0,0);
+        //filledEllipseRGBA(renderer,200,200,500,500,50,79,188,5);
+        //DrawCircle(renderer,100,100,50);
+        circleColor(renderer,200,200,200,105833);
+
+		SDL_RenderPresent(renderer);
+	}
+
+
+	void Space::loop()
+	{
+        // game loop
+		while (status != Status::stop)
+		{
+			// handle user events
+			handleEvents();
+
+			// update the game
+			update();
+
+			// render to the screen
+			render();
+
+			SDL_Delay(1);
+		}
+	}
+
+
+
+
+
+
+
+
 
 
 

@@ -102,14 +102,15 @@
 			<Target title="SDL2-dbg">
 				<Option output="bin/Debug/a-verso-1" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="`pkg-config sdl2 --cflags`" />
 					<Add option="-DOCTETOS_VERSO_SDL2" />
 				</Compiler>
 				<Linker>
-					<Add option="`pkg-config sdl2 --libs` `pkg-config SDL2_image --libs`" />
+					<Add option="`pkg-config sdl2 --libs` `pkg-config SDL2_image --libs` `pkg-config SDL2_gfx --libs`" />
 				</Linker>
 			</Target>
 		</Build>
@@ -168,9 +169,11 @@
 			<Option target="glfw-dbg" />
 			<Option target="scenaries-dbg" />
 			<Option target="verso" />
+			<Option target="SDL2-dbg" />
 		</Unit>
 		<Unit filename="devel/1/scenary.hh">
 			<Option target="verso" />
+			<Option target="SDL2-dbg" />
 		</Unit>
 		<Unit filename="devel/1/sdl/animation-1/animation-1.cpp">
 			<Option target="&lt;{~None~}&gt;" />
