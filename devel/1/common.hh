@@ -7,6 +7,8 @@
     #include <GLFW/glfw3.h>
 #elif defined(OCTETOS_VERSO_GLUT)
     #include <GL/glut.h>
+#elif defined(OCTETOS_VERSO_SDL2)
+
 #else
     #error "Libreria OpenGL desconocida."
 #endif // OCTETOS_VERSO_GLFW
