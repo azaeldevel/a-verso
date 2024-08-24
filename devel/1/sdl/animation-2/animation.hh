@@ -1,4 +1,8 @@
-﻿#include <SDL2/SDL.h>
+﻿
+#ifndef OCTETOS_VERSO_V1_ANIMATION_HH
+#define OCTETOS_VERSO_V1_ANIMATION_HH
+
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_opengl.h>
 
@@ -41,11 +45,6 @@ namespace oct::verso::v1::SDL
 		bool AABB(SDL_Rect recA, SDL_Rect recB);
 	};
 
-    struct Space : public Scenary
-	{
-		virtual bool initialize();
-		void update();
-		virtual void render();
-		virtual void loop();
-	};
 }
+
+#endif // OCTETOS_VERSO_V1_ANIMATION_HH
