@@ -295,12 +295,12 @@ namespace oct::verso::v1::SDL
 
 	void Space::render()
 	{
-        SDL_SetRenderDrawColor( renderer, 255, 50, 0, 10 );
+        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
 
 		SDL_RenderClear(renderer);
 
 	    //circleColor(renderer,width/2,height/2,2.5,100);
-        SDL_Rect r;
+        /*SDL_Rect r;
         r.x = 50;
         r.y = 50;
         r.w = 50;
@@ -310,16 +310,24 @@ namespace oct::verso::v1::SDL
         SDL_SetRenderDrawColor( renderer, 0, 0, 255, 255 );
         //Render rect
         SDL_RenderFillRect( renderer, &r );
-
         r.x = 200;
-        SDL_RenderFillRect( renderer, &r );
+        SDL_RenderFillRect( renderer, &r );*/
 
         //SDL_Surface* circle = SDL_CreateRGBSurface(0,width/2,height/2,32,0,0,0,0);
         //filledEllipseRGBA(renderer,200,200,500,500,50,79,188,5);
         //DrawCircle(renderer,100,100,50);
-        filledCircleColor(renderer,200,300,100,0xF30000AF);
+        //filledCircleColor(renderer,200,300,100,0xF30000AF);
 
-		SDL_RenderPresent(renderer);
+        int unit = width/11;
+        int y = height/2;
+        filledCircleRGBA(renderer,0,y,100,255,227,51,255);
+
+        circleRGBA(renderer,0,y,unit * 3,255,255,255,255);
+        filledCircleRGBA(renderer,unit * 3,y,10,175,255,51,255);
+
+        //filledPieColor(renderer,0,height/2,100,0,45,0xF30000AF);
+
+        SDL_RenderPresent(renderer);
 	}
 
 
