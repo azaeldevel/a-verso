@@ -130,7 +130,7 @@ namespace oct::verso::v1::SDL
 		return true;
 	}
 
-	void Scenary::handleEvents()
+	void Scenary::handler()
 	{
 		SDL_PollEvent(&event);
 		switch (event.type) {
@@ -235,7 +235,7 @@ namespace oct::verso::v1::SDL
 			frameStart = SDL_GetTicks();
 
 			// handle user events
-			handleEvents();
+			handler();
 
 			// update the game
 			update();

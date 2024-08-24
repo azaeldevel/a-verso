@@ -18,7 +18,7 @@ namespace oct::verso::v1::SDL
         int width, height;
 		Scenary();
 		bool create_window(const char* title, int width, int height);
-		virtual void handleEvents();
+		virtual void handler();
 		virtual void clean();
 		virtual void loop();
 		virtual void render() = 0;

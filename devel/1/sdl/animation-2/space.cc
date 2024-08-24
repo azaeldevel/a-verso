@@ -6,9 +6,146 @@
 namespace oct::verso::v1::SDL
 {
 
+    bool Object::initialize()
+	{
+	    //SDL_SetHint (SDL_HINT_RENDER_DRIVER, "opengl") ;
+		create_window("Game", 800, 600);
+		status = Status::running;
+
+		return false;
+	}
+
+	void Object::update()
+	{
+		// on key press
+		if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
+		{
+			switch (event.key.keysym.sym)
+			{
+			case SDLK_RIGHT:
+
+				break;
+			case SDLK_UP:
+
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	void Object::render()
+	{
+        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
+		SDL_RenderClear(renderer);
+
+
+        SDL_RenderPresent(renderer);
+	}
+
+	void Object::loop()
+	{
+        // game loop
+		while (status != Status::stop)
+		{
+			// handle user events
+			handler();
+
+			// update the game
+			update();
+
+			// render to the screen
+			render();
+
+			SDL_Delay(1);
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    bool Body::initialize()
+	{
+	    //SDL_SetHint (SDL_HINT_RENDER_DRIVER, "opengl") ;
+		create_window("Game", 800, 600);
+		status = Status::running;
+
+		return false;
+	}
+
+	void Body::update()
+	{
+		// on key press
+		if (event.type == SDL_KEYDOWN && event.key.repeat == 0)
+		{
+			switch (event.key.keysym.sym)
+			{
+			case SDLK_RIGHT:
+
+				break;
+			case SDLK_UP:
+
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	void Body::render()
+	{
+        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
+		SDL_RenderClear(renderer);
+
+
+        SDL_RenderPresent(renderer);
+	}
+
+	void Body::loop()
+	{
+        // game loop
+		while (status != Status::stop)
+		{
+			// handle user events
+			handler();
+
+			// update the game
+			update();
+
+			// render to the screen
+			render();
+
+			SDL_Delay(1);
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	bool Space::initialize()
 	{
-	    SDL_SetHint (SDL_HINT_RENDER_DRIVER, "opengl") ;
+	    //SDL_SetHint (SDL_HINT_RENDER_DRIVER, "opengl") ;
 		create_window("Game", 800, 600);
 		status = Status::running;
 
@@ -112,7 +249,7 @@ namespace oct::verso::v1::SDL
 		while (status != Status::stop)
 		{
 			// handle user events
-			handleEvents();
+			handler();
 
 			// update the game
 			update();

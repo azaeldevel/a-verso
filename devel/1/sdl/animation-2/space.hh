@@ -11,7 +11,24 @@
 
 namespace oct::verso::v1::SDL
 {
-    struct Space : public Scenary
+
+    struct Object : public Scenary
+	{
+		virtual bool initialize();
+		void update();
+		virtual void render();
+		virtual void loop();
+	};
+
+    struct Body : public Object
+	{
+		virtual bool initialize();
+		void update();
+		virtual void render();
+		virtual void loop();
+	};
+
+    struct Space : public Body
 	{
 		virtual bool initialize();
 		void update();
