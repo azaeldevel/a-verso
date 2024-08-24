@@ -318,21 +318,42 @@ namespace oct::verso::v1::SDL
         //DrawCircle(renderer,100,100,50);
         //filledCircleColor(renderer,200,300,100,0xF30000AF);
 
-        int unit = width/11;
+        int unit = width/12;
         int y = height/2;
         filledCircleRGBA(renderer,0,y,100,255,227,51,255);
 
+        //mercury
+        circleRGBA(renderer,0,y,unit * 2,255,255,255,255);
+        filledCircleRGBA(renderer,unit * 2,y,5,224,141,28,255);
+
+        //venus
         circleRGBA(renderer,0,y,unit * 3,255,255,255,255);
-        filledCircleRGBA(renderer,unit * 3,y,5,224,141,28,255);
+        filledCircleRGBA(renderer,unit * 3,y,10,175,255,51,255);
 
+        //tierra
         circleRGBA(renderer,0,y,unit * 4,255,255,255,255);
-        filledCircleRGBA(renderer,unit * 4,y,10,175,255,51,255);
+        filledCircleRGBA(renderer,unit * 4,y,20,28,111,224,255);
 
+        //martes
         circleRGBA(renderer,0,y,unit * 5,255,255,255,255);
-        filledCircleRGBA(renderer,unit * 5,y,20,28,111,224,255);
+        filledCircleRGBA(renderer,unit * 5,y,15,236,66,19,255);
 
-        circleRGBA(renderer,0,y,unit * 6,255,255,255,255);
-        filledCircleRGBA(renderer,unit * 6,y,15,236,66,19,255);
+        //jupiter
+        circleRGBA(renderer,0,y,unit * 6.5,255,255,255,255);
+        filledCircleRGBA(renderer,unit * 6.5,y,40,120,91,12,255);
+
+        //saturno
+        circleRGBA(renderer,0,y,unit * 8,255,255,255,255);
+        filledCircleRGBA(renderer,unit * 8,y,30,223,172,35,255);
+
+        //urano
+        circleRGBA(renderer,0,y,unit * 9,255,255,255,255);
+        filledCircleRGBA(renderer,unit * 9,y,25,27,137,58,255);
+
+        //neptuno
+        circleRGBA(renderer,0,y,unit * 9,255,255,255,255);
+        filledCircleRGBA(renderer,unit * 9,y,25,70,123,185,255);
+
 
         //filledPieColor(renderer,0,height/2,100,0,45,0xF30000AF);
 
