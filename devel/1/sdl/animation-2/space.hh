@@ -157,6 +157,13 @@ namespace oct::verso::v1::SDL
 		float radius;
 	};
 
+	enum class Mode
+	{
+	    none,
+        menu,
+        animation,
+	};
+
     struct Space : public Body
 	{
 	    Space() = default;
@@ -188,10 +195,14 @@ namespace oct::verso::v1::SDL
 		virtual void on_deactive();
 
 
-		int unit,y;
+		real unit;
 
 		Star sun;
 		Planet mercury,venus,earth,mars,jupiter,saturn,uranus,neptune;
+		Mode mode;
+        real delta;
+        real columns;
+        numbers::vector<real> step;
 	};
 }
 
