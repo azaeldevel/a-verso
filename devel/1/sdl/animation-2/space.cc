@@ -201,6 +201,12 @@ namespace oct::verso::v1::SDL
 		position.y() = height/2;
 		step.x() = delta * 20;
 		step.y() = 0;
+		displacement.x() = -1;
+		displacement.y() = -1;
+		displacement.z() = 0;
+		displacement = displacement.normalize();
+		animation = 0;
+
 
         //std::cout << "Space pinter : "<< (void*)this << "\n";
 
@@ -216,59 +222,67 @@ namespace oct::verso::v1::SDL
 
         //
         mercury.position.x() = unit * 2 + position.x();
-        mercury.position.y() = position.y();
+        mercury.position.y() = 0;
         mercury.radius = 5;
         mercury.name = "Mercurio";
         add_activables(mercury);
+        mercury.displacement = displacement;
 
         //
         venus.position.x() = unit * 3 + position.x();
-        venus.position.y() = position.y();
+        venus.position.y() = 0;
         venus.radius = 10;
         venus.name = "Venus";
         add_activables(venus);
+        venus.displacement = displacement;
 
         //
         earth.position.x() = unit * 4 + position.x();
-        earth.position.y() = position.y();
+        earth.position.y() = 0;
         earth.radius = 20;
         earth.name = "Tierra";
         add_activables(earth);
+        earth.displacement = displacement;
 
         //
         mars.position.x() = unit * 5 + position.x();
-        mars.position.y() = position.y();
+        mars.position.y() = 0;
         mars.radius = 15;
         mars.name = "Martes";
         add_activables(mars);
+        mars.displacement = displacement;
 
         //
         jupiter.position.x() = unit * 6.5 + position.x();
-        jupiter.position.y() = position.y();
+        jupiter.position.y() = 0;
         jupiter.radius = 40;
         jupiter.name = "Jupiter";
         add_activables(jupiter);
+        jupiter.displacement = displacement;
 
         //
         saturn.position.x() = unit * 8 + position.x();
-        saturn.position.y() = position.y();
+        saturn.position.y() = 0;
         saturn.radius = 25;
         saturn.name = "Saturno";
         add_activables(saturn);
+        saturn.displacement = displacement;
 
         //
         uranus.position.x() = unit * 9.5 + position.x();
-        uranus.position.y() = position.y();
+        uranus.position.y() = 0;
         uranus.radius = 25;
         uranus.name = "Urano";
         add_activables(uranus);
+        uranus.displacement = displacement;
 
         //
         neptune.position.x() = unit * 10.5 + position.x();
-        neptune.position.y() = position.y();
+        neptune.position.y() = 0;
         neptune.radius = 20;
         neptune.name = "Neptuno";
         add_activables(neptune);
+        neptune.displacement = displacement;
 
 		return true;
 	}
@@ -332,11 +346,13 @@ namespace oct::verso::v1::SDL
             if(event.key.keysym.sym == SDLK_a)
             {
                 mode = Mode::animation;
+                animation = 1;
                 std::cout << "Mode de animacion.\n";
             }
             else if(event.key.keysym.sym == SDLK_m)
             {
                 mode = Mode::menu;
+                animation = 0;
                 std::cout << "Mode de menu.\n";
             }
             break;
@@ -344,20 +360,56 @@ namespace oct::verso::v1::SDL
 			break;
 		}
 	}
+
 	void Space::update()
 	{
+	    switch(animation)
+	    {
+        case 1:
+            update_resize();
+            break;
+        case 2:
+            update_orbitar();
+            break;
+        default:
+            break;
+	    }
+	}
+
+	void Space::update_orbitar()
+	{
+	    //mercury.displacement = mercury.displacement * real(0.03);
+	    /*mercury.displacement = position;
+	    mercury.displacement.rotate(90);
+	    mercury.displacement += position;
+	    mercury.displacement = mercury.displacement.normalize();
+	    mercury.displacement.print(std::cout);
+	    std::cout << "\n";
+	    mercury.position += mercury.displacement;
+	    mercury.displacement = mercury.position.normalize();*/
+	}
+	void Space::update_resize()
+	{
         if(mode == Mode::menu) return;
+
+        bool flMaxColumns = false, flposition = false,flsunsize = false;
 
         if(columns < 30)
         {
             columns += delta;
             unit = width/columns;
         }
+        else
+        {
+            flMaxColumns = true;
+        }
         if(position.x() < width/2) position = position + step;
+        else flposition = true;
         //std::cout << "unit : " << unit << "\n";
 
         float zoom = 4;
         if(sun.radius > 30) sun.radius = sun.radius - (delta * zoom * 2);
+        else flsunsize = true;
         if(mercury.radius > 10) mercury.radius = mercury.radius - (delta * zoom);
         if(venus.radius > 10) venus.radius = venus.radius - (delta * zoom);
         if(earth.radius > 10) earth.radius = earth.radius - (delta * zoom);
@@ -385,6 +437,11 @@ namespace oct::verso::v1::SDL
         uranus.position.x() = (unit * 9.5);
         //
         neptune.position.x() = (unit * 10.5);
+
+        if(flMaxColumns and flposition and flsunsize)
+        {
+            animation++;
+        }
 	}
 
 	void Space::render()
@@ -397,40 +454,40 @@ namespace oct::verso::v1::SDL
 
         //mercury
         circleRGBA(renderer,position.x(),position.y(),mercury.position.x(),255,255,255,255);
-        filledCircleRGBA(renderer, position.x() + mercury.position.x(),mercury.position.y(),mercury.radius,224,141,28,255);
+        filledCircleRGBA(renderer, position.x() + mercury.position.x(),position.y() + mercury.position.y(),mercury.radius,224,141,28,255);
 
         //venus
         circleRGBA(renderer,position.x(),position.y(),venus.position.x(),255,255,255,255);
-        filledCircleRGBA(renderer,position.x() + venus.position.x(),venus.position.y(),venus.radius,175,255,51,255);
+        filledCircleRGBA(renderer,position.x() + venus.position.x(),position.y() + venus.position.y(),venus.radius,175,255,51,255);
 
         //tierra
         circleRGBA(renderer,position.x(),position.y(),earth.position.x(),255,255,255,255);
-        filledCircleRGBA(renderer,position.x() + earth.position.x(),earth.position.y(),earth.radius,28,111,224,255);
+        filledCircleRGBA(renderer,position.x() + earth.position.x(),position.y() + earth.position.y(),earth.radius,28,111,224,255);
 
         //martes
         circleRGBA(renderer,position.x(),position.y(),mars.position.x(),255,255,255,255);
-        filledCircleRGBA(renderer,position.x() + mars.position.x(),mars.position.y(),mars.radius,236,66,19,255);
+        filledCircleRGBA(renderer,position.x() + mars.position.x(),position.y() + mars.position.y(),mars.radius,236,66,19,255);
 
         //jupiter
         circleRGBA(renderer,position.x(),position.y(),jupiter.position.x(),255,255,255,255);
-        filledCircleRGBA(renderer,position.x() + jupiter.position.x(),jupiter.position.y(),jupiter.radius,120,91,12,255);
+        filledCircleRGBA(renderer,position.x() + jupiter.position.x(),position.y() + jupiter.position.y(),jupiter.radius,120,91,12,255);
 
         //saturno
         circleRGBA(renderer,position.x(),position.y(),saturn.position.x(),255,255,255,255);
-        circleRGBA(renderer,position.x() + saturn.position.x(),saturn.position.y(),saturn.radius + 5,223,172,35,255);
-        circleRGBA(renderer,position.x() + saturn.position.x(),saturn.position.y(),saturn.radius + 6,223,172,35,255);
-        circleRGBA(renderer,position.x() + saturn.position.x(),saturn.position.y(),saturn.radius + 7,223,172,35,255);
-        circleRGBA(renderer,position.x() + saturn.position.x(),saturn.position.y(),saturn.radius + 11,223,172,35,255);
-        circleRGBA(renderer,position.x() + saturn.position.x(),saturn.position.y(),saturn.radius + 12,223,172,35,255);
-        filledCircleRGBA(renderer,position.x() + saturn.position.x(),saturn.position.y(),saturn.radius,223,172,35,255);
+        circleRGBA(renderer,position.x() + saturn.position.x(),position.y() + saturn.position.y(),saturn.radius + 5,223,172,35,255);
+        circleRGBA(renderer,position.x() + saturn.position.x(),position.y() + saturn.position.y(),saturn.radius + 6,223,172,35,255);
+        circleRGBA(renderer,position.x() + saturn.position.x(),position.y() + saturn.position.y(),saturn.radius + 7,223,172,35,255);
+        circleRGBA(renderer,position.x() + saturn.position.x(),position.y() + saturn.position.y(),saturn.radius + 11,223,172,35,255);
+        circleRGBA(renderer,position.x() + saturn.position.x(),position.y() + saturn.position.y(),saturn.radius + 12,223,172,35,255);
+        filledCircleRGBA(renderer,position.x() + saturn.position.x(),position.y() + saturn.position.y(),saturn.radius,223,172,35,255);
 
         //urano
         circleRGBA(renderer,position.x(),position.y(),uranus.position.x(),255,255,255,255);
-        filledCircleRGBA(renderer,position.x() + uranus.position.x(),uranus.position.y(),uranus.radius,27,137,58,255);
+        filledCircleRGBA(renderer,position.x() + uranus.position.x(),position.y() + uranus.position.y(),uranus.radius,27,137,58,255);
 
         //neptuno
-        circleRGBA(renderer,position.x(),neptune.position.y(),neptune.position.x(),255,255,255,255);
-        filledCircleRGBA(renderer,position.x() + neptune.position.x(),neptune.position.y(),neptune.radius,70,123,185,255);
+        circleRGBA(renderer,position.x(),position.y() + neptune.position.y(),neptune.position.x(),255,255,255,255);
+        filledCircleRGBA(renderer,position.x() + neptune.position.x(),position.y() + neptune.position.y(),neptune.radius,70,123,185,255);
 
         //circleRGBA(renderer,earth.position.x(),earth.position.y(),earth.radius + 1,0,255,0,255);
         //circleRGBA(renderer,neptune.position.x(),neptune.position.y(),neptune.radius + 2,0,255,0,255);

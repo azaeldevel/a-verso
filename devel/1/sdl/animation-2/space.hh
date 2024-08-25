@@ -85,6 +85,7 @@ namespace oct::verso::v1::SDL
 		virtual void on_deactive();
 
 		std::string name,brief;
+		numbers::vector<real> displacement;
 	};
 
     struct Star : public Body
@@ -189,6 +190,8 @@ namespace oct::verso::v1::SDL
 
 		virtual void handler();
 		virtual void update();
+		virtual void update_resize();
+		virtual void update_orbitar();
 		virtual void render();
 
 		virtual void on_active();
@@ -203,6 +206,7 @@ namespace oct::verso::v1::SDL
         real delta;
         real columns;
         numbers::vector<real> step;
+		int animation;
 	};
 }
 
