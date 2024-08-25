@@ -357,7 +357,7 @@ namespace oct::verso::v1::SDL
         //std::cout << "unit : " << unit << "\n";
 
         float zoom = 4;
-        if(sun.radius > 20) sun.radius = sun.radius - (delta * zoom * 3);
+        if(sun.radius > 30) sun.radius = sun.radius - (delta * zoom * 2);
         if(mercury.radius > 10) mercury.radius = mercury.radius - (delta * zoom);
         if(venus.radius > 10) venus.radius = venus.radius - (delta * zoom);
         if(earth.radius > 10) earth.radius = earth.radius - (delta * zoom);
