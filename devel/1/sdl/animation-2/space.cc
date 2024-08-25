@@ -348,24 +348,24 @@ namespace oct::verso::v1::SDL
 	{
         if(mode == Mode::menu) return;
 
-        if(columns < 24)
+        if(columns < 30)
         {
-            columns += delta  * 10;
+            columns += delta;
             unit = width/columns;
         }
         if(position.x() < width/2) position = position + step;
         //std::cout << "unit : " << unit << "\n";
 
-
-        if(sun.radius > 10) sun.radius = sun.radius - delta;
-        if(mercury.radius > 10) mercury.radius = mercury.radius - delta;
-        if(venus.radius > 10) venus.radius = venus.radius - delta;
-        if(earth.radius > 10) earth.radius = earth.radius - delta;
-        if(mars.radius > 10) mars.radius = mars.radius - delta;
-        if(jupiter.radius > 10) jupiter.radius = jupiter.radius - delta;
-        if(saturn.radius > 10) saturn.radius = saturn.radius - delta;
-        if(uranus.radius > 10) uranus.radius = uranus.radius - delta;
-        if(neptune.radius > 10) neptune.radius = neptune.radius - delta;
+        float zoom = 4;
+        if(sun.radius > 20) sun.radius = sun.radius - (delta * zoom * 3);
+        if(mercury.radius > 10) mercury.radius = mercury.radius - (delta * zoom);
+        if(venus.radius > 10) venus.radius = venus.radius - (delta * zoom);
+        if(earth.radius > 10) earth.radius = earth.radius - (delta * zoom);
+        if(mars.radius > 10) mars.radius = mars.radius - (delta * zoom);
+        if(jupiter.radius > 10) jupiter.radius = jupiter.radius - (delta * zoom);
+        if(saturn.radius > 10) saturn.radius = saturn.radius - (delta * zoom);
+        if(uranus.radius > 10) uranus.radius = uranus.radius - (delta * zoom);
+        if(neptune.radius > 10) neptune.radius = neptune.radius - (delta * zoom);
 
         //
         sun.position.x() = 0;
