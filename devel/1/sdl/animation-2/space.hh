@@ -210,14 +210,46 @@ namespace oct::verso::v1::SDL
         Font() = default;
         Font(const char*, size_t size);
         Font(const std::string&, size_t size);
+        Font(const std::filesystem::path&, size_t size);
         ~Font();
 
         bool open(const char*, size_t size);
+        bool is_open()const;
 
         operator TTF_Font*();
     private:
         TTF_Font* font;
         static const std::filesystem::path directory;
+	};
+
+	class Surface
+	{
+    public:
+        Surface() = default;
+        ~Surface();
+
+        operator SDL_Surface*();
+
+        bool from_image();
+        bool from(Font&,const char *,SDL_Color&);
+
+    private:
+        SDL_Surface* surface;
+	};
+
+    class Texture
+	{
+    public:
+        Texture() = default;
+        ~Texture();
+
+        operator SDL_Texture*();
+
+        bool from_image();
+        bool from(Surface&, SDL_Renderer*);
+
+    private:
+        SDL_Texture* texture;
 	};
 
     struct Space : public Body

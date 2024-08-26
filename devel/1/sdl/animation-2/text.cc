@@ -77,8 +77,8 @@ bool loop() {
 		dest.h = text_surf->h;
 		SDL_RenderCopy(renderer, text, NULL, &dest);
 
-		SDL_DestroyTexture(text);
-		SDL_FreeSurface(text_surf);
+		//SDL_DestroyTexture(text);
+		//SDL_FreeSurface(text_surf);
 	}
 
 	// Update window

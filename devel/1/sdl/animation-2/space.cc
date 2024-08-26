@@ -561,17 +561,21 @@ namespace oct::verso::v1::SDL
         SDL_Color foreground = { 255,255,255 };
 
         //https://wiki.libsdl.org/SDL2_ttf/CategoryAPI
-		SDL_Surface* text_surf = TTF_RenderText_Solid(font, "Sistema Solar", foreground);
-		SDL_Texture * text = SDL_CreateTextureFromSurface(renderer, text_surf);
+        //SDL_Surface* text_surf = TTF_RenderText_Solid(font, input.c_str(), foreground);
+		Surface text_surf;
+		text_surf.from(font, "Sistema Solar", foreground);
+		//text = SDL_CreateTextureFromSurface(renderer, text_surf);
+		Texture text;
+		text.from(text_surf,renderer);
 
-		dest.x = text_surf->w / 2.0f;
+		dest.x = ((SDL_Surface*)text_surf)->w / 2.0f;
 		dest.y = 0;
-		dest.w = text_surf->w;
-		dest.h = text_surf->h;
+		dest.w = ((SDL_Surface*)text_surf)->w;
+		dest.h = ((SDL_Surface*)text_surf)->h;
 		SDL_RenderCopy(renderer, text, NULL, &dest);
 
-		SDL_DestroyTexture(text);
-		SDL_FreeSurface(text_surf);
+		//SDL_DestroyTexture(text);
+		//SDL_FreeSurface(text_surf);
 
 
         SDL_RenderPresent(renderer);
@@ -853,6 +857,10 @@ namespace oct::verso::v1::SDL
         std::filesystem::path file = directory/s;
         font = TTF_OpenFont(file.c_str(), size);
     }
+    Font::Font(const std::filesystem::path& s, size_t size)
+    {
+        font = TTF_OpenFont(s.c_str(), size);
+    }
     bool Font::open(const char* s, size_t size)
     {
         std::filesystem::path file = directory/s;
@@ -872,5 +880,45 @@ namespace oct::verso::v1::SDL
     Font::operator TTF_Font*()
     {
         return font;
+    }
+    bool Font::is_open()const
+    {
+        return font;
+    }
+
+
+    Surface::~Surface()
+    {
+        SDL_FreeSurface(surface);
+    }
+
+    Surface::operator SDL_Surface*()
+    {
+        return surface;
+    }
+
+    bool Surface::from(Font& f,const char * str,SDL_Color& color)
+    {
+        surface = TTF_RenderText_Solid(f, str, color);
+        return surface;
+    }
+
+
+
+    Texture::~Texture()
+    {
+        SDL_DestroyTexture(texture);
+    }
+
+
+    Texture::operator SDL_Texture*()
+    {
+        return texture;
+    }
+
+    bool Texture::from(Surface& s, SDL_Renderer* r)
+    {
+        texture = SDL_CreateTextureFromSurface(r, s);
+        return texture;
     }
 }
