@@ -226,7 +226,7 @@ namespace oct::verso::v1::SDL
             std::cout << "Error loading font: " << TTF_GetError() << std::endl;
             return false;
         }*/
-        font.open("TTF/Hack-Bold.ttf",72);
+        font.open("TTF/Hack-Bold.ttf",36);
 
         //std::cout << "Space pinter : "<< (void*)this << "\n";
 
@@ -566,7 +566,7 @@ namespace oct::verso::v1::SDL
 		//text = SDL_CreateTextureFromSurface(renderer, text_surf);
 		Texture text(text_surf,renderer);
 
-		dest.x = ((SDL_Surface*)text_surf)->w / 2.0f;
+		dest.x = width/2.0f - ((SDL_Surface*)text_surf)->w/2.0f;
 		dest.y = 0;
 		dest.w = ((SDL_Surface*)text_surf)->w;
 		dest.h = ((SDL_Surface*)text_surf)->h;
@@ -574,7 +574,6 @@ namespace oct::verso::v1::SDL
 
 		//SDL_DestroyTexture(text);
 		//SDL_FreeSurface(text_surf);
-
 
         SDL_RenderPresent(renderer);
 	}
