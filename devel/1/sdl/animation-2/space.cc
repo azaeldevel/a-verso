@@ -562,11 +562,9 @@ namespace oct::verso::v1::SDL
 
         //https://wiki.libsdl.org/SDL2_ttf/CategoryAPI
         //SDL_Surface* text_surf = TTF_RenderText_Solid(font, input.c_str(), foreground);
-		Surface text_surf;
-		text_surf.from(font, "Sistema Solar", foreground);
+		Surface text_surf(font, "Sistema Solar", foreground);
 		//text = SDL_CreateTextureFromSurface(renderer, text_surf);
-		Texture text;
-		text.from(text_surf,renderer);
+		Texture text(text_surf,renderer);
 
 		dest.x = ((SDL_Surface*)text_surf)->w / 2.0f;
 		dest.y = 0;
@@ -887,6 +885,17 @@ namespace oct::verso::v1::SDL
     }
 
 
+
+
+
+
+
+
+
+    Surface::Surface(Font& f,const char * s,SDL_Color& c)
+    {
+        from(f,s,c);
+    }
     Surface::~Surface()
     {
         SDL_FreeSurface(surface);
@@ -897,7 +906,11 @@ namespace oct::verso::v1::SDL
         return surface;
     }
 
-    bool Surface::from(Font& f,const char * str,SDL_Color& color)
+    bool Surface::from(const std::filesystem::path& p)
+    {
+        surface = IMG_Load(p.c_str());
+    }
+    bool Surface::from(Font& f,const char* str,SDL_Color& color)
     {
         surface = TTF_RenderText_Solid(f, str, color);
         return surface;
@@ -905,6 +918,18 @@ namespace oct::verso::v1::SDL
 
 
 
+
+
+
+
+
+
+
+
+    Texture::Texture(Surface& s, SDL_Renderer* r)
+    {
+        from(s,r);
+    }
     Texture::~Texture()
     {
         SDL_DestroyTexture(texture);

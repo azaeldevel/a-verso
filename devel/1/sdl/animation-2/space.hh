@@ -226,11 +226,12 @@ namespace oct::verso::v1::SDL
 	{
     public:
         Surface() = default;
+        Surface(Font&,const char*,SDL_Color&);
         ~Surface();
 
         operator SDL_Surface*();
 
-        bool from_image();
+        bool from(const std::filesystem::path&);
         bool from(Font&,const char *,SDL_Color&);
 
     private:
@@ -241,6 +242,7 @@ namespace oct::verso::v1::SDL
 	{
     public:
         Texture() = default;
+        Texture(Surface&, SDL_Renderer*);
         ~Texture();
 
         operator SDL_Texture*();
