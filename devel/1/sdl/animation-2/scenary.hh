@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_opengl.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "../../scenary.hh"
 
@@ -25,6 +26,7 @@ namespace oct::verso::v1::SDL
 		SDL_Event event; // event
         int width, height;
 		bool create_window(const char* title, int width, int height);
+		bool create_window(const char* title, int width, int height,int flwin,int flrender);
 
 
 		virtual bool initialize();

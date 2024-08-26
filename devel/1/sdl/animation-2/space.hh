@@ -6,6 +6,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_opengl.h>
+#include <filesystem>
 
 #include <map>
 
@@ -158,11 +159,65 @@ namespace oct::verso::v1::SDL
 		float radius;
 	};
 
+
+    struct Laboratory : public Planet
+	{
+	    Laboratory() = default;
+	    constexpr Laboratory(const std::initializer_list<real>& l) : Planet(l,true)
+	    {
+	    }
+	    constexpr Laboratory(const numbers::vector<real>& p) : Planet(p,true)
+	    {
+	    }
+	    constexpr Laboratory(const std::initializer_list<real>& l,bool a) : Planet(l,a)
+	    {
+	    }
+	    constexpr Laboratory(const numbers::vector<real>& p,bool a) : Planet(p,a)
+	    {
+	    }
+
+		virtual bool initialize();
+
+		virtual void run();
+
+		virtual void loop();
+
+		//virtual void handler();
+		virtual void update();
+		virtual void render();
+
+		virtual void on_active();
+		virtual void on_deactive();
+
+		virtual Object* into(int,int);
+		virtual void render_selection(SDL_Renderer*);
+	};
+
+
 	enum class Mode
 	{
 	    none,
         menu,
         animation,
+	};
+
+	/**
+	*\brief https://wiki.libsdl.org/SDL2_ttf/CategoryAPI
+	*/
+	class Font
+	{
+    public:
+        Font() = default;
+        Font(const char*, size_t size);
+        Font(const std::string&, size_t size);
+        ~Font();
+
+        bool open(const char*, size_t size);
+
+        operator TTF_Font*();
+    private:
+        TTF_Font* font;
+        static const std::filesystem::path directory;
 	};
 
     struct Space : public Body
@@ -202,11 +257,18 @@ namespace oct::verso::v1::SDL
 
 		Star sun;
 		Planet mercury,venus,earth,mars,jupiter,saturn,uranus,neptune;
+		Laboratory laboratory;
 		Mode mode;
         real delta;
         real columns;
         numbers::vector<real> step;
+
 		int animation;
+		SDL_Surface* buffer;
+        //SDL_Texture *texture, *text;
+        //TTF_Font* font;
+        Font font;
+        SDL_Surface* text_surf;
 	};
 }
 

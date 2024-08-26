@@ -38,6 +38,34 @@ namespace oct::verso::v1::SDL
 		return true;
 	}
 
+	bool Scenary::create_window(const char* title, int w, int h,int flw ,int flr)
+	{
+	    width = w;
+	    height = h;
+		if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
+		{
+			printf("SDL initialized!\n");
+			window = SDL_CreateWindow(title, 0, 0, width, height, flw);
+			if (window)
+			{
+				printf("Window created!\n");
+			}
+			renderer = SDL_CreateRenderer(window, -1, flr);
+			if (renderer)
+			{
+				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+				printf("Renderer created!\n");
+			}
+		}
+		else
+		{
+			printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
+
+		}
+
+		return true;
+	}
+
 
 
 

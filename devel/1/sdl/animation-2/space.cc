@@ -1,7 +1,8 @@
 ﻿
 #include "space.hh"
 #include "SDL2_gfxPrimitives.h"//https://www.ferzkopp.net/Software/SDL2_gfx/Docs/html/_s_d_l2__gfx_primitives_8h.html
-
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 namespace oct::verso::v1::SDL
 {
@@ -187,12 +188,10 @@ namespace oct::verso::v1::SDL
 
 
 
-
-
 	bool Space::initialize()
 	{
 	    //SDL_SetHint (SDL_HINT_RENDER_DRIVER, "opengl") ;
-		create_window("A verso system", 900, 600);
+		create_window("A verso system", 900, 600,SDL_WINDOW_SHOWN,SDL_RENDERER_ACCELERATED);
 		status = Status::running;
 		mode = Mode::menu;
 		delta = 0.009;
@@ -207,6 +206,27 @@ namespace oct::verso::v1::SDL
 		displacement = displacement.normalize();
 		animation = 0;
 
+        buffer = IMG_Load("devel/1/sdl/animation-2/assets/test.png");
+        if ( !buffer ) {
+            std::cout << "Error loading image test.png: " << SDL_GetError() << std::endl;
+            return false;
+        }
+
+        /*texture = SDL_CreateTextureFromSurface( renderer, buffer );
+        SDL_FreeSurface( buffer );
+        buffer = NULL;
+        if ( !texture ) {
+            std::cout << "Error creating texture: " << SDL_GetError() << std::endl;
+            return false;
+        }*/
+
+        // Load font
+        /*font = TTF_OpenFont("devel/1/sdl/animation-2/assets/font.ttf", 72);
+        if ( !font ) {
+            std::cout << "Error loading font: " << TTF_GetError() << std::endl;
+            return false;
+        }*/
+        font.open("TTF/Hack-Bold.ttf",72);
 
         //std::cout << "Space pinter : "<< (void*)this << "\n";
 
@@ -284,12 +304,41 @@ namespace oct::verso::v1::SDL
         add_activables(neptune);
         neptune.displacement = displacement;
 
+        //
+        laboratory.position.x() = unit * 11 + position.x();
+        laboratory.position.y() = position.y();
+        laboratory.radius = 10;
+        laboratory.name = "Laboratorio I";
+        add_activables(laboratory);
+        laboratory.displacement = displacement;
+
+        if ( IMG_Init(IMG_INIT_PNG) < 0 ) {
+		//cout << "Error initializing SDL_image: " << IMG_GetError() << endl;
+		return false;
+        }
+
+        // Initialize SDL_ttf
+        if ( TTF_Init() < 0 ) {
+            //cout << "Error intializing SDL_ttf: " << TTF_GetError() << endl;
+            return false;
+        }
+
 		return true;
 	}
 
 	void Space::run()
 	{
-	    //std::cout << "void Space::run()\n";
+        if ( IMG_Init(IMG_INIT_PNG) < 0 ) {
+            std::cout << "Error initializing SDL_image: " << IMG_GetError() << std::endl;
+            return;
+        }
+
+        // Initialize SDL_ttf
+        if ( TTF_Init() < 0 ) {
+            std::cout << "Error intializing SDL_ttf: " << TTF_GetError() << std::endl;
+            return;
+        }
+            //std::cout << "void Space::run()\n";
 		status = running;
 		initialize();
 		loop();
@@ -350,14 +399,14 @@ namespace oct::verso::v1::SDL
         case SDL_KEYDOWN:
             if(event.key.keysym.sym == SDLK_a)
             {
-                mode = Mode::animation;
-                animation = 1;
+                //mode = Mode::animation;
+                //animation = 1;
                 std::cout << "Mode de animacion.\n";
             }
             else if(event.key.keysym.sym == SDLK_m)
             {
-                mode = Mode::menu;
-                animation = 0;
+                //mode = Mode::menu;
+                //animation = 0;
                 std::cout << "Mode de menu.\n";
             }
             break;
@@ -494,14 +543,36 @@ namespace oct::verso::v1::SDL
         circleRGBA(renderer,position.x(),neptune.position.y(),neptune.position.x(),255,255,255,255);
         filledCircleRGBA(renderer,neptune.position.x(),neptune.position.y(),neptune.radius,70,123,185,255);
 
-        //circleRGBA(renderer,earth.position.x(),earth.position.y(),earth.radius + 1,0,255,0,255);
-        //circleRGBA(renderer,neptune.position.x(),neptune.position.y(),neptune.radius + 2,0,255,0,255);
+        //laboratory
+        circleRGBA(renderer,position.x(),neptune.position.y(),laboratory.position.x(),255,255,255,255);
+        filledCircleRGBA(renderer,laboratory.position.x(),laboratory.position.y(),laboratory.radius,135,30,185,255);
+
 
         if(selected)
         {
             std::cout << "Render selection :" << (void*)selected << "\n";
             selected->render_selection(renderer);
         }
+
+        SDL_Rect dest;
+        // Render texture
+        //SDL_RenderCopy(renderer, texture, NULL, NULL);
+
+        SDL_Color foreground = { 255,255,255 };
+
+        //https://wiki.libsdl.org/SDL2_ttf/CategoryAPI
+		SDL_Surface* text_surf = TTF_RenderText_Solid(font, "Sistema Solar", foreground);
+		SDL_Texture * text = SDL_CreateTextureFromSurface(renderer, text_surf);
+
+		dest.x = text_surf->w / 2.0f;
+		dest.y = 0;
+		dest.w = text_surf->w;
+		dest.h = text_surf->h;
+		SDL_RenderCopy(renderer, text, NULL, &dest);
+
+		SDL_DestroyTexture(text);
+		SDL_FreeSurface(text_surf);
+
 
         SDL_RenderPresent(renderer);
 	}
@@ -683,4 +754,123 @@ namespace oct::verso::v1::SDL
 	    circleRGBA(rend,position.x(),position.y(),radius + 3,0,255,0,255);
 	    circleRGBA(rend,position.x(),position.y(),radius + 4,0,255,0,255);
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	bool Laboratory::initialize()
+	{
+		return true;
+	}
+	void Laboratory::run()
+	{
+		status = running;
+		this->initialize();
+		this->loop();
+		this->clean();
+	}
+	void Laboratory::loop()
+	{
+        // game loop
+		while (status != Status::stop)
+		{
+			// handle user events
+			handler();
+
+			// update the game
+			update();
+
+			// render to the screen
+			render();
+
+			SDL_Delay(1);
+		}
+	}
+
+	/*void Planet::handler()
+	{
+	}*/
+	void Laboratory::update()
+	{
+	}
+
+	void Laboratory::render()
+	{
+        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
+		SDL_RenderClear(renderer);
+
+
+        SDL_RenderPresent(renderer);
+	}
+
+
+	void Laboratory::on_active()
+	{
+	}
+	void Laboratory::on_deactive()
+	{
+	}
+
+	Object* Laboratory::into(int x,int y)
+	{
+        //std::cout << "Laboratory : " << x << "," << y << "\n";
+        auto d = position.distance(x,y);
+        if(d < radius)
+        {
+            //std::cout << "distance : " << d << "\n";
+            return this;
+        }
+        return NULL;
+	}
+	void Laboratory::render_selection(SDL_Renderer* rend)
+	{
+	    //std::cout << "void Laboratory::render_selection()\n";
+	    //std::cout << "(" << position.x() << "," << position.y() << ")\n";
+	    circleRGBA(rend,position.x(),position.y(),radius + 3,0,255,0,255);
+	    circleRGBA(rend,position.x(),position.y(),radius + 4,0,255,0,255);
+	}
+
+
+
+    const std::filesystem::path Font::directory = "/usr/share/fonts";
+
+    Font::Font(const char* s, size_t size)
+    {
+        std::filesystem::path file = directory/s;
+        font = TTF_OpenFont(file.c_str(), size);
+    }
+    Font::Font(const std::string& s, size_t size)
+    {
+        std::filesystem::path file = directory/s;
+        font = TTF_OpenFont(file.c_str(), size);
+    }
+    bool Font::open(const char* s, size_t size)
+    {
+        std::filesystem::path file = directory/s;
+        font = TTF_OpenFont(file.c_str(), size);
+
+        return true;
+    }
+    Font::~Font()
+    {
+        if(font)
+        {
+            TTF_CloseFont(font);
+            font = NULL;
+        }
+    }
+
+    Font::operator TTF_Font*()
+    {
+        return font;
+    }
 }
