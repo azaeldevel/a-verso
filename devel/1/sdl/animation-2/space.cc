@@ -17,7 +17,7 @@ namespace oct::verso::v1::SDL
 	}
 	void Object::run()
 	{
-	    std::cout << "void Object::run()\n";
+	    //std::cout << "void Object::run()\n";
 		status = running;
 		this->initialize();
 		this->loop();
@@ -101,7 +101,7 @@ namespace oct::verso::v1::SDL
 	}
 	void Object::render_selection(SDL_Renderer*)
 	{
-	    std::cout << "void Object::render_selection()\n";
+	    //std::cout << "void Object::render_selection()\n";
 	}
 
 
@@ -547,7 +547,6 @@ namespace oct::verso::v1::SDL
         circleRGBA(renderer,position.x(),neptune.position.y(),laboratory.position.x(),255,255,255,255);
         filledCircleRGBA(renderer,laboratory.position.x(),laboratory.position.y(),laboratory.radius,135,30,185,255);
 
-
         if(selected)
         {
             std::cout << "Render selection :" << (void*)selected << "\n";
@@ -651,19 +650,19 @@ namespace oct::verso::v1::SDL
 
 	Object* Star::into(int x,int y)
 	{
-        std::cout << "Star : " << x << "," << y << "\n";
+        //std::cout << "Star : " << x << "," << y << "\n";
         auto d = position.distance(x,y);
         if(d < radius)
         {
-            std::cout << "distance : " << d << "\n";
+            //std::cout << "distance : " << d << "\n";
             return this;
         }
         return NULL;
 	}
 	void Star::render_selection(SDL_Renderer* rend)
 	{
-	    std::cout << "void Star::render_selection()\n";
-	    std::cout << "(" << position.x() << "," << position.y() << ")\n";
+	    //std::cout << "void Star::render_selection()\n";
+	    //std::cout << "(" << position.x() << "," << position.y() << ")\n";
 	    circleRGBA(rend,position.x(),position.y(),radius + 3,0,255,0,255);
 	    circleRGBA(rend,position.x(),position.y(),radius + 4,0,255,0,255);
 	}
@@ -739,91 +738,7 @@ namespace oct::verso::v1::SDL
 
 	Object* Planet::into(int x,int y)
 	{
-        std::cout << "Planet : " << x << "," << y << "\n";
-        auto d = position.distance(x,y);
-        if(d < radius)
-        {
-            std::cout << "distance : " << d << "\n";
-            return this;
-        }
-        return NULL;
-	}
-	void Planet::render_selection(SDL_Renderer* rend)
-	{
-	    std::cout << "void Planet::render_selection()\n";
-	    std::cout << "(" << position.x() << "," << position.y() << ")\n";
-	    circleRGBA(rend,position.x(),position.y(),radius + 3,0,255,0,255);
-	    circleRGBA(rend,position.x(),position.y(),radius + 4,0,255,0,255);
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-	bool Laboratory::initialize()
-	{
-		return true;
-	}
-	void Laboratory::run()
-	{
-		status = running;
-		this->initialize();
-		this->loop();
-		this->clean();
-	}
-	void Laboratory::loop()
-	{
-        // game loop
-		while (status != Status::stop)
-		{
-			// handle user events
-			handler();
-
-			// update the game
-			update();
-
-			// render to the screen
-			render();
-
-			SDL_Delay(1);
-		}
-	}
-
-	/*void Planet::handler()
-	{
-	}*/
-	void Laboratory::update()
-	{
-	}
-
-	void Laboratory::render()
-	{
-        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
-		SDL_RenderClear(renderer);
-
-
-        SDL_RenderPresent(renderer);
-	}
-
-
-	void Laboratory::on_active()
-	{
-	}
-	void Laboratory::on_deactive()
-	{
-	}
-
-	Object* Laboratory::into(int x,int y)
-	{
-        //std::cout << "Laboratory : " << x << "," << y << "\n";
+        //std::cout << "Planet : " << x << "," << y << "\n";
         auto d = position.distance(x,y);
         if(d < radius)
         {
@@ -832,13 +747,21 @@ namespace oct::verso::v1::SDL
         }
         return NULL;
 	}
-	void Laboratory::render_selection(SDL_Renderer* rend)
+	void Planet::render_selection(SDL_Renderer* rend)
 	{
-	    //std::cout << "void Laboratory::render_selection()\n";
+	    //std::cout << "void Planet::render_selection()\n";
 	    //std::cout << "(" << position.x() << "," << position.y() << ")\n";
 	    circleRGBA(rend,position.x(),position.y(),radius + 3,0,255,0,255);
 	    circleRGBA(rend,position.x(),position.y(),radius + 4,0,255,0,255);
 	}
+
+
+
+
+
+
+
+
 
 
 
@@ -945,4 +868,166 @@ namespace oct::verso::v1::SDL
         texture = SDL_CreateTextureFromSurface(r, s);
         return texture;
     }
+
+
+
+
+
+
+
+
+
+	bool Planet::initialize()
+	{
+		return true;
+	}
+	void Planet::run()
+	{
+		status = running;
+		this->initialize();
+		this->loop();
+		this->clean();
+	}
+	void Planet::loop()
+	{
+        // game loop
+		while (status != Status::stop)
+		{
+			// handle user events
+			handler();
+
+			// update the game
+			update();
+
+			// render to the screen
+			render();
+
+			SDL_Delay(1);
+		}
+	}
+
+	/*void Planet::handler()
+	{
+	}*/
+	void Planet::update()
+	{
+	}
+
+	void Planet::render()
+	{
+        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
+		SDL_RenderClear(renderer);
+
+
+        SDL_RenderPresent(renderer);
+	}
+
+
+	void Planet::on_active()
+	{
+	}
+	void Planet::on_deactive()
+	{
+	}
+
+	Object* Planet::into(int x,int y)
+	{
+        //std::cout << "Planet : " << x << "," << y << "\n";
+        auto d = position.distance(x,y);
+        if(d < radius)
+        {
+            //std::cout << "distance : " << d << "\n";
+            return this;
+        }
+        return NULL;
+	}
+	void Planet::render_selection(SDL_Renderer* rend)
+	{
+	    //std::cout << "void Planet::render_selection()\n";
+	    //std::cout << "(" << position.x() << "," << position.y() << ")\n";
+	    circleRGBA(rend,position.x(),position.y(),radius + 3,0,255,0,255);
+	    circleRGBA(rend,position.x(),position.y(),radius + 4,0,255,0,255);
+	}
+
+
+
+
+
+
+
+	bool Laboratory::initialize()
+	{
+		return true;
+	}
+	void Laboratory::run()
+	{
+		status = running;
+		this->initialize();
+		this->loop();
+		this->clean();
+	}
+	void Laboratory::loop()
+	{
+        // game loop
+		while (status != Status::stop)
+		{
+			// handle user events
+			handler();
+
+			// update the game
+			update();
+
+			// render to the screen
+			render();
+
+			SDL_Delay(1);
+		}
+	}
+
+	/*void Planet::handler()
+	{
+	}*/
+	void Laboratory::update()
+	{
+	}
+
+	void Laboratory::render()
+	{
+        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
+		SDL_RenderClear(renderer);
+
+
+        SDL_RenderPresent(renderer);
+	}
+
+
+	void Laboratory::on_active()
+	{
+	}
+	void Laboratory::on_deactive()
+	{
+	}
+
+	Object* Laboratory::into(int x,int y)
+	{
+        //std::cout << "Laboratory : " << x << "," << y << "\n";
+        auto d = position.distance(x,y);
+        if(d < radius)
+        {
+            //std::cout << "distance : " << d << "\n";
+            return this;
+        }
+        return NULL;
+	}
+	void Laboratory::render_selection(SDL_Renderer* rend)
+	{
+	    //std::cout << "void Laboratory::render_selection()\n";
+	    //std::cout << "(" << position.x() << "," << position.y() << ")\n";
+	    circleRGBA(rend,position.x(),position.y(),radius + 3,0,255,0,255);
+	    circleRGBA(rend,position.x(),position.y(),radius + 4,0,255,0,255);
+	}
+
+
+
+
 }

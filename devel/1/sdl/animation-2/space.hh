@@ -160,40 +160,6 @@ namespace oct::verso::v1::SDL
 	};
 
 
-    struct Laboratory : public Planet
-	{
-	    Laboratory() = default;
-	    constexpr Laboratory(const std::initializer_list<real>& l) : Planet(l,true)
-	    {
-	    }
-	    constexpr Laboratory(const numbers::vector<real>& p) : Planet(p,true)
-	    {
-	    }
-	    constexpr Laboratory(const std::initializer_list<real>& l,bool a) : Planet(l,a)
-	    {
-	    }
-	    constexpr Laboratory(const numbers::vector<real>& p,bool a) : Planet(p,a)
-	    {
-	    }
-
-		virtual bool initialize();
-
-		virtual void run();
-
-		virtual void loop();
-
-		//virtual void handler();
-		virtual void update();
-		virtual void render();
-
-		virtual void on_active();
-		virtual void on_deactive();
-
-		virtual Object* into(int,int);
-		virtual void render_selection(SDL_Renderer*);
-	};
-
-
 	enum class Mode
 	{
 	    none,
@@ -304,6 +270,44 @@ namespace oct::verso::v1::SDL
         Font font;
         SDL_Surface* text_surf;
 	};
+
+
+
+
+    struct Laboratory : public Planet
+	{
+	    Laboratory() = default;
+	    constexpr Laboratory(const std::initializer_list<real>& l) : Planet(l,true)
+	    {
+	    }
+	    constexpr Laboratory(const numbers::vector<real>& p) : Planet(p,true)
+	    {
+	    }
+	    constexpr Laboratory(const std::initializer_list<real>& l,bool a) : Planet(l,a)
+	    {
+	    }
+	    constexpr Laboratory(const numbers::vector<real>& p,bool a) : Planet(p,a)
+	    {
+	    }
+
+		virtual bool initialize();
+
+		virtual void run();
+
+		virtual void loop();
+
+		//virtual void handler();
+		virtual void update();
+		virtual void render();
+
+		virtual void on_active();
+		virtual void on_deactive();
+
+		virtual Object* into(int,int);
+		virtual void render_selection(SDL_Renderer*);
+	};
+
+
 }
 
 #endif // OCTETOS_AVERSO_SPACE_HH
