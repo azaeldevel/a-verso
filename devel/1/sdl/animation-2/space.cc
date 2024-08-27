@@ -313,13 +313,15 @@ namespace oct::verso::v1::SDL
         add_activables(laboratory);
         laboratory.displacement = displacement;
 
-        if ( IMG_Init(IMG_INIT_PNG) < 0 ) {
-		//cout << "Error initializing SDL_image: " << IMG_GetError() << endl;
-		return false;
+        if ( IMG_Init(IMG_INIT_PNG) < 0 )
+        {
+            //cout << "Error initializing SDL_image: " << IMG_GetError() << endl;
+            return false;
         }
 
         // Initialize SDL_ttf
-        if ( TTF_Init() < 0 ) {
+        if ( TTF_Init() < 0 )
+        {
             //cout << "Error intializing SDL_ttf: " << TTF_GetError() << endl;
             return false;
         }
@@ -417,6 +419,8 @@ namespace oct::verso::v1::SDL
                 subscenary->status = Status::running;
                 subscenary->window = window;
                 subscenary->renderer = renderer;
+                subscenary->width = width;
+                subscenary->height = height;
                 break;
             }
             break;
@@ -966,9 +970,26 @@ namespace oct::verso::v1::SDL
 
 	void Laboratory::render()
 	{
-        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
+        SDL_SetRenderDrawColor( renderer,0,0,0,255);
 		SDL_RenderClear(renderer);
 
+		SDL_SetRenderDrawColor( renderer,255,255,255,10);
+		std::cout << "(" << width << "," << height << ")\n";
+		size_t w = width/50;
+		size_t h = height/50;
+        for(size_t i = 0; i < height; i+=h)
+        {
+            SDL_RenderDrawLine(renderer,0,i,width,i);
+            //std::cout << "(" << 0 << "," << i << ")\n";
+        }
+        for(size_t i = 0; i < width; i+=w)
+        {
+            SDL_RenderDrawLine(renderer,i,0,i,width);
+            //std::cout << "(" << 0 << "," << i << ")\n";
+        }
+        SDL_RenderDrawPoint(renderer,0,0);
+
+        //SDL_RenderDrawLine(renderer,10,500,100,100);
 
         SDL_RenderPresent(renderer);
 	}
@@ -994,10 +1015,6 @@ namespace oct::verso::v1::SDL
 	}
 	void Laboratory::render_selection(SDL_Renderer* rend)
 	{
-	    //std::cout << "void Laboratory::render_selection()\n";
-	    //std::cout << "(" << position.x() << "," << position.y() << ")\n";
-	    circleRGBA(rend,position.x(),position.y(),radius + 3,0,255,0,255);
-	    circleRGBA(rend,position.x(),position.y(),radius + 4,0,255,0,255);
 	}
 
 
