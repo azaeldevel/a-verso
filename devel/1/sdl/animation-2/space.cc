@@ -205,6 +205,7 @@ namespace oct::verso::v1::SDL
 		displacement.z() = 0;
 		displacement = displacement.normalize();
 		animation = 0;
+		subscenary = NULL;
 
         buffer = IMG_Load("devel/1/sdl/animation-2/assets/test.png");
         if ( !buffer ) {
@@ -358,6 +359,7 @@ namespace oct::verso::v1::SDL
 			render();
 
 			SDL_Delay(1);
+			if(subscenary) subscenary->loop();
 		}
 	}
 	void Space::handler()
@@ -397,17 +399,25 @@ namespace oct::verso::v1::SDL
             }
             break;
         case SDL_KEYDOWN:
-            if(event.key.keysym.sym == SDLK_a)
+            switch(event.key.keysym.sym)
             {
+            case SDLK_a:
                 //mode = Mode::animation;
                 //animation = 1;
                 std::cout << "Mode de animacion.\n";
-            }
-            else if(event.key.keysym.sym == SDLK_m)
-            {
+                break;
+            case SDLK_m:
                 //mode = Mode::menu;
                 //animation = 0;
                 std::cout << "Mode de menu.\n";
+                break;
+            case SDLK_l:
+                std::cout << "Activando sub Escenario (Laboratorio)\n";
+                subscenary = &laboratory;
+                subscenary->status = Status::running;
+                subscenary->window = window;
+                subscenary->renderer = renderer;
+                break;
             }
             break;
 		default:
@@ -549,7 +559,7 @@ namespace oct::verso::v1::SDL
 
         if(selected)
         {
-            std::cout << "Render selection :" << (void*)selected << "\n";
+            //std::cout << "Render selection :" << (void*)selected << "\n";
             selected->render_selection(renderer);
         }
 
@@ -877,82 +887,6 @@ namespace oct::verso::v1::SDL
 
 
 
-	bool Planet::initialize()
-	{
-		return true;
-	}
-	void Planet::run()
-	{
-		status = running;
-		this->initialize();
-		this->loop();
-		this->clean();
-	}
-	void Planet::loop()
-	{
-        // game loop
-		while (status != Status::stop)
-		{
-			// handle user events
-			handler();
-
-			// update the game
-			update();
-
-			// render to the screen
-			render();
-
-			SDL_Delay(1);
-		}
-	}
-
-	/*void Planet::handler()
-	{
-	}*/
-	void Planet::update()
-	{
-	}
-
-	void Planet::render()
-	{
-        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
-		SDL_RenderClear(renderer);
-
-
-        SDL_RenderPresent(renderer);
-	}
-
-
-	void Planet::on_active()
-	{
-	}
-	void Planet::on_deactive()
-	{
-	}
-
-	Object* Planet::into(int x,int y)
-	{
-        //std::cout << "Planet : " << x << "," << y << "\n";
-        auto d = position.distance(x,y);
-        if(d < radius)
-        {
-            //std::cout << "distance : " << d << "\n";
-            return this;
-        }
-        return NULL;
-	}
-	void Planet::render_selection(SDL_Renderer* rend)
-	{
-	    //std::cout << "void Planet::render_selection()\n";
-	    //std::cout << "(" << position.x() << "," << position.y() << ")\n";
-	    circleRGBA(rend,position.x(),position.y(),radius + 3,0,255,0,255);
-	    circleRGBA(rend,position.x(),position.y(),radius + 4,0,255,0,255);
-	}
-
-
-
-
-
 
 
 	bool Laboratory::initialize()
@@ -984,9 +918,48 @@ namespace oct::verso::v1::SDL
 		}
 	}
 
-	/*void Planet::handler()
+	void Laboratory::handler()
 	{
-	}*/
+		SDL_PollEvent(&event);
+		Object* obj = NULL;
+		switch (event.type)
+		{
+		case SDL_QUIT:
+			status = Status::stop;
+			break;
+        case SDL_MOUSEMOTION:
+            break;
+        case SDL_MOUSEBUTTONDOWN:
+            for(const auto& [k,v] : activables)
+            {
+                obj = k->into(event.motion.x,event.motion.y);
+                if(obj)
+                {
+                    selected = obj;
+                    //std::cout << "Selected :" << (void*)selected << "\n";
+                    return;
+                }
+                else
+                {
+                    selected = NULL;
+                }
+            }
+            break;
+        case SDL_KEYDOWN:
+            switch(event.key.keysym.sym)
+            {
+            case SDLK_a:
+                break;
+            case SDLK_m:
+                break;
+            case SDLK_l:
+                break;
+            }
+            break;
+		default:
+			break;
+		}
+	}
 	void Laboratory::update()
 	{
 	}

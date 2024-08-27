@@ -53,7 +53,7 @@ namespace oct::verso::v1::SDL
 
 		bool activable;
 		std::map<Object*,Object*> activables;
-		Object* selected;
+		Object* selected,*subscenary;
 	};
 
     struct Body : public Object
@@ -220,6 +220,55 @@ namespace oct::verso::v1::SDL
         SDL_Texture* texture;
 	};
 
+
+
+
+
+
+
+
+
+    struct Laboratory : public Planet
+	{
+	    Laboratory() = default;
+	    constexpr Laboratory(const std::initializer_list<real>& l) : Planet(l,true)
+	    {
+	    }
+	    constexpr Laboratory(const numbers::vector<real>& p) : Planet(p,true)
+	    {
+	    }
+	    constexpr Laboratory(const std::initializer_list<real>& l,bool a) : Planet(l,a)
+	    {
+	    }
+	    constexpr Laboratory(const numbers::vector<real>& p,bool a) : Planet(p,a)
+	    {
+	    }
+
+		virtual bool initialize();
+
+		virtual void run();
+
+		virtual void loop();
+
+		virtual void handler();
+		virtual void update();
+		virtual void render();
+
+		virtual void on_active();
+		virtual void on_deactive();
+
+		virtual Object* into(int,int);
+		virtual void render_selection(SDL_Renderer*);
+	};
+
+
+
+
+
+
+
+
+
     struct Space : public Body
 	{
 	    Space() = default;
@@ -273,39 +322,6 @@ namespace oct::verso::v1::SDL
 
 
 
-
-    struct Laboratory : public Planet
-	{
-	    Laboratory() = default;
-	    constexpr Laboratory(const std::initializer_list<real>& l) : Planet(l,true)
-	    {
-	    }
-	    constexpr Laboratory(const numbers::vector<real>& p) : Planet(p,true)
-	    {
-	    }
-	    constexpr Laboratory(const std::initializer_list<real>& l,bool a) : Planet(l,a)
-	    {
-	    }
-	    constexpr Laboratory(const numbers::vector<real>& p,bool a) : Planet(p,a)
-	    {
-	    }
-
-		virtual bool initialize();
-
-		virtual void run();
-
-		virtual void loop();
-
-		//virtual void handler();
-		virtual void update();
-		virtual void render();
-
-		virtual void on_active();
-		virtual void on_deactive();
-
-		virtual Object* into(int,int);
-		virtual void render_selection(SDL_Renderer*);
-	};
 
 
 }
