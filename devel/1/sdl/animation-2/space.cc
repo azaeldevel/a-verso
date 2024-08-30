@@ -998,15 +998,22 @@ namespace oct::verso::v1::SDL
         //numbers::vector<float,2,float> vP{1,1};
         //auto p = mxO * vP;
         //mxO.print(std::cout);
-        float x_prev,y_prev;
-        SDL_RenderGetScale(renderer,&x_prev,&y_prev);
-        SDL_RenderSetScale(renderer,1,1);
+        //float x_prev,y_prev;
+        //SDL_RenderGetScale(renderer,&x_prev,&y_prev);
+        //SDL_RenderSetScale(renderer,1,1);
         SDL_RenderDrawLine(renderer,0,mxO[1][0],width,mxO[1][0]);
         SDL_RenderDrawLine(renderer,mxO[0][0],0,mxO[0][0],height);
-        SDL_RenderSetScale(renderer,x_prev,y_prev);
+        //SDL_RenderSetScale(renderer,x_prev,y_prev);
         //SDL_RenderDrawPoint(renderer,mxO[0][0],mxO[1][0]);
 
         //SDL_RenderDrawLine(renderer,10,500,100,100);
+
+        SDL_SetRenderDrawColor( renderer,255,255,255,255);
+        numbers::vector<float,2,float> vP0{0,0},vP1{0,0};
+        //vP1.x() += 10;
+        auto mP = mxO * vP1;
+        SDL_RenderDrawLine(renderer,mxO[0][0],mxO[1][0],mP[0][0],mP[0][1]);
+
 
         SDL_RenderPresent(renderer);
 	}
