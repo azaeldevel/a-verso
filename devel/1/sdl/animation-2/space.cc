@@ -421,6 +421,7 @@ namespace oct::verso::v1::SDL
                 subscenary->renderer = renderer;
                 subscenary->width = width;
                 subscenary->height = height;
+                subscenary->initialize();
                 break;
             }
             break;
@@ -895,6 +896,11 @@ namespace oct::verso::v1::SDL
 
 	bool Laboratory::initialize()
 	{
+	    mxO[0][0] = width/2;
+	    mxO[0][1] = 0;
+	    mxO[1][0] = height/2;
+	    mxO[1][1] = 0;
+
 		return true;
 	}
 	void Laboratory::run()
@@ -974,6 +980,7 @@ namespace oct::verso::v1::SDL
 		SDL_RenderClear(renderer);
 
 		SDL_SetRenderDrawColor( renderer,255,255,255,10);
+		/*
 		std::cout << "(" << width << "," << height << ")\n";
 		size_t w = width/50;
 		size_t h = height/50;
@@ -987,7 +994,17 @@ namespace oct::verso::v1::SDL
             SDL_RenderDrawLine(renderer,i,0,i,width);
             //std::cout << "(" << 0 << "," << i << ")\n";
         }
-        SDL_RenderDrawPoint(renderer,0,0);
+        */
+        //numbers::vector<float,2,float> vP{1,1};
+        //auto p = mxO * vP;
+        //mxO.print(std::cout);
+        float x_prev,y_prev;
+        SDL_RenderGetScale(renderer,&x_prev,&y_prev);
+        SDL_RenderSetScale(renderer,1,1);
+        SDL_RenderDrawLine(renderer,0,mxO[1][0],width,mxO[1][0]);
+        SDL_RenderDrawLine(renderer,mxO[0][0],0,mxO[0][0],height);
+        SDL_RenderSetScale(renderer,x_prev,y_prev);
+        //SDL_RenderDrawPoint(renderer,mxO[0][0],mxO[1][0]);
 
         //SDL_RenderDrawLine(renderer,10,500,100,100);
 

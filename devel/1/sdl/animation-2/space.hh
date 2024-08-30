@@ -9,6 +9,7 @@
 #include <filesystem>
 
 #include <map>
+#include "../../../../../numbers/0/matrix.hh"
 
 #include "animation.hh"
 
@@ -259,6 +260,8 @@ namespace oct::verso::v1::SDL
 
 		virtual Object* into(int,int);
 		virtual void render_selection(SDL_Renderer*);
+
+		numbers::matrix<float,2,2,float> mxO;
 	};
 
 
