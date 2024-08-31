@@ -1010,7 +1010,7 @@ namespace oct::verso::v1::SDL
 
         SDL_SetRenderDrawColor( renderer,255,255,255,255);
         numbers::vector<float,2,float> vP0{0,0},vP1{0,0};
-        //vP1.x() += 10;
+        vP1.x() += 10;
         auto mP = mxO * vP1;
         SDL_RenderDrawLine(renderer,mxO[0][0],mxO[1][0],mP[0][0],mP[0][1]);
 

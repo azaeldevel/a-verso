@@ -33,7 +33,7 @@ namespace oct::verso::v1
             {
                 position[i] = c[i];
             }
-            position.print(std::cout);
+            //position.print(std::cout);
         }
         constexpr IScenary(const numbers::vector<real>& p) : position(p)
         {
